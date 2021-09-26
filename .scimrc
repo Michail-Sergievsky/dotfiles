@@ -1,0 +1,8 @@
+# - comment
+color "type=HEADINGS fg=BLACK bg=YELLOW bold=0,
+# standart input
+color "type=INPUT fg=BLACK bg=WHITE"
+color "type=EXPRESSION fg=BLACK bg=WHITE"
+color "type=NORMAL fg=BLACK bg=WHITE"
+# when in insert mode
+color "type=MODE fg=BLACK bg=WHITE"

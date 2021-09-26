@@ -1,0 +1,2 @@
+# Disable "beep" sound in terminal application
+xset -b
