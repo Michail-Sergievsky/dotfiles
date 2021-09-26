@@ -1,0 +1,17 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda2
+UUID=52becc37-d748-49e9-b99b-e39766920521	/         	ext4      	rw,relatime	0 1
+#wd-ntfs-smy
+UUID=46302F72302F685F	/home/freeman/DiskD	ntfs-3g	defaults,uid=1000,gid=1000,dmask=0077,fmask=0077	0	0
+#torrents
+UUID="6EE22119E220E6D5" /home/freeman/Media	ntfs-3g	defaults,uid=1000,gid=1000,dmask=0077,fmask=0077	0	0
+#swapfile
+/swapfile	none	swap	defaults	0	0
+#torrents
+//192.169.2.3/download/Torrents/  /home/freeman/NetFolders/torrents  cifs  user,username=smy,password=xxxxx,uid=1000,gid=1000,exec,sec=ntlm,vers=1.0,_netdev  0  0
+#//192.169.2.3/download/Torrents/  /media/torrents  cifs  username=smy,password=xxxxx,uid=1000,gid=1000,vers=3,_netdev  0  0
+#syl-storage
+//192.169.2.14/svolume4/  /home/freeman/NetFolders/syl-storage  cifs  username=Freeman,password=xxxxx,iocharset=utf8,sec=ntlm,nofail,uid=1000,gid=1000,vers=1.0  0  0

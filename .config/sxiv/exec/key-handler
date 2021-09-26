@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# Example for $XDG_CONFIG_HOME/sxiv/exec/key-handler
+# Called by sxiv(1) after the external prefix key (C-x by default) is pressed.
+# The next key combo is passed as its first argument. Passed via stdin are the
+# images to act upon, one path per line: all marked images, if in thumbnail
+# mode and at least one image has been marked, otherwise the current image.
+# sxiv(1) blocks until this script terminates. It then checks which images
+# have been modified and reloads them.
+
+# The key combo argument has the following form: "[C-][M-][S-]KEY",
+# where C/M/S indicate Ctrl/Meta(Alt)/Shift modifier states and KEY is the X
+# keysym as listed in /usr/include/X11/keysymdef.h without the "XK_" prefix.
+neofetchneofetch
+rotate() {
+	degree="$1"
+	tr '\n' '\0' | xargs -0 realpath | sort | uniq | while read file; do
+		case "$(file -b -i "$file")" in
+		image/jpeg*) jpegtran -rotate "$degree" -copy all -outfile "$file" "$file" ;;
+		*)           mogrify  -rotate "$degree" "$file" ;;
+		esac
+	done
+}
+
+while read file
+do
+    case "$1" in
+# "C-u") exiftool -all= "$file" && shareLinkCreator "$file" ;;
+# make wallpaper
+"C-1") feh --bg-fill "$file" ;;
+"C-2") feh --bg-scale "$file" ;;
+"C-3") feh --bg-center "$file" ;;
+"C-4") feh --bg-max "$file" ;;
+"C-5") feh --bg-tile "$file" ;;
+# remove file
+"d") rm "$file" ;;
+# copy filename to clipboard
+"x") echo -n "$file" | xclip -selection clipboard ;;
+# copy file to clipboard (works only for png)
+"c") xclip -selection clipboard -target image/png "$file" ;;
+ # copy marked images
+"y") mkdir -p /media/freeman/ntfs/Pictures/IMAGES_COPIED && cp "$file" /media/freeman/ntfs/Pictures/IMAGES_COPIED ;;
+# move marked images
+"m") mkdir -p /media/freeman/ntfs/Pictures/IMAGES_SELECTED && mv "$file" /media/freeman/ntfs/Pictures/IMAGES_SELECTED ;;
+# clean cache 
+"f") cd ~/.cache/sxiv && \rm -fr * ;;
+# open in pinta
+"p") pinta "$file" & ;;
+# rotate and save
+"r") convert -rotate 90 "$file" "$file" ;;
+# convert "$file" "$file" ;;
+# file info with dunst?????
+"i")	notify-send "File information" "$(mediainfo "$file")" ;;
+    esac
+done

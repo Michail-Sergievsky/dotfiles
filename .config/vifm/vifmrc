@@ -1,0 +1,750 @@
+" vim: filetype=vim :
+" #########################################################
+" ##########           VIFMRC by smy       #################
+" #########################################################
+"------Setup-----------------{{{
+
+" always ignore case of characters for f/F/;/,
+set caseoptions=g
+
+" delete files without confirmation
+set confirm=""
+
+" show size of directories
+set dirsize=size
+
+" hide .. directory everywhere
+set dotdirs=
+
+" show dotfiles
+set dotfiles
+
+" allow partially entered external commands with unambiguous beginning using :!
+set fastrun
+
+" how many directories to store in all kinds of history
+set history=1000
+
+" ignore case in search pattern unless it contains at least one uppercase letter
+set ignorecase
+set smartcase
+
+" use increment searching and filtering (search/filter while typing)
+set incsearch
+
+" follow links on l or Enter automatically, not just navigate to target!!!!!!
+set nofollowlinks
+
+" don't highlight search results automatically
+set nohlsearch
+
+" don't wrap long lines in preview pane
+set nowrap
+
+" show lines numbers
+set number
+
+set relativenumber
+
+" custom ruler format
+set rulerformat='%2l-%S%[ +%x%]'
+
+" allow automatic runing of executable files
+set runexec
+
+" try to leave some space from cursor to upper/lower border in lists
+set scrolloff=4
+
+" natural sort of (version) numbers within filenames
+set sortnumbers
+
+" show suggestions
+set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+
+" perform file operations via system calls
+set syscalls
+
+" expand tabulation characters as two spaces
+set tabstop=2
+
+" format for displaying time
+set timefmt="%y/%m/%d %H:%M"
+
+" update terminal title
+set title
+
+" use trash directory per mount point, fallback to ~/.vifm-trash
+set trashdir=%r/.vifm-trash,$HOME/.vifm-trash
+
+" maximum number of changes that can be undone.
+set undolevels=100
+
+" use vim as default editor, open multiple files in tabs!!!!!
+" set vicmd="vim -p"
+"Fedora
+set vicmd="gvim -v"
+"Arch
+" set vicmd=vim
+
+" use vim's documentation system for :help command
+set vimhelp
+
+" What should be saved automatically between vifm sessions.  
+set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+    \phistory,fhistory,dirstack,registers,bookmarks,bmarks
+
+" show list of matches on tab complition in command-line mode
+set wildmenu
+
+" use popup window instead of a single line for completion
+set wildstyle=popup
+
+" Don't do too many requests to slow file systems!!!!!!!
+if !has('win')
+    set slowfs=curlftpfs
+endif
+
+" mount FUSE file-systems here!!!!!!!!!!
+set fusehome=~/.vifm/.fuse
+
+" ignore .git directory on :find
+set findprg='find %s %a -print ,
+            \ -type d \( ! -readable -o ! -executable -o -path "*/.git" \)
+            \ -prune'
+
+"}}}
+"----Appearance--{{{
+" themes, highlighting
+
+" List of color schemes to try (picks the first one supported by the terminal)
+colorscheme solarized-light-256 Default-256 Default
+" colorscheme dwmlight Default-256 Default
+
+"Each flag configures some aspect of TUI appearance. s - left/rigth borders
+set tuioptions="pv"
+
+" change appearance of middle border
+" set fillchars=vborder:В·
+
+" Customize view columns a bit (enable ellipsis for truncated file names)
+set viewcolumns=-{name}..,6{}.
+
+"}}}
+"----Status line ----{{{
+
+" let &statusline = " %t%= %A %10u:%-7g %12s %4*%2* +%E %4* %15d | %a "
+" let &statusline .= '%1*'           " left separator
+
+let &statusline = ' %-26t'         " file name
+let &statusline .= '%='         " fill the whole status line
+let &statusline .= ' %A '       " file attributes
+let &statusline .= '%u:%-g|'  " user and group owners of the file
+let &statusline .= ' %-s '     " human readable cumulative file size
+let &statusline .= '%4*%2*'    " left separator
+let &statusline .= ' +%E '      " human readable cumulative file size
+let &statusline .= '%4*'       " right separator
+let &statusline .= ' %d '     " file modification date and time
+let &statusline .= '|'          " right separator
+let &statusline .= ' %a '       " free space available at current partition
+
+"}}}
+"----Marks----------------{{{
+
+" :mark mark /full/directory/path [filename]
+
+mark h ~/
+
+mark 0 ~/Videos/!convert
+mark 1 ~/Documents
+mark 2 ~/Documents/Docs
+mark 3 ~/Dropbox
+mark 4 ~/Downloads/t_done
+mark 5 ~/Media/Torrents/done
+mark 6 ~/Downloads/Media_done
+mark 7 ~/Books
+mark 8 ~/Music
+mark 9 ~/Videos/!to_convert
+mark C ~/Media/Torrents/done/comics
+mark D ~/Documents
+mark M ~/Music
+mark S ~/Stuff
+mark a ~/Music/audiobooks
+mark b ~/Books
+mark c ~/.config
+mark d ~/Downloads
+mark e /etc
+mark f ~/Foto
+mark g ~/DiskD/soft&drivers
+mark i ~/Knowledge/!IT_articles
+mark j ~/Knowledge/japan,anime,manga
+mark k ~/Knowledge
+mark l ~/Documents/Look.out.for.them.all
+mark m ~/Magazine
+mark n ~/Notes
+mark o ~/Mounted
+mark p ~/Pictures
+mark r ~/DiskD
+mark s ~/Study
+mark t ~/Temp
+mark u /usr/share
+mark v ~/Videos
+mark w ~/Work
+mark x ~/.config/vifm
+mark z ~/.vim
+
+" }}}
+" ----Commands------------------{{{
+
+
+" autocmd DirEnter * %select | exe 'normal ga' | %unselect
+
+command! df df -h %m 2> /dev/null
+command! diff vim -d %f %F
+command! zip zip -r %f.zip %f
+" run script
+command! run !! ./%f
+" run make in current directory
+command! make !!make %a
+" creates directory and immediately enters it
+command! mkcd :mkdir %a | cd %a
+" FIND MEANING!
+command! vgrep vim "+grep %a"
+
+command! config /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME
+command! reload :write | restart full
+command! link ln -s %d/%f %D
+command! print lp -n 1 -o sides=two-sided-long-edge %f
+
+"dosnt work!
+command! readreg : execute '!cat %%c%%U'
+               \| normal "%ayah
+
+" command! FZFlocate :set noquickview | :execute 'goto "'.system('locate $HOME | fzf --height 10 2>/dev/tty ').'"%IU' | redraw
+" command! FZFfind :set noquickview | :execute 'goto "'.system('fd | fzf --height 10 2>/dev/tty ').'"%IU' | redraw
+command! FZFlocate : set noquickview
+                  \| let $FZF_PICK = term('locate $HOME | fzf --height 10 2>/dev/tty')
+                  \| if $FZF_PICK != ''
+                  \|     execute 'goto' fnameescape($FZF_PICK)
+                  \| endif
+
+command! FZFfind : set noquickview
+                \| let $FZF_PICK = term('find | fzf --height 10 2>/dev/tty')
+                \| if $FZF_PICK != ''
+                \|     execute 'goto' fnameescape($FZF_PICK)
+                \| endif
+
+command! sanitize :tr/ ?<>\\:*|"/__________
+
+" silently extract selected archives in background
+" command extract aunpack -e %f &>/dev/null &
+" unpack selected archivers
+command extract aunpack %f &>/dev/null &
+" archive the selection with :archive <filename.ext>
+command archive apack %a %f &>/dev/null &
+
+" toggle between sorting: by name <--> by size <--> by mtime
+command! togglesort
+         \ :if &sort == '-size,+name'
+         \ |    set sort=+mtime
+         \ |    echo 'Sorted by modification date'
+         \ |elseif &sort == '+iname'
+         \ |    set sort=-size
+         \ |    echo 'Sorted by size'
+         \ |else
+         \ |    set sort=+iname
+         \ |    echo 'Sorted by name'
+         \ |endif
+
+command! cmpinternal compare-cmd %a %S
+command! cmp : if expand('%%c') == expand('%%f')
+              \ |     echo expand('Comparing %%"c and %%"C:t ...')
+              \ |     cmpinternal %c %C
+              \ | else
+              \ |     echo expand('Comparing files: %%"f ...')
+              \ |     cmpinternal %f \ | endif
+
+"}}}
+"----Executing programms---------------{{{
+"	 COMMON FILES
+
+" .dotfiles!!!!!!!!!!!!1
+filetype /^[^.]+$/ vim
+
+" Pdf
+filextype {*.pdf},<application/pdf> zathura %c %i &
+fileviewer *.pdf
+        \ vifmimg pdfpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+" PostScript
+filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
+        \ {View in zathura}
+        \ zathura %f,
+
+" Djvu
+filextype {*.djvu},<image/vnd.djvu>
+        \ {View in zathura}
+        \ zathura %f %i,
+"Comics 
+filextype {*.cbz,*.cbr}
+	\ {View in Mcomix}
+	" \ mcomix %c %i &,
+	\ mcomix3 %c %i &,
+	\ {View in YACReader}
+	\ YACReader %c %i &
+
+"E-books
+filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
+	\ {View in foliate}
+	\ foliate %c %i &,
+    \ {View in zathura}
+    \ zathura %f %i &
+
+" Audio
+filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg},
+        \<audio/*>
+	" \{Play using cmus}
+	" \ urxvt -e cmus %f &,
+       \ {Play using ffplay}
+       \ ffplay -nodisp -autoexit %c,
+       \ {Play using MPlayer}
+       \ mplayer %f,
+fileviewer {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg} mediainfo
+
+" Video
+filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.m2ts,
+        \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+        \*.as[fx]},
+        \<video/*>
+        \ {View using vlc}
+        \ vlc %f %i &,
+        \ {View using mpv}
+        \ mpv %f,
+        \ {View using ffplay}
+        \ ffplay -fs -autoexit %f,
+fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+           \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+           \*.as[fx]},
+          \<video/*>
+	\ mediainfo %c 2>&1
+"vlc playlist
+filextype {*.xspf} vlc %c %i &
+
+" Web
+filextype {*.html,*.htm},<text/html>
+        \ {Open with firefox}
+        \ firefox %f &,
+        \ {Open with uzbl}
+        \ uzbl-browser %f %i &,
+filetype {*.html,*.htm},<text/html> links, lynx
+
+
+" Images
+filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
+        \ {View in sxiv}
+        \ rifle_sxiv.sh %f %i,
+        \ {View in gpicview}
+        \ sxiv %f
+fileviewer {*.jpg,*.jpeg,*.png}
+           \ vifmimg draw %px %py %pw %ph %c
+           \ %pc
+           \ vifmimg clear
+
+" Office files
+filextype {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
+         \<application/vnd.openxmlformats-officedocument.*,
+          \application/msword,
+          \application/vnd.ms-excel>
+        \ libreoffice %f %i &
+fileviewer {*.doc},<application/msword> catdoc %c
+fileviewer {*.docx},
+          \<application/
+           \vnd.openxmlformats-officedocument.wordprocessingml.document>
+         \ docx2txt.pl %f -
+
+" Torrent
+filetype {*.torrent},<application/x-bittorrent> ktorrent %f &
+fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
+
+"-------------------------------------------
+" view contents of archive files on opening them
+filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
+        \*.msi,*.pkg,*.rar,*.tar,*.tgz,*.xz,*.zip
+        \ als %f | less
+
+" put following rules before any other filetype and fileviewer groups
+" filetype *.tar.gz,*.tgz,*.tar.bz,*.tbz,*.tar.bz2,*.tbz2,
+"          \*.tar.Z,*.tZ,*.tar.lzo,*.tzo,*.tar.lz,*.tlz,*.tar.xz,*.txz,*.tar.7z,*.t7z,
+"          \*.tar,
+"          \*.zip,*.jar,*.war,*.rar,*.lha,*.lzh,
+"          \*.alz,*.ace,*.a,*.arj,*.arc,
+"          \*.rpm,*.deb,
+"          \*.cab,
+"          \*.gz,*.bz,*.bz2,
+"          \*.Z,*.lzma,*.lzo,*.lz,*.xz,*.rz,*.lrz,*.7z,
+"          \*.cpio
+"          \ aunpack %f
+" fileviewer *.tar.gz,*.tgz,*.tar.bz,*.tbz,*.tar.bz2,*.tbz2,
+"          \*.tar.Z,*.tZ,*.tar.lzo,*.tzo,*.tar.lz,*.tlz,*.tar.xz,*.txz,*.tar.7z,*.t7z,
+"          \*.tar,
+"          \*.zip,*.jar,*.war,*.rar,*.lha,*.lzh,
+"          \*.alz,*.ace,*.a,*.arj,*.arc,
+"          \*.rpm,*.deb,
+"          \*.cab,
+"          \*.gz,*.bz,*.bz2,
+"          \*.Z,*.lzma,*.lzo,*.lz,*.xz,*.rz,*.lrz,*.7z,
+"          \*.cpio
+"          \ als %f 2>/dev/null
+
+
+" Object
+filetype {*.o},<application/x-object> nm %f | less
+
+" Man page
+filetype {*.[1-8]},<text/troff> man ./%c
+fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
+
+" OpenRaster
+filextype *.ora
+        \ {Edit in MyPaint}
+        \ mypaint %f,
+
+" Mindmap
+filextype *.vym
+        \ {Open with VYM}
+        \ vym %f &,
+
+" MD5
+filetype *.md5
+       \ {Check MD5 hash sum}
+       \ md5sum -c %f %S,
+
+" SHA1
+filetype *.sha1
+       \ {Check SHA1 hash sum}
+       \ sha1sum -c %f %S,
+
+" SHA256
+filetype *.sha256
+       \ {Check SHA256 hash sum}
+       \ sha256sum -c %f %S,
+
+" SHA512
+filetype *.sha512
+       \ {Check SHA512 hash sum}
+       \ sha512sum -c %f %S,
+
+" GPG signature
+filetype {*.asc},<application/pgp-signature>
+       \ {Check signature}
+       \ !!gpg --verify %c,
+
+
+" FuseZipMount
+filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
+        \<application/zip,application/java-archive>
+       \ {Mount with fuse-zip}
+       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
+       \ {View contents}
+       \ zip -sf %c | less,
+       \ {Extract here}
+       \ tar -xf %c,
+fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
+
+" ArchiveMount
+filetype {*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
+        \<application/x-tar>
+       \ {Mount with archivemount}
+       \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.tgz,*.tar.gz tar -tzf %c
+fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
+fileviewer *.tar.txz,*.txz xz --list %c
+fileviewer {*.tar},<application/x-tar> tar -tf %c
+
+" Rar2FsMount and rar archives
+filetype {*.rar},<application/x-rar>
+       \ {Mount with rar2fs}
+       \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
+fileviewer {*.rar},<application/x-rar> unrar v %c
+
+" IsoMount
+filetype {*.iso},<application/x-iso9660-image>
+       \ {Mount with fuseiso}
+       \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+
+" SshMount
+filetype *.ssh
+       \ {Mount with sshfs}
+       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %FOREGROUND,
+
+" FtpMount
+filetype *.ftp
+       \ {Mount with curlftpfs}
+       \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
+
+" Fuse7z and 7z archives
+filetype {*.7z},<application/x-7z-compressed>
+       \ {Mount with fuse-7z}
+       \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
+fileviewer {*.7z},<application/x-7z-compressed> 7z l %c
+
+" TuDu files
+filetype *.tudu tudu -f %c
+
+" Qt projects
+filextype *.pro qtcreator %f &
+
+
+"}}}
+"----GETTING ICONS TO DISPLAY IN VIFM   {{{
+" https://github.com/sebastiencs/icons-in-terminal
+
+" Filetypes/directories
+set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
+"Dir
+set classify+=' ::.config/::/,
+	\  ::.vifm-trash/::/,
+	\  ::Documents/::/,
+	\  ::Downloads/::/,
+	\  ::Google\ Drive/::/,
+	\  ::Music/::/,
+	\  ::Pictures/::/,
+	\  ::Videos/::/'
+
+" Specific files
+set classify+=' ::.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc,,.dmrc,,.d_store,,.fasd,,.gitconfig,,.gitignore,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.xinitpurc,,.zprofile,,.yarnc,,.snclirc,,.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs,,.mimeapps.list,,.offlineimaprc,,.msmtprc,,.Xauthority,,config::,
+			\  ::dropbox::,
+			\  ::favicon.*,,README,,readme::,
+			\  ::.vim,,.vimrc,,.gvimrc,,.vifm::,
+			\  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::,
+			\  ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::,
+			\  ::ledger::,
+			\  ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::,
+			\  ::node_modules::,
+			\  ::react.jsx::'
+
+" File extensions
+set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz,,*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm,,*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::,
+			\  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.opus,,*.ac3::,
+			\  ::*.avi,,*.divx,,*.flv,,*.m2v,,*.m4v,,*.ts,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.wmv,,*.vob,,*.qt,,*.webm::,
+			\  ::*.pdf::,
+			\  ::*.djvu::,
+			\  ::*.epub,,*.fb2,,*.mobi,,*.azw3::,
+			\  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz,,*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip::,
+			\  ::*.cbr,,*.cbz::,
+			\  ::*.log::,
+			\  ::*.doc,,*.docx,,*.odt,,*.adoc::,
+			\  ::*.xls,,*.xlsx,,*.odt,,*.xlsmx::,
+			\  ::*.pptx,,*.odp,,*.ppt::,
+			\  ::*.fish,,*.sh,,*.bash::,
+			\ 﫭::*.iso::,
+			\  ::*.torrent::,
+			\ 陼 ::*.xspf::,
+			\  ::*.h264,,*.h265::,
+			\  ::*.srt,,*.ass,,*.ssa::,
+			\  ::*.otf,,*.ttf::,
+			\  ::*.part::,
+			\  ::*.desktop::,
+			\  ::*.txt::,
+			\  ::*.mdb,,*.accdb::'
+" coding
+set classify+='λ ::*.ml,,*.mli::,
+			\  ::*.styl::,
+			\  ::*.scss::,
+			\  ::*.py,,*.pyc,,*.pyd,,*.pyo::,
+			\  ::*.php::,
+			\  ::*.markdown,,*.md::,
+			\  ::*.json::,
+			\  ::*.js::,
+			\  ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::,
+			\  ::*.mustasche::,
+			\  ::*.css,,*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg,,*.rc::,
+			\  ::*.rss::,
+			\  ::*.coffee::,
+			\  ::*.twig::,
+			\  ::*.c++,,*.cpp,,*.cxx,,*.h::,
+			\  ::*.cc,,*.c::,
+			\  ::*.hs,,*.lhs::,
+			\  ::*.lua::,
+			\  ::*.jl::,
+			\  ::*.go::,
+			\  ::*.ts::,
+			\  ::*.db,,*.dump,,*.sql::,
+			\  ::*.sln,,*.suo::,
+			\  ::*.exe::,
+			\  ::*.diff,,*.sum,,*.md5,,*.sha512::,
+			\  ::*.scala::,
+			\  ::*.java,,*.jar::,
+			\  ::*.xul::,
+			\  ::*.clj,,*.cljc::,
+			\  ::*.pl,,*.pm,,*.t::,
+			\  ::*.cljs,,*.edn::,
+			\  ::*.rb::,
+			\  ::*.dart::,
+			\  ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::,
+			\  ::*.rlib,,*.rs::,
+			\  ::*.d::,
+			\  ::*.erl,,*.hrl::,
+			\  ::*.ai::,
+			\  ::*.psb,,*.psd::,
+			\  ::*.jsx::,
+			\  ::.git/,,*.git/::'
+
+" }}}
+"----Keyboard Mappings-------------{{{
+
+nnoremap <c-f> <c-w>x
+nnoremap <c-b> :sync<CR>
+nnoremap <a-p> [R
+nnoremap <a-n> ]R
+nnoremap <c-t> :tabnew<cr>
+nnoremap <c-c> :tabclose<cr>
+nnoremap <c-p> gT
+nnoremap <c-n> gt
+nnoremap - <C-w>5<
+nnoremap _ <C-w>5>
+nnoremap | <C-w>5=
+
+nnoremap <space> tj
+nnoremap S :sort<cr>
+nnoremap e :edit<cr>
+nnoremap E :!less %c<CR>
+nnoremap i :file &<cr>l
+nmap I :file<cr>
+nnoremap o :!gvim --remote-tab-silent %f<cr>
+nnoremap O :!gvim %f<cr>
+nnoremap w :view<cr>gs
+vnoremap w :view<cr>gv
+nnoremap x :select *.<c-x>e<cr>
+nnoremap X :unselect *.<c-x>e<cr>
+nnoremap ~ :help<cr>
+
+" PDF preview scrolling https://github.com/cirala/vifmimg
+" map > :!vifmimg inc<cr>
+" map < :!vifmimg dec<cr>
+
+nnoremap <wait>af :select *.*<CR>
+nnoremap <wait>aa :%select<CR>
+nnoremap <wait>ata :!tar -cvf `basename $(pwd)`.tar .<cr>
+nnoremap <wait>atf :!tar -cvf .tar %f<left><left><left><left><left><left><left>
+nnoremap <wait>agz :!tar cvzf `basename $(pwd)`.tar.gz .<cr>
+nnoremap <wait>abz :!tar cvfj `basename $(pwd)`.tar.bz2 .<cr>
+nnoremap <wait>aza :!zip -r `basename $(pwd)` .<cr>
+nnoremap <wait>azf :!zip -r  %f<left><left><left>
+nnoremap <wait>by :yank | winrun , put<cr>
+nnoremap <wait>bp :yank | winrun , put!<cr>
+nnoremap <wait>bc :copy&<cr>
+nnoremap <wait>bm :move&<cr>
+nnoremap <wait>bo :copy!&<cr>
+nnoremap <wait>bj :jobs<cr>
+nnoremap <wait>cx :!chmod +x %f<cr>
+nnoremap <wait>ca :!config add %c<cr>
+nnoremap m <Nop>
+nnoremap <wait>me :edit<space>
+nnoremap <wait>mf :touch<space>""<Left>
+nnoremap <wait>md :mkdir<space>""<Left>
+nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rh :reg h<cr>b
+nnoremap <wait>s1 :select *(1).mkv<cr>
+nnoremap <wait>s2 :select *[^(1)].mkv<cr>
+nnoremap <wait>s3 :select *.srt,*jpg,*.txt,*.m4a,*.ogg<CR>
+nnoremap <wait>ss :set sort=+size<cr>
+nnoremap <wait>sS :set sort=-size<cr>
+nnoremap <wait>sn :set sort=+iname<cr>
+nnoremap <wait>sN :set sort=-iname<cr>
+nnoremap <wait>st :set sort=+mtime<cr>
+nnoremap <wait>sT :set sort=-mtime<cr>
+nnoremap <wait>sm :togglesort<cr>
+nnoremap <wait>tl :!ls --group-directories-first -vRlh > $(basename $PWD)<cr>
+nnoremap <wait>ta :!!find . -iname "**"<Left><Left>
+nnoremap <wait>td :!diff %c %C<cr>
+nnoremap <wait>tc :!cp %c -f ~/Documents/Look\ out\ for\ them\ all/<cr>
+nnoremap <wait>tm :!!mediainfo %c<cr>
+nnoremap <wait>tf :FZFfind<cr> 
+nnoremap <wait>tz :FZFlocate<cr>
+
+" yank current directory path into the clipboard
+nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+" yank current file path into the clipboard
+nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+" yank current filename without path into the clipboard
+nnoremap yn :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+" yank root of current file's name into the clipboard
+nnoremap yr :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
+" copy names of selected files into the clipboard
+nnoremap yz :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>
+nnoremap yu :normal "hyy<cr>
+nnoremap yi :normal "Hyy<cr>
+
+"---Leader <,>
+
+nnoremap <wait>,a :archive<Left>
+nnoremap <wait>,b :bmarks<cr>
+nnoremap <wait>,c :!gvim --remote-tab-silent $MYVIFMRC &<cr>
+nnoremap <wait>,d :!!date<cr>
+nnoremap <wait>,e :extract<CR>
+nnoremap <wait>,m :marks<cr>
+nnoremap <wait>,r :!sudo vifm %d %D<cr>
+nnoremap <wait>,s :shell<cr>
+nnoremap <wait>,t :!urxvt &<cr>
+nnoremap <wait>,vh :split<cr>
+nnoremap <wait>,vo :only<cr>
+nnoremap <wait>,vv :vsplit<cr>
+nnoremap <wait>,x :fzf<cr>
+
+" nnoremap <wait> ,= :<c-w>x
+
+"_____Function keys______
+
+nnoremap <f1> :!man<space>
+nnoremap <f2> :set wrap!<cr>
+nnoremap <f3> :set number!<cr>
+nnoremap <f4> :set relativenumber!<cr>
+nnoremap <f5> :copy<cr>
+nnoremap <f6> :move<cr>
+nnoremap <f7> :mkdir<space>""<Left>
+nnoremap <f8> :delete<cr>
+nnoremap <f9> :write<cr> 
+" brief information about files
+nnoremap <f10> :set viewcolumns=*{name}..,6{}.<cr>
+" detailed information about files
+nnoremap <f11> :set viewcolumns=*{name}.,10{perms},12{uname},-7{gname},10{size}.,20{mtime}<cr>
+nnoremap <f12> :reload<cr>
+
+" go to previous tab page or move current tab page to position specified by the
+" count
+nnoremap <silent> gT : <c-u>
+                    \| if v:count == 0
+                    \|     execute 'normal gT'
+                    \| elseif v:count > tabpagenr('$')
+                    \|     tabmove
+                    \| elseif v:count >= tabpagenr()
+                    \|     execute 'tabmove' v:count
+                    \| elseif v:count < tabpagenr()
+                    \|     execute 'tabmove' v:count - 1
+                    \| endif
+                    \| <cr>
+
+" cycle thru the layouts -- only, vsplit, and split
+nnoremap ` :if layoutis('only')
+                        \|    vsplit
+                        \|elseif layoutis('vsplit')
+                        \|    split
+                        \|else
+                        \|    only
+                        \|endif<cr>
+
+"Disable Execution on pressing lower case L 
+nnoremap <silent> l : if filetype('.', 1) == 'dir'
+                   \|     execute 'normal! l'
+                   \| endif<cr>
+
+"-----Arrows---
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
+" noremap <Left> <Nop>
+" noremap <Right> <Nop>
+
+
+"}}}

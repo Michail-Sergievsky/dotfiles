@@ -1,0 +1,50 @@
+Main:
+dir(a,Applications)
+dir(c,Communication)
+dir(d, Download)
+dir(m,MediaWork)
+dir(s,System)
+dir(w,Work)
+
+Applications:
+act(a,Anki,anki)
+act(f,Firefox,firefox)
+act(c,Calc,libreoffice --calc)
+act(p,Pinta,pinta)
+act(r,Foliate,foliate)
+act(s,Steam,steam)
+act(t,Terminal,terminator)
+act(v,Vlc,vlc)
+act(w,Writer,libreoffice --writer)
+
+Communication:
+act(b,Thunderbird,thunderbird)
+act(d,Discord,discord)
+act(s,Skype,skype)
+act(r,RocketChat,skype)
+act(t,Telegram,telegram-desktop)
+act(z,Zoom,zoom)
+
+Work:
+act(g,GVim,gvim)
+act(v,VirtualBox,VirtualBox)
+act(p,Packettracer,VirtualBox)
+
+Download:
+act(j,JDownload,/bin/sh "/home/freeman/Soft/jd2/JDownloader2")
+act(q,qBittorrent,qbittorrent)
+act(t,Transmission Remote GUI,transgui)
+
+MediaWork:
+act(e,Inviska,/home/freeman/Soft/Inviska_MKV_Extract-11.0-x86_64.AppImage)
+act(f,fre:ac,freac)
+act(h,Handbreake,flatpak run fr.handbrake.ghb)
+act(i,Mediainfo-gui,mediainfo-gui)
+act(m,MkvToolNix-gui,mkvtoolnix-gui)
+act(s,Soundconverter,soundconverter)
+
+System:
+act(a,Arandr,arandr)
+act(c,Conky,conky)
+act(h,Htop,terminator -e htop)
+

@@ -1,0 +1,120 @@
+" vim: filetype=vifm :
+" This is Vifm's default color scheme for terminals that support 256 colors.
+" This file last updated: 3 September, 2020
+
+"cterm - style
+"ctermfg - font color
+"ctermbg - background color
+
+"colors
+"0 - black
+"7 - silver(white)
+"12 - light blue
+
+" status line - command line
+
+highlight clear
+
+"Panels
+hi Win          cterm=none                    ctermfg=default    ctermbg=8
+hi OtherWin     cterm=none                    ctermfg=default  ctermbg=7
+
+"more in panels
+hi AuxWin       cterm=none                    ctermfg=default  ctermbg=70
+hi OddLine                                    ctermfg=default  ctermbg=none
+
+"Top panels lines
+hi TopLine      cterm=none                    ctermfg=4    ctermbg=7
+hi TopLineSel   cterm=bold,underline          ctermfg=12    ctermbg=7
+
+"tabs
+hi TabLine      cterm=none                    ctermfg=0     ctermbg=default
+hi TabLineSel   cterm=bold,reverse            ctermfg=12    ctermbg=default
+
+"Not Status line itself
+hi JobLine      cterm=bold                    ctermfg=4    ctermbg=250
+hi StatusLine   cterm=none                    ctermfg=4    ctermbg=white
+hi Border       cterm=none                    ctermfg=4    ctermbg=white
+
+"Current line
+hi CurrLine     cterm=none,reverse    		      ctermfg=default  ctermbg=default
+hi OtherLine    cterm=none	              ctermfg=default      ctermbg=7
+hi LineNr       cterm=uderline                ctermfg=default  ctermbg=default
+
+"Selected files
+hi Selected     cterm=bold                    ctermfg=15      ctermbg=14
+hi CmpMismatch  cterm=bold                    ctermfg=white    ctermbg=88
+
+"FIND MORE!!!
+hi SuggestBox   cterm=bold,reverse            ctermfg=225     ctermbg=232
+hi WildMenu     cterm=underline,reverse	      ctermfg=11   ctermbg=7
+
+"Command Line
+hi CmdLine      cterm=none                    ctermfg=black    ctermbg=15
+hi ErrorMsg     cterm=none                    ctermfg=red    ctermbg=7
+
+"dir&files
+hi Directory    cterm=none                    ctermfg=4        ctermbg=default
+hi Executable   cterm=none                    ctermfg=red      ctermbg=default
+hi Socket       cterm=none                    ctermfg=violet  ctermbg=default
+hi Device       cterm=none	              ctermfg=green      ctermbg=default
+hi Fifo         cterm=none      	      ctermfg=cyan     ctermbg=default
+hi Link         cterm=bold                    ctermfg=27      ctermbg=default
+hi BrokenLink   cterm=bold                    ctermfg=red      ctermbg=default
+hi HardLink     cterm=none                    ctermfg=yellow   ctermbg=default
+
+" for powerline-like look of statusline
+highlight User1 ctermbg=white
+highlight User2 ctermbg=240 ctermfg=231 cterm=bold
+highlight User3 ctermbg=240 ctermfg=white
+highlight User4 ctermbg=white ctermfg=240
+
+"-----For extensions------
+" software documentation
+highlight {COPYRIGHT,COPYING*,BUGS,ChangeLog*,FAQ,INSTALL*,LICENCE,LICENSE,NEWS,
+          \README,README.*,AUTHORS,TODO,THANKS}
+        \ cterm=none ctermfg=202 ctermbg=default
+
+" build system files
+highlight {Makefile,Makefile.am,Makefile.in,Makefile.win,*.mak,*.mk,*.m4,*.ac,
+          \configure,CMakeLists.txt,*.cmake,*.pro,*.pri,*.sln}
+       \ cterm=none ctermfg=113 ctermbg=default
+
+" archives
+highlight {*.7z,*.ace,*.arj,*.bz2,*.cpio,*.deb,*.dz,*.gz,*.jar,*.lzh,*.lzma,
+          \*.rar,*.rpm,*.rz,*.tar,*.taz,*.tb2,*.tbz,*.tbz2,*.tgz,*.tlz,*.trz,
+          \*.txz,*.tz,*.tz2,*.xz,*.z,*.zip,*.zoo,*.apk,*.gzip}
+        \ cterm=none ctermfg=215 ctermbg=default
+
+" documents, configuration, text-based formats
+highlight {*.djvu,*.htm,*.html,*.shtml,*.css,*.markdown,*.md,*[^0-9].[1-9],
+          \*.mkd,*.org,*.pandoc,*.pdc,*.pdf,*.epub,*.fb2,*.tex,*.txt,*.xhtml,
+          \*.xml,*.pptx,*.ppt,*.doc,*.docx,*.xls,*.xlsm,*.xlsx,*.mobi,*.rtf,
+          \*.less,*.scss,*.log,*.rss,*.xul,*.json,*.yaml,*.yml,*.desktop,*.csv,
+          \*.plist,*.ini,*.cfg,*.rc,*.conf,*.spec,*.qrc}
+        \ cterm=none ctermfg=176 ctermbg=default
+
+" media
+highlight {*.aac,*.anx,*.asf,*.au,*.avi,*.ts,*.axa,*.axv,*.divx,*.flac,*.m2a,
+          \*.m2v,*.m4a,*.m4p,*.m4v,*.mid,*.midi,*.mka,*.mkv,*.mov,*.mp3,*.mp4,
+          \*.flv,*.mp4v,*.mpc,*.mpeg,*.mpg,*.nuv,*.oga,*.ogg,*.ogv,*.ogx,*.pbm,
+          \*.pgm,*.qt,*.ra,*.ram,*.rm,*.spx,*.vob,*.wav,*.wma,*.wmv,*.xvid,
+          \*.ac3,*.webm,*.cue,*.ape}
+        \ cterm=none ctermfg=49 ctermbg=default
+
+" images
+highlight {*.bmp,*.gif,*.jpeg,*.jpg,*.ico,*.png,*.ppm,*.svg,*.svgz,*.tga,*.tif,
+          \*.tiff,*.xbm,*.xcf,*.xpm,*.xspf,*.xwd,*.ai}
+        \ cterm=none ctermfg=117 ctermbg=default
+
+" executables
+highlight {*.sh,*.bash,*.zsh,*.bat,*.btm,*.cmd,*.com,*.dll,*.exe,*.run,*.msu,
+          \*.msi,*.fish}
+        \ cterm=none ctermfg=77 ctermbg=default
+
+" source code
+highlight {*.patch,*.diff,*.py,*.cpp,*.hpp,*.mk,*.c,*.h,*.cpp,*.hpp,*.cc,*.hs,
+          \*.php,*.lua,*.vim,*.vifm,*.asm,*.s,*.java,*.cxx,*.c++,*.go,
+          \*.pl,*.pm,*.t,*.cs,*.asp,*.dart,*.js,*.rb,*.scala,*.ts,*.coffee,
+          \*.ml,*.mli,*.rs,*.sql,*.qml,vifmrc,vimrc,.vimrc}
+        \ cterm=none ctermfg=147 ctermbg=default
