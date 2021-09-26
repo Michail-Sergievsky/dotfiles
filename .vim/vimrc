@@ -1,0 +1,446 @@
+" ###########################################################
+" ##########               VIMRC file by smy               ##
+" ###########################################################
+
+"----------Configuration-----------------------------{{{
+
+" Bail out if something that ran earlier, e.g. a system wide vimrc, does not
+" want Vim to use these default values.
+if exists('skip_defaults_vim')
+  finish
+endif
+
+filetype plugin indent on  " enable filetype recognitions and indent base on it
+
+set nocompatible               " Use Vim settings, rather than Vi settings (much better!).
+set viminfo=<1000,'1000,/50,:100,h,f1
+
+set backspace=indent,eol,start  " Allow backspacing over everything in insert mode.
+set backup		        " keep a backup file (restore to previous version)
+" set clipboard^=unnamedplus      " use the system register for everything
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+set display=truncate            " Show @@@ in the last line if it is truncated.
+set encoding=utf-8              " Unicode encoding support
+" set fileencodings=uft-8,cp1251	" encoding for existing files made in cp1251
+set foldcolumn=2                " width of fold column
+set foldmethod=marker           " set folding mode
+set hidden                      " Allow hidden buffers, don't limit to 1 file per window/split
+set history=200		        " keep 200 lines of command line history
+set hlsearch                    " Switch on highlighting the last used search pattern.
+set ignorecase                  " set ignore small/capital for search
+set incsearch                   " Display the match for a search pattern when halfway typing it
+set laststatus=2                " show statusline always
+set mouse=a                     " use mouse everywhere
+set nrformats-=octal            " do not recognize octal numbers for ctrl-a and ctrl-x
+set number relativenumber       " Show line numbers & relativenumber
+" set ruler		        " show the cursor position all the time
+set scrolloff=5                 " Show a few lines of context around the cursor.
+set sidescrolloff=5		" Vertical
+set showcmd		        " display incomplete commands
+" set showmatch                 " When selecting a parenthesis it will highlight the one matching
+set smartcase                   " set smartcase for search
+" set splitbelow splitright
+" set spell                     " set spellchecking
+set spelllang=en_us,ru_ru
+set statusline=%f%m%r%h%w\ [%Y]\ [0x%02.2B]%<\ %F%=%4v,%4l\ of\ %L\ %3p%%
+set ttimeout		        " time out for key codes
+set ttimeoutlen=50	        " wait up to 100ms after Esc for special key
+set vb "disable beep sound
+set wildmenu		        " display completion matches in a status line
+set wildmode=longest,list,full  " wildmode insertions
+syntax enable                   " Switch syntax highlighting on
+
+"Autosave & swap
+set autowriteall		" This will save the file when you switch buffers, make it etc.
+"autosave everything with ignoring warnings from untitled buffers,
+"and read-only files, etc
+autocmd FocusLost * silent! wa
+" TextChangedI - save everytime in insert mode!!!
+" autocmd TextChanged,TextChangedI * silent! write
+autocmd TextChanged * silent! write
+set nobackup
+set noswapfile
+set undofile " Maintain undo history
+set undodir=~/.vim/undodir
+set undolevels=1000      " Maximum number of changes that can be undone
+set undoreload=10000
+
+"Langmap for Russian layout
+"no <">, <?>, <;>, </> - try to find way to write in codes
+set langmap=!№%*ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;!#%*`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+set nolangremap
+
+let mapleader=" "  "leader key
+
+"Tabs and Indent
+
+set autoindent " when creating a new line, copy the indentation from the line above
+set smartindent "Do smart autoindenting when starting a new line.
+set expandtab " [I] < > instead Tab. Real tab -> CTRL-V<Tab>.
+set smarttab  " when deleting whitespace at the beginning of a line, delete 1 tab worth of spaces
+set shiftwidth=4  "Number of spaces to use for each step of (auto)indent
+set softtabstop=4 " Number of spaces that a <Tab> counts for while performing editing operations
+set tabstop=4  "Number of spaces that a <Tab> in the file counts for.
+set wrap "Wrap lines
+
+set nolist
+set listchars=tab:»-,space:·,nbsp:~,trail:-,eol:$
+" highlight SpecialKey ctermfg=8 guifg=DimGrey
+" highlight SpecialKey ctermfg=14 guifg=Yellow
+
+" Ignoring file types from autocomplition:
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+
+"Cursor Cross
+"must add right color scheme OR experement with set guicolor
+" set cursorline
+" set cursorcolumn
+" highlight CursorLine ctermbg=Yellow cterm=bold guibg=#f9ed07
+" highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#f9ed07
+" colorsheme XXXXXXXXXXXXXXXx
+
+"Remove pipes | that act as separators on slits
+set fillchars+=vert:\
+
+" MArkdown
+let g:markdown_folding = 1
+"}}}
+"----------Autocmd------------{{{
+
+" textwidth = 78
+augroup vimrcEx
+  au!
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+augroup END
+
+"cursor position
+augroup vimStartup
+  au!
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid, when inside an event handler
+  " (happens when dropping a file on gvim) and for a commit message (it's
+  " likely a different one than last time).
+  autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \ |   exe "normal! g`\""
+    \ | endif
+augroup END
+" Put these in an autocmd group, so that you can revert them with:
+" ":augroup vimStartup | au! | augroup END"
+
+" Make views automatic !!!!!!!!!!!!!
+autocmd BufWinLeave *.* mkview!
+autocmd BufWinEnter *.* silent loadview
+" autocmd BufWinLeave * if expand("%") != "" | mkview | endif
+" autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+" autocmd BufWinLeave ?* mkview!
+" autocmd BufWinEnter ?* silent loadview
+
+" Highlight cursorline ONLY in the active window:
+au WinEnter * setlocal cursorline
+au WinLeave * setlocal nocursorline
+
+"remove whitespaces on save
+" autocmd BufWritePre * :%s/\s\+$//e
+
+" Filetype autocmd
+" autocmd BufReadPost,BufNewFile,BufRead  *.txt  set filetype=txt
+
+" autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
+
+" }}}
+"--------- PLUGINS & FILES {{{
+
+" VIM-PLUG
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+
+" Declare the list of plugins.
+Plug 'tpope/vim-speeddating' 
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-commentary'
+Plug 'vimwiki/vimwiki'
+Plug 'tools-life/taskwiki'
+Plug 'mattn/calendar-vim'
+Plug 'brianrodri/vim-sort-folds'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+"____________ Vimwiki_____________________________
+let g:vimwiki_folding='expr'
+let g:vimwiki_global_ext = 0
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_conceal_pre = 1
+let g:vimwiki_url_maxsave = 0
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" let g:vimwiki_nested_syntaxes = {'python': 'python', 'bash':'bash', 'sql':'sql', 'msql':'msql', 'git':'git',
+"             \'gitcommit':'gitcommint', 'vim':'vim', 'viminfo':'viminfo', 'c':'c', 'c++': 'cpp', 'conf':'conf',
+"             \'config':'config', 'cfg':'cfg', 'cmake':'cmake', 'diff':'diff', 'zsh':'zsh',
+"             \'xdefaults':'xdefaults'}
+
+" Final exp
+
+let g:vimwiki_root = '~/Notes/Vimwiki'
+let g:vimwiki_list = [
+            \{'path': '~/Notes/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/linux', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/server', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/study', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/culture', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
+
+command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
+
+" let g:vimwiki_root = '~/Vimwiki'
+" auto_diary_index - dos't work!! wait for update
+" let g:vimwiki_list = [
+"             \{'path': '~/Vimwiki'},
+"             \{'path': '~/Vimwiki/linux'},
+"             \{'path': '~/Vimwiki/soft'},
+"             \{'path': '~/Vimwiki/server'},
+"             \{'path': '~/Vimwiki/study'},
+"             \{'path': '~/Vimwiki/work'},
+"             \{'path': '~/Vimwiki/hardware'},
+"             \{'path': '~/Vimwiki/culture'},
+"             \{'path': '~/Vimwiki/life'}]
+" ---------------------
+" Taskwiki
+
+let g:taskwiki_disable_concealcursor = 1
+let g:taskwiki_sort_orders={"D": "project+,description+"}
+
+"-----------------------------
+
+" Netrw setup
+" let g:netrw_banner       = 0  " removes the netrw banner
+" let g:netrw_liststyle    = 3  " tree style listing
+" let g:netrw_browse_split = 4  " see help on this one. lots of useful options
+" let g:netrw_altv         = 1  " change from left splitting to right splitting
+" let g:netrw_winsize      = 25 " initial size of new explore windows
+" By default netrw leaves unmodified buffers open. This autocommand
+" deletes them when they're hidden (using :q for example).
+" autocmd FileType netrw setl bufhidden=delete
+
+"}}}
+"----------Add optional packages.-----------{{{
+
+" The matchit plugin makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
+
+" }}}
+"----------Commands-------------------------{{{
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+" Revert with: ":delcommand DiffOrig".
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
+" }}}
+" ---------Funtions----------{{{
+
+" Wrap mode, move cursor by display lines when wrappong
+
+function ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    " set virtualedit=all
+    silent! nunmap <buffer> k
+    silent! nunmap <buffer> j
+    silent! vunmap <buffer> k
+    silent! vunmap <buffer> j
+    silent! nunmap <buffer> 0
+    silent! nunmap <buffer> $
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak
+    " set virtualedit=
+    " setlocal display+=lastline
+    noremap <buffer> <silent> k gk
+    noremap <buffer> <silent> j gj
+    noremap <buffer> <silent> 0 g0
+    noremap <buffer> <silent> $ g$
+    vnoremap <buffer> <silent> j gj
+    vnoremap <buffer> <silent> k gk
+    noremap <buffer> <silent> <Home> g<Home>
+    noremap <buffer> <silent> <End>  g<End>
+  endif
+endfunction
+" }}}
+" ----------Making Alt works----------{{{
+
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+" }}}
+"----------THEMES & COLORS----------------{{{
+
+" set termguicolors "use true color
+
+" fold color
+" hi Folded cterm=bold ctermfg=DarkBlue ctermbg=none
+" hi FoldColumn cterm=bold ctermfg=DarkBlue ctermbg=none
+
+" search color
+highlight Search ctermbg=3 ctermfg=0 cterm=none
+
+"set cursorline
+set cursorline
+highlight CursorLine ctermbg=7 cterm=none
+
+"---Solarized----
+
+" set background=light
+" let g:solarized_termcolors=256
+" let g:solarized_contrast="high"
+" colorscheme solarized
+
+"}}}
+"----------KEYMAPPINGS-------------------------{{{
+"^^^^^^^^^Function keys^^^^^^^^^^^^
+
+"enable/disable spellchecking
+nnoremap <F1> :set spell!<CR>
+"enable/disable relativenumber
+nnoremap <F2> :set relativenumber!<CR>
+" turn off folder search
+nnoremap <F3> :set foldopen-=search \| set foldopen<CR>
+" turn on folder search
+nnoremap <F4> :set foldopen+=search \| set foldopen<CR>
+" turn on/off list
+nnoremap <F5> :set list!<CR>
+inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+" nnoremap <F6> :set wrap!<CR>
+nnoremap <F6> :call ToggleWrap()<CR>
+inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
+" nnoremap <F8> :sbnext<CR>
+" nnoremap <F9> :sbnext<CR>
+" nnoremap <F10> :sbnext<CR>
+" nnoremap <F11> :sbnext<CR>
+" nnoremap <F12> :sbnext<CR>
+
+"^^^^^^^^main^^^^^^^^^^^^^^^
+
+"Esc
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+inoremap ;; <esc>
+" Don't use Ex mode, use Q for formatting.
+" Revert with ":unmap Q".
+map Q gq
+nnoremap Y y$
+nnoremap <A-q> ggVG
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <S-Tab> <<
+nnoremap <S-j> :bnext<CR>
+nnoremap <S-k> :bprev<CR>
+nnoremap <Tab> >>
+" Ctrl-n/m deletes blank line below/above, and Alt-i/o inserts.
+nnoremap <silent><A-o> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent><A-i> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><C-m> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+" nnoremap <leader>a :bp<bar>vsp<bar>bn<bar>bd<CR>
+" datestump
+
+nmap <leader>b <Plug>VimwikiGoBackLink
+nnoremap <leader>df "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+nnoremap <leader>ds "=strftime("%Y-%m-%d")<CR>P
+nnoremap <leader>cc @='i```<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cb @='i```bash<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cp @='i```python<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cs @='i```sql<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cg @='i```git<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cv @='i```vim<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>ct :VimwikiTOC<CR>
+"Use this to quickly fix spelling mistakes 
+nnoremap <Leader>fs 1z=
+nnoremap <Leader>ft @='ciW**<C-V><C-R>"**<C-V><Esc>w'<CR>
+nnoremap <Leader>fb :exe "norm I**" <bar> exe "norm A**"<CR>
+nnoremap <Leader>fi @='ciW_<C-V><C-R>"_<C-V><Esc>w'<CR>
+nnoremap <Leader>fI :exe "norm I_" <bar> exe "norm A_"<CR>
+nnoremap <Leader>fc @='ciW`<C-V><C-R>"`<C-V><Esc>w'<CR>
+nnoremap <Leader>fC :exe "norm I`" <bar> exe "norm A`"<CR>
+nnoremap <leader>h :split<CR>
+noremap <leader>j J
+nnoremap <leader>l :ls<CR>:b<space>
+nnoremap <leader>o :only<CR>
+nnoremap <leader>p :b#<CR>
+" nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>rc :e $MYVIMRC<CR>
+nnoremap <leader>rr :source ~/.vim/vimrc<CR>
+nnoremap <leader>s :%s//gI<Left><Left><Left>
+nnoremap <leader>sudo :w !sudo tee % <CR><CR>
+"shell check
+" using https://www.shellcheck.net/ - install first
+map <leader>S :!clear && shellcheck %<CR>
+nnoremap <leader>v :vsplit<CR>
+nmap <leader>w1 :b ~/Notes/Vimwiki/study.md<CR>
+nmap <leader>wc :Calendar<CR>
+nmap <leader>wd :Diary<CR>
+nmap <leader>wg <Plug>VimwikiGoto
+nmap <leader>wp <Plug>VimwikiDiaryIndex
+nmap <leader>wn <Plug>VimwikiMakeDiaryNote
+nmap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <leader>wu <Plug>VimwikiDiaryGenerateLinks
+nmap <leader>wx <Plug>VimwikiDeleteFile
+nnoremap <leader>q :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
+nnoremap <leader>z zMzvzz
+nnoremap <leader>x :close<CR>
+noremap <silent> <A-a> :vertical resize +3<CR>
+noremap <silent> <A-s> :resize -3<CR>
+noremap <silent> <A-d> :vertical resize -3<CR>
+noremap <silent> <A-w> :resize +3<CR>
+
+"change 2 split windows from vert to horiz or horiz to vert
+" map <Leader>th <C-w>t<C-w>H
+" map <Leader>tk <C-w>t<C-w>K
+
+" move to previos tab
+" nnoremap <S-h> gT
+" move to next tab
+" nnoremap <S-l> gt
+
+" Make adjusing split sizes a bit more friendly
+" noremap <silent> <C-Left> :vertical resize +3<CR>
+" noremap <silent> <C-Right> :vertical resize -3<CR>
+" noremap <silent> <C-Up> :resize +3<CR>
+" noremap <silent> <C-Down> :resize -3<CR>
+
+"^^^^^^^^^^Arrows^^^^^^^^^^^^^^^^^^^^^^^^
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+ 
+" }}}

@@ -1,0 +1,5 @@
+
+set guioptions=egmLt            " set GUI options
+set guifont=Source\ Code\ Pro\ 14
+colorscheme morning
+set relativenumber
