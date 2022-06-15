@@ -79,8 +79,8 @@ _fzf_compgen_dir() {
 #---------fzf
 
 #gvim-to-vim Fedora
-alias vim='gvim -v'
-export EDITOR="gvim -v"
-export VISUAL="$EDITOR"
+# alias vim='gvim -v'
+# export EDITOR="gvim -v"
+# export VISUAL="$EDITOR"
 
 neofetch
