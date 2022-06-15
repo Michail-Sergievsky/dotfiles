@@ -64,7 +64,7 @@ set nobackup
 set noswapfile
 set undofile " Maintain undo history
 set undodir=~/.vim/undodir
-set undolevels=1000      " Maximum number of changes that can be undone
+set undolevels=10000     " Maximum number of changes that can be undone
 set undoreload=10000
 
 "Langmap for Russian layout
@@ -95,10 +95,10 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 
 "Cursor Cross
 "must add right color scheme OR experement with set guicolor
-" set cursorline
-" set cursorcolumn
-" highlight CursorLine ctermbg=Yellow cterm=bold guibg=#f9ed07
-" highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#f9ed07
+set cursorline
+set cursorcolumn
+highlight CursorLine ctermbg=Yellow cterm=bold guibg=#f9ed07
+highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#f9ed07
 " colorsheme XXXXXXXXXXXXXXXx
 
 "Remove pipes | that act as separators on slits
@@ -152,6 +152,10 @@ au WinLeave * setlocal nocursorline
 
 " autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
 
+" Working projects
+" ansible inventory yaml
+autocmd BufRead,BufNewFile ~/Git/*/inventory/* set filetype=yaml
+
 " }}}
 "--------- PLUGINS & FILES {{{
 
@@ -166,9 +170,11 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-commentary'
 Plug 'vimwiki/vimwiki'
-Plug 'tools-life/taskwiki'
+" Plug 'tools-life/taskwiki'
 Plug 'mattn/calendar-vim'
 Plug 'brianrodri/vim-sort-folds'
+Plug 'romainl/vim-qf'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -189,48 +195,47 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown'
 
 let g:vimwiki_root = '~/Notes/Vimwiki'
 let g:vimwiki_list = [
-            \{'path': '~/Notes/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
             \{'path': '~/Notes/Vimwiki/linux', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Notes/Vimwiki/server', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/study', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Notes/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
+            \{'path': '~/Notes/Vimwiki/study', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Notes/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Notes/Vimwiki/culture', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Notes/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
 command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
 
-" let g:vimwiki_root = '~/Vimwiki'
 " auto_diary_index - dos't work!! wait for update
-" let g:vimwiki_list = [
-"             \{'path': '~/Vimwiki'},
-"             \{'path': '~/Vimwiki/linux'},
-"             \{'path': '~/Vimwiki/soft'},
-"             \{'path': '~/Vimwiki/server'},
-"             \{'path': '~/Vimwiki/study'},
-"             \{'path': '~/Vimwiki/work'},
-"             \{'path': '~/Vimwiki/hardware'},
-"             \{'path': '~/Vimwiki/culture'},
-"             \{'path': '~/Vimwiki/life'}]
 " ---------------------
 " Taskwiki
-
 let g:taskwiki_disable_concealcursor = 1
 let g:taskwiki_sort_orders={"D": "project+,description+"}
-
 "-----------------------------
-
 " Netrw setup
-" let g:netrw_banner       = 0  " removes the netrw banner
-" let g:netrw_liststyle    = 3  " tree style listing
-" let g:netrw_browse_split = 4  " see help on this one. lots of useful options
-" let g:netrw_altv         = 1  " change from left splitting to right splitting
-" let g:netrw_winsize      = 25 " initial size of new explore windows
+let g:netrw_banner       = 0  " removes the netrw banner
+let g:netrw_liststyle    = 3  " tree style listing
+let g:netrw_browse_split = 4  " see help on this one. lots of useful options
+let g:netrw_altv         = 1  " change from left splitting to right splitting
+let g:netrw_winsize      = 15 " initial size of new explore windows
+let g:netrw_keepdir      = 0  "Keep the current directory and the browsing directory synced
+let g:netrw_localcopydircmd = 'cp -r'
+ "Highlight marked files in the same way search matches are.
+hi! link netrwMarkFile Search
 " By default netrw leaves unmodified buffers open. This autocommand
 " deletes them when they're hidden (using :q for example).
-" autocmd FileType netrw setl bufhidden=delete
+autocmd FileType netrw setl bufhidden=delete
+"launch after opening vim
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
 
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
 "}}}
 "----------Add optional packages.-----------{{{
 
@@ -255,7 +260,7 @@ if !exists(":DiffOrig")
 endif
 
 " }}}
-" ---------Funtions----------{{{
+" ----------Funtions----------{{{
 
 " Wrap mode, move cursor by display lines when wrappong
 
@@ -287,6 +292,150 @@ function ToggleWrap()
     noremap <buffer> <silent> <End>  g<End>
   endif
 endfunction
+
+" fonts for gvim
+" let g:fnt_types = ['SourceCode\ Pro', 'monofur' ]
+" let g:fnt_sizes = [ 10, 13 ]
+
+" let g:fnt_index = 0
+" let g:fnt_size  = g:fnt_sizes[g:fnt_index]
+
+" function! CycleFont()
+"   let g:fnt_index = (g:fnt_index + 1) % len(g:fnt_types)
+"   let g:fnt_size  = g:fnt_sizes[g:fnt_index]
+"   call ResetFont()
+" endfunction
+
+" function! ResetFont ()
+"   if has('gui_running')
+"     exe ':set guifont=' . g:fnt_types[g:fnt_index] . '\ ' . string(g:fnt_size)
+"   endif
+" endfunction
+
+" call ResetFont()
+
+" function! FontSizePlus ()
+"   let g:fnt_size = g:fnt_size + 0.5
+"   call ResetFont()
+" endfunction
+
+" function! FontSizeMinus ()
+"   let g:fnt_size = g:fnt_size - 0.5
+"   call ResetFont()
+" endfunction
+
+" nnoremap <leader>+ :call FontSizePlus()<cr>
+" nnoremap <leader>- :call FontSizeMinus()<cr>
+" nnoremap cot :call CycleFont()<cr>
+
+" Another version of font switch for gui
+
+if has("unix")
+    function! FontSizePlus ()
+      let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole + 1
+      let l:new_font_size = ' '.l:gf_size_whole
+      let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+    endfunction
+
+    function! FontSizeMinus ()
+      let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole - 1
+      let l:new_font_size = ' '.l:gf_size_whole
+      let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+    endfunction
+else
+    function! FontSizePlus ()
+      let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole + 1
+      let l:new_font_size = ':h'.l:gf_size_whole
+      let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
+    endfunction
+
+    function! FontSizeMinus ()
+      let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole - 1
+      let l:new_font_size = ':h'.l:gf_size_whole
+      let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
+    endfunction
+endif
+
+if has("gui_running")
+    nmap <S-F12> :call FontSizeMinus()<CR>
+    nmap <F12> :call FontSizePlus()<CR>
+endif
+" So using has('gui_gtk2') is probably better than using has('unix')
+
+"Netrw navigation
+function! NetrwMapping()
+"navigation
+nmap <buffer> H u
+nmap <buffer> h -^
+nmap <buffer> l <CR>
+nmap <buffer> . gh
+nmap <buffer> P <C-w>z
+nmap <buffer> L <CR>:Lexplore<CR>
+nmap <buffer> <Leader>dd :Lexplore<CR>
+"marks
+nmap <buffer> <TAB> mf
+nmap <buffer> <S-TAB> mF
+nmap <buffer> <Leader><TAB> mu
+"file managining
+nmap <buffer> ff %:w<CR>:buffer #<CR>
+nmap <buffer> fe R
+nmap <buffer> fc mc
+nmap <buffer> fC mtmc
+nmap <buffer> fx mm
+nmap <buffer> fX mtmm
+nmap <buffer> f; mx
+nmap <buffer> fl :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
+nmap <buffer> fq :echo 'Target:' . netrw#Expose("netrwmftgt")<CR>
+nmap <buffer> fd mtfq
+nmap <buffer> FF :call NetrwRemoveRecursive()<CR>
+"bookmarks
+nmap <buffer> bb mb
+nmap <buffer> bd mB
+nmap <buffer> bl gb
+
+endfunction
+
+"remove files recursively
+function! NetrwRemoveRecursive()
+  if &filetype ==# 'netrw'
+    cnoremap <buffer> <CR> rm -r<CR>
+    normal mu
+    normal mf
+    
+    try
+      normal mx
+    catch
+      echo "Canceled"
+    endtry
+
+    cunmap <buffer> <CR>
+  endif
+endfunction
+
+" Wrap visual selection in an JIRA {noformat} tag.
+vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
+function! VisualHTMLTagWrap()
+  " let tag = input("Tag to wrap block: ")
+  let tag = 1
+  if len(tag) > 0
+    normal `>
+    if &selection == 'exclusive'
+      exe "normal o{noformat}"
+    else
+      " exe "normal o</".tag.">"
+      exe "normal o{noformat}"
+    endif
+    normal `<
+    exe "normal O{noformat}"
+    " exe "normal O<".tag.">"
+    normal `<
+  endif
+endfunction
+
 " }}}
 " ----------Making Alt works----------{{{
 
@@ -347,6 +496,8 @@ nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
 
 "^^^^^^^^main^^^^^^^^^^^^^^^
 
+" when map 2 or more commands use <bar> or \| - for more :help map_bar
+
 "Esc
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 inoremap ;; <esc>
@@ -374,6 +525,8 @@ nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nmap <leader>b <Plug>VimwikiGoBackLink
 nnoremap <leader>df "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 nnoremap <leader>ds "=strftime("%Y-%m-%d")<CR>P
+nnoremap <leader>dd :Lexplore %:p:h<CR>
+nnoremap <Leader>da :Lexplore<CR>
 nnoremap <leader>cc @='i```<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cb @='i```bash<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cp @='i```python<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
@@ -381,7 +534,7 @@ nnoremap <leader>cs @='i```sql<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>``
 nnoremap <leader>cg @='i```git<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cv @='i```vim<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>ct :VimwikiTOC<CR>
-"Use this to quickly fix spelling mistakes 
+"Use this to quickly fix spelling mistakes
 nnoremap <Leader>fs 1z=
 nnoremap <Leader>ft @='ciW**<C-V><C-R>"**<C-V><Esc>w'<CR>
 nnoremap <Leader>fb :exe "norm I**" <bar> exe "norm A**"<CR>
@@ -389,6 +542,8 @@ nnoremap <Leader>fi @='ciW_<C-V><C-R>"_<C-V><Esc>w'<CR>
 nnoremap <Leader>fI :exe "norm I_" <bar> exe "norm A_"<CR>
 nnoremap <Leader>fc @='ciW`<C-V><C-R>"`<C-V><Esc>w'<CR>
 nnoremap <Leader>fC :exe "norm I`" <bar> exe "norm A`"<CR>
+nnoremap <Leader>fe @='ciW[[#<C-V><C-R>"]]<C-V><Esc>w'<CR>
+vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
 nnoremap <leader>h :split<CR>
 noremap <leader>j J
 nnoremap <leader>l :ls<CR>:b<space>
@@ -397,7 +552,8 @@ nnoremap <leader>p :b#<CR>
 " nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <leader>rr :source ~/.vim/vimrc<CR>
-nnoremap <leader>s :%s//gI<Left><Left><Left>
+nnoremap <leader>ss :%s//gI<Left><Left><Left>
+nnoremap <leader>sp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
 nnoremap <leader>sudo :w !sudo tee % <CR><CR>
 "shell check
 " using https://www.shellcheck.net/ - install first
@@ -416,6 +572,7 @@ nmap <leader>wx <Plug>VimwikiDeleteFile
 nnoremap <leader>q :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
 nnoremap <leader>z zMzvzz
 nnoremap <leader>x :close<CR>
+" Make adjusing split sizes a bit more friendly
 noremap <silent> <A-a> :vertical resize +3<CR>
 noremap <silent> <A-s> :resize -3<CR>
 noremap <silent> <A-d> :vertical resize -3<CR>
@@ -426,9 +583,9 @@ noremap <silent> <A-w> :resize +3<CR>
 " map <Leader>tk <C-w>t<C-w>K
 
 " move to previos tab
-" nnoremap <S-h> gT
+nnoremap <S-h> gT
 " move to next tab
-" nnoremap <S-l> gt
+nnoremap <S-l> gt
 
 " Make adjusing split sizes a bit more friendly
 " noremap <silent> <C-Left> :vertical resize +3<CR>

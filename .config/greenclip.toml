@@ -6,6 +6,6 @@
   image_cache_directory = "/tmp/greenclip"
   max_history_length = 250
   max_selection_size_bytes = 0
-  static_history = ["TERM=xterm"]
+  static_history = ['setxkbmap "us,ru" ",winkeys" "grp:ctrl_shift_toggle,grp_led:scroll"',"TERM=xterm"]
   trim_space_from_selection = true
   use_primary_selection_as_input = false

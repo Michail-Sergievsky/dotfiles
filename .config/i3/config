@@ -89,17 +89,13 @@ exec --no-startup-id i3-msg 'workspace 1'
 exec --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:ctrl_shift_toggle,grp_led:scroll"
 
 #Fedora
+exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id goldendict
 exec --no-startup-id $redshift_start
 exec --no-startup-id lxqt-policykit-agent
+exec --no-startup-id telegram-desktop
 exec --no-startup-id udiskie -N
-#via flatpak
-exec --no-startup-id flatpak run org.telegram.desktop
-exec --no-startup-id flatpak run com.dropbox.Client
-#usuall
-# exec --no-startup-id telegram-desktop
-# exec --no-startup-id dropbox
 #}}}
 #---------Mouse--{{{
 
@@ -209,7 +205,7 @@ exec --no-startup-id $term -name dropdown_term
 bindsym $mod+b [class="^URxvt$" instance="^dropdown_term"] scratchpad show; [class="^URxvt$" instance="^dropdown_term"] move position center
 
 # exec --no-startup-id $term -name dropdown_notes -e vim
-exec --no-startup-id $term -name dropdown_notes -e gvim -v
+exec --no-startup-id $term -name dropdown_notes -e gvim -v "/home/freeman/Dropbox/Vimwiki/work/Notes.md"
 bindsym $mod+n [class="^URxvt$" instance="^dropdown_notes"] scratchpad show; [class="^URxvt$" instance="^dropdown_notes"] move position center
 
 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
@@ -236,13 +232,21 @@ mode "$mode_system" {
 bindsym $mod+Pause mode "$mode_system"
 #}}}
 #-------- Manual management of external displays{{{
-# Set the shortcuts and what they do
-set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) HDMI+DP_rotate
+# HOME
+set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) DP ONLY, (f) HDMI+DP_rotate
 mode "$mode_display" {
 bindsym a exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output DVI-D-0 --off, mode "default"
 bindsym s exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off --output DisplayPort-0 --off, mode "default"
-# bindsym d exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output DVI-D-0 --off, mode "default"
-bindsym d exec --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate left --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
+bindsym d exec --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output DVI-D-0 --off
+bindsym f exec --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate left --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
+
+# WORK
+# set $mode_display Ext_Screen (a) note, (s) note+DELL, (d) note_doc_DELL, (f) note+BENQ
+# mode "$mode_display" {
+# bindsym a exec --no-startup-id xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off
+# bindsym s exec --no-startup-id xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off
+# bindsym d exec --no-startup-id xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --primary --mode 1920x1200 --pos 1920x0 --rotate normal --output DisplayPort-3 --off
+# bindsym f exec --no-startup-id xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -359,9 +363,9 @@ bindsym $mod+plus scratchpad show; resize set 1366 750; move position center
 # start a terminal
 bindsym $mod+Return exec $term
 # vifm
-# bindsym $mod+Ctrl+v exec --no-startup-id $term -e ~/.config/vifm/scripts/vifmrun
+bindsym $mod+Ctrl+v exec --no-startup-id $term -e ~/.config/vifm/scripts/vifmrun
 # vifm Fedora
-bindsym $mod+Ctrl+v exec --no-startup-id $term -e vifm
+# bindsym $mod+Ctrl+v exec --no-startup-id $term -e vifm
 
 # CMUS CONTROLS
 # pause

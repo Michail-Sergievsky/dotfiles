@@ -82,9 +82,9 @@ set undolevels=100
 " use vim as default editor, open multiple files in tabs!!!!!
 " set vicmd="vim -p"
 "Fedora
-set vicmd="gvim -v"
+" set vicmd="gvim -v"
 "Arch
-" set vicmd=vim
+set vicmd=vim
 
 " use vim's documentation system for :help command
 set vimhelp
@@ -154,43 +154,43 @@ let &statusline .= ' %a '       " free space available at current partition
 
 mark h ~/
 
-mark 0 ~/Videos/!convert
-mark 1 ~/Documents
-mark 2 ~/Documents/Docs
-mark 3 ~/Dropbox
-mark 4 ~/Downloads/t_done
-mark 5 ~/Media/Torrents/done
-mark 6 ~/Downloads/Media_done
-mark 7 ~/Books
-mark 8 ~/Music
-mark 9 ~/Videos/!to_convert
-mark C ~/Media/Torrents/done/comics
-mark D ~/Documents
-mark M ~/Music
-mark S ~/Stuff
-mark a ~/Music/audiobooks
-mark b ~/Books
-mark c ~/.config
-mark d ~/Downloads
-mark e /etc
-mark f ~/Foto
-mark g ~/DiskD/soft&drivers
-mark i ~/Knowledge/!IT_articles
-mark j ~/Knowledge/japan,anime,manga
-mark k ~/Knowledge
-mark l ~/Documents/Look.out.for.them.all
-mark m ~/Magazine
-mark n ~/Notes
-mark o ~/Mounted
-mark p ~/Pictures
-mark r ~/DiskD
-mark s ~/Study
-mark t ~/Temp
-mark u /usr/share
-mark v ~/Videos
-mark w ~/Work
-mark x ~/.config/vifm
-mark z ~/.vim
+" mark 0 ~/Videos/!convert
+" mark 1 ~/Documents
+" mark 2 ~/Documents/Docs
+" mark 3 ~/Dropbox
+" mark 4 ~/Downloads/t_done
+" mark 5 ~/Media/Torrents/done
+" mark 6 ~/Downloads/Media_done
+" mark 7 ~/Books
+" mark 8 ~/Music
+" mark 9 ~/Videos/!to_convert
+" mark C ~/Media/Torrents/done/comics
+" mark D ~/Documents
+" mark M ~/Music
+" mark S ~/Stuff
+" mark a ~/Music/audiobooks
+" mark b ~/Books
+" mark c ~/.config
+" mark d ~/Downloads
+" mark e /etc
+" mark f ~/Foto
+" mark g ~/DiskD/soft&drivers
+" mark i ~/Knowledge/!IT_articles
+" mark j ~/Knowledge/japan,anime,manga
+" mark k ~/Knowledge
+" mark l ~/Documents/Look.out.for.them.all
+" mark m ~/Magazine
+" mark n ~/Notes
+" mark o ~/Mounted
+" mark p ~/Pictures
+" mark r ~/DiskD
+" mark s ~/Study
+" mark t ~/Temp
+" mark u /usr/share
+" mark v ~/Videos
+" mark w ~/Work
+" mark x ~/.config/vifm
+" mark z ~/.vim
 
 " }}}
 " ----Commands------------------{{{
@@ -286,20 +286,34 @@ filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
 filextype {*.djvu},<image/vnd.djvu>
         \ {View in zathura}
         \ zathura %f %i,
-"Comics 
+
+"Comics Arch
 filextype {*.cbz,*.cbr}
 	\ {View in Mcomix}
-	" \ mcomix %c %i &,
-	\ mcomix3 %c %i &,
+	\ mcomix %c %i &,
 	\ {View in YACReader}
 	\ YACReader %c %i &
 
-"E-books
+"Comics Fedora
+" filextype {*.cbz,*.cbr}
+" 	\ {View in Mcomix}
+" 	\ mcomix3 %c %i &,
+" 	\ {View in YACReader}
+" 	\ YACReader %c %i &
+
+"E-books Arch
 filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
 	\ {View in foliate}
 	\ foliate %c %i &,
     \ {View in zathura}
     \ zathura %f %i &
+
+"E-books Fedora
+" filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
+" 	\ {View in foliate}
+" 	\ com.github.johnfactotum.Foliate %c %i &,
+"     \ {View in zathura}
+"     \ zathura %f %i &
 
 " Audio
 filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg},
@@ -352,11 +366,12 @@ fileviewer {*.jpg,*.jpeg,*.png}
            \ vifmimg clear
 
 " Office files
-filextype {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
+filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.odp,*.pptx,*.ppt,*.csv},
          \<application/vnd.openxmlformats-officedocument.*,
           \application/msword,
           \application/vnd.ms-excel>
         \ libreoffice %f %i &
+
 fileviewer {*.doc},<application/msword> catdoc %c
 fileviewer {*.docx},
           \<application/
@@ -397,6 +412,15 @@ filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
 "          \*.cpio
 "          \ als %f 2>/dev/null
 
+" Traces
+filextype {*.pcap,*.pcapng}
+	\ {View in wireshark}
+	\ /usr/bin/wireshark %c %i &
+
+" RDP
+filextype {*.rdp}
+    \ {open with remmina}
+    \ remmina -c %c %i &
 
 " Object
 filetype {*.o},<application/x-object> nm %f | less
@@ -626,11 +650,13 @@ nnoremap ~ :help<cr>
 
 nnoremap <wait>af :select *.*<CR>
 nnoremap <wait>aa :%select<CR>
-nnoremap <wait>ata :!tar -cvf `basename $(pwd)`.tar .<cr>
-nnoremap <wait>atf :!tar -cvf .tar %f<left><left><left><left><left><left><left>
-nnoremap <wait>agz :!tar cvzf `basename $(pwd)`.tar.gz .<cr>
-nnoremap <wait>abz :!tar cvfj `basename $(pwd)`.tar.bz2 .<cr>
-nnoremap <wait>aza :!zip -r `basename $(pwd)` .<cr>
+" all to dir_name.tar.gz
+nnoremap <wait>adgz :!tar -cvzf `basename $(pwd)`.tar.gz .<cr>
+" selected to INSERT_NAME tar.gz
+nnoremap <wait>angz :!tar -cvzf .tar.gz %f<left><left><left><left><left><left><left><left><left><left>
+" all to dir_name.zip
+nnoremap <wait>aza :!!zip -r -0 "$(basename "$(pwd)")" .<cr>
+" selected to INSERT_NAME zip
 nnoremap <wait>azf :!zip -r  %f<left><left><left>
 nnoremap <wait>by :yank | winrun , put<cr>
 nnoremap <wait>bp :yank | winrun , put!<cr>
@@ -640,12 +666,21 @@ nnoremap <wait>bo :copy!&<cr>
 nnoremap <wait>bj :jobs<cr>
 nnoremap <wait>cx :!chmod +x %f<cr>
 nnoremap <wait>ca :!config add %c<cr>
+nnoremap <wait>gc :!!git clone<space>
+nnoremap <wait>gs :!!git status<CR>
+nnoremap <wait>gb :!!git branch -a<CR>
+nnoremap <wait>gm :!!git checkout<space>
 nnoremap m <Nop>
 nnoremap <wait>me :edit<space>
 nnoremap <wait>mf :touch<space>""<Left>
 nnoremap <wait>md :mkdir<space>""<Left>
+nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
 nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
 nnoremap <wait>rh :reg h<cr>b
+nnoremap <wait>rcd :!!clear && rsync -avP --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rcr :!!clear && rsync -avP %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>s1 :select *(1).mkv<cr>
 nnoremap <wait>s2 :select *[^(1)].mkv<cr>
 nnoremap <wait>s3 :select *.srt,*jpg,*.txt,*.m4a,*.ogg<CR>
@@ -659,8 +694,9 @@ nnoremap <wait>sm :togglesort<cr>
 nnoremap <wait>tl :!ls --group-directories-first -vRlh > $(basename $PWD)<cr>
 nnoremap <wait>ta :!!find . -iname "**"<Left><Left>
 nnoremap <wait>td :!diff %c %C<cr>
-nnoremap <wait>tc :!cp %c -f ~/Documents/Look\ out\ for\ them\ all/<cr>
+nnoremap <wait>tp :!ls --group-directories-first -vRlh > move && mv move -f ~/Documents/Look.out.for.them.all/$(basename $PWD)<cr>
 nnoremap <wait>tm :!!mediainfo %c<cr>
+nnoremap <wait>ti :!!mkvmerge -i %c<cr>
 nnoremap <wait>tf :FZFfind<cr> 
 nnoremap <wait>tz :FZFlocate<cr>
 

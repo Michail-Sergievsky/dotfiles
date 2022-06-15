@@ -138,9 +138,14 @@ type = internal/fs
 interval = 25
 fixed-values = true
 
+#HOME
 mount-0 = /
 mount-1 = /home/freeman/DiskD
-mount-2 = /home/freeman/Media
+mount-2 = /home/freeman/DiskE
+mount-3 = /home/freeman/Media
+#WORK
+mount-0 = /
+mount-1 = /home/freeman/
 
 label-mounted = 💽 %free%
 label-unmounted = %mountpoint% not mounted

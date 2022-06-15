@@ -1,4 +1,5 @@
 #
+# SMY bashrc
 # ~/.bashrc
 #
 
@@ -14,10 +15,28 @@ fi
 bind "set completion-ignore-case on"
 
 export HISTCONTROL=ignoreboth
-export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\]'
+
+# Git command line
+function parse_git_branch() 
+{
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
+}
+
+# 30m - color
+PS1="\[\033[00;30m\]\u\
+\[$(tput sgr0)\]\[\033[00;34m\]@\
+\[$(tput sgr0)\]\[\033[00;31m\]\h\
+\[$(tput sgr0)\]\[\033[00;15m\]\
+ [\[$(tput sgr0)\]\[\033[38;5;30m\]\W\
+\[$(tput sgr0)\]\[\033[00;15m\]]\
+ \[\033[38;5;30m\]\$(parse_git_branch)\[\033[38;5;15m\]\[\033[00m\]\
+\[$(tput sgr0)\]\[\033[38;5;9m\]>\
+\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+# export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 
 #Arch pkgfile
-# source /usr/share/doc/pkgfile/command-not-found.bash
+source /usr/share/doc/pkgfile/command-not-found.bash
 
 #dircolors
 [ ! -e ~/.dircolors ] && eval $(dircolors -p > ~/.dircolors)
@@ -25,11 +44,11 @@ export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\
 
 #FZF-------
 #Fedora style
-source /usr/share/fzf/shell/key-bindings.bash
-source /usr/share/fzf/shell/completion.bash
+# source /usr/share/fzf/shell/key-bindings.bash
+# source /usr/share/fzf/shell/completion.bash
 #Arch style
-# source /usr/share/fzf/key-bindings.bash
-# source /usr/share/fzf/completion.bash
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
 export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"

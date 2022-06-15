@@ -22,8 +22,8 @@ alias vd='vifm .'
 alias vimrc='vim /home/freeman/.vim/vimrc'
 alias vifmrc='vim /home/freeman/.config/vifm/vifmrc'
 
-alias vpn_on='systemctl start openvpn-client@media-tel-vpn'
-alias vpn_off='systemctl stop openvpn-client@media-tel-vpn'
+alias vpn_on='sudo systemctl start openvpn-client@media-tel-vpn'
+alias vpn_off='sudo systemctl stop openvpn-client@media-tel-vpn'
 alias vpn_st='systemctl status openvpn-client@media-tel-vpn'
 
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
