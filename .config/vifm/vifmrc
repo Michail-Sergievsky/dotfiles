@@ -154,43 +154,49 @@ let &statusline .= ' %a '       " free space available at current partition
 
 mark h ~/
 
-" mark 0 ~/Videos/!convert
-" mark 1 ~/Documents
-" mark 2 ~/Documents/Docs
-" mark 3 ~/Dropbox
-" mark 4 ~/Downloads/t_done
-" mark 5 ~/Media/Torrents/done
-" mark 6 ~/Downloads/Media_done
-" mark 7 ~/Books
-" mark 8 ~/Music
-" mark 9 ~/Videos/!to_convert
-" mark C ~/Media/Torrents/done/comics
-" mark D ~/Documents
-" mark M ~/Music
-" mark S ~/Stuff
-" mark a ~/Music/audiobooks
-" mark b ~/Books
-" mark c ~/.config
-" mark d ~/Downloads
-" mark e /etc
-" mark f ~/Foto
-" mark g ~/DiskD/soft&drivers
-" mark i ~/Knowledge/!IT_articles
-" mark j ~/Knowledge/japan,anime,manga
-" mark k ~/Knowledge
-" mark l ~/Documents/Look.out.for.them.all
-" mark m ~/Magazine
-" mark n ~/Notes
-" mark o ~/Mounted
-" mark p ~/Pictures
-" mark r ~/DiskD
-" mark s ~/Study
-" mark t ~/Temp
-" mark u /usr/share
-" mark v ~/Videos
-" mark w ~/Work
-" mark x ~/.config/vifm
-" mark z ~/.vim
+mark 0 /home/freeman/Videos/!convert
+mark 1 /home/freeman/Documents
+mark 2 /home/freeman/Documents/docs
+mark 3 /home/freeman/Dropbox
+mark 4 /home/freeman/Downloads/t_done
+mark 5 /home/freeman/Downloads/t_done
+mark 6 /home/freeman/Media/t_done
+mark 7 /home/freeman/Books
+mark 8 /home/freeman/DiskD
+mark 9 /home/freeman/DiskE
+mark A /home/freeman/.ansible
+mark C /home/freeman/Media/home/comics
+mark D /home/freeman/Documents
+mark F /home/freeman/Foto
+mark M /home/freeman/Music
+mark P /home/freeman/Pictures
+mark R /
+mark S /home/freeman/Share
+mark T /home/freeman/Downloads/t_done
+mark U /usr/share
+mark a /home/freeman/Music/audiobooks
+mark b /home/freeman/Books
+mark c /home/freeman/.config
+mark d /home/freeman/Downloads
+mark e /etc
+mark g /home/freeman/Git
+mark i /home/freeman/Knowledge/!IT_articles
+mark j /home/freeman/Knowledge/japan,anime,manga
+mark k /home/freeman/Knowledge
+mark l /home/freeman/Documents/Look.out.for.them.all
+mark m /home/freeman/Magazine
+mark n /home/freeman/Notes
+mark o /home/freeman/Mounted
+mark p /home/freeman/Work/my_data
+mark r /home/freeman/Work/task
+mark s /home/freeman/Stuff
+mark t /home/freeman/Temp
+mark u /home/freeman/Work/uslugi
+mark v /home/freeman/Videos
+mark w /home/freeman/Work
+mark x /home/freeman/.config/vifm
+mark y /home/freeman/Media/home
+mark z /home/freeman/.vim
 
 " }}}
 " ----Commands------------------{{{
@@ -670,12 +676,14 @@ nnoremap <wait>gc :!!git clone<space>
 nnoremap <wait>gs :!!git status<CR>
 nnoremap <wait>gb :!!git branch -a<CR>
 nnoremap <wait>gm :!!git checkout<space>
-nnoremap m <Nop>
+nnoremap <wait>m <Nop>
+nnoremap <wait>mb :!vim "$(basename "$(pwd)")"<CR>
 nnoremap <wait>me :edit<space>
 nnoremap <wait>mf :touch<space>""<Left>
 nnoremap <wait>md :mkdir<space>""<Left>
 nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
 nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right><right><right>
 nnoremap <wait>rh :reg h<cr>b
 nnoremap <wait>rcd :!!clear && rsync -avP --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rcr :!!clear && rsync -avP %d/ %D | grep -E '^deleting|[^/]$'<cr>
@@ -699,6 +707,8 @@ nnoremap <wait>tm :!!mediainfo %c<cr>
 nnoremap <wait>ti :!!mkvmerge -i %c<cr>
 nnoremap <wait>tf :FZFfind<cr> 
 nnoremap <wait>tz :FZFlocate<cr>
+nnoremap <wait>c1 :!!find . -type f -iname "*.zip" -exec bash -c 'mv "$1" "${1%.zip}.cbz"' - '{}' \;<CR>
+nnoremap <wait>c2 :!!find . -type f -iname "*.rar" -exec bash -c 'mv "$1" "${1%.rar}.cbr"' - '{}' \;<CR>
 
 " yank current directory path into the clipboard
 nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>

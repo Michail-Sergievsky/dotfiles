@@ -554,6 +554,10 @@ nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <leader>rr :source ~/.vim/vimrc<CR>
 nnoremap <leader>ss :%s//gI<Left><Left><Left>
 nnoremap <leader>sp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
+nnoremap <leader>q1 :% norm 0dW$px<CR>
+nnoremap <leader>q2 :s%/.zip/.cbz/g<CR>
+nnoremap <leader>q3 :s%/.rar/.cbr/g<CR>
+nnoremap <leader>q3 :%s/\[\S*\] //g<CR>
 nnoremap <leader>sudo :w !sudo tee % <CR><CR>
 "shell check
 " using https://www.shellcheck.net/ - install first

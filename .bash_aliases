@@ -13,23 +13,22 @@ alias ll='ls --group-directories-first -lHAv'
 # -A, --almost-all           do not list implied . and ..
 # -l                         use a long listing format
 
-
 alias upd='sudo pacman -Syu && yay -Syu'
-alias reload="source .bashrc"
-alias reloada="source .bash_alias"
+alias reload="source ~/.bashrc"
+alias reloada="source ~/.bash_aliases"
 alias dirh='cat ~/help'
 alias vd='vifm .'
 alias vimrc='vim /home/freeman/.vim/vimrc'
 alias vifmrc='vim /home/freeman/.config/vifm/vifmrc'
-
 alias vpn_on='sudo systemctl start openvpn-client@media-tel-vpn'
 alias vpn_off='sudo systemctl stop openvpn-client@media-tel-vpn'
 alias vpn_st='systemctl status openvpn-client@media-tel-vpn'
-
+alias vag='cd /home/freeman/Vagrant'
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+alias con='/home/freeman/.scripts/connect.sh'
 
-alias nt="task add $1"
-alias tl="task list"
+# alias nt="task add $1"
+# alias tl="task list"
 
 taskprojectfunction () {
     task $1 modify project:$2
