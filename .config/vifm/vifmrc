@@ -118,6 +118,7 @@ set findprg='find %s %a -print ,
 
 " List of color schemes to try (picks the first one supported by the terminal)
 colorscheme solarized-light-256 Default-256 Default
+" colorscheme solarized-light-256-r.vifm
 " colorscheme dwmlight Default-256 Default
 
 "Each flag configures some aspect of TUI appearance. s - left/rigth borders
@@ -174,8 +175,10 @@ mark R /
 mark S /home/freeman/Share
 mark T /home/freeman/Downloads/t_done
 mark U /usr/share
+mark V /home/freeman/VagrantVM
 mark a /home/freeman/Music/audiobooks
 mark b /home/freeman/Books
+mark B /home/freeman/Books
 mark c /home/freeman/.config
 mark d /home/freeman/Downloads
 mark e /etc
