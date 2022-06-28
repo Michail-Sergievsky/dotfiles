@@ -1,0 +1,6 @@
+[user]
+	email = mikhail.sergiev@gmail.com
+	name = Michail-Sergievsky
+
+[includeIf "gitdir:~/Git/"]
+    path = ~/Git/.gitconfig
