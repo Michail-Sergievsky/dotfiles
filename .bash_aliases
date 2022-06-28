@@ -1,4 +1,4 @@
-#	Aliases
+#	SMY Bash Aliases
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -16,7 +16,6 @@ alias ll='ls --group-directories-first -lHAv'
 alias upd='sudo pacman -Syu && yay -Syu'
 alias reload="source ~/.bashrc"
 alias reloada="source ~/.bash_aliases"
-alias dirh='cat ~/help'
 alias vd='vifm .'
 alias vimrc='vim /home/freeman/.vim/vimrc'
 alias vifmrc='vim /home/freeman/.config/vifm/vifmrc'

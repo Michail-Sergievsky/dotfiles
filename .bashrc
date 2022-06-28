@@ -43,10 +43,6 @@ source /usr/share/doc/pkgfile/command-not-found.bash
 [ -e /bin/dircolors ] && eval $(dircolors -b ~/.dircolors)
 
 #FZF-------
-#Fedora style
-# source /usr/share/fzf/shell/key-bindings.bash
-# source /usr/share/fzf/shell/completion.bash
-#Arch style
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
@@ -77,10 +73,5 @@ _fzf_compgen_dir() {
     fd --type d . "$1"
 }
 #---------fzf
-
-#gvim-to-vim Fedora
-# alias vim='gvim -v'
-# export EDITOR="gvim -v"
-# export VISUAL="$EDITOR"
 
 neofetch
