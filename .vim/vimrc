@@ -155,6 +155,7 @@ au WinLeave * setlocal nocursorline
 " Working projects
 " ansible inventory yaml
 autocmd BufRead,BufNewFile ~/Git/*/inventory/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/Git/*/*/group_vars/* set filetype=yaml
 
 " }}}
 "--------- PLUGINS & FILES {{{
