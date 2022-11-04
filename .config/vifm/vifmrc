@@ -685,6 +685,7 @@ nnoremap <wait>me :edit<space>
 nnoremap <wait>mf :touch<space>""<Left>
 nnoremap <wait>md :mkdir<space>""<Left>
 nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
+nnoremap <wait>rg :!!grep --with-filename -iE "" * 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
 nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
 nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right><right><right>
 nnoremap <wait>rh :reg h<cr>b

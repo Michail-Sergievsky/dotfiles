@@ -554,10 +554,13 @@ nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <leader>rr :source ~/.vim/vimrc<CR>
 nnoremap <leader>ss :%s//gI<Left><Left><Left>
 nnoremap <leader>sp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
-nnoremap <leader>q1 :% norm 0dW$px<CR>
-nnoremap <leader>q2 :s%/.zip/.cbz/g<CR>
-nnoremap <leader>q3 :s%/.rar/.cbr/g<CR>
-nnoremap <leader>q3 :%s/\[\S*\] //g<CR>
+nnoremap <leader>e1 :% norm 0dW$px<CR>
+nnoremap <leader>e2 :exe 'g/^\[/norm 0df]' <bar> exe 'g/^(/norm 0df)' <bar> exe '%s/^ //g' <bar>exe '%s/^_//g' <bar>sort<CR>
+nnoremap <leader>e3 :exe 'g/^\[/norm 0df]' <bar> exe '%s/^ //g' <bar>exe '%s/^_//g'<CR>
+nnoremap <leader>e4 :$ norm f1yw0Pi - 
+nnoremap <leader>e5 :s%/.zip/.cbz/g<CR>
+nnoremap <leader>e6 :s%/.rar/.cbr/g<CR>
+nnoremap <leader>e7 :%s/\[\S*\] //g<CR>
 nnoremap <leader>sudo :w !sudo tee % <CR><CR>
 "shell check
 " using https://www.shellcheck.net/ - install first
