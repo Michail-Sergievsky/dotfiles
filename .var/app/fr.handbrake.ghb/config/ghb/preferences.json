@@ -21,7 +21,7 @@
         "auto_name": true,
         "auto_name_template": "{source}",
         "check_updates": "weekly",
-        "default_source": "/home/freeman/Videos/!to_convert/[Inka-Subs] Oishinbo (The Gourmet) 035.mkv",
+        "default_source": "/home/freeman/Videos/!to_convert/Creditless",
         "destination_dir": "/home/freeman/Videos/!convert",
         "hbfd": false,
         "hbfd_feature": false,
@@ -37,7 +37,7 @@
         "update_skip_version": 0,
         "use_dvdnav": true,
         "version": "0.1",
-        "window_height": 1038,
-        "window_width": 950
+        "window_height": 1021,
+        "window_width": 1910
     }
 }
