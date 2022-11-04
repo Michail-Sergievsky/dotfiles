@@ -871,13 +871,13 @@
 [alsa] # ALSA audio output
 
 # Audio output device (string)
-#alsa-audio-device=default
+alsa-audio-device=sysdefault:CARD=Intel
 
 # Audio output channels (integer)
 #alsa-audio-channels=6
 
 # Software gain (float)
-#alsa-gain=1.000000
+alsa-gain=0.015625
 
 [afile] # File audio output
 
@@ -926,7 +926,7 @@
 [freetype] # Freetype2 font renderer
 
 # Font (string)
-freetype-font=DejaVu Sans
+freetype-font=Verdana
 
 # Monospace Font (string)
 #freetype-monofont=Monospace
@@ -1378,6 +1378,11 @@ freetype-font=DejaVu Sans
 
 # Advanced options (string)
 #sout-avcodec-options=
+
+[dav1d] # Dav1d video decoder
+
+# Frames Threads (integer)
+#dav1d-thread-frames=0
 
 [qsv] # Intel QuickSync Video encoder for MPEG4-Part10/MPEG2 (aka H.264/H.262)
 
@@ -2966,7 +2971,7 @@ qt-continue=2
 #qt-advanced-pref=0
 
 # Show unimportant error and warnings dialogs (boolean)
-#qt-error-dialogs=1
+qt-error-dialogs=0
 
 # Define the colors of the volume slider (string)
 #qt-slider-colours=153;210;153;20;210;20;255;199;15;245;39;29
@@ -3109,7 +3114,7 @@ qt-privacy-ask=0
 [sharpen] # Sharpen video filter
 
 # Sharpen strength (0-2) (float)
-#sharpen-sigma=0.050000
+sharpen-sigma=0.000000
 
 [fps] # FPS conversion video filter
 
@@ -3272,16 +3277,16 @@ qt-privacy-ask=0
 [adjust] # Image properties filter
 
 # Image contrast (0-2) (float)
-#contrast=1.000000
+contrast=0.930000
 
 # Image brightness (0-2) (float)
-#brightness=1.000000
+brightness=1.100000
 
 # Image hue (-180..180) (float)
 #hue=0.000000
 
 # Image saturation (0-3) (float)
-#saturation=1.000000
+saturation=0.780000
 
 # Image gamma (0-10) (float)
 #gamma=1.000000
@@ -4057,7 +4062,7 @@ sub-language=eng,rus
 #packetizer=
 
 # VoD server module (string)
-#vod-server=
+vod-server=any
 
 # Use a plugins cache (boolean)
 #plugins-cache=1
@@ -4132,7 +4137,7 @@ sub-language=eng,rus
 #metadata-network-access=0
 
 # Subdirectory behavior (string)
-#recursive=collapse
+recursive=expand
 
 # Ignored extensions (string)
 #ignore-filetypes=m3u,db,nfo,ini,jpg,jpeg,ljpg,gif,png,pgm,pgmyuv,pbm,pam,tga,bmp,pnm,xpm,xcf,pcx,tif,tiff,lbm,sfv,txt,sub,idx,srt,cue,ssa
