@@ -99,7 +99,7 @@ URxvt.iso14755: false
 URxvt.scrollstyle: plain
 
 !scrollback buffer lines
-URxvt.saveline: 4096
+URxvt.saveline: 50000
 ! Disable printing the terminal contents when pressing PrintScreen.
 URxvt.print-pipe: "cat > /dev/null"
 
