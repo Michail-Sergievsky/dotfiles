@@ -52,6 +52,8 @@ set wildmenu		        " display completion matches in a status line
 set wildmode=longest,list,full  " wildmode insertions
 syntax enable                   " Switch syntax highlighting on
 
+let g:languagetool_jar='/usr/share/java/languagetool/languagetool-commandline.jar'
+
 "Autosave & swap
 set autowriteall		" This will save the file when you switch buffers, make it etc.
 "autosave everything with ignoring warnings from untitled buffers,
@@ -176,6 +178,7 @@ Plug 'mattn/calendar-vim'
 Plug 'brianrodri/vim-sort-folds'
 Plug 'romainl/vim-qf'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'dpelle/vim-LanguageTool'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()

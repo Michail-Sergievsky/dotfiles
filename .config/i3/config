@@ -65,7 +65,7 @@ client.urgent				$ubgcolor	$ubgcolor		$textcolor	$ubgcolor
 #---------Desktop ENVIRONMENT--{{{
 
 #Display Resolution
-exec_always xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
+exec_always --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-2 --off
 
 #Polybar Launch script
 exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
@@ -74,7 +74,7 @@ exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
 exec_always --no-startup-id $picom_start
 
 #Display Wallpapers
-Exec_always feh --bg-fill /home/freeman/.wallpapers/wp4657311-arch-solarized-wallpapers.png
+exec_always feh --bg-fill /home/freeman/.wallpapers/wp4657311-arch-solarized-wallpapers.png
 # Exec_always feh --bg-center --randomize /home/freeman/Pictures/Wallpapers/Mics_authors/*
 #}}}
 #---------Autostart applications-----{{{
@@ -233,12 +233,11 @@ bindsym $mod+Pause mode "$mode_system"
 #}}}
 #-------- Manual management of external displays{{{
 # HOME
-set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) DP ONLY, (f) HDMI+DP_rotate
+set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) HDMI+DP_rotate
 mode "$mode_display" {
-bindsym a exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output DVI-D-0 --off, mode "default"
-bindsym s exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off --output DisplayPort-0 --off, mode "default"
-bindsym d exec --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output DVI-D-0 --off
-bindsym f exec --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate left --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
+bindsym a exec --no-startup-id xrandr  --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-2 --off
+bindsym s exec xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-2 --off
+bindsym d exec xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-2 --off
 
 # WORK
 # set $mode_display Ext_Screen (a) note, (s) note+DELL, (d) note_doc_DELL, (f) note+BENQ
