@@ -25,6 +25,9 @@ alias vpn_st='systemctl status openvpn-client@media-tel-vpn'
 alias vag='cd /home/freeman/Vagrant'
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 alias con='/home/freeman/.scripts/connect.sh'
+alias smarton='aft-mtp-mount ~/Phone'
+alias smartoff='fusermount -u ~/Phone'
+alias smartsync='/home/freeman/.scripts/sync_music_phone.sh'
 
 # alias nt="task add $1"
 # alias tl="task list"
