@@ -162,7 +162,7 @@ mark 3 /home/freeman/Dropbox
 mark 4 /home/freeman/Downloads/t_done
 mark 5 /home/freeman/Downloads/t_done
 mark 6 /home/freeman/Media/t_done
-mark 7 /home/freeman/Books
+mark 7 /home/freeman/books
 mark 8 /home/freeman/DiskD
 mark 9 /home/freeman/DiskE
 mark A /home/freeman/.ansible
@@ -176,9 +176,9 @@ mark S /home/freeman/Share
 mark T /home/freeman/Downloads/t_done
 mark U /usr/share
 mark V /home/freeman/VagrantVM
-mark a /home/freeman/Music/audiobooks
-mark b /home/freeman/Books
-mark B /home/freeman/Books
+mark a /home/freeman/Music/books_audiobooks
+mark b /home/freeman/books
+mark B /home/freeman/books
 mark c /home/freeman/.config
 mark d /home/freeman/Downloads
 mark e /etc
@@ -375,7 +375,7 @@ fileviewer {*.jpg,*.jpeg,*.png}
            \ vifmimg clear
 
 " Office files
-filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.odp,*.pptx,*.ppt,*.csv},
+filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
          \<application/vnd.openxmlformats-officedocument.*,
           \application/msword,
           \application/vnd.ms-excel>
@@ -685,12 +685,17 @@ nnoremap <wait>me :edit<space>
 nnoremap <wait>mf :touch<space>""<Left>
 nnoremap <wait>md :mkdir<space>""<Left>
 nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
-nnoremap <wait>rg :!!grep --with-filename -iE "" * 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rg1 :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rga :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/anime* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rgb :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/book* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rgc :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/comic* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rgk :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/Knowledge* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rgm :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/movies* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rgs :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/sound* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rgv :!!grep --with-filename -iE "" /home/freeman/Documents/Look.out.for.them.all/video* 2>&1 | less<a-b><a-b><a-b><a-b><a-b><right>
 nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
 nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right><right><right>
 nnoremap <wait>rh :reg h<cr>b
-nnoremap <wait>rcd :!!clear && rsync -avP --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
-nnoremap <wait>rcr :!!clear && rsync -avP %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>s1 :select *(1).mkv<cr>
