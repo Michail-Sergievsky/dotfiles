@@ -100,7 +100,7 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set cursorline
 set cursorcolumn
 highlight CursorLine ctermbg=Yellow cterm=bold guibg=#f9ed07
-highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#f9ed07
+" highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#000000
 " colorsheme XXXXXXXXXXXXXXXx
 
 "Remove pipes | that act as separators on slits
@@ -197,17 +197,17 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown'
 
 " Final exp
 
-let g:vimwiki_root = '~/Notes/Vimwiki'
+let g:vimwiki_root = '~/Vimwiki'
 let g:vimwiki_list = [
-            \{'path': '~/Notes/Vimwiki/linux', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/server', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/study', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/culture', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Notes/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
+            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/server', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/study', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/culture', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
 command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
 
