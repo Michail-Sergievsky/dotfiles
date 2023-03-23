@@ -19,9 +19,11 @@ alias reloada="source ~/.bash_aliases"
 alias vd='vifm .'
 alias vimrc='vim /home/freeman/.vim/vimrc'
 alias vifmrc='vim /home/freeman/.config/vifm/vifmrc'
-alias vpn_on='sudo systemctl start openvpn-client@media-tel-vpn'
-alias vpn_off='sudo systemctl stop openvpn-client@media-tel-vpn'
-alias vpn_st='systemctl status openvpn-client@media-tel-vpn'
+alias vpn_on='wg-quick up wg-client'
+alias vpn_off='wg-quick down wg-client'
+alias vpnkr_on='sudo systemctl start openvpn-client@media-tel-vpn'
+alias vpnkr_off='sudo systemctl stop openvpn-client@media-tel-vpn'
+alias vpnkr_st='systemctl status openvpn-client@media-tel-vpn'
 alias vag='cd /home/freeman/Vagrant'
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 alias con='/home/freeman/.scripts/connect.sh'
@@ -30,16 +32,3 @@ alias smartoff='fusermount -u ~/Phone'
 alias smartsync='/home/freeman/.scripts/sync_music_phone.sh'
 alias asciidoc2pdf='/home/freeman/.local/share/asciidoc2pdf/asciidoc2pdf'
 
-# alias nt="task add $1"
-# alias tl="task list"
-
-taskprojectfunction () {
-    task $1 modify project:$2
-}
-alias tproj=taskprojectfunction 
-
-tasktagfunction () {
-
- task $1 modify +$2 +$3 +$4
-}
-alias ttag=tasktagfunction

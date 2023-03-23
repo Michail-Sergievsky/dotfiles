@@ -167,19 +167,19 @@ autocmd BufRead,BufNewFile ~/Git/*/*/group_vars/* set filetype=yaml
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
-Plug 'tpope/vim-speeddating' 
-Plug 'tpope/vim-unimpaired'
+Plug 'brianrodri/vim-sort-folds'
+Plug 'dpelle/vim-LanguageTool'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'mattn/calendar-vim'
+Plug 'romainl/vim-qf'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-speeddating' 
+Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
-" Plug 'tools-life/taskwiki'
-Plug 'mattn/calendar-vim'
-Plug 'brianrodri/vim-sort-folds'
-Plug 'romainl/vim-qf'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'dpelle/vim-LanguageTool'
 
+" Plug 'tools-life/taskwiki'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 "____________ Vimwiki_____________________________

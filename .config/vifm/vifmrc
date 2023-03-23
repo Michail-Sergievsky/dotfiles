@@ -166,7 +166,7 @@ mark 7 /home/freeman/books
 mark 8 /home/freeman/DiskD
 mark 9 /home/freeman/DiskE
 mark A /home/freeman/.ansible
-mark C /home/freeman/Media/home/comics
+mark c /home/freeman/Media/home/comics
 mark D /home/freeman/Documents
 mark F /home/freeman/Foto
 mark M /home/freeman/Music
@@ -179,7 +179,7 @@ mark V /home/freeman/VagrantVM
 mark a /home/freeman/Music/books_audiobooks
 mark b /home/freeman/books
 mark B /home/freeman/books
-mark c /home/freeman/.config
+mark C /home/freeman/.config
 mark d /home/freeman/Downloads
 mark e /etc
 mark g /home/freeman/Git
@@ -422,7 +422,7 @@ filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
 "          \ als %f 2>/dev/null
 
 " Traces
-filextype {*.pcap,*.pcapng}
+filextype {*.pcap,*.pcapng,*.pcapng.gz,*.pcap.gz}
 	\ {View in wireshark}
 	\ /usr/bin/wireshark %c %i &
 
