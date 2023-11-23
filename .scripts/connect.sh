@@ -36,6 +36,7 @@ echo "8 - mvpn"
 echo "9 - adn"
 echo "0 - multifon"
 echo "m - media-tel"
+echo "v - viva"
 
 read uslug;
 case $uslug in
@@ -50,5 +51,6 @@ case $uslug in
     9) usl="adn"; awk '/'"$usl"''"$pref"'/{s=NR;p=1;next}/#/{p=0}p&&NR>s' /etc/hosts;;
     0) usl="multifon"; awk '/'"$usl"''"$pref"'/{s=NR;p=1;next}/#/{p=0}p&&NR>s' /etc/hosts;;
     m) usl="media-tel"; awk '/'"$usl"''"$pref"'/{s=NR;p=1;next}/#/{p=0}p&&NR>s' /etc/hosts;;
+    v) usl="viva"; awk '/'"$usl"''"$pref"'/{s=NR;p=1;next}/#/{p=0}p&&NR>s' /etc/hosts;;
     *) echo "Error";;
 esac

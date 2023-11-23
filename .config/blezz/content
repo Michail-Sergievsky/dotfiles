@@ -20,7 +20,7 @@ act(w,Writer,libreoffice --writer)
 Communication:
 act(b,Thunderbird,thunderbird)
 act(d,Discord,discord)
-act(s,Skype,skype)
+act(s,Skype,skypeforlinux)
 act(r,RocketChat,rocketchat-desktop)
 act(t,Telegram,telegram-desktop)
 act(z,Zoom,zoom)
@@ -39,9 +39,11 @@ act(t,Transmission Remote GUI,transgui)
 MediaWork:
 act(e,Inviska,/home/freeman/Soft/Inviska_MKV_Extract-11.0-x86_64.AppImage)
 act(f,fre:ac,freac)
-act(h,Handbreake,flatpak run fr.handbrake.ghb)
+act(h,Handbreake,ghb)
 act(i,Mediainfo-gui,mediainfo-gui)
+act(k,Kdenlive,kdenlive)
 act(m,MkvToolNix-gui,mkvtoolnix-gui)
+act(o,OBS,obs)
 act(s,Soundconverter,soundconverter)
 
 System:

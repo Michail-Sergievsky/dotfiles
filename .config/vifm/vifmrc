@@ -117,7 +117,8 @@ set findprg='find %s %a -print ,
 " themes, highlighting
 
 " List of color schemes to try (picks the first one supported by the terminal)
-colorscheme solarized-light-256 Default-256 Default
+colorscheme solarized-light Default-256 Default
+" colorscheme solarized-light-256 Default-256 Default
 " colorscheme solarized-light-256-r.vifm
 " colorscheme dwmlight Default-256 Default
 
@@ -162,7 +163,7 @@ mark 3 /home/freeman/Dropbox
 mark 4 /home/freeman/Downloads/t_done
 mark 5 /home/freeman/Downloads/t_done
 mark 6 /home/freeman/Media/t_done
-mark 7 /home/freeman/books
+mark 7 /home/freeman/.ssh
 mark 8 /home/freeman/DiskD
 mark 9 /home/freeman/DiskE
 mark A /home/freeman/.ansible
@@ -172,11 +173,11 @@ mark F /home/freeman/Foto
 mark M /home/freeman/Music
 mark P /home/freeman/Pictures
 mark R /
-mark S /home/freeman/Share
+mark S /home/freeman/Study
 mark T /home/freeman/Downloads/t_done
 mark U /usr/share
 mark V /home/freeman/VagrantVM
-mark a /home/freeman/Music/books_audiobooks
+mark a /home/freeman/Music/audiobooks_1_main
 mark b /home/freeman/books
 mark B /home/freeman/books
 mark C /home/freeman/.config
@@ -191,7 +192,7 @@ mark m /home/freeman/Magazine
 mark n /home/freeman/Vimwiki
 mark o /home/freeman/Mounted
 mark p /home/freeman/Work/my_data
-mark r /home/freeman/Work/task
+mark r /home/freeman/Recordings
 mark s /home/freeman/Stuff
 mark t /home/freeman/Temp
 mark u /home/freeman/Work/uslugi

@@ -13,6 +13,7 @@ alias ll='ls --group-directories-first -lHAv'
 # -A, --almost-all           do not list implied . and ..
 # -l                         use a long listing format
 
+#mark
 alias upd='sudo pacman -Syu && yay -Syu'
 alias reload="source ~/.bashrc"
 alias reloada="source ~/.bash_aliases"
@@ -31,4 +32,7 @@ alias smarton='aft-mtp-mount ~/Phone'
 alias smartoff='fusermount -u ~/Phone'
 alias smartsync='/home/freeman/.scripts/sync_music_phone.sh'
 alias asciidoc2pdf='/home/freeman/.local/share/asciidoc2pdf/asciidoc2pdf'
-
+alias la='awk "/#mark/{s=NR;p=1;next}/#/{p=0}p&&NR>s" .bash_aliases'
+alias mirr='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed'
+alias i3h='grep -E "^bindsym" /home/freeman/.config/i3/config | less'
+alias genpass="</dev/urandom tr -dc '1234567890-=!@#$%^&*()_=qwertyuiop[]QWERTYUIOP{}asdfghjkl;\ASDFGHJKL:zxcvbnm,./ZXCVBNM<>?' | head -c12; echo """

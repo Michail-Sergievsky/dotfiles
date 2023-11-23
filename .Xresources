@@ -64,10 +64,10 @@
 
 !	URxvt Appearance
 !fonts to use
-URxvt.*.font: xft:SauceCodePro Nerd Font Mono:style=Regular:size=12
-URxvt.*.boldFont: xft:SauceCodePro Nerd Font Mono:style=Bold:size=12
-URxvt.*.italicFont: xft:SauceCodePro Nerd Font Mono:style=Italic:size=12
-URxvt.*.boldItalicFont: xft:SauceCodePro Nerd Font Mono:style=Bold Italic:size=12
+URxvt.*.font: xft:SauceCodePro Nerd Font Mono:style=Regular:size=10
+URxvt.*.boldFont: xft:SauceCodePro Nerd Font Mono:style=Bold:size=10
+URxvt.*.italicFont: xft:SauceCodePro Nerd Font Mono:style=Italic:size=10
+URxvt.*.boldItalicFont: xft:SauceCodePro Nerd Font Mono:style=Bold Italic:size=10
 
 !space between characters
 URxvt.letterSpace: -1
