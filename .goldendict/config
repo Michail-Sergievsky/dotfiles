@@ -1,140 +1,145 @@
 <config>
  <paths>
-  <path recursive="1">/home/freeman/Soft/goldendict_dicts/En-En</path>
-  <path recursive="1">/home/freeman/Soft/goldendict_dicts/En-Ru</path>
-  <path recursive="1">/home/freeman/Soft/goldendict_dicts/Ru-En</path>
-  <path recursive="1">/home/freeman/Soft/goldendict_dicts/Ru-Ru</path>
-  <path recursive="1">/home/freeman/Soft/goldendict_dicts/Abbrev</path>
+  <path recursive="1">/home/freeman/Soft/goldendict_dicts_ready/Abbrev</path>
+  <path recursive="1">/home/freeman/Soft/goldendict_dicts_ready/En-En</path>
+  <path recursive="1">/home/freeman/Soft/goldendict_dicts_ready/En-Ru</path>
+  <path recursive="1">/home/freeman/Soft/goldendict_dicts_ready/Ru-En</path>
+  <path recursive="1">/home/freeman/Soft/goldendict_dicts_ready/Ru-Ru</path>
+  <path recursive="1">/home/freeman/Soft/goldendict_dicts_ready/Sound</path>
  </paths>
  <sounddirs>
   <sounddir icon="" name="Sound">/home/freeman/Soft/goldendict_dicts/Sound</sounddir>
  </sounddirs>
  <dictionaryOrder id="0" name="">
-  <dictionary name="Collins (En-En)">c56119049eb332fcc6dcfe7030182f4e</dictionary>
-  <dictionary name="OxfordDictionary (En-En)">e926342ad832300c75ea14051151cc88</dictionary>
-  <dictionary name="LingvoUniversal (En-Ru)">815cd1c85aca4f6721fc83187f552074</dictionary>
-  <dictionary name="Biology (En-Ru)">0d89ec340535c949c03ef7eb5a7dd268</dictionary>
-  <dictionary name="LingvoComputer (En-Ru)">343dff6611e4e40047449c91811c2983</dictionary>
-  <dictionary name="LingvoEconomics (En-Ru)">be8774515d3696bb7dfeeb659d247249</dictionary>
-  <dictionary name="LingvoGrammar (En-Ru)">a3b7c19d8a85cd84b93b3f85ee421743</dictionary>
-  <dictionary name="LingvoScience (En-Ru)">59afc51d67580af2ad83717b30f7aeb9</dictionary>
-  <dictionary name="Macmillan English Dictionary (En-En)">b1859bed91d0c4a80915ecd9cb00a72d</dictionary>
-  <dictionary name="Macmillan English Thesaurus (En-En)">7c0bfb0e44bf707bb1dc5f070bba43ae</dictionary>
-  <dictionary name="OxfordEconomics (En-En)">9f579fb3cd1d296d6213eff2909e799b</dictionary>
-  <dictionary name="OxfordFinanceAndBanking (En-En)">51b06966c832ae4f67186b485613d032</dictionary>
-  <dictionary name="CollinsCobuild (En-En)">54d37d0844f90abbfbc2c29bdbeeba51</dictionary>
-  <dictionary name="BBI Combinatory Dictionary of English">3413accd99458428290937c808e73197</dictionary>
-  <dictionary name="Longman Activator 2nd Ed. (En-En)">b4e204abbcf7571bda148800ea21317b</dictionary>
-  <dictionary name="Longman Common Errors (En-En)">6116b01f8cc5793ddd35720d3d9081b7</dictionary>
-  <dictionary name="Longman DOCE 5th Ed. (En-En)">78d1c4c407fee18b81556f4a5274c642</dictionary>
-  <dictionary name="Longman DOCE5 Extras (En-En)">00e31a49ecc412c83f79e893b98a9bb6</dictionary>
-  <dictionary name="Longman Pronunciation Dictionary (En-En)">8b22ff9af2ad5a3eb2de614bce409e49</dictionary>
-  <dictionary name="Merriam-Webster's Advanced Learner's Dictionary (En-En)">33b32a90c7ad470a7967d9047fe108d6</dictionary>
-  <dictionary name="Merriam-Webster's Collegiate 11 (En-En)">f55f2d958beefa486ce237a9243ada84</dictionary>
-  <dictionary name="Merriam-Webster's Collegiate Thesaurus (En-En)">a459807590412c728d914d0b5a93be72</dictionary>
-  <dictionary name="AHD Indo-European and Semitic Roots Supplement (En-En)">1d103d5ad9aedaf2085d66d9701555ae</dictionary>
-  <dictionary name="American Heritage Dictionary 4th Ed. (En-En)">22ad3d82c64a14d4d6060a1724fe4267</dictionary>
-  <dictionary name="Cambridge Advanced Learners Dictionary 3th Ed.">3164eba71124ae2d88319e2716e171ea</dictionary>
-  <dictionary name="Concise Oxford English Dictionary (En-En)">744f7af6cd654a982aac8c24d76236af</dictionary>
-  <dictionary name="Oxford Advanced Learners Dictionary 8th Ed.">a9470baf1996f099d9adc0a43df816b7</dictionary>
-  <dictionary name="IM abridgements (En-En)">89c17cba04b04cd5674799f333a4258c</dictionary>
-  <dictionary name="OxfordAmericanDictionary (En-En)">c84bfd6a3a52607cf643ce6b06e52de4</dictionary>
-  <dictionary name="OxfordAmericanThesaurus (En-En)">7a22637382dabf18717e8dcbfa9a0b6c</dictionary>
-  <dictionary name="OxfordBusinessAndManagement (En-En)">28ec30e1f0e34393b2beae3b372c2c04</dictionary>
-  <dictionary name="WordNet® 3.0 (En-En)">1004889d3cb2e343f36c14f7d7bc6d5b</dictionary>
-  <dictionary name="Accounting (En-Ru)">5c5098998def57c1f314b97dcfeae6c7</dictionary>
-  <dictionary name="Americana (En-Ru)">fead419376476eebcb5630a1f319744f</dictionary>
-  <dictionary name="AmericanSlang (En-Ru)">4de84658414208948dd9391e796510cb</dictionary>
-  <dictionary name="Auto (En-Ru)">9f3b8ad492d2a85bcf84653e96aa9de6</dictionary>
-  <dictionary name="Beer (En-Ru)">0b5a867763e52c20ab0b1a2770ab58e0</dictionary>
-  <dictionary name="Building (En-Ru)">f2ef5bba161fb24d960fe15992828a2d</dictionary>
-  <dictionary name="Combinatory (En-Ru)">64583c7268ff5c7a79243f1276153d56</dictionary>
-  <dictionary name="Computers (En-Ru)">5ad4d3b15c2357e5d7bdb3ae089ddb28</dictionary>
-  <dictionary name="Difficulties (En-Ru)">a1d713316b965cc40b974aebf8be8c56</dictionary>
-  <dictionary name="EconomicusBanking (En-Ru)">2579ddda0d7f8ad52147b95a475afaaa</dictionary>
-  <dictionary name="Economicus (En-Ru)">3062d8a753899ee8df93a3472b2bb2eb</dictionary>
-  <dictionary name="EconomicusGovernment (En-Ru)">a1320b937937327750083fb1890b764f</dictionary>
-  <dictionary name="EconomicusInsurance (En-Ru)">bc229ce92e5401efb11da29ac6687e93</dictionary>
-  <dictionary name="EconomicusInternational (En-Ru)">fd233852733ed5edc3e837a006678895</dictionary>
-  <dictionary name="Apresyan (En-Ru)">3431a4662409640e43ee204436e876c3</dictionary>
-  <dictionary name="Engineering (En-Ru)">6feee8da30ec0c34e1d02b8dbbebe9b5</dictionary>
-  <dictionary name="FinancialManagement (En-Ru)">c48c0f37b6c3737be42b28d63670bd51</dictionary>
-  <dictionary name="FinancialMarkets (En-Ru)">cbdc4942b085ec087d4fd6fb4fffaeca</dictionary>
-  <dictionary name="FoodAbbreviations (En-Ru)">acf0053ece6fc5b3efe369a40a9daa43</dictionary>
-  <dictionary name="ForumDictionary (En-Ru)">3fa8d38f06e8664984fa0e86b1f004f7</dictionary>
-  <dictionary name="Geography (En-Ru)">d4d46289a9c39439a5758249c67540c6</dictionary>
-  <dictionary name="GreatBritain (En-Ru)">92a77043ac18bfefe119461d088833a4</dictionary>
-  <dictionary name="HoverDictionary (En-Ru)">0f6d7113dee362fbe94904a51c8cb3bf</dictionary>
-  <dictionary name="Idioms (En-Ru)">2f32bd5eec82fe00a8e367913577b100</dictionary>
-  <dictionary name="Informal (En-Ru)">2ffea53ed1d823fe05dde11b06b9fb41</dictionary>
-  <dictionary name="Law (En-Ru)">9ef8a3549721b7f98a05f5e2846fe907</dictionary>
-  <dictionary name="Learning (En-Ru)">7f75c84d6c8f474d419bdac02b83e426</dictionary>
-  <dictionary name="Management (En-Ru)">0207f8a2758d01b380f9c36ddea18e6a</dictionary>
-  <dictionary name="Marketing (En-Ru)">6a2ef592de4938beea6a71566707d178</dictionary>
-  <dictionary name="MechanicalEngineering (En-Ru)">84a21e147e683c58f717319f5498ad1f</dictionary>
-  <dictionary name="Medical (En-Ru)">11829fd69b735b64f968c335d001c11b</dictionary>
-  <dictionary name="Microeconomics (En-Ru)">4845b3f0b89cff993ce05836e024a993</dictionary>
-  <dictionary name="OilAndGas (En-Ru)">ad97d0f98fc47bc121091dd821fd882c</dictionary>
-  <dictionary name="Paper (En-Ru)">09dcbfacf2b83d75f79df7d64dadb86d</dictionary>
-  <dictionary name="Patents (En-Ru)">99b5291ce7b6ef5ba630e04f771cfac0</dictionary>
-  <dictionary name="Physics (En-Ru)">a495af1f804998e48f46eb2559ae7ecf</dictionary>
-  <dictionary name="Politics (En-Ru)">2166835ec6ee4f4e4497b3470895419a</dictionary>
-  <dictionary name="Polytechnical (En-Ru)">831e107612d74cb58a659c3fd8603638</dictionary>
-  <dictionary name="Proverbs (En-Ru)">2ac02de35eb0a9ba4102a8e4f6fa786b</dictionary>
-  <dictionary name="Psychology (En-Ru)">0022d8d78c4798bc75896b75e2f2630f</dictionary>
-  <dictionary name="RadioElectronics (En-Ru)">50c859ed04a71b766d6065495690067c</dictionary>
-  <dictionary name="Religion (Ru-En)">c7156fd96604f964cce584a301ecdf21</dictionary>
-  <dictionary name="Sport (En-Ru)">1039f53df1cbeec8ab2322d8b7a8452f</dictionary>
-  <dictionary name="Telecoms (En-Ru)">17b4fe7eade511d3a216f7ec3b47429c</dictionary>
-  <dictionary name="Transport (En-Ru)">aaa835dc48e0c8a61e6cd4ea7e956954</dictionary>
-  <dictionary name="Wine (En-Ru)">a92ea91217ee9c7415697fba7db2bf2d</dictionary>
-  <dictionary name="Auto (Ru-En)">e36d733fa136c90e973a018098302997</dictionary>
-  <dictionary name="Biology (Ru-En)">a486cce667180086a58e477687b787cd</dictionary>
-  <dictionary name="Building (Ru-En)">0841e05d0bc2fa10ff7ecc5124fd9825</dictionary>
-  <dictionary name="Computers (Ru-En)">1702ec589084ad2d3c28827f271307a4</dictionary>
-  <dictionary name="Context (Ru-En)">e475b0c0bbe690a1f59634deefdb8eac</dictionary>
-  <dictionary name="Engineering (Ru-En)">a47f59d227a14815c2213b80f9ab795e</dictionary>
-  <dictionary name="Geography (Ru-En)">c92de3571ffb4b179adf9d074d832f20</dictionary>
-  <dictionary name="HoverDictionary (Ru-En)">f3125d08f6cdad35a51a92889b1e1f40</dictionary>
-  <dictionary name="Law (Ru-En)">b3b580132d7cd871f21eb868a26486a4</dictionary>
-  <dictionary name="Learning (Ru-En)">5c74893e59005e526a34252ad30b4641</dictionary>
-  <dictionary name="LingvoComputer (Ru-En)">fba09079018681e2551d596c7484d591</dictionary>
-  <dictionary name="LingvoEconomics (Ru-En)">7aa43229992d00fd23b7184525495011</dictionary>
-  <dictionary name="LingvoScience (Ru-En)">9606b64e77be446af0e493575b82a36f</dictionary>
-  <dictionary name="LingvoUniversal (Ru-En)">ac546a69c1d9d1f93cfd64f1b694cb54</dictionary>
-  <dictionary name="MechanicalEngineering (Ru-En)">33a150f3ae78cd80f289b7cc2f47017d</dictionary>
-  <dictionary name="Medical (Ru-En)">064e6da650b33be7c553fc789b758967</dictionary>
-  <dictionary name="Microeconomics (Ru-En)">20f8e9ba96e491fcbd37353acf31bc56</dictionary>
-  <dictionary name="OilAndGas (Ru-En)">8c11bb0775f7d1ac3e5744146e6459b6</dictionary>
-  <dictionary name="Paper (Ru-En)">2d2b790e79004057ca0dc3d8ced77d6f</dictionary>
-  <dictionary name="Patents (Ru-En)">ef214d3ad1d20a5d7ae03e5d9fdbcf80</dictionary>
-  <dictionary name="PhraseBook (Ru-En)">6fa6d36301cab55aaf52ef0710f3ee34</dictionary>
-  <dictionary name="Physics (Ru-En)">0b5747e6217de84dc84d2bd404d76188</dictionary>
-  <dictionary name="Politics (Ru-En)">bc0c79052fb0989fc7c74a6bce424b32</dictionary>
-  <dictionary name="Polytechnical (Ru-En)">29eacc64ff1ff8b66833aab536c29ede</dictionary>
-  <dictionary name="Psychology (Ru-En)">5d72f3ae7ddf2e6fc9b8b4bcc71e57db</dictionary>
-  <dictionary name="RadioElectronics (Ru-En)">40290e8b760f994342ec21af6d311869</dictionary>
-  <dictionary name="Smirnitsky (Ru-En)">bcbf69d15fb3bbfc8f227928af69f020</dictionary>
-  <dictionary name="Sport (Ru-En)">3db6afcddea74cd9d509460457309b3a</dictionary>
-  <dictionary name="Telecoms (Ru-En)">9fe9c15d2647a5f48149190605e590f6</dictionary>
-  <dictionary name="Universal (Ru-En)">5a36c0c434d4384409d9b3a87e6c8d6d</dictionary>
-  <dictionary name="BigCity2007 (Ru-Ru)">a42ce3ad212c6c15eb7a6cbf830c6de4</dictionary>
-  <dictionary name="BusinessSlang (Ru-Ru)">b4099e20ef836429dce9bfe061f92065</dictionary>
-  <dictionary name="ComputerSlang (Ru-Ru)">9aa07c34ebd3684645979948f16c390c</dictionary>
-  <dictionary name="Dahl (Ru-Ru)">83272041585d2365020572313dd20b51</dictionary>
-  <dictionary name="ExplanatoryBTS (Ru-Ru)">7b947169ca2111bdb3cad7e33e480ab3</dictionary>
-  <dictionary name="Explanatory (Ru-Ru)">72c6c9140240c0d013398df6d8763707</dictionary>
-  <dictionary name="GreatEncyclopaedicDictionary (Ru-Ru)">dcb0f8d1f65786715632c296ee3ef194</dictionary>
-  <dictionary name="LingvoThesaurus (Ru-Ru)">23ad71208eea33547b016508b74bcb3f</dictionary>
-  <dictionary name="Male (Ru-Ru)">b09a72ae2710760b407e46d1e19913df</dictionary>
-  <dictionary name="NetSlang (Ru-Ru)">54c7d132dc64c3490daaf3d61391501e</dictionary>
-  <dictionary name="OdessaSlang (Ru-Ru)">2ef64d0774ef54b99a00db11aa7d1241</dictionary>
-  <dictionary name="Ozhegov&amp;Shvedova'sDictionary (Ru-Ru)">1f04e37744a97dae0db010b0724a86bb</dictionary>
-  <dictionary name="Popular (Ru-Ru)">0a63da613ea26c381abe7a1ac9ecd013</dictionary>
-  <dictionary name="Smiles (Ru-Ru)">b128cb72a40d556e7b21ec88af03671d</dictionary>
-  <dictionary name="UrbanDictionary (Ru-Ru)">816293db8ad13e395be3ff0e784d5cd1</dictionary>
-  <dictionary name="Ushakov'sDictionary (Ru-Ru)">9dcf5f3ed460c56efbbfe7a89c99577e</dictionary>
-  <dictionary name="Sound">b0f84b095736bc6cdff153076dd7be74</dictionary>
+  <dictionary name="CollinsCobuild (En-En)">8b5f58b5e3b0afd1c1d2f0d063922683</dictionary>
+  <dictionary name="Collins (En-En)">6557fd0aed6e5bee2bc3dbdc65fac49f</dictionary>
+  <dictionary name="BBI Combinatory Dictionary of English">dccadd1f87ed3fa49712a3702973320b</dictionary>
+  <dictionary name="Longman Activator 2nd Ed. (En-En)">3db0b76e1535e47f6923e20915f14618</dictionary>
+  <dictionary name="Longman Common Errors (En-En)">b45a026402a8ffd6860b437f99334611</dictionary>
+  <dictionary name="Longman DOCE 5th Ed. (En-En)">83810c4d59af4f36a537e31790a44e34</dictionary>
+  <dictionary name="Longman DOCE5 Extras (En-En)">a5480d75cf13bdb6a4a5ba98f71d251b</dictionary>
+  <dictionary name="Longman Pronunciation Dictionary (En-En)">bbbbf576cd209a64537b072846f90363</dictionary>
+  <dictionary name="Merriam-Webster's Advanced Learner's Dictionary (En-En)">a73d6a3991240b8c1c6103c7925d374a</dictionary>
+  <dictionary name="Merriam-Webster's Collegiate 11 (En-En)">a9267b04fe42bf3a0aed6b3f0db3a57f</dictionary>
+  <dictionary name="Merriam-Webster's Collegiate Thesaurus (En-En)">40dac6bca9e29873b9babed7830f8507</dictionary>
+  <dictionary name="AHD Indo-European and Semitic Roots Supplement (En-En)">8c20ca74c8f1f3f7835a59aa649c2803</dictionary>
+  <dictionary name="American Heritage Dictionary 4th Ed. (En-En)">24b017d17ca699b8a43539f1902172fc</dictionary>
+  <dictionary name="Cambridge Advanced Learners Dictionary 3th Ed.">2a1958af3c8f4ca6964ea57d62d2ad55</dictionary>
+  <dictionary name="Concise Oxford English Dictionary (En-En)">6293b02ab63f1edca838748dc7c40377</dictionary>
+  <dictionary name="Macmillan English Dictionary (En-En)">e2c2fbdff2ed617f6c5c2dec2fe23b38</dictionary>
+  <dictionary name="Macmillan English Thesaurus (En-En)">ab7e219d287c9b5fdc0248182401bef4</dictionary>
+  <dictionary name="Oxford Advanced Learners Dictionary 8th Ed.">7f8426e1f6075f2556b71b3fe565e8f7</dictionary>
+  <dictionary name="IM abridgements (En-En)">059d17edaaf4101bbcd04f5a62ada9a1</dictionary>
+  <dictionary name="OxfordAmericanDictionary (En-En)">13d9c412edc8cab2c21218dcccb95ec0</dictionary>
+  <dictionary name="OxfordAmericanThesaurus (En-En)">48f452a97d95b4e29545874c12193987</dictionary>
+  <dictionary name="OxfordBusinessAndManagement (En-En)">2cb8b9da3158f562584de63ef12b361e</dictionary>
+  <dictionary name="OxfordDictionary (En-En)">140ca3afe569a0a8040fcba7af58d934</dictionary>
+  <dictionary name="OxfordEconomics (En-En)">d69cd52422e8199df70a8086ea881364</dictionary>
+  <dictionary name="OxfordFinanceAndBanking (En-En)">73c9080887a3aeddca593915b513bdb0</dictionary>
+  <dictionary name="WordNet® 3.0 (En-En)">74199951570200278bac4d9eb3ef37cf</dictionary>
+  <dictionary name="Accounting (En-Ru)">63f9812f8f7577ad242f40674bc8b58a</dictionary>
+  <dictionary name="Americana (En-Ru)">d5ba9066c5a1f3b62812670e6276de2f</dictionary>
+  <dictionary name="AmericanSlang (En-Ru)">10b3b8d4b3d46272366e2f0a38fb7e82</dictionary>
+  <dictionary name="Auto (En-Ru)">98885f7804c247974e411e335eea46a2</dictionary>
+  <dictionary name="Beer (En-Ru)">6c129a769528475a4b9bd22ea1ba3d8e</dictionary>
+  <dictionary name="Biology (En-Ru)">4fbc98d442ff2666221fc4fa3e931819</dictionary>
+  <dictionary name="Building (En-Ru)">63375115e72dbc28a6c4ba962df57325</dictionary>
+  <dictionary name="Combinatory (En-Ru)">ba44d42a2d19fdf29bc1e3431dde54c8</dictionary>
+  <dictionary name="Computers (En-Ru)">7a2848ff315dbf844669ec4212a0be2d</dictionary>
+  <dictionary name="Difficulties (En-Ru)">386e76c04c1e013bafa22f3abd4957c9</dictionary>
+  <dictionary name="EconomicusBanking (En-Ru)">cfc21de763271c2614b2f05f54a715bf</dictionary>
+  <dictionary name="Economicus (En-Ru)">faa00043555779fb03c575f30631087f</dictionary>
+  <dictionary name="EconomicusGovernment (En-Ru)">f7b2b6a9e7d918f312325a7f306371ba</dictionary>
+  <dictionary name="EconomicusInsurance (En-Ru)">e1e92a87477306501919b0aebc9f0398</dictionary>
+  <dictionary name="EconomicusInternational (En-Ru)">0ad18b579eee8305d061a0cf4f9dcdde</dictionary>
+  <dictionary name="Apresyan (En-Ru)">a1e371fbac569f7fe6405cd90c3a5ff2</dictionary>
+  <dictionary name="Engineering (En-Ru)">84b7226086218e8d2a280910d34df954</dictionary>
+  <dictionary name="FinancialManagement (En-Ru)">0b8f0df4be8a1e5f5f8f49f759599b53</dictionary>
+  <dictionary name="FinancialMarkets (En-Ru)">44b13eb53ce85e29df48f6854b86b850</dictionary>
+  <dictionary name="FoodAbbreviations (En-Ru)">387b9f26c356a2e0a4f9d9e013245b6b</dictionary>
+  <dictionary name="ForumDictionary (En-Ru)">a3c92b6b9fee1ad95c0f86135a794c2a</dictionary>
+  <dictionary name="Geography (En-Ru)">f14c5410e715eadb926c0345073f7830</dictionary>
+  <dictionary name="GreatBritain (En-Ru)">367a5e5c443813a9f208fa1d101bf9e0</dictionary>
+  <dictionary name="HoverDictionary (En-Ru)">2c0d5876a0ad3a6991622f8478d8ce1e</dictionary>
+  <dictionary name="Idioms (En-Ru)">5dd610331ebdec73a4dd8e192548be17</dictionary>
+  <dictionary name="Informal (En-Ru)">7dac13cab450ee9cb556eaa333902075</dictionary>
+  <dictionary name="Law (En-Ru)">4559352cc29bdd43beb5be71a3fb783e</dictionary>
+  <dictionary name="Learning (En-Ru)">0616257bd4d3d5fa0482509a5c094967</dictionary>
+  <dictionary name="LingvoComputer (En-Ru)">c5884ff4fba19417d3f32f47a9c68d2c</dictionary>
+  <dictionary name="LingvoEconomics (En-Ru)">4b28a7656bb7f65b3587720158967907</dictionary>
+  <dictionary name="LingvoGrammar (En-Ru)">ba0a8b33f564953fb92a775865cf42ba</dictionary>
+  <dictionary name="LingvoScience (En-Ru)">4179204e58ebdf65d8c9685f8a72b820</dictionary>
+  <dictionary name="LingvoUniversal (En-Ru)">902bb1c2469618b25468678cf9345c7d</dictionary>
+  <dictionary name="Management (En-Ru)">2fda0fa11f0ce8c5172d6376a7689015</dictionary>
+  <dictionary name="Marketing (En-Ru)">6736bfc41b770ec1e79f9234f1c71285</dictionary>
+  <dictionary name="MechanicalEngineering (En-Ru)">0a7ea7c8327ba76dd2210339f0943c18</dictionary>
+  <dictionary name="Medical (En-Ru)">cd8065d5b6adec67721ba5cfcbd98926</dictionary>
+  <dictionary name="Microeconomics (En-Ru)">93f405ad31d426ca46d713bde6bf6979</dictionary>
+  <dictionary name="OilAndGas (En-Ru)">b4963b4e0f2de896a31a3a6138843950</dictionary>
+  <dictionary name="Paper (En-Ru)">632785e8b897a9f634e62d490d05459c</dictionary>
+  <dictionary name="Patents (En-Ru)">3e544266607e0543ece8177d8b2e2393</dictionary>
+  <dictionary name="Physics (En-Ru)">eebf783ce63dabd8d6740a552f0fdc3a</dictionary>
+  <dictionary name="Politics (En-Ru)">9fc4b49c26e40bc67e05a446567751b3</dictionary>
+  <dictionary name="Polytechnical (En-Ru)">70269dcf54621c743a1474d1708ab85c</dictionary>
+  <dictionary name="Proverbs (En-Ru)">96f421d4cd7a80c1ac3e97b683166712</dictionary>
+  <dictionary name="Psychology (En-Ru)">59eb8766aaa189f801202960d8011e84</dictionary>
+  <dictionary name="RadioElectronics (En-Ru)">02c44d5350f84bcb023ecc3fd9047e1c</dictionary>
+  <dictionary name="Religion (Ru-En)">285a1df7ed1e5bffd2af91b5046bfea3</dictionary>
+  <dictionary name="Sport (En-Ru)">651febefdfe59360b91b0233d6b6671d</dictionary>
+  <dictionary name="Telecoms (En-Ru)">e58afb42361ce1346cc478c0c6002d2f</dictionary>
+  <dictionary name="Transport (En-Ru)">122e58a6b5336b7a18d7918532174d05</dictionary>
+  <dictionary name="Wine (En-Ru)">e14f6a7713715361b6faba2641f0df3a</dictionary>
+  <dictionary name="Auto (Ru-En)">d1f35367363254b7ce795b36a3e9c351</dictionary>
+  <dictionary name="Biology (Ru-En)">c40d9bbdd312d61b2ba35bd127b0c283</dictionary>
+  <dictionary name="Building (Ru-En)">ad64f36778486d91b636ebca09742006</dictionary>
+  <dictionary name="Computers (Ru-En)">d6d684f94fedcfb262991ee78f32d972</dictionary>
+  <dictionary name="Context (Ru-En)">b7638838204ab5afc03369d9fcc21ce7</dictionary>
+  <dictionary name="Engineering (Ru-En)">810808ca39531d134a9abb5ae8e35457</dictionary>
+  <dictionary name="Geography (Ru-En)">42eedddb85102fe9511317351024e948</dictionary>
+  <dictionary name="HoverDictionary (Ru-En)">8a1686d55066217b357aba0acdc298cc</dictionary>
+  <dictionary name="Law (Ru-En)">729456bdb5481d6c92c1af3e87697d6c</dictionary>
+  <dictionary name="Learning (Ru-En)">e0ea0a1cf925e93c3e9f57c769a56b17</dictionary>
+  <dictionary name="LingvoComputer (Ru-En)">21ce43e392026935091ebaf8e93f561f</dictionary>
+  <dictionary name="LingvoEconomics (Ru-En)">67c1d1f70f20bfd3ce1809707220dffb</dictionary>
+  <dictionary name="LingvoScience (Ru-En)">ecf811a96024e0d0f7d13020f1e8a755</dictionary>
+  <dictionary name="LingvoUniversal (Ru-En)">fc1f2e6c216f489325b4c4674fa4fa9f</dictionary>
+  <dictionary name="MechanicalEngineering (Ru-En)">985ac0df4d8b006eac32425ddc9c73ab</dictionary>
+  <dictionary name="Medical (Ru-En)">f76cc973ee4550fd6c0442be2784c9bd</dictionary>
+  <dictionary name="Microeconomics (Ru-En)">9cf8bcebe685749f459861fe84a54e85</dictionary>
+  <dictionary name="OilAndGas (Ru-En)">b89b33bddf300c5329c2778dcfe425cd</dictionary>
+  <dictionary name="Paper (Ru-En)">53c2b3cb65d61077c73d5cd6c25eba94</dictionary>
+  <dictionary name="Patents (Ru-En)">9bb10331ef2963fe77a1a6530523c3e4</dictionary>
+  <dictionary name="PhraseBook (Ru-En)">5c259aa0fe8d7714c3d8b4521be39a94</dictionary>
+  <dictionary name="Physics (Ru-En)">81447e09ada015ce2345acc1c3388973</dictionary>
+  <dictionary name="Politics (Ru-En)">5ca2a3d8559dff9e9ff9357e9c3224fa</dictionary>
+  <dictionary name="Polytechnical (Ru-En)">7b2aa062e94c8fab151f4ea475a11ef5</dictionary>
+  <dictionary name="Psychology (Ru-En)">54edd7e3d1e30e8df8e2ac45d8361023</dictionary>
+  <dictionary name="RadioElectronics (Ru-En)">fe7a9d4b015a15d90ae521a7ada00fae</dictionary>
+  <dictionary name="Smirnitsky (Ru-En)">6524069cc9f89024ec7f81fd63e51d42</dictionary>
+  <dictionary name="Sport (Ru-En)">ae0b6f91166a7bb982112afa33150e9f</dictionary>
+  <dictionary name="Telecoms (Ru-En)">f372d7ac767db0a76e0519310a6ba238</dictionary>
+  <dictionary name="Universal (Ru-En)">804bcd2c1558f5d7818333ca4bf25050</dictionary>
+  <dictionary name="BigCity2007 (Ru-Ru)">353bbba691d1de6b385f8cc3f7ef8899</dictionary>
+  <dictionary name="BusinessSlang (Ru-Ru)">0c6c8188e4f674777a61cf346b340229</dictionary>
+  <dictionary name="ComputerSlang (Ru-Ru)">bc41374f9ca12c9b1f39111cb4f66d45</dictionary>
+  <dictionary name="Dahl (Ru-Ru)">4f073f3802a561e77141f9fbc5c22ab4</dictionary>
+  <dictionary name="ExplanatoryBTS (Ru-Ru)">daaf3ef421b8c1e9fda0c007fefc9420</dictionary>
+  <dictionary name="Explanatory (Ru-Ru)">f7acf88e0912465f0e21e1c1cf214a8d</dictionary>
+  <dictionary name="GreatEncyclopaedicDictionary (Ru-Ru)">d07dd8b86554b37bb8586533024a5785</dictionary>
+  <dictionary name="LingvoThesaurus (Ru-Ru)">5fef5856983e758e0d54cea9869840cc</dictionary>
+  <dictionary name="Male (Ru-Ru)">6956cc40c69b0278c190d07105c0b6a1</dictionary>
+  <dictionary name="NetSlang (Ru-Ru)">4a8d1819be77c197894d01299398ee41</dictionary>
+  <dictionary name="OdessaSlang (Ru-Ru)">f35a58c6800659b04afc84eb06412175</dictionary>
+  <dictionary name="Ozhegov&amp;Shvedova'sDictionary (Ru-Ru)">895bbe0556fa36c6b60f1b549324156f</dictionary>
+  <dictionary name="Popular (Ru-Ru)">0cd58c76553edb73983972732602655f</dictionary>
+  <dictionary name="Smiles (Ru-Ru)">645e6eb0dc88f0e39dfc120e1e8f48fe</dictionary>
+  <dictionary name="UrbanDictionary (Ru-Ru)">e95259855c9c5a556564e3227ca6fad5</dictionary>
+  <dictionary name="Ushakov'sDictionary (Ru-Ru)">8ab408d3a3955b85bb6f219ba752bb6c</dictionary>
+  <dictionary name="PhraseBookRuEn">aa4edf8097080d60c929c3ed5b99165d</dictionary>
+  <dictionary name="SoundEn">b29e5d161ab73972f127fbae7ba3a5e9</dictionary>
+  <dictionary name="SoundRu">621ef7f69f7acf6fc8779a8a01875937</dictionary>
+  <dictionary name="SoundUk">9cfa693c7b308cd27d3f693f328a6a2d</dictionary>
+  <dictionary name="Speech">7a28055f44dd5bf33c3ca9b9fe6b6894</dictionary>
   <mutedDictionaries/>
  </dictionaryOrder>
  <inactiveDictionaries id="0" name="">
@@ -142,115 +147,250 @@
  </inactiveDictionaries>
  <groups nextId="6">
   <group id="5" name="main">
-   <dictionary name="Collins (En-En)">c56119049eb332fcc6dcfe7030182f4e</dictionary>
-   <dictionary name="OxfordDictionary (En-En)">e926342ad832300c75ea14051151cc88</dictionary>
-   <dictionary name="Macmillan English Dictionary (En-En)">b1859bed91d0c4a80915ecd9cb00a72d</dictionary>
-   <dictionary name="Merriam-Webster's Collegiate 11 (En-En)">f55f2d958beefa486ce237a9243ada84</dictionary>
-   <dictionary name="American Heritage Dictionary 4th Ed. (En-En)">22ad3d82c64a14d4d6060a1724fe4267</dictionary>
-   <dictionary name="LingvoUniversal (En-Ru)">815cd1c85aca4f6721fc83187f552074</dictionary>
-   <dictionary name="LingvoComputer (En-Ru)">343dff6611e4e40047449c91811c2983</dictionary>
-   <dictionary name="AmericanSlang (En-Ru)">4de84658414208948dd9391e796510cb</dictionary>
-   <dictionary name="Idioms (En-Ru)">2f32bd5eec82fe00a8e367913577b100</dictionary>
-   <dictionary name="LingvoEconomics (En-Ru)">be8774515d3696bb7dfeeb659d247249</dictionary>
-   <dictionary name="LingvoGrammar (En-Ru)">a3b7c19d8a85cd84b93b3f85ee421743</dictionary>
+   <dictionary name="CollinsCobuild (En-En)">8b5f58b5e3b0afd1c1d2f0d063922683</dictionary>
+   <dictionary name="Collins (En-En)">6557fd0aed6e5bee2bc3dbdc65fac49f</dictionary>
+   <dictionary name="BBI Combinatory Dictionary of English">dccadd1f87ed3fa49712a3702973320b</dictionary>
+   <dictionary name="Longman Activator 2nd Ed. (En-En)">3db0b76e1535e47f6923e20915f14618</dictionary>
+   <dictionary name="Longman Common Errors (En-En)">b45a026402a8ffd6860b437f99334611</dictionary>
+   <dictionary name="Longman DOCE 5th Ed. (En-En)">83810c4d59af4f36a537e31790a44e34</dictionary>
+   <dictionary name="Longman DOCE5 Extras (En-En)">a5480d75cf13bdb6a4a5ba98f71d251b</dictionary>
+   <dictionary name="Longman Pronunciation Dictionary (En-En)">bbbbf576cd209a64537b072846f90363</dictionary>
+   <dictionary name="Merriam-Webster's Advanced Learner's Dictionary (En-En)">a73d6a3991240b8c1c6103c7925d374a</dictionary>
+   <dictionary name="Merriam-Webster's Collegiate 11 (En-En)">a9267b04fe42bf3a0aed6b3f0db3a57f</dictionary>
+   <dictionary name="Merriam-Webster's Collegiate Thesaurus (En-En)">40dac6bca9e29873b9babed7830f8507</dictionary>
+   <dictionary name="AHD Indo-European and Semitic Roots Supplement (En-En)">8c20ca74c8f1f3f7835a59aa649c2803</dictionary>
+   <dictionary name="American Heritage Dictionary 4th Ed. (En-En)">24b017d17ca699b8a43539f1902172fc</dictionary>
+   <dictionary name="Cambridge Advanced Learners Dictionary 3th Ed.">2a1958af3c8f4ca6964ea57d62d2ad55</dictionary>
+   <dictionary name="Concise Oxford English Dictionary (En-En)">6293b02ab63f1edca838748dc7c40377</dictionary>
+   <dictionary name="Macmillan English Dictionary (En-En)">e2c2fbdff2ed617f6c5c2dec2fe23b38</dictionary>
+   <dictionary name="Macmillan English Thesaurus (En-En)">ab7e219d287c9b5fdc0248182401bef4</dictionary>
+   <dictionary name="Oxford Advanced Learners Dictionary 8th Ed.">7f8426e1f6075f2556b71b3fe565e8f7</dictionary>
+   <dictionary name="IM abridgements (En-En)">059d17edaaf4101bbcd04f5a62ada9a1</dictionary>
+   <dictionary name="OxfordAmericanDictionary (En-En)">13d9c412edc8cab2c21218dcccb95ec0</dictionary>
+   <dictionary name="OxfordAmericanThesaurus (En-En)">48f452a97d95b4e29545874c12193987</dictionary>
+   <dictionary name="OxfordBusinessAndManagement (En-En)">2cb8b9da3158f562584de63ef12b361e</dictionary>
+   <dictionary name="OxfordDictionary (En-En)">140ca3afe569a0a8040fcba7af58d934</dictionary>
+   <dictionary name="OxfordEconomics (En-En)">d69cd52422e8199df70a8086ea881364</dictionary>
+   <dictionary name="OxfordFinanceAndBanking (En-En)">73c9080887a3aeddca593915b513bdb0</dictionary>
+   <dictionary name="WordNet® 3.0 (En-En)">74199951570200278bac4d9eb3ef37cf</dictionary>
+   <dictionary name="Accounting (En-Ru)">63f9812f8f7577ad242f40674bc8b58a</dictionary>
+   <dictionary name="Americana (En-Ru)">d5ba9066c5a1f3b62812670e6276de2f</dictionary>
+   <dictionary name="AmericanSlang (En-Ru)">10b3b8d4b3d46272366e2f0a38fb7e82</dictionary>
+   <dictionary name="Auto (En-Ru)">98885f7804c247974e411e335eea46a2</dictionary>
+   <dictionary name="Beer (En-Ru)">6c129a769528475a4b9bd22ea1ba3d8e</dictionary>
+   <dictionary name="Biology (En-Ru)">4fbc98d442ff2666221fc4fa3e931819</dictionary>
+   <dictionary name="Building (En-Ru)">63375115e72dbc28a6c4ba962df57325</dictionary>
+   <dictionary name="Combinatory (En-Ru)">ba44d42a2d19fdf29bc1e3431dde54c8</dictionary>
+   <dictionary name="Computers (En-Ru)">7a2848ff315dbf844669ec4212a0be2d</dictionary>
+   <dictionary name="Difficulties (En-Ru)">386e76c04c1e013bafa22f3abd4957c9</dictionary>
+   <dictionary name="EconomicusBanking (En-Ru)">cfc21de763271c2614b2f05f54a715bf</dictionary>
+   <dictionary name="Economicus (En-Ru)">faa00043555779fb03c575f30631087f</dictionary>
+   <dictionary name="EconomicusGovernment (En-Ru)">f7b2b6a9e7d918f312325a7f306371ba</dictionary>
+   <dictionary name="EconomicusInsurance (En-Ru)">e1e92a87477306501919b0aebc9f0398</dictionary>
+   <dictionary name="EconomicusInternational (En-Ru)">0ad18b579eee8305d061a0cf4f9dcdde</dictionary>
+   <dictionary name="Apresyan (En-Ru)">a1e371fbac569f7fe6405cd90c3a5ff2</dictionary>
+   <dictionary name="Engineering (En-Ru)">84b7226086218e8d2a280910d34df954</dictionary>
+   <dictionary name="FinancialManagement (En-Ru)">0b8f0df4be8a1e5f5f8f49f759599b53</dictionary>
+   <dictionary name="FinancialMarkets (En-Ru)">44b13eb53ce85e29df48f6854b86b850</dictionary>
+   <dictionary name="FoodAbbreviations (En-Ru)">387b9f26c356a2e0a4f9d9e013245b6b</dictionary>
+   <dictionary name="ForumDictionary (En-Ru)">a3c92b6b9fee1ad95c0f86135a794c2a</dictionary>
+   <dictionary name="Geography (En-Ru)">f14c5410e715eadb926c0345073f7830</dictionary>
+   <dictionary name="GreatBritain (En-Ru)">367a5e5c443813a9f208fa1d101bf9e0</dictionary>
+   <dictionary name="HoverDictionary (En-Ru)">2c0d5876a0ad3a6991622f8478d8ce1e</dictionary>
+   <dictionary name="Idioms (En-Ru)">5dd610331ebdec73a4dd8e192548be17</dictionary>
+   <dictionary name="Informal (En-Ru)">7dac13cab450ee9cb556eaa333902075</dictionary>
+   <dictionary name="Law (En-Ru)">4559352cc29bdd43beb5be71a3fb783e</dictionary>
+   <dictionary name="Learning (En-Ru)">0616257bd4d3d5fa0482509a5c094967</dictionary>
+   <dictionary name="LingvoComputer (En-Ru)">c5884ff4fba19417d3f32f47a9c68d2c</dictionary>
+   <dictionary name="LingvoEconomics (En-Ru)">4b28a7656bb7f65b3587720158967907</dictionary>
+   <dictionary name="LingvoGrammar (En-Ru)">ba0a8b33f564953fb92a775865cf42ba</dictionary>
+   <dictionary name="LingvoScience (En-Ru)">4179204e58ebdf65d8c9685f8a72b820</dictionary>
+   <dictionary name="LingvoUniversal (En-Ru)">902bb1c2469618b25468678cf9345c7d</dictionary>
+   <dictionary name="Management (En-Ru)">2fda0fa11f0ce8c5172d6376a7689015</dictionary>
+   <dictionary name="Marketing (En-Ru)">6736bfc41b770ec1e79f9234f1c71285</dictionary>
+   <dictionary name="MechanicalEngineering (En-Ru)">0a7ea7c8327ba76dd2210339f0943c18</dictionary>
+   <dictionary name="Medical (En-Ru)">cd8065d5b6adec67721ba5cfcbd98926</dictionary>
+   <dictionary name="Microeconomics (En-Ru)">93f405ad31d426ca46d713bde6bf6979</dictionary>
+   <dictionary name="OilAndGas (En-Ru)">b4963b4e0f2de896a31a3a6138843950</dictionary>
+   <dictionary name="Paper (En-Ru)">632785e8b897a9f634e62d490d05459c</dictionary>
+   <dictionary name="Patents (En-Ru)">3e544266607e0543ece8177d8b2e2393</dictionary>
+   <dictionary name="Physics (En-Ru)">eebf783ce63dabd8d6740a552f0fdc3a</dictionary>
+   <dictionary name="Politics (En-Ru)">9fc4b49c26e40bc67e05a446567751b3</dictionary>
+   <dictionary name="Polytechnical (En-Ru)">70269dcf54621c743a1474d1708ab85c</dictionary>
+   <dictionary name="Proverbs (En-Ru)">96f421d4cd7a80c1ac3e97b683166712</dictionary>
+   <dictionary name="Psychology (En-Ru)">59eb8766aaa189f801202960d8011e84</dictionary>
+   <dictionary name="RadioElectronics (En-Ru)">02c44d5350f84bcb023ecc3fd9047e1c</dictionary>
+   <dictionary name="Religion (Ru-En)">285a1df7ed1e5bffd2af91b5046bfea3</dictionary>
+   <dictionary name="Sport (En-Ru)">651febefdfe59360b91b0233d6b6671d</dictionary>
+   <dictionary name="Telecoms (En-Ru)">e58afb42361ce1346cc478c0c6002d2f</dictionary>
+   <dictionary name="Transport (En-Ru)">122e58a6b5336b7a18d7918532174d05</dictionary>
+   <dictionary name="Wine (En-Ru)">e14f6a7713715361b6faba2641f0df3a</dictionary>
+   <dictionary name="Auto (Ru-En)">d1f35367363254b7ce795b36a3e9c351</dictionary>
+   <dictionary name="Biology (Ru-En)">c40d9bbdd312d61b2ba35bd127b0c283</dictionary>
+   <dictionary name="Building (Ru-En)">ad64f36778486d91b636ebca09742006</dictionary>
+   <dictionary name="Computers (Ru-En)">d6d684f94fedcfb262991ee78f32d972</dictionary>
+   <dictionary name="Context (Ru-En)">b7638838204ab5afc03369d9fcc21ce7</dictionary>
+   <dictionary name="Engineering (Ru-En)">810808ca39531d134a9abb5ae8e35457</dictionary>
+   <dictionary name="Geography (Ru-En)">42eedddb85102fe9511317351024e948</dictionary>
+   <dictionary name="HoverDictionary (Ru-En)">8a1686d55066217b357aba0acdc298cc</dictionary>
+   <dictionary name="Law (Ru-En)">729456bdb5481d6c92c1af3e87697d6c</dictionary>
+   <dictionary name="Learning (Ru-En)">e0ea0a1cf925e93c3e9f57c769a56b17</dictionary>
+   <dictionary name="LingvoComputer (Ru-En)">21ce43e392026935091ebaf8e93f561f</dictionary>
+   <dictionary name="LingvoEconomics (Ru-En)">67c1d1f70f20bfd3ce1809707220dffb</dictionary>
+   <dictionary name="LingvoScience (Ru-En)">ecf811a96024e0d0f7d13020f1e8a755</dictionary>
+   <dictionary name="LingvoUniversal (Ru-En)">fc1f2e6c216f489325b4c4674fa4fa9f</dictionary>
+   <dictionary name="MechanicalEngineering (Ru-En)">985ac0df4d8b006eac32425ddc9c73ab</dictionary>
+   <dictionary name="Medical (Ru-En)">f76cc973ee4550fd6c0442be2784c9bd</dictionary>
+   <dictionary name="Microeconomics (Ru-En)">9cf8bcebe685749f459861fe84a54e85</dictionary>
+   <dictionary name="OilAndGas (Ru-En)">b89b33bddf300c5329c2778dcfe425cd</dictionary>
+   <dictionary name="Paper (Ru-En)">53c2b3cb65d61077c73d5cd6c25eba94</dictionary>
+   <dictionary name="Patents (Ru-En)">9bb10331ef2963fe77a1a6530523c3e4</dictionary>
+   <dictionary name="PhraseBook (Ru-En)">5c259aa0fe8d7714c3d8b4521be39a94</dictionary>
+   <dictionary name="Physics (Ru-En)">81447e09ada015ce2345acc1c3388973</dictionary>
+   <dictionary name="Politics (Ru-En)">5ca2a3d8559dff9e9ff9357e9c3224fa</dictionary>
+   <dictionary name="Polytechnical (Ru-En)">7b2aa062e94c8fab151f4ea475a11ef5</dictionary>
+   <dictionary name="Psychology (Ru-En)">54edd7e3d1e30e8df8e2ac45d8361023</dictionary>
+   <dictionary name="RadioElectronics (Ru-En)">fe7a9d4b015a15d90ae521a7ada00fae</dictionary>
+   <dictionary name="Smirnitsky (Ru-En)">6524069cc9f89024ec7f81fd63e51d42</dictionary>
+   <dictionary name="Sport (Ru-En)">ae0b6f91166a7bb982112afa33150e9f</dictionary>
+   <dictionary name="Telecoms (Ru-En)">f372d7ac767db0a76e0519310a6ba238</dictionary>
+   <dictionary name="Universal (Ru-En)">804bcd2c1558f5d7818333ca4bf25050</dictionary>
+   <dictionary name="BigCity2007 (Ru-Ru)">353bbba691d1de6b385f8cc3f7ef8899</dictionary>
+   <dictionary name="BusinessSlang (Ru-Ru)">0c6c8188e4f674777a61cf346b340229</dictionary>
+   <dictionary name="ComputerSlang (Ru-Ru)">bc41374f9ca12c9b1f39111cb4f66d45</dictionary>
+   <dictionary name="Dahl (Ru-Ru)">4f073f3802a561e77141f9fbc5c22ab4</dictionary>
+   <dictionary name="ExplanatoryBTS (Ru-Ru)">daaf3ef421b8c1e9fda0c007fefc9420</dictionary>
+   <dictionary name="Explanatory (Ru-Ru)">f7acf88e0912465f0e21e1c1cf214a8d</dictionary>
+   <dictionary name="GreatEncyclopaedicDictionary (Ru-Ru)">d07dd8b86554b37bb8586533024a5785</dictionary>
+   <dictionary name="LingvoThesaurus (Ru-Ru)">5fef5856983e758e0d54cea9869840cc</dictionary>
+   <dictionary name="Male (Ru-Ru)">6956cc40c69b0278c190d07105c0b6a1</dictionary>
+   <dictionary name="NetSlang (Ru-Ru)">4a8d1819be77c197894d01299398ee41</dictionary>
+   <dictionary name="OdessaSlang (Ru-Ru)">f35a58c6800659b04afc84eb06412175</dictionary>
+   <dictionary name="Ozhegov&amp;Shvedova'sDictionary (Ru-Ru)">895bbe0556fa36c6b60f1b549324156f</dictionary>
+   <dictionary name="Popular (Ru-Ru)">0cd58c76553edb73983972732602655f</dictionary>
+   <dictionary name="Smiles (Ru-Ru)">645e6eb0dc88f0e39dfc120e1e8f48fe</dictionary>
+   <dictionary name="UrbanDictionary (Ru-Ru)">e95259855c9c5a556564e3227ca6fad5</dictionary>
+   <dictionary name="Ushakov'sDictionary (Ru-Ru)">8ab408d3a3955b85bb6f219ba752bb6c</dictionary>
+   <dictionary name="PhraseBookRuEn">aa4edf8097080d60c929c3ed5b99165d</dictionary>
+   <dictionary name="SoundEn">b29e5d161ab73972f127fbae7ba3a5e9</dictionary>
+   <dictionary name="SoundRu">621ef7f69f7acf6fc8779a8a01875937</dictionary>
+   <dictionary name="SoundUk">9cfa693c7b308cd27d3f693f328a6a2d</dictionary>
+   <dictionary name="Speech">7a28055f44dd5bf33c3ca9b9fe6b6894</dictionary>
    <mutedDictionaries/>
   </group>
-  <group id="1" icon="ax.png" name="En-ru">
-   <dictionary name="Biology (En-Ru)">0d89ec340535c949c03ef7eb5a7dd268</dictionary>
-   <dictionary name="LingvoComputer (En-Ru)">343dff6611e4e40047449c91811c2983</dictionary>
-   <dictionary name="LingvoEconomics (En-Ru)">be8774515d3696bb7dfeeb659d247249</dictionary>
-   <dictionary name="LingvoGrammar (En-Ru)">a3b7c19d8a85cd84b93b3f85ee421743</dictionary>
-   <dictionary name="LingvoScience (En-Ru)">59afc51d67580af2ad83717b30f7aeb9</dictionary>
-   <dictionary name="LingvoUniversal (En-Ru)">815cd1c85aca4f6721fc83187f552074</dictionary>
-   <dictionary name="Accounting (En-Ru)">5c5098998def57c1f314b97dcfeae6c7</dictionary>
-   <dictionary name="AmericanSlang (En-Ru)">4de84658414208948dd9391e796510cb</dictionary>
-   <dictionary name="Auto (En-Ru)">9f3b8ad492d2a85bcf84653e96aa9de6</dictionary>
-   <dictionary name="Beer (En-Ru)">0b5a867763e52c20ab0b1a2770ab58e0</dictionary>
-   <dictionary name="Building (En-Ru)">f2ef5bba161fb24d960fe15992828a2d</dictionary>
-   <dictionary name="Economicus (En-Ru)">3062d8a753899ee8df93a3472b2bb2eb</dictionary>
-   <dictionary name="Engineering (En-Ru)">6feee8da30ec0c34e1d02b8dbbebe9b5</dictionary>
-   <dictionary name="Geography (En-Ru)">d4d46289a9c39439a5758249c67540c6</dictionary>
-   <dictionary name="GreatBritain (En-Ru)">92a77043ac18bfefe119461d088833a4</dictionary>
-   <dictionary name="Idioms (En-Ru)">2f32bd5eec82fe00a8e367913577b100</dictionary>
-   <dictionary name="Informal (En-Ru)">2ffea53ed1d823fe05dde11b06b9fb41</dictionary>
-   <dictionary name="Law (En-Ru)">9ef8a3549721b7f98a05f5e2846fe907</dictionary>
-   <dictionary name="Marketing (En-Ru)">6a2ef592de4938beea6a71566707d178</dictionary>
-   <dictionary name="Medical (En-Ru)">11829fd69b735b64f968c335d001c11b</dictionary>
-   <dictionary name="Physics (En-Ru)">a495af1f804998e48f46eb2559ae7ecf</dictionary>
-   <dictionary name="Patents (En-Ru)">99b5291ce7b6ef5ba630e04f771cfac0</dictionary>
-   <dictionary name="Psychology (En-Ru)">0022d8d78c4798bc75896b75e2f2630f</dictionary>
-   <dictionary name="RadioElectronics (En-Ru)">50c859ed04a71b766d6065495690067c</dictionary>
-   <dictionary name="Sport (En-Ru)">1039f53df1cbeec8ab2322d8b7a8452f</dictionary>
-   <dictionary name="Telecoms (En-Ru)">17b4fe7eade511d3a216f7ec3b47429c</dictionary>
-   <dictionary name="Transport (En-Ru)">aaa835dc48e0c8a61e6cd4ea7e956954</dictionary>
-   <dictionary name="Wine (En-Ru)">a92ea91217ee9c7415697fba7db2bf2d</dictionary>
+  <group icon="ax.png" id="1" name="En-ru">
+   <dictionary name="Accounting (En-Ru)">63f9812f8f7577ad242f40674bc8b58a</dictionary>
+   <dictionary name="Americana (En-Ru)">d5ba9066c5a1f3b62812670e6276de2f</dictionary>
+   <dictionary name="AmericanSlang (En-Ru)">10b3b8d4b3d46272366e2f0a38fb7e82</dictionary>
+   <dictionary name="Auto (En-Ru)">98885f7804c247974e411e335eea46a2</dictionary>
+   <dictionary name="Beer (En-Ru)">6c129a769528475a4b9bd22ea1ba3d8e</dictionary>
+   <dictionary name="Biology (En-Ru)">4fbc98d442ff2666221fc4fa3e931819</dictionary>
+   <dictionary name="Building (En-Ru)">63375115e72dbc28a6c4ba962df57325</dictionary>
+   <dictionary name="Combinatory (En-Ru)">ba44d42a2d19fdf29bc1e3431dde54c8</dictionary>
+   <dictionary name="Computers (En-Ru)">7a2848ff315dbf844669ec4212a0be2d</dictionary>
+   <dictionary name="Difficulties (En-Ru)">386e76c04c1e013bafa22f3abd4957c9</dictionary>
+   <dictionary name="EconomicusBanking (En-Ru)">cfc21de763271c2614b2f05f54a715bf</dictionary>
+   <dictionary name="Economicus (En-Ru)">faa00043555779fb03c575f30631087f</dictionary>
+   <dictionary name="EconomicusGovernment (En-Ru)">f7b2b6a9e7d918f312325a7f306371ba</dictionary>
+   <dictionary name="EconomicusInsurance (En-Ru)">e1e92a87477306501919b0aebc9f0398</dictionary>
+   <dictionary name="EconomicusInternational (En-Ru)">0ad18b579eee8305d061a0cf4f9dcdde</dictionary>
+   <dictionary name="Apresyan (En-Ru)">a1e371fbac569f7fe6405cd90c3a5ff2</dictionary>
+   <dictionary name="Engineering (En-Ru)">84b7226086218e8d2a280910d34df954</dictionary>
+   <dictionary name="FinancialManagement (En-Ru)">0b8f0df4be8a1e5f5f8f49f759599b53</dictionary>
+   <dictionary name="FinancialMarkets (En-Ru)">44b13eb53ce85e29df48f6854b86b850</dictionary>
+   <dictionary name="FoodAbbreviations (En-Ru)">387b9f26c356a2e0a4f9d9e013245b6b</dictionary>
+   <dictionary name="ForumDictionary (En-Ru)">a3c92b6b9fee1ad95c0f86135a794c2a</dictionary>
+   <dictionary name="Geography (En-Ru)">f14c5410e715eadb926c0345073f7830</dictionary>
+   <dictionary name="GreatBritain (En-Ru)">367a5e5c443813a9f208fa1d101bf9e0</dictionary>
+   <dictionary name="HoverDictionary (En-Ru)">2c0d5876a0ad3a6991622f8478d8ce1e</dictionary>
+   <dictionary name="Idioms (En-Ru)">5dd610331ebdec73a4dd8e192548be17</dictionary>
+   <dictionary name="Informal (En-Ru)">7dac13cab450ee9cb556eaa333902075</dictionary>
+   <dictionary name="Law (En-Ru)">4559352cc29bdd43beb5be71a3fb783e</dictionary>
+   <dictionary name="Learning (En-Ru)">0616257bd4d3d5fa0482509a5c094967</dictionary>
+   <dictionary name="LingvoComputer (En-Ru)">c5884ff4fba19417d3f32f47a9c68d2c</dictionary>
+   <dictionary name="LingvoEconomics (En-Ru)">4b28a7656bb7f65b3587720158967907</dictionary>
+   <dictionary name="LingvoGrammar (En-Ru)">ba0a8b33f564953fb92a775865cf42ba</dictionary>
+   <dictionary name="LingvoScience (En-Ru)">4179204e58ebdf65d8c9685f8a72b820</dictionary>
+   <dictionary name="LingvoUniversal (En-Ru)">902bb1c2469618b25468678cf9345c7d</dictionary>
+   <dictionary name="Management (En-Ru)">2fda0fa11f0ce8c5172d6376a7689015</dictionary>
+   <dictionary name="Marketing (En-Ru)">6736bfc41b770ec1e79f9234f1c71285</dictionary>
+   <dictionary name="MechanicalEngineering (En-Ru)">0a7ea7c8327ba76dd2210339f0943c18</dictionary>
+   <dictionary name="Medical (En-Ru)">cd8065d5b6adec67721ba5cfcbd98926</dictionary>
+   <dictionary name="Microeconomics (En-Ru)">93f405ad31d426ca46d713bde6bf6979</dictionary>
+   <dictionary name="OilAndGas (En-Ru)">b4963b4e0f2de896a31a3a6138843950</dictionary>
+   <dictionary name="Paper (En-Ru)">632785e8b897a9f634e62d490d05459c</dictionary>
+   <dictionary name="Patents (En-Ru)">3e544266607e0543ece8177d8b2e2393</dictionary>
+   <dictionary name="Physics (En-Ru)">eebf783ce63dabd8d6740a552f0fdc3a</dictionary>
+   <dictionary name="Politics (En-Ru)">9fc4b49c26e40bc67e05a446567751b3</dictionary>
+   <dictionary name="Polytechnical (En-Ru)">70269dcf54621c743a1474d1708ab85c</dictionary>
+   <dictionary name="Proverbs (En-Ru)">96f421d4cd7a80c1ac3e97b683166712</dictionary>
+   <dictionary name="Psychology (En-Ru)">59eb8766aaa189f801202960d8011e84</dictionary>
+   <dictionary name="RadioElectronics (En-Ru)">02c44d5350f84bcb023ecc3fd9047e1c</dictionary>
+   <dictionary name="Sport (En-Ru)">651febefdfe59360b91b0233d6b6671d</dictionary>
+   <dictionary name="Telecoms (En-Ru)">e58afb42361ce1346cc478c0c6002d2f</dictionary>
+   <dictionary name="Transport (En-Ru)">122e58a6b5336b7a18d7918532174d05</dictionary>
+   <dictionary name="Wine (En-Ru)">e14f6a7713715361b6faba2641f0df3a</dictionary>
    <mutedDictionaries/>
   </group>
   <group id="2" name="En-En">
-   <dictionary name="Collins (En-En)">c56119049eb332fcc6dcfe7030182f4e</dictionary>
-   <dictionary name="Macmillan English Dictionary (En-En)">b1859bed91d0c4a80915ecd9cb00a72d</dictionary>
-   <dictionary name="Macmillan English Thesaurus (En-En)">7c0bfb0e44bf707bb1dc5f070bba43ae</dictionary>
-   <dictionary name="OxfordDictionary (En-En)">e926342ad832300c75ea14051151cc88</dictionary>
-   <dictionary name="OxfordEconomics (En-En)">9f579fb3cd1d296d6213eff2909e799b</dictionary>
-   <dictionary name="OxfordFinanceAndBanking (En-En)">51b06966c832ae4f67186b485613d032</dictionary>
-   <dictionary name="Merriam-Webster's Collegiate Thesaurus (En-En)">a459807590412c728d914d0b5a93be72</dictionary>
-   <dictionary name="American Heritage Dictionary 4th Ed. (En-En)">22ad3d82c64a14d4d6060a1724fe4267</dictionary>
-   <dictionary name="WordNet® 3.0 (En-En)">1004889d3cb2e343f36c14f7d7bc6d5b</dictionary>
-   <dictionary name="OxfordAmericanDictionary (En-En)">c84bfd6a3a52607cf643ce6b06e52de4</dictionary>
-   <dictionary name="IM abridgements (En-En)">89c17cba04b04cd5674799f333a4258c</dictionary>
+   <dictionary name="CollinsCobuild (En-En)">8b5f58b5e3b0afd1c1d2f0d063922683</dictionary>
+   <dictionary name="Collins (En-En)">6557fd0aed6e5bee2bc3dbdc65fac49f</dictionary>
+   <dictionary name="Longman Activator 2nd Ed. (En-En)">3db0b76e1535e47f6923e20915f14618</dictionary>
+   <dictionary name="Longman Common Errors (En-En)">b45a026402a8ffd6860b437f99334611</dictionary>
+   <dictionary name="Longman DOCE 5th Ed. (En-En)">83810c4d59af4f36a537e31790a44e34</dictionary>
+   <dictionary name="Longman DOCE5 Extras (En-En)">a5480d75cf13bdb6a4a5ba98f71d251b</dictionary>
+   <dictionary name="Longman Pronunciation Dictionary (En-En)">bbbbf576cd209a64537b072846f90363</dictionary>
+   <dictionary name="Merriam-Webster's Advanced Learner's Dictionary (En-En)">a73d6a3991240b8c1c6103c7925d374a</dictionary>
+   <dictionary name="Merriam-Webster's Collegiate 11 (En-En)">a9267b04fe42bf3a0aed6b3f0db3a57f</dictionary>
+   <dictionary name="Merriam-Webster's Collegiate Thesaurus (En-En)">40dac6bca9e29873b9babed7830f8507</dictionary>
+   <dictionary name="AHD Indo-European and Semitic Roots Supplement (En-En)">8c20ca74c8f1f3f7835a59aa649c2803</dictionary>
+   <dictionary name="American Heritage Dictionary 4th Ed. (En-En)">24b017d17ca699b8a43539f1902172fc</dictionary>
+   <dictionary name="Concise Oxford English Dictionary (En-En)">6293b02ab63f1edca838748dc7c40377</dictionary>
+   <dictionary name="Macmillan English Dictionary (En-En)">e2c2fbdff2ed617f6c5c2dec2fe23b38</dictionary>
+   <dictionary name="Macmillan English Thesaurus (En-En)">ab7e219d287c9b5fdc0248182401bef4</dictionary>
+   <dictionary name="IM abridgements (En-En)">059d17edaaf4101bbcd04f5a62ada9a1</dictionary>
+   <dictionary name="OxfordAmericanDictionary (En-En)">13d9c412edc8cab2c21218dcccb95ec0</dictionary>
+   <dictionary name="OxfordAmericanThesaurus (En-En)">48f452a97d95b4e29545874c12193987</dictionary>
+   <dictionary name="OxfordBusinessAndManagement (En-En)">2cb8b9da3158f562584de63ef12b361e</dictionary>
+   <dictionary name="OxfordDictionary (En-En)">140ca3afe569a0a8040fcba7af58d934</dictionary>
+   <dictionary name="OxfordEconomics (En-En)">d69cd52422e8199df70a8086ea881364</dictionary>
+   <dictionary name="OxfordFinanceAndBanking (En-En)">73c9080887a3aeddca593915b513bdb0</dictionary>
+   <dictionary name="WordNet® 3.0 (En-En)">74199951570200278bac4d9eb3ef37cf</dictionary>
    <mutedDictionaries/>
   </group>
   <group id="3" name="Ru-En">
-   <dictionary name="Religion (Ru-En)">c7156fd96604f964cce584a301ecdf21</dictionary>
-   <dictionary name="Auto (Ru-En)">e36d733fa136c90e973a018098302997</dictionary>
-   <dictionary name="Biology (Ru-En)">a486cce667180086a58e477687b787cd</dictionary>
-   <dictionary name="Building (Ru-En)">0841e05d0bc2fa10ff7ecc5124fd9825</dictionary>
-   <dictionary name="Computers (Ru-En)">1702ec589084ad2d3c28827f271307a4</dictionary>
-   <dictionary name="Context (Ru-En)">e475b0c0bbe690a1f59634deefdb8eac</dictionary>
-   <dictionary name="Engineering (Ru-En)">a47f59d227a14815c2213b80f9ab795e</dictionary>
-   <dictionary name="Geography (Ru-En)">c92de3571ffb4b179adf9d074d832f20</dictionary>
-   <dictionary name="HoverDictionary (Ru-En)">f3125d08f6cdad35a51a92889b1e1f40</dictionary>
-   <dictionary name="Law (Ru-En)">b3b580132d7cd871f21eb868a26486a4</dictionary>
-   <dictionary name="Learning (Ru-En)">5c74893e59005e526a34252ad30b4641</dictionary>
-   <dictionary name="LingvoComputer (Ru-En)">fba09079018681e2551d596c7484d591</dictionary>
-   <dictionary name="LingvoEconomics (Ru-En)">7aa43229992d00fd23b7184525495011</dictionary>
-   <dictionary name="LingvoScience (Ru-En)">9606b64e77be446af0e493575b82a36f</dictionary>
-   <dictionary name="LingvoUniversal (Ru-En)">ac546a69c1d9d1f93cfd64f1b694cb54</dictionary>
-   <dictionary name="MechanicalEngineering (Ru-En)">33a150f3ae78cd80f289b7cc2f47017d</dictionary>
-   <dictionary name="Medical (Ru-En)">064e6da650b33be7c553fc789b758967</dictionary>
-   <dictionary name="Microeconomics (Ru-En)">20f8e9ba96e491fcbd37353acf31bc56</dictionary>
-   <dictionary name="OilAndGas (Ru-En)">8c11bb0775f7d1ac3e5744146e6459b6</dictionary>
-   <dictionary name="Paper (Ru-En)">2d2b790e79004057ca0dc3d8ced77d6f</dictionary>
-   <dictionary name="Patents (Ru-En)">ef214d3ad1d20a5d7ae03e5d9fdbcf80</dictionary>
-   <dictionary name="PhraseBook (Ru-En)">6fa6d36301cab55aaf52ef0710f3ee34</dictionary>
-   <dictionary name="Physics (Ru-En)">0b5747e6217de84dc84d2bd404d76188</dictionary>
-   <dictionary name="Politics (Ru-En)">bc0c79052fb0989fc7c74a6bce424b32</dictionary>
-   <dictionary name="Polytechnical (Ru-En)">29eacc64ff1ff8b66833aab536c29ede</dictionary>
-   <dictionary name="Psychology (Ru-En)">5d72f3ae7ddf2e6fc9b8b4bcc71e57db</dictionary>
-   <dictionary name="RadioElectronics (Ru-En)">40290e8b760f994342ec21af6d311869</dictionary>
-   <dictionary name="Smirnitsky (Ru-En)">bcbf69d15fb3bbfc8f227928af69f020</dictionary>
-   <dictionary name="Sport (Ru-En)">3db6afcddea74cd9d509460457309b3a</dictionary>
-   <dictionary name="Telecoms (Ru-En)">9fe9c15d2647a5f48149190605e590f6</dictionary>
-   <dictionary name="Universal (Ru-En)">5a36c0c434d4384409d9b3a87e6c8d6d</dictionary>
+   <dictionary name="OilAndGas (Ru-En)">b89b33bddf300c5329c2778dcfe425cd</dictionary>
+   <dictionary name="Paper (Ru-En)">53c2b3cb65d61077c73d5cd6c25eba94</dictionary>
+   <dictionary name="Patents (Ru-En)">9bb10331ef2963fe77a1a6530523c3e4</dictionary>
+   <dictionary name="PhraseBook (Ru-En)">5c259aa0fe8d7714c3d8b4521be39a94</dictionary>
+   <dictionary name="Physics (Ru-En)">81447e09ada015ce2345acc1c3388973</dictionary>
+   <dictionary name="Politics (Ru-En)">5ca2a3d8559dff9e9ff9357e9c3224fa</dictionary>
+   <dictionary name="Polytechnical (Ru-En)">7b2aa062e94c8fab151f4ea475a11ef5</dictionary>
+   <dictionary name="Psychology (Ru-En)">54edd7e3d1e30e8df8e2ac45d8361023</dictionary>
+   <dictionary name="RadioElectronics (Ru-En)">fe7a9d4b015a15d90ae521a7ada00fae</dictionary>
+   <dictionary name="Smirnitsky (Ru-En)">6524069cc9f89024ec7f81fd63e51d42</dictionary>
+   <dictionary name="Sport (Ru-En)">ae0b6f91166a7bb982112afa33150e9f</dictionary>
+   <dictionary name="Telecoms (Ru-En)">f372d7ac767db0a76e0519310a6ba238</dictionary>
+   <dictionary name="Universal (Ru-En)">804bcd2c1558f5d7818333ca4bf25050</dictionary>
    <mutedDictionaries/>
   </group>
   <group id="4" name="Ru-Ru">
-   <dictionary name="BigCity2007 (Ru-Ru)">a42ce3ad212c6c15eb7a6cbf830c6de4</dictionary>
-   <dictionary name="BusinessSlang (Ru-Ru)">b4099e20ef836429dce9bfe061f92065</dictionary>
-   <dictionary name="ComputerSlang (Ru-Ru)">9aa07c34ebd3684645979948f16c390c</dictionary>
-   <dictionary name="Dahl (Ru-Ru)">83272041585d2365020572313dd20b51</dictionary>
-   <dictionary name="ExplanatoryBTS (Ru-Ru)">7b947169ca2111bdb3cad7e33e480ab3</dictionary>
-   <dictionary name="Explanatory (Ru-Ru)">72c6c9140240c0d013398df6d8763707</dictionary>
-   <dictionary name="GreatEncyclopaedicDictionary (Ru-Ru)">dcb0f8d1f65786715632c296ee3ef194</dictionary>
-   <dictionary name="LingvoThesaurus (Ru-Ru)">23ad71208eea33547b016508b74bcb3f</dictionary>
-   <dictionary name="Male (Ru-Ru)">b09a72ae2710760b407e46d1e19913df</dictionary>
-   <dictionary name="NetSlang (Ru-Ru)">54c7d132dc64c3490daaf3d61391501e</dictionary>
-   <dictionary name="OdessaSlang (Ru-Ru)">2ef64d0774ef54b99a00db11aa7d1241</dictionary>
-   <dictionary name="Ozhegov&amp;Shvedova'sDictionary (Ru-Ru)">1f04e37744a97dae0db010b0724a86bb</dictionary>
-   <dictionary name="Popular (Ru-Ru)">0a63da613ea26c381abe7a1ac9ecd013</dictionary>
-   <dictionary name="Smiles (Ru-Ru)">b128cb72a40d556e7b21ec88af03671d</dictionary>
-   <dictionary name="UrbanDictionary (Ru-Ru)">816293db8ad13e395be3ff0e784d5cd1</dictionary>
-   <dictionary name="Ushakov'sDictionary (Ru-Ru)">9dcf5f3ed460c56efbbfe7a89c99577e</dictionary>
+   <dictionary name="BigCity2007 (Ru-Ru)">353bbba691d1de6b385f8cc3f7ef8899</dictionary>
+   <dictionary name="BusinessSlang (Ru-Ru)">0c6c8188e4f674777a61cf346b340229</dictionary>
+   <dictionary name="ComputerSlang (Ru-Ru)">bc41374f9ca12c9b1f39111cb4f66d45</dictionary>
+   <dictionary name="Dahl (Ru-Ru)">4f073f3802a561e77141f9fbc5c22ab4</dictionary>
+   <dictionary name="ExplanatoryBTS (Ru-Ru)">daaf3ef421b8c1e9fda0c007fefc9420</dictionary>
+   <dictionary name="Explanatory (Ru-Ru)">f7acf88e0912465f0e21e1c1cf214a8d</dictionary>
+   <dictionary name="GreatEncyclopaedicDictionary (Ru-Ru)">d07dd8b86554b37bb8586533024a5785</dictionary>
+   <dictionary name="LingvoThesaurus (Ru-Ru)">5fef5856983e758e0d54cea9869840cc</dictionary>
+   <dictionary name="Male (Ru-Ru)">6956cc40c69b0278c190d07105c0b6a1</dictionary>
+   <dictionary name="NetSlang (Ru-Ru)">4a8d1819be77c197894d01299398ee41</dictionary>
+   <dictionary name="OdessaSlang (Ru-Ru)">f35a58c6800659b04afc84eb06412175</dictionary>
+   <dictionary name="Ozhegov&amp;Shvedova'sDictionary (Ru-Ru)">895bbe0556fa36c6b60f1b549324156f</dictionary>
+   <dictionary name="Popular (Ru-Ru)">0cd58c76553edb73983972732602655f</dictionary>
+   <dictionary name="Smiles (Ru-Ru)">645e6eb0dc88f0e39dfc120e1e8f48fe</dictionary>
+   <dictionary name="UrbanDictionary (Ru-Ru)">e95259855c9c5a556564e3227ca6fad5</dictionary>
+   <dictionary name="Ushakov'sDictionary (Ru-Ru)">8ab408d3a3955b85bb6f219ba752bb6c</dictionary>
    <mutedDictionaries/>
   </group>
  </groups>
@@ -260,6 +400,12 @@
   <enableGermanTransliteration>0</enableGermanTransliteration>
   <enableGreekTransliteration>0</enableGreekTransliteration>
   <enableBelarusianTransliteration>0</enableBelarusianTransliteration>
+  <chinese>
+   <enable>0</enable>
+   <enableSCToTWConversion>1</enableSCToTWConversion>
+   <enableSCToHKConversion>1</enableSCToHKConversion>
+   <enableTCToSCConversion>1</enableTCToSCConversion>
+  </chinese>
   <romaji>
    <enable>0</enable>
    <enableHepburn>1</enableHepburn>
@@ -268,51 +414,57 @@
    <enableHiragana>1</enableHiragana>
    <enableKatakana>1</enableKatakana>
   </romaji>
+  <customtrans>
+   <enable>0</enable>
+   <context></context>
+  </customtrans>
  </transliteration>
+ <lingua>
+  <enable>1</enable>
+  <languageCodes></languageCodes>
+ </lingua>
  <forvo>
   <enable>0</enable>
   <apiKey></apiKey>
   <languageCodes></languageCodes>
  </forvo>
  <mediawikis>
-  <mediawiki url="https://en.wikipedia.org/w" enabled="0" id="ae6f89aac7151829681b85f035d54e48" icon="" name="English Wikipedia"/>
-  <mediawiki url="https://en.wiktionary.org/w" enabled="0" id="affcf9678e7bfe701c9b071f97eccba3" icon="" name="English Wiktionary"/>
-  <mediawiki url="https://ru.wikipedia.org/w" enabled="0" id="8e0c1c2b6821dab8bdba8eb869ca7176" icon="" name="Russian Wikipedia"/>
-  <mediawiki url="https://ru.wiktionary.org/w" enabled="0" id="b09947600ae3902654f8ad4567ae8567" icon="" name="Russian Wiktionary"/>
-  <mediawiki url="https://de.wikipedia.org/w" enabled="0" id="a8a66331a1242ca2aeb0b4aed361c41d" icon="" name="German Wikipedia"/>
-  <mediawiki url="https://de.wiktionary.org/w" enabled="0" id="21c64bca5ec10ba17ff19f3066bc962a" icon="" name="German Wiktionary"/>
-  <mediawiki url="https://pt.wikipedia.org/w" enabled="0" id="96957cb2ad73a20c7a1d561fc83c253a" icon="" name="Portuguese Wikipedia"/>
-  <mediawiki url="https://pt.wiktionary.org/w" enabled="0" id="ed4c3929196afdd93cc08b9a903aad6a" icon="" name="Portuguese Wiktionary"/>
-  <mediawiki url="https://el.wikipedia.org/w" enabled="0" id="f3b4ec8531e52ddf5b10d21e4577a7a2" icon="" name="Greek Wikipedia"/>
-  <mediawiki url="https://el.wiktionary.org/w" enabled="0" id="5d45232075d06e002dea72fe3e137da1" icon="" name="Greek Wiktionary"/>
+  <mediawiki enabled="0" icon="" id="ae6f89aac7151829681b85f035d54e48" name="English Wikipedia" url="https://en.wikipedia.org/w"/>
+  <mediawiki enabled="0" icon="" id="affcf9678e7bfe701c9b071f97eccba3" name="English Wiktionary" url="https://en.wiktionary.org/w"/>
+  <mediawiki enabled="0" icon="" id="8e0c1c2b6821dab8bdba8eb869ca7176" name="Russian Wikipedia" url="https://ru.wikipedia.org/w"/>
+  <mediawiki enabled="0" icon="" id="b09947600ae3902654f8ad4567ae8567" name="Russian Wiktionary" url="https://ru.wiktionary.org/w"/>
+  <mediawiki enabled="0" icon="" id="a8a66331a1242ca2aeb0b4aed361c41d" name="German Wikipedia" url="https://de.wikipedia.org/w"/>
+  <mediawiki enabled="0" icon="" id="21c64bca5ec10ba17ff19f3066bc962a" name="German Wiktionary" url="https://de.wiktionary.org/w"/>
+  <mediawiki enabled="0" icon="" id="96957cb2ad73a20c7a1d561fc83c253a" name="Portuguese Wikipedia" url="https://pt.wikipedia.org/w"/>
+  <mediawiki enabled="0" icon="" id="ed4c3929196afdd93cc08b9a903aad6a" name="Portuguese Wiktionary" url="https://pt.wiktionary.org/w"/>
+  <mediawiki enabled="0" icon="" id="f3b4ec8531e52ddf5b10d21e4577a7a2" name="Greek Wikipedia" url="https://el.wikipedia.org/w"/>
+  <mediawiki enabled="0" icon="" id="5d45232075d06e002dea72fe3e137da1" name="Greek Wiktionary" url="https://el.wiktionary.org/w"/>
  </mediawikis>
  <websites>
-  <website url="https://www.google.com/dictionary?aq=f&amp;langpair=en|en&amp;q=%GDWORD%&amp;hl=en" enabled="0" id="b88cb2898e634c6638df618528284c2d" icon="" name="Google En-En (Oxford)"/>
-  <website url="https://www.urbandictionary.com/define.php?term=%GDWORD%" enabled="0" id="f376365a0de651fd7505e7e5e683aa45" icon="" name="Urban Dictionary"/>
-  <website url="https://multitran.ru/c/m.exe?CL=1&amp;l1=1&amp;s=%GD1251%" enabled="0" id="324ca0306187df7511b26d3847f4b07c" icon="" name="Multitran (En)"/>
-  <website url="http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%" enabled="0" id="924db471b105299c82892067c0f10787" icon="" name="Lingvo (En-Ru)"/>
-  <website url="http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&amp;palavra=%GDISO1%" enabled="0" id="087a6d65615fb047f4c80eef0a9465db" icon="" name="Michaelis (Pt-En)"/>
+  <website enabled="0" icon="" id="b88cb2898e634c6638df618528284c2d" inside_iframe="1" name="Google En-En (Oxford)" url="https://www.google.com/dictionary?aq=f&amp;langpair=en|en&amp;q=%GDWORD%&amp;hl=en"/>
+  <website enabled="0" icon="" id="f376365a0de651fd7505e7e5e683aa45" inside_iframe="1" name="Urban Dictionary" url="https://www.urbandictionary.com/define.php?term=%GDWORD%"/>
+  <website enabled="0" icon="" id="324ca0306187df7511b26d3847f4b07c" inside_iframe="1" name="Multitran (En)" url="https://multitran.ru/c/m.exe?CL=1&amp;l1=1&amp;s=%GD1251%"/>
+  <website enabled="0" icon="" id="924db471b105299c82892067c0f10787" inside_iframe="1" name="Lingvo (En-Ru)" url="http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%"/>
+  <website enabled="0" icon="" id="087a6d65615fb047f4c80eef0a9465db" inside_iframe="1" name="Michaelis (Pt-En)" url="http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&amp;palavra=%GDISO1%"/>
  </websites>
  <dictservers/>
  <programs/>
  <voiceEngines/>
  <mutedDictionaries>
-  <mutedDictionary>59afc51d67580af2ad83717b30f7aeb9</mutedDictionary>
-  <mutedDictionary>7c0bfb0e44bf707bb1dc5f070bba43ae</mutedDictionary>
-  <mutedDictionary>be8774515d3696bb7dfeeb659d247249</mutedDictionary>
-  <mutedDictionary>343dff6611e4e40047449c91811c2983</mutedDictionary>
-  <mutedDictionary>815cd1c85aca4f6721fc83187f552074</mutedDictionary>
   <mutedDictionary>a3b7c19d8a85cd84b93b3f85ee421743</mutedDictionary>
- </mutedDictionaries>
- <popupMutedDictionaries>
   <mutedDictionary>be8774515d3696bb7dfeeb659d247249</mutedDictionary>
+  <mutedDictionary>59afc51d67580af2ad83717b30f7aeb9</mutedDictionary>
   <mutedDictionary>343dff6611e4e40047449c91811c2983</mutedDictionary>
-  <mutedDictionary>0d89ec340535c949c03ef7eb5a7dd268</mutedDictionary>
- </popupMutedDictionaries>
+  <mutedDictionary>7c0bfb0e44bf707bb1dc5f070bba43ae</mutedDictionary>
+  <mutedDictionary>815cd1c85aca4f6721fc83187f552074</mutedDictionary>
+ </mutedDictionaries>
+ <popupMutedDictionaries/>
  <preferences>
   <interfaceLanguage></interfaceLanguage>
-  <helpLanguage></helpLanguage>
+  <interfaceFont></interfaceFont>
+  <customFonts monospace="" sans-serif="" serif="" standard=""/>
   <displayStyle></displayStyle>
+  <interfaceStyle></interfaceStyle>
   <newTabsOpenAfterCurrentOne>0</newTabsOpenAfterCurrentOne>
   <newTabsOpenInBackground>1</newTabsOpenInBackground>
   <hideSingleTab>0</hideSingleTab>
@@ -324,7 +476,10 @@
   <autoStart>0</autoStart>
   <doubleClickTranslates>1</doubleClickTranslates>
   <selectWordBySingleClick>0</selectWordBySingleClick>
+  <autoScrollToTargetArticle>1</autoScrollToTargetArticle>
   <escKeyHidesMainWindow>0</escKeyHidesMainWindow>
+  <darkMode>0</darkMode>
+  <darkReaderMode>0</darkReaderMode>
   <zoomFactor>1</zoomFactor>
   <helpZoomFactor>1</helpZoomFactor>
   <wordsZoomLevel>0</wordsZoomLevel>
@@ -332,24 +487,28 @@
   <mainWindowHotkey>Ctrl+F11, Ctrl+F11</mainWindowHotkey>
   <enableClipboardHotkey>1</enableClipboardHotkey>
   <clipboardHotkey>Ctrl+C, Ctrl+C</clipboardHotkey>
-  <enableScanPopup>1</enableScanPopup>
   <startWithScanPopupOn>0</startWithScanPopupOn>
   <enableScanPopupModifiers>0</enableScanPopupModifiers>
   <scanPopupModifiers>0</scanPopupModifiers>
-  <scanPopupAltMode>0</scanPopupAltMode>
-  <scanPopupAltModeSecs>3</scanPopupAltModeSecs>
+  <ignoreOwnClipboardChanges>0</ignoreOwnClipboardChanges>
   <scanToMainWindow>0</scanToMainWindow>
-  <scanPopupUseUIAutomation>1</scanPopupUseUIAutomation>
-  <scanPopupUseIAccessibleEx>1</scanPopupUseIAccessibleEx>
-  <scanPopupUseGDMessage>1</scanPopupUseGDMessage>
+  <ignoreDiacritics>0</ignoreDiacritics>
+  <ignorePunctuation>1</ignorePunctuation>
+  <sessionCollapse>0</sessionCollapse>
+  <trackClipboardScan>0</trackClipboardScan>
+  <trackSelectionScan>0</trackSelectionScan>
+  <showScanFlag>0</showScanFlag>
+  <selectionChangeDelayTimer>0</selectionChangeDelayTimer>
   <pronounceOnLoadMain>0</pronounceOnLoadMain>
   <pronounceOnLoadPopup>0</pronounceOnLoadPopup>
-  <useExternalPlayer>0</useExternalPlayer>
   <useInternalPlayer>1</useInternalPlayer>
+  <internalPlayerBackend>FFmpeg+libao</internalPlayerBackend>
   <audioPlaybackProgram>mplayer</audioPlaybackProgram>
   <alwaysOnTop>0</alwaysOnTop>
   <searchInDock>1</searchInDock>
   <historyStoreInterval>0</historyStoreInterval>
+  <favoritesStoreInterval>0</favoritesStoreInterval>
+  <confirmFavoritesDeletion>1</confirmFavoritesDeletion>
   <proxyserver enabled="0" useSystemProxy="0">
    <type>0</type>
    <host></host>
@@ -359,49 +518,61 @@
    <systemProxyUser></systemProxyUser>
    <systemProxyPassword></systemProxyPassword>
   </proxyserver>
+  <ankiConnectServer enabled="0">
+   <host>127.0.0.1</host>
+   <port>8765</port>
+   <deck></deck>
+   <model></model>
+   <text>selected_text</text>
+   <word>word</word>
+   <sentence>marked_sentence</sentence>
+  </ankiConnectServer>
   <checkForNewReleases>1</checkForNewReleases>
   <disallowContentFromOtherSites>0</disallowContentFromOtherSites>
-  <enableWebPlugins>0</enableWebPlugins>
   <hideGoldenDictHeader>0</hideGoldenDictHeader>
+  <maxNetworkCacheSize>50</maxNetworkCacheSize>
+  <clearNetworkCacheOnExit>1</clearNetworkCacheOnExit>
+  <removeInvalidIndexOnExit>0</removeInvalidIndexOnExit>
   <maxStringsInHistory>500</maxStringsInHistory>
   <storeHistory>1</storeHistory>
   <alwaysExpandOptionalParts>0</alwaysExpandOptionalParts>
   <addonStyle></addonStyle>
   <collapseBigArticles>0</collapseBigArticles>
   <articleSizeLimit>2000</articleSizeLimit>
+  <limitInputPhraseLength>0</limitInputPhraseLength>
+  <inputPhraseLengthLimit>1000</inputPhraseLengthLimit>
   <maxDictionaryRefsInContextMenu>20</maxDictionaryRefsInContextMenu>
-  <trackClipboardChanges>0</trackClipboardChanges>
+  <synonymSearchEnabled>1</synonymSearchEnabled>
+  <stripClipboard>0</stripClipboard>
+  <raiseWindowOnSearch>1</raiseWindowOnSearch>
   <fullTextSearch>
    <searchMode>0</searchMode>
-   <matchCase>0</matchCase>
-   <maxArticlesPerDictionary>100</maxArticlesPerDictionary>
-   <maxDistanceBetweenWords>2</maxDistanceBetweenWords>
-   <useMaxArticlesPerDictionary>0</useMaxArticlesPerDictionary>
-   <useMaxDistanceBetweenWords>1</useMaxDistanceBetweenWords>
    <dialogGeometry></dialogGeometry>
    <disabledTypes></disabledTypes>
    <enabled>1</enabled>
+   <enablePosition>0</enablePosition>
    <maxDictionarySize>0</maxDictionarySize>
+   <parallelThreads>7</parallelThreads>
   </fullTextSearch>
  </preferences>
- <lastMainGroupId>4294967294</lastMainGroupId>
+ <lastMainGroupId>5</lastMainGroupId>
  <lastPopupGroupId>5</lastPopupGroupId>
- <popupWindowState>AAAA/wAAAAH9AAAAAAAAAg8AAAGTAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywADAAAAAARlAAACkwAABpEAAAQlAAAEZQAAApMAAAaRAAAEJQAAAAAAAAAAB4AAAARlAAACkwAABpEAAAQl</popupWindowGeometry>
+ <popupWindowState>AAAA/wAAAAD9AAAAAAAAAgUAAAGTAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
+ <popupWindowGeometry>AdnQywADAAAAAAPEAAABjAAABfAAAAMeAAADxAAAAYwAAAXwAAADHgAAAAAAAAAAB4AAAAPEAAABjAAABfAAAAMe</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
- <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAADMAAAB3vwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUBAAAAPAAAAd4AAACHAP///wAAAAEAAACOAAAB3vwCAAAAA/sAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAADwAAAHeAAAAYgD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUAAAABLwAAAOoAAABiAP////sAAAAaAGYAYQB2AG8AcgBpAHQAZQBzAFAAYQBuAGUBAAABfwAAAJsAAAAAAAAAAAAAAZ4AAAHeAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAAA/////wAAAAAAAAAA</mainWindowState>
- <mainWindowGeometry>AdnQywADAAAAAAQLAAAB7wAABxgAAAQSAAAEEAAAAfQAAAcTAAAEDQAAAAAAAAAAB4AAAAQQAAAB9AAABxMAAAQN</mainWindowGeometry>
- <helpWindowGeometry>AdnQywADAAAAAAKWAAABSgAABPcAAAMVAAACmwAAAU8AAATyAAADEAAAAAAAAAAAB4AAAAKbAAABTwAABPIAAAMQ</helpWindowGeometry>
- <helpSplitterState>AAAA/wAAAAEAAAACAAABBAAABAAB/////wEAAAABAA==</helpSplitterState>
+ <popupWindowAlwaysOnTop>0</popupWindowAlwaysOnTop>
+ <mainWindowState>AAAA/wAAAAD9AAAAAgAAAAAAAAELAAAB3/wCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUBAAAAOwAAAd8AAACHAP///wAAAAEAAACOAAAB3/wCAAAAA/sAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAADsAAACcAAAAYQD////7AAAAGgBmAGEAdgBvAHIAaQB0AGUAcwBQAGEAbgBlAQAAAN0AAACbAAAAYQD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABfgAAAJwAAABhAP///wAAAeoAAAHfAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgEAAAF9/////wAAAAAAAAAA</mainWindowState>
+ <mainWindowGeometry>AdnQywADAAAAAAHpAAAA+gAABYEAAAMdAAAB7gAAAP8AAAV8AAADGAAAAAAAAAAAB4AAAAHuAAAA/wAABXwAAAMY</mainWindowGeometry>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
+ <dictionariesDialogGeometry>AdnQywADAAAAAAKtAAABGgAABmwAAAM3AAACsgAAAR8AAAZnAAADMgAAAAAAAAAAB4AAAAKyAAABHwAABmcAAAMy</dictionariesDialogGeometry>
  <timeForNewReleaseCheck>2020-10-17T17:39:38</timeForNewReleaseCheck>
  <skippedRelease></skippedRelease>
  <showingDictBarNames>0</showingDictBarNames>
  <usingSmallIconsInToolbars>0</usingSmallIconsInToolbars>
  <editDictionaryCommandLine></editDictionaryCommandLine>
- <maxPictureWidth>0</maxPictureWidth>
  <maxHeadwordSize>256</maxHeadwordSize>
+ <maxHeadwordsToExpand>0</maxHeadwordsToExpand>
  <headwordsDialog>
   <searchMode>0</searchMode>
   <matchCase>0</matchCase>

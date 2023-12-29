@@ -171,6 +171,7 @@ Plug 'brianrodri/vim-sort-folds'
 Plug 'dpelle/vim-LanguageTool'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'mattn/calendar-vim'
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 Plug 'romainl/vim-qf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'

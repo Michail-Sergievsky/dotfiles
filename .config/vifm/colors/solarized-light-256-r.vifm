@@ -39,7 +39,7 @@ hi Border       cterm=none                    ctermfg=4    ctermbg=white
 "Current line
 hi CurrLine     cterm=none,reverse    		      ctermfg=default  ctermbg=default
 hi OtherLine    cterm=none	              ctermfg=default      ctermbg=7
-hi LineNr       cterm=uderline                ctermfg=default  ctermbg=default
+"hi LineNr       cterm=uderline                ctermfg=default  ctermbg=default
 
 "Selected files
 hi Selected     cterm=bold                    ctermfg=15      ctermbg=14

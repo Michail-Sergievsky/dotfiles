@@ -1,5 +1,5 @@
 configuration {
- modi: "window,run,drun,ssh,combi";
+ modi: "window,run,drun,ssh,combi,blezz";
  /* modi: "window,run,drun,ssh,combi,blezz"; */
  /* theme: "solarized"; */
  font: "hack 12";

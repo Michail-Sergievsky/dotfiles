@@ -117,8 +117,8 @@ set findprg='find %s %a -print ,
 " themes, highlighting
 
 " List of color schemes to try (picks the first one supported by the terminal)
-colorscheme solarized-light Default-256 Default
-" colorscheme solarized-light-256 Default-256 Default
+" colorscheme solarized-light Default-256 Default
+colorscheme solarized-light-256 Default-256 Default
 " colorscheme solarized-light-256-r.vifm
 " colorscheme dwmlight Default-256 Default
 
@@ -161,8 +161,8 @@ mark 1 /home/freeman/Documents
 mark 2 /home/freeman/Documents/docs
 mark 3 /home/freeman/Dropbox
 mark 4 /home/freeman/Downloads/t_done
-mark 5 /home/freeman/Downloads/t_done
-mark 6 /home/freeman/Media/t_done
+mark 5 /home/freeman/Downloads/t_done_inside
+mark 6 /home/freeman/.steam/steam/steamapps/common/
 mark 7 /home/freeman/.ssh
 mark 8 /home/freeman/DiskD
 mark 9 /home/freeman/DiskE
@@ -176,7 +176,7 @@ mark R /
 mark S /home/freeman/Study
 mark T /home/freeman/Downloads/t_done
 mark U /usr/share
-mark V /home/freeman/VagrantVM
+mark V /home/freeman/Vagrant
 mark a /home/freeman/Music/audiobooks_1_main
 mark b /home/freeman/books
 mark B /home/freeman/books
@@ -276,55 +276,46 @@ command! cmp : if expand('%%c') == expand('%%f')
 "}}}
 "----Executing programms---------------{{{
 "	 COMMON FILES
-
 " .dotfiles!!!!!!!!!!!!1
 filetype /^[^.]+$/ vim
-
 " Pdf
 filextype {*.pdf},<application/pdf> zathura %c %i &
 fileviewer *.pdf
         \ vifmimg pdfpreview %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
-
 " PostScript
 filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
         \ {View in zathura}
         \ zathura %f,
-
 " Djvu
 filextype {*.djvu},<image/vnd.djvu>
         \ {View in zathura}
         \ zathura %f %i,
-
 "Comics Arch
 filextype {*.cbz,*.cbr}
 	\ {View in Mcomix}
 	\ mcomix %c %i &,
 	\ {View in YACReader}
 	\ YACReader %c %i &
-
 "Comics Fedora
 " filextype {*.cbz,*.cbr}
 " 	\ {View in Mcomix}
 " 	\ mcomix3 %c %i &,
 " 	\ {View in YACReader}
 " 	\ YACReader %c %i &
-
 "E-books Arch
 filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
 	\ {View in foliate}
 	\ foliate %c %i &,
     \ {View in zathura}
     \ zathura %f %i &
-
 "E-books Fedora
 " filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
 " 	\ {View in foliate}
 " 	\ com.github.johnfactotum.Foliate %c %i &,
 "     \ {View in zathura}
 "     \ zathura %f %i &
-
 " Audio
 filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg},
         \<audio/*>
@@ -335,7 +326,6 @@ filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.og
        \ {Play using MPlayer}
        \ mplayer %f,
 fileviewer {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg} mediainfo
-
 " Video
 filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.m2ts,
         \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
@@ -354,7 +344,6 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 	\ mediainfo %c 2>&1
 "vlc playlist
 filextype {*.xspf} vlc %c %i &
-
 " Web
 filextype {*.html,*.htm},<text/html>
         \ {Open with firefox}
@@ -362,8 +351,6 @@ filextype {*.html,*.htm},<text/html>
         \ {Open with uzbl}
         \ uzbl-browser %f %i &,
 filetype {*.html,*.htm},<text/html> links, lynx
-
-
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {View in sxiv}
@@ -374,30 +361,25 @@ fileviewer {*.jpg,*.jpeg,*.png}
            \ vifmimg draw %px %py %pw %ph %c
            \ %pc
            \ vifmimg clear
-
 " Office files
 filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
          \<application/vnd.openxmlformats-officedocument.*,
           \application/msword,
           \application/vnd.ms-excel>
         \ libreoffice %f %i &
-
 fileviewer {*.doc},<application/msword> catdoc %c
 fileviewer {*.docx},
           \<application/
            \vnd.openxmlformats-officedocument.wordprocessingml.document>
          \ docx2txt.pl %f -
-
 " Torrent
 filetype {*.torrent},<application/x-bittorrent> ktorrent %f &
 fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
-
 "-------------------------------------------
 " view contents of archive files on opening them
 filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
         \*.msi,*.pkg,*.rar,*.tar,*.tgz,*.xz,*.zip
         \ als %f | less
-
 " put following rules before any other filetype and fileviewer groups
 " filetype *.tar.gz,*.tgz,*.tar.bz,*.tbz,*.tar.bz2,*.tbz2,
 "          \*.tar.Z,*.tZ,*.tar.lzo,*.tzo,*.tar.lz,*.tlz,*.tar.xz,*.txz,*.tar.7z,*.t7z,
@@ -421,60 +403,47 @@ filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
 "          \*.Z,*.lzma,*.lzo,*.lz,*.xz,*.rz,*.lrz,*.7z,
 "          \*.cpio
 "          \ als %f 2>/dev/null
-
 " Traces
 filextype {*.pcap,*.pcapng,*.pcapng.gz,*.pcap.gz}
 	\ {View in wireshark}
 	\ /usr/bin/wireshark %c %i &
-
 " RDP
 filextype {*.rdp}
     \ {open with remmina}
     \ remmina -c %c %i &
-
 " Object
 filetype {*.o},<application/x-object> nm %f | less
-
 " Man page
 filetype {*.[1-8]},<text/troff> man ./%c
 fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
-
 " OpenRaster
 filextype *.ora
         \ {Edit in MyPaint}
         \ mypaint %f,
-
 " Mindmap
 filextype *.vym
         \ {Open with VYM}
         \ vym %f &,
-
 " MD5
 filetype *.md5
        \ {Check MD5 hash sum}
        \ md5sum -c %f %S,
-
 " SHA1
 filetype *.sha1
        \ {Check SHA1 hash sum}
        \ sha1sum -c %f %S,
-
 " SHA256
 filetype *.sha256
        \ {Check SHA256 hash sum}
        \ sha256sum -c %f %S,
-
 " SHA512
 filetype *.sha512
        \ {Check SHA512 hash sum}
        \ sha512sum -c %f %S,
-
 " GPG signature
 filetype {*.asc},<application/pgp-signature>
        \ {Check signature}
        \ !!gpg --verify %c,
-
-
 " FuseZipMount
 filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
         \<application/zip,application/java-archive>
@@ -485,7 +454,6 @@ filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
        \ {Extract here}
        \ tar -xf %c,
 fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
-
 " ArchiveMount
 filetype {*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
         \<application/x-tar>
@@ -495,44 +463,36 @@ fileviewer *.tgz,*.tar.gz tar -tzf %c
 fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
 fileviewer *.tar.txz,*.txz xz --list %c
 fileviewer {*.tar},<application/x-tar> tar -tf %c
-
 " Rar2FsMount and rar archives
 filetype {*.rar},<application/x-rar>
        \ {Mount with rar2fs}
        \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
 fileviewer {*.rar},<application/x-rar> unrar v %c
-
 " IsoMount
 filetype {*.iso},<application/x-iso9660-image>
        \ {Mount with fuseiso}
        \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
-
 " SshMount
 filetype *.ssh
        \ {Mount with sshfs}
        \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %FOREGROUND,
-
 " FtpMount
 filetype *.ftp
        \ {Mount with curlftpfs}
        \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
-
 " Fuse7z and 7z archives
 filetype {*.7z},<application/x-7z-compressed>
        \ {Mount with fuse-7z}
        \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
 fileviewer {*.7z},<application/x-7z-compressed> 7z l %c
-
 " TuDu files
 filetype *.tudu tudu -f %c
-
 " Qt projects
 filextype *.pro qtcreator %f &
-
-
 "}}}
 "----GETTING ICONS TO DISPLAY IN VIFM   {{{
 " https://github.com/sebastiencs/icons-in-terminal
+"   NOW USE OTHER FONTS!!!
 
 " Filetypes/directories
 set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
