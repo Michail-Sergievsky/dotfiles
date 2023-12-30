@@ -82,7 +82,6 @@ exec_always feh --bg-fill /home/freeman/.wallpapers/wp4657311-arch-solarized-wal
 #---------Autostart applications-----{{{
 
 # move all download apps to ws6 then return to ws1
-# exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec transgui; exec /bin/sh "/home/freeman/Soft/jd2/JDownloader2"'
 exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/home/freeman/Soft/jd2/JDownloader2"'
 exec --no-startup-id i3-msg 'workspace 1'
 # eng-rus keyboard layout
@@ -93,7 +92,7 @@ exec --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:ctrl_shift_toggle,grp_led
 #Fedora
 exec --no-startup-id dropbox
 exec --no-startup-id flameshot
-exec --no-startup-id goldendict
+exec --no-startup-id goldendict-ng
 exec --no-startup-id $redshift_start
 exec --no-startup-id lxqt-policykit-agent
 exec --no-startup-id telegram-desktop

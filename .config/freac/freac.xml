@@ -4,7 +4,7 @@
   <section name="Settings">
    <value name="LastOutputDirectory1">/home/freeman/Music/</value>
    <value name="Language">internal</value>
-   <value name="StartCount">5</value>
+   <value name="StartCount">8</value>
    <value name="WindowPosX">5</value>
    <value name="WindowPosY">54</value>
    <value name="WindowSizeX">1393</value>
@@ -35,7 +35,8 @@
    <value name="NotificationAvailable">1</value>
    <value name="ShowTitleInfo">1</value>
    <value name="ActiveConfiguration">default</value>
-   <value name="LastSelectedOpenDir">/home/freeman/Downloads/t_done/!scripts</value>
+   <value name="LastSelectedOpenDir">/home/freeman/Media/home/music/!flac_cut/Эпидемия/1998 - Воля к жизни</value>
+   <value name="LastAddedDir">/home/freeman/Media/home/music/!flac_cut/Эпидемия/</value>
   </section>
   <section name="Tags">
    <value name="DefaultComment">fre:ac - free audio converter &lt;https://www.freac.org/&gt;</value>
@@ -81,7 +82,7 @@
    <value name="ReplaceExistingComments">0</value>
   </section>
   <section name="Donate">
-   <value name="StartCount">5</value>
+   <value name="StartCount">8</value>
   </section>
   <section name="Joblist">
    <value name="FieldSizes">120,997,50,80,100</value>
@@ -91,13 +92,14 @@
    <value name="Mode">0</value>
    <value name="Bandwidth">0</value>
    <value name="FileExtension">0</value>
-   <value name="Bitrate">176</value>
+   <value name="Bitrate">224</value>
    <value name="Complexity">10</value>
    <value name="FrameSize">20000</value>
    <value name="PacketLoss">0</value>
    <value name="EnableVBR">1</value>
    <value name="EnableConstrainedVBR">0</value>
    <value name="EnableDTX">0</value>
+   <value name="DisablePhaseInversion">0</value>
   </section>
   <section name="Processing">
    <value name="ProcessingComponents"/>
