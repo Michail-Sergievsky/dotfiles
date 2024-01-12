@@ -16,18 +16,15 @@ set nocompatible               " Use Vim settings, rather than Vi settings (much
 set viminfo=<1000,'1000,/50,:100,h,f1
 
 set backspace=indent,eol,start  " Allow backspacing over everything in insert mode.
-set backup		        " keep a backup file (restore to previous version)
-" set clipboard^=unnamedplus      " use the system register for everything
-if has('unnamedplus')
+if has('unnamedplus')           " use the system register for everything
   set clipboard=unnamed,unnamedplus
 endif
 set display=truncate            " Show @@@ in the last line if it is truncated.
 set encoding=utf-8              " Unicode encoding support
-" set fileencodings=uft-8,cp1251	" encoding for existing files made in cp1251
 set foldcolumn=2                " width of fold column
 set foldmethod=marker           " set folding mode
 set hidden                      " Allow hidden buffers, don't limit to 1 file per window/split
-set history=200		        " keep 200 lines of command line history
+set history=200		            " keep 200 lines of command line history
 set hlsearch                    " Switch on highlighting the last used search pattern.
 set ignorecase                  " set ignore small/capital for search
 set incsearch                   " Display the match for a search pattern when halfway typing it
@@ -35,29 +32,29 @@ set laststatus=2                " show statusline always
 set mouse=a                     " use mouse everywhere
 set nrformats-=octal            " do not recognize octal numbers for ctrl-a and ctrl-x
 set number relativenumber       " Show line numbers & relativenumber
-" set ruler		        " show the cursor position all the time
+" set ruler		                 " show the cursor position all the time
 set scrolloff=5                 " Show a few lines of context around the cursor.
-set sidescrolloff=5		" Vertical
-set showcmd		        " display incomplete commands
-" set showmatch                 " When selecting a parenthesis it will highlight the one matching
+set sidescrolloff=5	        	" Vertical
+set showcmd		               " display incomplete commands
+set showmatch                 " When selecting a parenthesis it will highlight the one matching
 set smartcase                   " set smartcase for search
 " set splitbelow splitright
 " set spell                     " set spellchecking
 set spelllang=en_us,ru_ru
 set statusline=%f%m%r%h%w\ [%Y]\ [0x%02.2B]%<\ %F%=%4v,%4l\ of\ %L\ %3p%%
-set ttimeout		        " time out for key codes
-set ttimeoutlen=50	        " wait up to 100ms after Esc for special key
+" set termguicolors               " colors to term
+set ttimeout		            " time out for key codes
+set ttimeoutlen=500	            " wait up to 500ms after Esc for special key
 set vb "disable beep sound
-set wildmenu		        " display completion matches in a status line
+set wildmenu		            " display completion matches in a status line
 set wildmode=longest,list,full  " wildmode insertions
 syntax enable                   " Switch syntax highlighting on
-
-let g:languagetool_jar='/usr/share/java/languagetool/languagetool-commandline.jar'
+filetype on
 
 "Autosave & swap
 set autowriteall		" This will save the file when you switch buffers, make it etc.
-"autosave everything with ignoring warnings from untitled buffers,
-"and read-only files, etc
+						"autosave everything with ignoring warnings from untitled buffers,
+						"and read-only files, etc
 autocmd FocusLost * silent! wa
 " TextChangedI - save everytime in insert mode!!!
 " autocmd TextChanged,TextChangedI * silent! write
@@ -71,26 +68,40 @@ set undoreload=10000
 
 "Langmap for Russian layout
 "no <">, <?>, <;>, </> - try to find way to write in codes
-set langmap=!№%*ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;!#%*`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
-set nolangremap
-
-let mapleader=" "  "leader key
+" set langmap=!№%*ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;!#%*`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+" set nolangremap
+set keymap=russian-jcukenwin
+set iminsert=0 " Чтобы при старте ввод был на английском, а не русском (start > i)
+set imsearch=0 " Чтобы при старте поиск был на английском, а не русском (start > /)
+"switch C-^
 
 "Tabs and Indent
 
-set autoindent " when creating a new line, copy the indentation from the line above
-set smartindent "Do smart autoindenting when starting a new line.
-set expandtab " [I] < > instead Tab. Real tab -> CTRL-V<Tab>.
-set smarttab  " when deleting whitespace at the beginning of a line, delete 1 tab worth of spaces
-set shiftwidth=4  "Number of spaces to use for each step of (auto)indent
-set softtabstop=4 " Number of spaces that a <Tab> counts for while performing editing operations
-set tabstop=4  "Number of spaces that a <Tab> in the file counts for.
-set wrap "Wrap lines
+set autoindent         "when creating a new line, copy the indentation from the line above
+set copyindent         "copy the previous indentation on autoindenting
+set smartindent      "Do smart autoindenting when starting a new line.
+" set expandtab        " [I] < > instead Tab. Real tab -> CTRL-V<Tab>.
+set noexpandtab        "don't expand tabs to spaces by default
+set smarttab           "when deleting whitespace at the beginning of a line, delete 1 tab worth of spaces
+set shiftwidth=4       "Number of spaces to use for each step of (auto)indent
+set shiftround         "Use multiple of shiftwidth when indenting with '<' and '>'
+set softtabstop=4      "Number of spaces that a <Tab> counts for while performing editing operations
+set tabstop=4          "Number of spaces that a <Tab> in the file counts for.
+set wrap               "Wrap lines
+set linebreak
 
 set nolist
 set listchars=tab:»-,space:·,nbsp:~,trail:-,eol:$
 " highlight SpecialKey ctermfg=8 guifg=DimGrey
 " highlight SpecialKey ctermfg=14 guifg=Yellow
+
+" white space characters
+" set nolist
+" compatible space chars
+" set listchars=eol:$,tab:.\ ,trail:.,extends:>,precedes:<,nbsp:_
+" incompatible with debian stretch
+"set listchars=eol:↓,tab:\ \ ┊,trail:●,extends:…,precedes:…,space:·
+" highlight SpecialKey term=standout ctermfg=darkgray guifg=darkgray
 
 " Ignoring file types from autocomplition:
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
@@ -146,6 +157,24 @@ autocmd BufWinEnter *.* silent loadview
 au WinEnter * setlocal cursorline
 au WinLeave * setlocal nocursorline
 
+" #NERDTree
+" https://mr-destructive.github.io/techstructive-blog/vim-nerdtree/
+" Open nerdtree window on opening Vim
+" autocmd VimEnter * NERDTree
+
+" Refresh the current folder if any changes
+autocmd BufEnter NERD_tree_* | execute 'normal R'
+au CursorHold * if exists("t:NerdTreeBufName") | call <SNR>15_refreshRoot() | endif
+
+"Reload the window if directory is changed
+augroup DIRCHANGE
+    au!
+    autocmd DirChanged global :NERDTreeCWD
+augroup END
+
+"Close nerdtree automatically if it is theonly window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 "remove whitespaces on save
 " autocmd BufWritePre * :%s/\s\+$//e
 
@@ -170,8 +199,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'brianrodri/vim-sort-folds'
 Plug 'dpelle/vim-LanguageTool'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'liuchengxu/vim-which-key'
 Plug 'mattn/calendar-vim'
-Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+Plug 'preservim/nerdtree'
 Plug 'romainl/vim-qf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -179,8 +209,6 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-speeddating' 
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
-
-" Plug 'tools-life/taskwiki'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 "____________ Vimwiki_____________________________
@@ -190,14 +218,11 @@ let g:vimwiki_hl_headers = 1
 let g:vimwiki_conceal_pre = 1
 let g:vimwiki_url_maxsave = 0
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-
 " let g:vimwiki_nested_syntaxes = {'python': 'python', 'bash':'bash', 'sql':'sql', 'msql':'msql', 'git':'git',
 "             \'gitcommit':'gitcommint', 'vim':'vim', 'viminfo':'viminfo', 'c':'c', 'c++': 'cpp', 'conf':'conf',
 "             \'config':'config', 'cfg':'cfg', 'cmake':'cmake', 'diff':'diff', 'zsh':'zsh',
 "             \'xdefaults':'xdefaults'}
-
 " Final exp
-
 let g:vimwiki_root = '~/Vimwiki'
 let g:vimwiki_list = [
             \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
@@ -211,36 +236,23 @@ let g:vimwiki_list = [
             \{'path': '~/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
 command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
-
 " auto_diary_index - dos't work!! wait for update
-" ---------------------
-" Taskwiki
-let g:taskwiki_disable_concealcursor = 1
-let g:taskwiki_sort_orders={"D": "project+,description+"}
 "-----------------------------
-" Netrw setup
-let g:netrw_banner       = 0  " removes the netrw banner
-let g:netrw_liststyle    = 3  " tree style listing
-let g:netrw_browse_split = 4  " see help on this one. lots of useful options
-let g:netrw_altv         = 1  " change from left splitting to right splitting
-let g:netrw_winsize      = 15 " initial size of new explore windows
-let g:netrw_keepdir      = 0  "Keep the current directory and the browsing directory synced
-let g:netrw_localcopydircmd = 'cp -r'
- "Highlight marked files in the same way search matches are.
-hi! link netrwMarkFile Search
-" By default netrw leaves unmodified buffers open. This autocommand
-" deletes them when they're hidden (using :q for example).
-autocmd FileType netrw setl bufhidden=delete
-"launch after opening vim
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
+"
+"NERDTRee
+"
+let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
+let NERDTreeShowHidden=1
 
-augroup netrw_mapping
-  autocmd!
-  autocmd filetype netrw call NetrwMapping()
-augroup END
+"Languagetool
+" not work with modern version of Languagetool
+" https://github.com/dpelle/vim-LanguageTool/issues/33
+" now must use unzip version 5.9
+let g:languagetool_jar='/home/freeman/Soft/LanguageTool-5.9/languagetool-commandline.jar'
+" for archlinux
+" let g:languagetool_cmd='/sbin/languagetool'
+" let g:languagetool_cmd='java -jar /usr/share/java/languagetool/languagetool-commandline.jar'
+
 "}}}
 "----------Add optional packages.-----------{{{
 
@@ -254,7 +266,6 @@ endif
 
 " }}}
 "----------Commands-------------------------{{{
-
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -263,7 +274,6 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
-
 " }}}
 " ----------Funtions----------{{{
 
@@ -371,56 +381,6 @@ if has("gui_running")
 endif
 " So using has('gui_gtk2') is probably better than using has('unix')
 
-"Netrw navigation
-function! NetrwMapping()
-"navigation
-nmap <buffer> H u
-nmap <buffer> h -^
-nmap <buffer> l <CR>
-nmap <buffer> . gh
-nmap <buffer> P <C-w>z
-nmap <buffer> L <CR>:Lexplore<CR>
-nmap <buffer> <Leader>dd :Lexplore<CR>
-"marks
-nmap <buffer> <TAB> mf
-nmap <buffer> <S-TAB> mF
-nmap <buffer> <Leader><TAB> mu
-"file managining
-nmap <buffer> ff %:w<CR>:buffer #<CR>
-nmap <buffer> fe R
-nmap <buffer> fc mc
-nmap <buffer> fC mtmc
-nmap <buffer> fx mm
-nmap <buffer> fX mtmm
-nmap <buffer> f; mx
-nmap <buffer> fl :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
-nmap <buffer> fq :echo 'Target:' . netrw#Expose("netrwmftgt")<CR>
-nmap <buffer> fd mtfq
-nmap <buffer> FF :call NetrwRemoveRecursive()<CR>
-"bookmarks
-nmap <buffer> bb mb
-nmap <buffer> bd mB
-nmap <buffer> bl gb
-
-endfunction
-
-"remove files recursively
-function! NetrwRemoveRecursive()
-  if &filetype ==# 'netrw'
-    cnoremap <buffer> <CR> rm -r<CR>
-    normal mu
-    normal mf
-    
-    try
-      normal mx
-    catch
-      echo "Canceled"
-    endtry
-
-    cunmap <buffer> <CR>
-  endif
-endfunction
-
 " Wrap visual selection in an JIRA {noformat} tag.
 vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
 function! VisualHTMLTagWrap()
@@ -444,6 +404,7 @@ endfunction
 " }}}
 " ----------Making Alt works----------{{{
 
+" Can work without IT - WHY???
 let c='a'
 while c <= 'z'
   exec "set <A-".c.">=\e".c
@@ -476,32 +437,134 @@ highlight CursorLine ctermbg=7 cterm=none
 
 "}}}
 "----------KEYMAPPINGS-------------------------{{{
-"^^^^^^^^^Function keys^^^^^^^^^^^^
 
-"enable/disable spellchecking
-nnoremap <F1> :set spell!<CR>
-"enable/disable relativenumber
-nnoremap <F2> :set relativenumber!<CR>
-" turn off folder search
-nnoremap <F3> :set foldopen-=search \| set foldopen<CR>
-" turn on folder search
-nnoremap <F4> :set foldopen+=search \| set foldopen<CR>
-" turn on/off list
-nnoremap <F5> :set list!<CR>
-inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-" nnoremap <F6> :set wrap!<CR>
-nnoremap <F6> :call ToggleWrap()<CR>
-inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
-nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
-" nnoremap <F8> :sbnext<CR>
-" nnoremap <F9> :sbnext<CR>
-" nnoremap <F10> :sbnext<CR>
-" nnoremap <F11> :sbnext<CR>
-" nnoremap <F12> :sbnext<CR>
-
-"^^^^^^^^main^^^^^^^^^^^^^^^
+" examples
+" nnoremap <leader>e2 :exe 'g/^\[/norm 0df]' <bar> exe 'g/^(/norm 0df)' <bar> exe '%s/^ //g' <bar>exe '%s/^_//g' <bar>sort<CR>
 
 " when map 2 or more commands use <bar> or \| - for more :help map_bar
+
+"Leader mapping & WhichKey
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+call which_key#register('<Space>', "g:which_key_map", 'n')
+call which_key#register('<Space>', "g:which_key_map_visual", 'v')
+
+let g:which_key_map =  {}
+let g:which_key_map['e'] = {
+        \ 'name' : 'rename files' ,
+		\ '1' : [':% norm /\(19\|20\)\d\{2}/yw0Pa - ', 'move movies date to begining'],
+		\ '2' : [':%s/.zip/.cbz/g', 'rename zip to cbz'],
+		\ '3' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
+		\ }
+let g:which_key_map['d'] = {
+        \ 'name' : 'NERDTree' ,
+		\ 'd' : [':NERDTreeToggle', 'Open NERDTree'],
+		\ 'f' : [':NERDTreeFind', 'NERDTree to current file'],
+		\ 'c' : [':NERDTreeCWD', 'NERDTree to current dir'],
+		\ }
+
+nnoremap <leader>cc @='i```<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cb @='i```bash<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cp @='i```python<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cs @='i```sql<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cg @='i```git<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>cv @='i```vim<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
+nnoremap <leader>ct :VimwikiTOC<CR>
+let g:which_key_map['c'] = {
+        \ 'name' : 'code block' ,
+		\ 'c' : 'quotes blank',
+		\ 'b' : 'bash',
+		\ 'p' : 'python',
+		\ 's' : 'sql',
+		\ 'g' : 'git',
+		\ 'v' : 'vim',
+		\ 't' : 'VimwikiTOC',
+		\ }
+nnoremap <Leader>ft @='ciW**<C-V><C-R>"**<C-V><Esc>w'<CR>
+nnoremap <Leader>fb :exe "norm I**" <bar> exe "norm A**"<CR>
+nnoremap <Leader>fi @='ciW_<C-V><C-R>"_<C-V><Esc>w'<CR>
+nnoremap <Leader>fI :exe "norm I_" <bar> exe "norm A_"<CR>
+nnoremap <Leader>fc @='ciW`<C-V><C-R>"`<C-V><Esc>w'<CR>
+nnoremap <Leader>fC :exe "norm I`" <bar> exe "norm A`"<CR>
+nnoremap <Leader>fe @='ciW[[#<C-V><C-R>"]]<C-V><Esc>w'<CR>
+nnoremap <leader>fp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
+let g:which_key_map['f'] = {
+        \ 'name' : 'text format' ,
+		\ 't' : 'world in bold',
+		\ 'b' : 'line in bold',
+		\ 'i' : 'world in cursive',
+		\ 'I' : 'line in cursive',
+		\ 'c' : 'world in quotes',
+		\ 'C' : 'line in quotes',
+		\ 'e' : '[[#]]',
+		\ 'p' : 'noformat to pre',
+		\ }
+nnoremap <leader>rc :e $MYVIMRC<CR>
+nnoremap <leader>rr :source ~/.vim/vimrc<CR>
+nnoremap <leader>sq :%s:::g<Left><Left><Left>
+nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
+"WORK!!!
+nnoremap <leader>se :execute "vimgrep /" . expand("<cword>") . "/gj **/*"<Left><Left><Left><Left><Left>
+nnoremap <leader>sr :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+nnoremap <leader>su :w !sudo tee % <CR><CR>
+cmap ;\ \(\)<Left><Left>
+"shell check
+" using https://www.shellcheck.net/ - install first
+nmap <leader>wc :Calendar<CR>
+nmap <leader>wd :Diary<CR>
+nmap <leader>wg <Plug>VimwikiGoto
+nmap <leader>wp <Plug>VimwikiDiaryIndex
+nmap <leader>wn <Plug>VimwikiMakeDiaryNote
+nmap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <leader>wu <Plug>VimwikiDiaryGenerateLinks
+nmap <leader>wx <Plug>VimwikiDeleteFile
+
+map <leader>S :!clear && shellcheck %<CR>
+nnoremap <leader>b <Plug>VimwikiGoBackLink
+nnoremap <leader>ds1 "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+nnoremap <leader>ds2 "=strftime("%Y-%m-%d")<CR>P
+"quickly fix spelling mistakes [gets rid of spellchecking]
+nnoremap <Leader>fs 1z=
+nnoremap <leader>h :split<CR>
+nnoremap <leader>j J
+nnoremap <leader>l :ls<CR>:b<space>
+nnoremap <leader>lc :LanguageToolCheck<CR>
+nnoremap <leader>lo :LanguageToolClear<CR>
+nnoremap <leader>o :only<CR>
+nnoremap <leader>p :b#<CR>
+nnoremap <leader>q :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>x :close<CR>
+" refocus folds; close any other fold except the one that you are on
+nnoremap <leader>z zMzvzz
+vmap <leader>w <Esc>:call VisualHTMLTagWrap()<CR>
+
+
+"^^^^^^^^^Function keys^^^^^^^^^^^^
+nnoremap <F1> :set spell!<CR>
+"enable/disable spellchecking
+nnoremap <F2> :set relativenumber!<CR>
+"enable/disable relativenumber
+nnoremap <F3> :set foldopen-=search \| set foldopen<CR>
+" turn off folder search
+nnoremap <F4> :set foldopen+=search \| set foldopen<CR>
+" turn on folder search
+nnoremap <F5> :set list! list?<CR>
+" turn on/off list
+nnoremap <F6> :call ToggleWrap()<CR>
+nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
+" nnoremap <F8> :sbnext<CR>
+nnoremap <F8> :set invpaste paste?<CR>
+set pastetoggle=<F8>
+
+inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+inoremap <c-l> <c-^>
+"^^^^^^^^main^^^^^^^^^^^^^^^
 
 "Esc
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
@@ -525,91 +588,122 @@ nnoremap <silent><A-i> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-m> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 " nnoremap <leader>a :bp<bar>vsp<bar>bn<bar>bd<CR>
-" datestump
-
-nmap <leader>b <Plug>VimwikiGoBackLink
-nnoremap <leader>df "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
-nnoremap <leader>ds "=strftime("%Y-%m-%d")<CR>P
-nnoremap <leader>dd :Lexplore %:p:h<CR>
-nnoremap <Leader>da :Lexplore<CR>
-nnoremap <leader>cc @='i```<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
-nnoremap <leader>cb @='i```bash<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
-nnoremap <leader>cp @='i```python<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
-nnoremap <leader>cs @='i```sql<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
-nnoremap <leader>cg @='i```git<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
-nnoremap <leader>cv @='i```vim<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
-nnoremap <leader>ct :VimwikiTOC<CR>
-"Use this to quickly fix spelling mistakes
-nnoremap <Leader>fs 1z=
-nnoremap <Leader>ft @='ciW**<C-V><C-R>"**<C-V><Esc>w'<CR>
-nnoremap <Leader>fb :exe "norm I**" <bar> exe "norm A**"<CR>
-nnoremap <Leader>fi @='ciW_<C-V><C-R>"_<C-V><Esc>w'<CR>
-nnoremap <Leader>fI :exe "norm I_" <bar> exe "norm A_"<CR>
-nnoremap <Leader>fc @='ciW`<C-V><C-R>"`<C-V><Esc>w'<CR>
-nnoremap <Leader>fC :exe "norm I`" <bar> exe "norm A`"<CR>
-nnoremap <Leader>fe @='ciW[[#<C-V><C-R>"]]<C-V><Esc>w'<CR>
-vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
-nnoremap <leader>h :split<CR>
-noremap <leader>j J
-nnoremap <leader>l :ls<CR>:b<space>
-nnoremap <leader>o :only<CR>
-nnoremap <leader>p :b#<CR>
-" nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <leader>rc :e $MYVIMRC<CR>
-nnoremap <leader>rr :source ~/.vim/vimrc<CR>
-nnoremap <leader>ss :%s//gI<Left><Left><Left>
-nnoremap <leader>sp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
-nnoremap <leader>e1 :% norm 0dW$px<CR>
-nnoremap <leader>e2 :exe 'g/^\[/norm 0df]' <bar> exe 'g/^(/norm 0df)' <bar> exe '%s/^ //g' <bar>exe '%s/^_//g' <bar>sort<CR>
-nnoremap <leader>e3 :exe 'g/^\[/norm 0df]' <bar> exe '%s/^ //g' <bar>exe '%s/^_//g'<CR>
-nnoremap <leader>e4 :$ norm f1yw0Pi - 
-nnoremap <leader>e5 :s%/.zip/.cbz/g<CR>
-nnoremap <leader>e6 :s%/.rar/.cbr/g<CR>
-nnoremap <leader>e7 :%s/\[\S*\] //g<CR>
-nnoremap <leader>sudo :w !sudo tee % <CR><CR>
-"shell check
-" using https://www.shellcheck.net/ - install first
-map <leader>S :!clear && shellcheck %<CR>
-nnoremap <leader>v :vsplit<CR>
-nmap <leader>w1 :b ~/Notes/Vimwiki/study.md<CR>
-nmap <leader>wc :Calendar<CR>
-nmap <leader>wd :Diary<CR>
-nmap <leader>wg <Plug>VimwikiGoto
-nmap <leader>wp <Plug>VimwikiDiaryIndex
-nmap <leader>wn <Plug>VimwikiMakeDiaryNote
-nmap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
-nmap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
-nmap <leader>wu <Plug>VimwikiDiaryGenerateLinks
-nmap <leader>wx <Plug>VimwikiDeleteFile
-nnoremap <leader>q :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
-nnoremap <leader>z zMzvzz
-nnoremap <leader>x :close<CR>
 " Make adjusing split sizes a bit more friendly
-noremap <silent> <A-a> :vertical resize +3<CR>
-noremap <silent> <A-s> :resize -3<CR>
-noremap <silent> <A-d> :vertical resize -3<CR>
-noremap <silent> <A-w> :resize +3<CR>
+noremap <silent> <A-n> :vertical resize +3<CR>
+noremap <silent> <A-m> :vertical resize -3<CR>
+noremap <silent> <A-r> :resize -3<CR>
+noremap <silent> <A-f> :resize +3<CR>
 
 "change 2 split windows from vert to horiz or horiz to vert
 " map <Leader>th <C-w>t<C-w>H
 " map <Leader>tk <C-w>t<C-w>K
 
+"TABS
 " move to previos tab
 nnoremap <S-h> gT
 " move to next tab
 nnoremap <S-l> gt
-
-" Make adjusing split sizes a bit more friendly
-" noremap <silent> <C-Left> :vertical resize +3<CR>
-" noremap <silent> <C-Right> :vertical resize -3<CR>
-" noremap <silent> <C-Up> :resize +3<CR>
-" noremap <silent> <C-Down> :resize -3<CR>
+nnoremap <A-h> :tabm -1<CR>
+nnoremap <A-l> :tabm +1<CR>
 
 "^^^^^^^^^^Arrows^^^^^^^^^^^^^^^^^^^^^^^^
-
+" disable arrows
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
  
 " }}}
+" ----------TEST--------- {{{
+
+"line breakejs
+" nnoremap <expr> j v:count ? 'j' : 'gj'
+" nnoremap <expr> k v:count ? 'k' : 'gk'
+" {noformat}
+" nnoremap <expr> <Down> v:count ? 'j' : 'gj'
+" nnoremap <expr> <Up> v:count ? 'k' : 'gk'
+
+"  }}}
+"----------OLD STUFF [LEGACY]------ {{{
+""
+"" Netrw setup
+"let g:netrw_banner       = 0  " removes the netrw banner
+"let g:netrw_liststyle    = 3  " tree style listing
+"let g:netrw_browse_split = 4  " see help on this one. lots of useful options
+"let g:netrw_altv         = 1  " change from left splitting to right splitting
+"let g:netrw_winsize      = 15 " initial size of new explore windows
+"let g:netrw_keepdir      = 0  "Keep the current directory and the browsing directory synced
+"let g:netrw_localcopydircmd = 'cp -r'
+" "Highlight marked files in the same way search matches are.
+"hi! link netrwMarkFile Search
+"" By default netrw leaves unmodified buffers open. This autocommand
+"" deletes them when they're hidden (using :q for example).
+"autocmd FileType netrw setl bufhidden=delete
+""launch after opening vim
+"" augroup ProjectDrawer
+""   autocmd!
+""   autocmd VimEnter * :Vexplore
+"" augroup END
+
+" augroup netrw_mapping
+"   autocmd!
+"   autocmd filetype netrw call NetrwMapping()
+" augroup END
+
+"NETRW NAVIGATION
+
+"function! NetrwMapping()
+""navigation
+"nmap <buffer> H u
+"nmap <buffer> h -^
+"nmap <buffer> l <CR>
+"nmap <buffer> . gh
+"nmap <buffer> P <C-w>z
+"#netrw
+"nmap <buffer> L <CR>:Lexplore<CR>
+"nmap <buffer> <Leader>dd :Lexplore<CR>
+"nnoremap <leader>dd :Lexplore %:p:h<CR>
+"nnoremap <Leader>da :Lexplore<CR>
+""marks
+"nmap <buffer> <TAB> mf
+"nmap <buffer> <S-TAB> mF
+"nmap <buffer> <Leader><TAB> mu
+""file managining
+"nmap <buffer> ff %:w<CR>:buffer #<CR>
+"nmap <buffer> fe R
+"nmap <buffer> fc mc
+"nmap <buffer> fC mtmc
+"nmap <buffer> fx mm
+"nmap <buffer> fX mtmm
+"nmap <buffer> f; mx
+"nmap <buffer> fl :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
+"nmap <buffer> fq :echo 'Target:' . netrw#Expose("netrwmftgt")<CR>
+"nmap <buffer> fd mtfq
+"nmap <buffer> FF :call NetrwRemoveRecursive()<CR>
+""bookmarks
+"nmap <buffer> bb mb
+"nmap <buffer> bd mB
+"nmap <buffer> bl gb
+
+"endfunction
+
+""remove files recursively
+"function! NetrwRemoveRecursive()
+"  if &filetype ==# 'netrw'
+"    cnoremap <buffer> <CR> rm -r<CR>
+"    normal mu
+"    normal mf
+    
+"    try
+"      normal mx
+"    catch
+"      echo "Canceled"
+"    endtry
+
+"    cunmap <buffer> <CR>
+"  endif
+"endfunction
+
+" }}}
+
+
