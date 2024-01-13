@@ -215,10 +215,10 @@ bindsym $mod+semicolon [class="^URxvt$" instance="^dropdown_qalc"] scratchpad sh
 #---------Shutdown, reboot, lock screen{{{
 set $Locker i3lock && sleep 1
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (Shift+r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (Shift+e) logout, (s) suspend, (h) hibernate, (Shift+r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym Shift+e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     # bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
@@ -236,23 +236,9 @@ bindsym $mod+Pause mode "$mode_system"
 # HOME
 set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) HDMI+DP_rotate
 mode "$mode_display" {
-# bindsym a exec --no-startup-id xrandr  --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-2 --off
-# bindsym a exec xrandr --output DP1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-bindsym a exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
-# bindsym s exec xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-2 --off
-# bindsym s exec xrandr --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
-# bindsym d exec xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-2 --off
-# bindsym d exec xrandr --output DP1 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
-
-# WORK
-# set $mode_display Ext_Screen (a) note, (s) note+DELL, (d) note_doc_DELL, (f) note+BENQ
-# mode "$mode_display" {
-# bindsym a exec --no-startup-id xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off
-# bindsym s exec --no-startup-id xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off
-# bindsym d exec --no-startup-id xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --primary --mode 1920x1200 --pos 1920x0 --rotate normal --output DisplayPort-3 --off
-# bindsym f exec --no-startup-id xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off
+bindsym a exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -264,12 +250,12 @@ bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rota
 # Set the shortcuts and what they do
 set $mode_reload Reload (i) i3wm (p) polybar, (x) Xresource, (r) redshift, (Shift+r) redshift_kill, (c) picom
 mode "$mode_reload" {
-bindsym i restart 
-bindsym p exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh
-bindsym x exec --no-startup-id "xrdb -load ~/.Xresources"
-bindsym c exec --no-startup-id $picom_start
-bindsym r exec --no-startup-id $redshift_start
-bindsym Shift+r exec --no-startup-id $redshift_kill
+bindsym i restart ; mode "default"
+bindsym p exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+bindsym x exec --no-startup-id "xrdb -load ~/.Xresources" ; mode "default"
+bindsym c exec --no-startup-id $picom_start ; mode "default"
+bindsym r exec --no-startup-id $redshift_start ; mode "default"
+bindsym Shift+r exec --no-startup-id $redshift_kill ; mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
