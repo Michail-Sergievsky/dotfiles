@@ -456,8 +456,9 @@ let g:which_key_map =  {}
 let g:which_key_map['e'] = {
         \ 'name' : 'rename files' ,
 		\ '1' : [':% norm /\(19\|20\)\d\{2}/yw0Pa - ', 'move movies date to begining'],
-		\ '2' : [':%s/.zip/.cbz/g', 'rename zip to cbz'],
-		\ '3' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
+		\ '2' : [':% norm 0df]$p0x', 'move anime group to end'],
+		\ '3' : [':%s/.zip/.cbz/g', 'rename zip to cbz'],
+		\ '4' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
 		\ }
 let g:which_key_map['d'] = {
         \ 'name' : 'NERDTree' ,
@@ -506,9 +507,8 @@ nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <leader>rr :source ~/.vim/vimrc<CR>
 nnoremap <leader>sq :%s:::g<Left><Left><Left>
 nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
-"WORK!!!
-nnoremap <leader>se :execute "vimgrep /" . expand("<cword>") . "/gj **/*"<Left><Left><Left><Left><Left>
-nnoremap <leader>sr :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+nnoremap <leader>se :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>sr :cfdo %s:::gc<Left><Left><Left><Left>
 nnoremap <leader>su :w !sudo tee % <CR><CR>
 cmap ;\ \(\)<Left><Left>
 "shell check
@@ -522,7 +522,6 @@ nmap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
 nmap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <leader>wu <Plug>VimwikiDiaryGenerateLinks
 nmap <leader>wx <Plug>VimwikiDeleteFile
-
 map <leader>S :!clear && shellcheck %<CR>
 nnoremap <leader>b <Plug>VimwikiGoBackLink
 nnoremap <leader>ds1 "=strftime("%Y-%m-%d %H:%M:%S")<CR>P

@@ -178,7 +178,7 @@ mark T /home/freeman/Downloads/t_done
 mark U /usr/share
 mark V /home/freeman/Vagrant
 mark a /home/freeman/Music/audiobooks_1_main
-mark b /home/freeman/books
+mark b /home/freeman/Books
 mark B /home/freeman/books
 mark C /home/freeman/.config
 mark d /home/freeman/Downloads
@@ -757,10 +757,10 @@ nnoremap <silent> l : if filetype('.', 1) == 'dir'
                    \| endif<cr>
 
 "-----Arrows---
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
-" noremap <Left> <Nop>
-" noremap <Right> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 
 "}}}
