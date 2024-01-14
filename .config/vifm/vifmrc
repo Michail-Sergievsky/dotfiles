@@ -659,6 +659,8 @@ nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' 
 nnoremap <wait>rh :reg h<cr>b
 nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsfd :!!clear && rsync -urvP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsfr :!!clear && rsync -urvP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>s1 :select *(1).mkv<cr>
 nnoremap <wait>s2 :select *[^(1)].mkv<cr>
 nnoremap <wait>s3 :select *.srt,*jpg,*.txt,*.m4a,*.ogg<CR>
