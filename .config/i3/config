@@ -76,13 +76,13 @@ exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
 exec_always --no-startup-id $picom_start
 
 #Display Wallpapers
-exec_always feh --bg-fill /home/freeman/.wallpapers/wp4657311-arch-solarized-wallpapers.png
-# Exec_always feh --bg-center --randomize /home/freeman/Pictures/Wallpapers/Mics_authors/*
+exec_always feh --bg-fill /$HOME/.wallpapers/wp4657311-arch-solarized-wallpapers.png
+# Exec_always feh --bg-center --randomize /$HOME/Pictures/Wallpapers/Mics_authors/*
 #}}}
 #---------Autostart applications-----{{{
 
 # move all download apps to ws6 then return to ws1
-exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/home/freeman/Soft/jd2/JDownloader2"'
+exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/$HOME/Soft/jd2/JDownloader2"'
 exec --no-startup-id i3-msg 'workspace 1'
 # eng-rus keyboard layout
 # exec_always --no-startup-id sbxkb
@@ -206,7 +206,7 @@ exec --no-startup-id $term -name dropdown_term
 bindsym $mod+b [class="^URxvt$" instance="^dropdown_term"] scratchpad show; [class="^URxvt$" instance="^dropdown_term"] move position center
 
 # exec --no-startup-id $term -name dropdown_notes -e vim
-exec --no-startup-id $term -name dropdown_notes -e gvim -v "/home/freeman/Dropbox/Vimwiki/work/Notes.md"
+exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Notes.md" -v "/$HOME/Vimwiki/work/Work_Notes.md"
 bindsym $mod+n [class="^URxvt$" instance="^dropdown_notes"] scratchpad show; [class="^URxvt$" instance="^dropdown_notes"] move position center
 
 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
@@ -296,7 +296,7 @@ bindsym $mod+f fullscreen toggle
 # kill focused window
 bindsym $mod+Shift+c kill
 # swaping workspaces
-bindsym $mod+Shift+s exec /home/freeman/.scripts/i3-display-swap.sh
+bindsym $mod+Shift+s exec /$HOME/.scripts/i3-display-swap.sh
 
 # APPEAREANCE
 
@@ -401,7 +401,7 @@ bindsym $mod+Shift+comma exec "i3-msg \\"focus up, move right, focus left\\""
 
 bindsym $mod+F1 exec --no-startup-id $term -name dropdown_term 
 # bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim
-bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e gvim -v
+bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Notes.md" -v "/$HOME/Vimwiki/work/Work_Notes.md"
 bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
 # bindsym $mod+F4 exec --no-startup-id 
 # bindsym $mod+F5 exec --no-startup-id 
@@ -415,8 +415,8 @@ bindsym $mod+F11 exec "sleep 1; xset dpms force off"
 bindsym $mod+F12 mode "$mode_display" 
 
 # Flameshot for screenshots
-bindsym Print exec --no-startup-id flameshot gui -p ~/Pictures/screenshots
-bindsym $mod+Print exec --no-startup-id flameshot full -p ~/Pictures/screenshots
+bindsym Print exec --no-startup-id flameshot gui -p /$HOME/Pictures/screenshots
+bindsym $mod+Print exec --no-startup-id flameshot full -p /$HOME/Pictures/screenshots
 bindsym $mod+Shift+Print exec --no-startup-id flameshot gui
 
 # bindsym $mod+F1 exec xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off --output DisplayPort-0 --off --dpi 81
@@ -463,7 +463,7 @@ bindsym XF86AudioPrev exec playerctl previous
 #}}}
 #---------TESTING-----------{{{
 
-# bindsym $alt+1 exec i3-msg "workspace 1; append_layout /home/freeman/.config/i3/workspace-1.json"
+# bindsym $alt+1 exec i3-msg "workspace 1; append_layout /$HOME/.config/i3/workspace-1.json"
 # bindsym $alt+2 exec --no-startup-id i3-msg "workspace 2; exec $term -e vifm; workspace 1"
 # bindsym $alt+3 workspace 2; layout stacking; exec $term -e vifm; exec $term -e top
 # bindsym $alt+4 exec --no-startup-id i3-msg 'workspace 3; exec $term'

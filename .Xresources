@@ -3,7 +3,6 @@
 !xrdb ~/.Xresources 
 !for reload
 
-
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -63,6 +62,7 @@
 
 
 !	URxvt Appearance
+
 !fonts to use
 URxvt.*.font: xft:SFMono Nerd Font Mono:style=Regular:size=10
 URxvt.*.boldFont: xft:SFMono Nerd Font Mono:style=Bold:size=10
@@ -100,6 +100,11 @@ URxvt.iso14755: false
 
 !	Settings
 
+URxvt.modifier: alt
+! True: handle Meta (Alt) + keypress to set the 8th bit.
+! False: handle Meta (Alt) + keypress as an escape prefix [default]. 
+! URxvt.meta8: true
+
 URxvt.scrollstyle: plain
 
 !scrollback buffer lines
@@ -108,17 +113,22 @@ URxvt*saveLines: 16384
 URxvt.print-pipe: "cat > /dev/null"
 
 !Extensions
-URxvt.perl-ext-common: default,url-select,keyboard-select,resize-font,52-osc
+URxvt.perl-ext-common: default,url-select,keyboard-select,resize-font
 
 !	Bindings
 
 !CopyPastetoClipboard
+!WHERE IT CAME FROM???
 /* URxvt.keysym.M-c: perl:clipboard:copy */
 /* URxvt.keysym.M-v: perl:clipboard:paste */
 /* URxvt.matcher.button: 1 */
 /* URxvt.matcher.rend.0: Uline Bold fg5 */
 /* URxvt.keysym.C-Delete: perl:matcher:last */
 /* URxvt.keysym.M-Delete: perl:matcher:list */
+
+!52-osc - another way to copy to clipboard
+!https://github.com/ojroques/vim-oscyank
+
 !Url-select
 URxvt.colorUL: #4682B4
 URxvt.keysym.M-u: perl:url-select:select_next

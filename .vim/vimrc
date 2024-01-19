@@ -402,17 +402,6 @@ function! VisualHTMLTagWrap()
 endfunction
 
 " }}}
-" ----------Making Alt works----------{{{
-
-" Can work without IT - WHY???
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-
-" }}}
 "----------THEMES & COLORS----------------{{{
 
 " set termguicolors "use true color
@@ -509,10 +498,12 @@ nnoremap <leader>sq :%s:::g<Left><Left><Left>
 nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
 nnoremap <leader>se :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <leader>sr :cfdo %s:::gc<Left><Left><Left><Left>
+nnoremap <leader>st :/^\*\*\*\*$<Left><Left><Left><Left><Left>
 nnoremap <leader>su :w !sudo tee % <CR><CR>
 cmap ;\ \(\)<Left><Left>
 "shell check
 " using https://www.shellcheck.net/ - install first
+map <leader>S :!clear && shellcheck %<CR>
 nmap <leader>wc :Calendar<CR>
 nmap <leader>wd :Diary<CR>
 nmap <leader>wg <Plug>VimwikiGoto
@@ -522,7 +513,6 @@ nmap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
 nmap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <leader>wu <Plug>VimwikiDiaryGenerateLinks
 nmap <leader>wx <Plug>VimwikiDeleteFile
-map <leader>S :!clear && shellcheck %<CR>
 nnoremap <leader>b <Plug>VimwikiGoBackLink
 nnoremap <leader>ds1 "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 nnoremap <leader>ds2 "=strftime("%Y-%m-%d")<CR>P
@@ -572,7 +562,6 @@ inoremap ;; <esc>
 " Revert with ":unmap Q".
 map Q gq
 nnoremap Y y$
-nnoremap <A-q> ggVG
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -581,29 +570,48 @@ nnoremap <S-Tab> <<
 nnoremap <S-j> :bnext<CR>
 nnoremap <S-k> :bprev<CR>
 nnoremap <Tab> >>
-" Ctrl-n/m deletes blank line below/above, and Alt-i/o inserts.
-nnoremap <silent><A-o> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-nnoremap <silent><A-i> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+" Ctrl-n/m deletes blank line below/above
 nnoremap <silent><C-m> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 " nnoremap <leader>a :bp<bar>vsp<bar>bn<bar>bd<CR>
-" Make adjusing split sizes a bit more friendly
-noremap <silent> <A-n> :vertical resize +3<CR>
-noremap <silent> <A-m> :vertical resize -3<CR>
-noremap <silent> <A-r> :resize -3<CR>
-noremap <silent> <A-f> :resize +3<CR>
 
-"change 2 split windows from vert to horiz or horiz to vert
-" map <Leader>th <C-w>t<C-w>H
-" map <Leader>tk <C-w>t<C-w>K
+" ALT mappings
+if !has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    autocmd InsertEnter * set timeoutlen=0
+    autocmd InsertLeave * set timeoutlen=2000
+  augroup END
+endif
+ 
+function! Altmap(char)
+  if has('gui_running') | return ' <A-'.a:char.'> ' | else | return ' <Esc>'.a:char.' '|endif
+endfunction
+ 
+" Make adjusing split sizes a bit more friendly
+execute 'nnoremap <silent>'.Altmap('n').':vertical resize +3<CR>'
+execute 'nnoremap <silent>'.Altmap('m').':vertical resize -3<CR>'
+execute 'nnoremap <silent>'.Altmap('p').':resize -3<CR>'
+execute 'nnoremap <silent>'.Altmap(';').':resize +3<CR>'
+" Alt-i/o insert blank line below/above
+execute 'nnoremap <silent>'.Altmap('o').':set paste<CR>m`O<Esc>``:set nopaste<CR>'
+execute 'nnoremap <silent>'.Altmap('i').':set paste<CR>m`o<Esc>``:set nopaste<CR>'
+"Moving tabs
+execute 'nnoremap <silent>'.Altmap('r').':tabm -1<CR>'
+execute 'nnoremap <silent>'.Altmap('t').':tabm +1<CR>'
+"select all
+execute 'nnoremap <silent>'.Altmap('q').'ggVG'
 
 "TABS
 " move to previos tab
 nnoremap <S-h> gT
 " move to next tab
 nnoremap <S-l> gt
-nnoremap <A-h> :tabm -1<CR>
-nnoremap <A-l> :tabm +1<CR>
+
+"change 2 split windows from vert to horiz or horiz to vert
+" map <Leader>th <C-w>t<C-w>H
+" map <Leader>tk <C-w>t<C-w>K
 
 "^^^^^^^^^^Arrows^^^^^^^^^^^^^^^^^^^^^^^^
 " disable arrows
@@ -613,16 +621,6 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
  
 " }}}
-" ----------TEST--------- {{{
-
-"line breakejs
-" nnoremap <expr> j v:count ? 'j' : 'gj'
-" nnoremap <expr> k v:count ? 'k' : 'gk'
-" {noformat}
-" nnoremap <expr> <Down> v:count ? 'j' : 'gj'
-" nnoremap <expr> <Up> v:count ? 'k' : 'gk'
-
-"  }}}
 "----------OLD STUFF [LEGACY]------ {{{
 ""
 "" Netrw setup
@@ -704,5 +702,15 @@ noremap <Right> <Nop>
 "endfunction
 
 " }}}
+" ----------TEST--------- {{{
 
+"line breakejs
+" nnoremap <expr> j v:count ? 'j' : 'gj'
+" nnoremap <expr> k v:count ? 'k' : 'gk'
+" {noformat}
+" nnoremap <expr> <Down> v:count ? 'j' : 'gj'
+" nnoremap <expr> <Up> v:count ? 'k' : 'gk'
+
+
+"  }}}
 
