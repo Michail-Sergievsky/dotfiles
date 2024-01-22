@@ -355,9 +355,7 @@ bindsym $mod+plus scratchpad show; resize set 1366 750; move position center
 # start a terminal
 bindsym $mod+Return exec $term
 # vifm
-bindsym $mod+Ctrl+v exec --no-startup-id $term -e ~/.config/vifm/scripts/vifmrun
-# vifm Fedora
-# bindsym $mod+Ctrl+v exec --no-startup-id $term -e vifm
+bindsym $mod+Ctrl+v exec --no-startup-id $term -e ~/.scripts/launch_vifm.sh
 
 # CMUS CONTROLS
 # pause
@@ -423,6 +421,22 @@ bindsym $mod+Shift+Print exec --no-startup-id flameshot gui
 # bindsym $mod+F2 exec xrandr  --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off --output DisplayPort-0 --off --dpi 82
 
 #}}}
+#---------Media Keys--{{{
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Media Controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+#}}}
 #---------Arrow Keys--{{{
 bindsym $mod+Left		focus left
 bindsym $mod+Shift+Left		move left
@@ -445,32 +459,9 @@ bindsym $mod+Ctrl+Right		move workspace to output right
 bindsym $alt+Right		resize shrink width 20 px or 2 ppt
 
 #}}}
-#---------Media Keys--{{{
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Media Controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-#}}}
 #---------TESTING-----------{{{
+bindsym $mod+F4 exec --no-startup-id $term -e ~/.scripts/launch_vifm.sh
 
-# bindsym $alt+1 exec i3-msg "workspace 1; append_layout /$HOME/.config/i3/workspace-1.json"
-# bindsym $alt+2 exec --no-startup-id i3-msg "workspace 2; exec $term -e vifm; workspace 1"
-# bindsym $alt+3 workspace 2; layout stacking; exec $term -e vifm; exec $term -e top
-# bindsym $alt+4 exec --no-startup-id i3-msg 'workspace 3; exec $term'
-# bindsym $alt+4 exec $term -e vifm; move to workspace 8
-# bindsym $alt+5 exec transgui; move to workspace 6
-# rename workspace
-# bindsym $alt+4 exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 #}}}
 
 

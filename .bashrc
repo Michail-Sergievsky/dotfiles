@@ -16,9 +16,10 @@ bind "set completion-ignore-case on"
 
 export HISTCONTROL=ignoreboth
 
-#for vifm [bash aliases]
+#for vifm [bash aliases] NOT working
 # shopt -s expand_aliases
 # unset BASH_ENV
+set shellcmdflag=-lc
 
 #Prompt
 # 30m - color

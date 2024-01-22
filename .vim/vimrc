@@ -197,6 +197,7 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 Plug 'brianrodri/vim-sort-folds'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'dpelle/vim-LanguageTool'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'liuchengxu/vim-which-key'
@@ -375,12 +376,6 @@ else
     endfunction
 endif
 
-if has("gui_running")
-    nmap <S-F12> :call FontSizeMinus()<CR>
-    nmap <F12> :call FontSizePlus()<CR>
-endif
-" So using has('gui_gtk2') is probably better than using has('unix')
-
 " Wrap visual selection in an JIRA {noformat} tag.
 vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
 function! VisualHTMLTagWrap()
@@ -426,21 +421,20 @@ highlight CursorLine ctermbg=7 cterm=none
 
 "}}}
 "----------KEYMAPPINGS-------------------------{{{
+"^^^^^^^^main^^^^^^^^^^^^^^^
+" Don't use Ex mode, use Q for formatting.
+" Revert with ":unmap Q".
+map Q gq
+nnoremap Y y$
 
-" examples
-" nnoremap <leader>e2 :exe 'g/^\[/norm 0df]' <bar> exe 'g/^(/norm 0df)' <bar> exe '%s/^ //g' <bar>exe '%s/^_//g' <bar>sort<CR>
-
-" when map 2 or more commands use <bar> or \| - for more :help map_bar
-
-"Leader mapping & WhichKey
+"^^^^^Leader mapping & WhichKey^^^^
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
-nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <leader>      :<C-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<C-u>WhichKey  ','<CR>
+vnoremap <silent> <leader> :<C-u>WhichKeyVisual '<Space>'<CR>
 call which_key#register('<Space>', "g:which_key_map", 'n')
 call which_key#register('<Space>', "g:which_key_map_visual", 'v')
-
 let g:which_key_map =  {}
 let g:which_key_map['e'] = {
         \ 'name' : 'rename files' ,
@@ -455,7 +449,6 @@ let g:which_key_map['d'] = {
 		\ 'f' : [':NERDTreeFind', 'NERDTree to current file'],
 		\ 'c' : [':NERDTreeCWD', 'NERDTree to current dir'],
 		\ }
-
 nnoremap <leader>cc @='i```<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cb @='i```bash<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cp @='i```python<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
@@ -492,95 +485,64 @@ let g:which_key_map['f'] = {
 		\ 'e' : '[[#]]',
 		\ 'p' : 'noformat to pre',
 		\ }
-nnoremap <leader>rc :e $MYVIMRC<CR>
-nnoremap <leader>rr :source ~/.vim/vimrc<CR>
-nnoremap <leader>sq :%s:::g<Left><Left><Left>
-nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
-nnoremap <leader>se :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>sr :cfdo %s:::gc<Left><Left><Left><Left>
-nnoremap <leader>st :/^\*\*\*\*$<Left><Left><Left><Left><Left>
-nnoremap <leader>su :w !sudo tee % <CR><CR>
-cmap ;\ \(\)<Left><Left>
+
+"quickly fix spelling mistakes [gets rid of spellchecking]
+nnoremap <Leader>fs 1z=
 "shell check
 " using https://www.shellcheck.net/ - install first
-map <leader>S :!clear && shellcheck %<CR>
-nmap <leader>wc :Calendar<CR>
-nmap <leader>wd :Diary<CR>
-nmap <leader>wg <Plug>VimwikiGoto
-nmap <leader>wp <Plug>VimwikiDiaryIndex
-nmap <leader>wn <Plug>VimwikiMakeDiaryNote
-nmap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
-nmap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
-nmap <leader>wu <Plug>VimwikiDiaryGenerateLinks
-nmap <leader>wx <Plug>VimwikiDeleteFile
+nnoremap <leader>S :!clear && shellcheck %<CR>
 nnoremap <leader>b <Plug>VimwikiGoBackLink
 nnoremap <leader>ds1 "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 nnoremap <leader>ds2 "=strftime("%Y-%m-%d")<CR>P
-"quickly fix spelling mistakes [gets rid of spellchecking]
-nnoremap <Leader>fs 1z=
 nnoremap <leader>h :split<CR>
 nnoremap <leader>j J
 nnoremap <leader>l :ls<CR>:b<space>
 nnoremap <leader>lc :LanguageToolCheck<CR>
 nnoremap <leader>lo :LanguageToolClear<CR>
+nnoremap <leader>ma :vim /$alt+\\|<A-\\|Altmap\\|M-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
+nnoremap <leader>mc :vim /<C-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
+nnoremap <leader>ms :vim /<S-\\|S-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader>p :b#<CR>
 nnoremap <leader>q :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
+nnoremap <leader>rc :e $MYVIMRC<CR>
+nnoremap <leader>rr :source ~/.vim/vimrc<CR>
+nnoremap <leader>se :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>sq :%s:::g<Left><Left><Left>
+nnoremap <leader>sr :cfdo %s:::gc<Left><Left><Left><Left>
+nnoremap <leader>st :/^\*\*\*\*$<Left><Left><Left><Left><Left>
+nnoremap <leader>su :w !sudo tee % <CR><CR>
+nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
 nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>wc :Calendar<CR>
+nnoremap <leader>wd :Diary<CR>
+nnoremap <leader>wg <Plug>VimwikiGoto
+nnoremap <leader>wn <Plug>VimwikiMakeDiaryNote
+nnoremap <leader>wp <Plug>VimwikiDiaryIndex
+nnoremap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
+nnoremap <leader>wu <Plug>VimwikiDiaryGenerateLinks
+nnoremap <leader>wx <Plug>VimwikiDeleteFile
+nnoremap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
 nnoremap <leader>x :close<CR>
 " refocus folds; close any other fold except the one that you are on
 nnoremap <leader>z zMzvzz
-vmap <leader>w <Esc>:call VisualHTMLTagWrap()<CR>
-
-
-"^^^^^^^^^Function keys^^^^^^^^^^^^
-nnoremap <F1> :set spell!<CR>
-"enable/disable spellchecking
-nnoremap <F2> :set relativenumber!<CR>
-"enable/disable relativenumber
-nnoremap <F3> :set foldopen-=search \| set foldopen<CR>
-" turn off folder search
-nnoremap <F4> :set foldopen+=search \| set foldopen<CR>
-" turn on folder search
-nnoremap <F5> :set list! list?<CR>
-" turn on/off list
-nnoremap <F6> :call ToggleWrap()<CR>
-nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
-" nnoremap <F8> :sbnext<CR>
-nnoremap <F8> :set invpaste paste?<CR>
-set pastetoggle=<F8>
-
-inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
-inoremap <c-l> <c-^>
-"^^^^^^^^main^^^^^^^^^^^^^^^
 
 "Esc
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
-inoremap ;; <esc>
-" Don't use Ex mode, use Q for formatting.
-" Revert with ":unmap Q".
-map Q gq
-nnoremap Y y$
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <S-Tab> <<
-nnoremap <S-j> :bnext<CR>
-nnoremap <S-k> :bprev<CR>
 nnoremap <Tab> >>
+
+" Ctrl mapping
 " Ctrl-n/m deletes blank line below/above
 nnoremap <silent><C-m> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-" nnoremap <leader>a :bp<bar>vsp<bar>bn<bar>bd<CR>
 
 " ALT mappings
 if !has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
     autocmd!
-    autocmd InsertEnter * set timeoutlen=0
+    " can break <esc> mapping in isert mode - switch from 0 to 200
+    autocmd InsertEnter * set timeoutlen=200
     autocmd InsertLeave * set timeoutlen=2000
   augroup END
 endif
@@ -603,113 +565,58 @@ execute 'nnoremap <silent>'.Altmap('t').':tabm +1<CR>'
 "select all
 execute 'nnoremap <silent>'.Altmap('q').'ggVG'
 
-"TABS
+"Shift mapping
 " move to previos tab
 nnoremap <S-h> gT
 " move to next tab
 nnoremap <S-l> gt
+nnoremap <S-Tab> <<
+nnoremap <S-j> :bnext<CR>
+nnoremap <S-k> :bprev<CR>
 
-"change 2 split windows from vert to horiz or horiz to vert
-" map <Leader>th <C-w>t<C-w>H
-" map <Leader>tk <C-w>t<C-w>K
-
-"^^^^^^^^^^Arrows^^^^^^^^^^^^^^^^^^^^^^^^
 " disable arrows
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+"^^^^^^^^^Function keys^^^^^^^^^^^^
+nnoremap <F1> :set spell!<CR>
+"enable/disable spellchecking
+nnoremap <F2> :set relativenumber!<CR>
+"enable/disable relativenumber
+nnoremap <F3> :set foldopen-=search \| set foldopen<CR>
+" turn off folder search
+nnoremap <F4> :set foldopen+=search \| set foldopen<CR>
+" turn on folder search
+nnoremap <F5> :set list! list?<CR>
+" turn on/off list
+nnoremap <F6> :call ToggleWrap()<CR>
+nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
+" nnoremap <F8> :sbnext<CR>
+nnoremap <F8> :set invpaste paste?<CR>
+set pastetoggle=<F8>
+
+
+" ^^^^^COMAND MODE^^^^^
+"????????
+" cmap ;\ \(\)<Left><Left>
+
+"^^^^^^ INSERT MODE^^^^^^
+inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+"switch to rus lang
+inoremap <C-l> <c-^>
+" inoremap ;; <c-3>
+inoremap ;; <esc>
+
+"^^^^^VISUAL MODE^^^^^
+vmap <leader>w <Esc>:call VisualHTMLTagWrap()<CR>
+
  
-" }}}
-"----------OLD STUFF [LEGACY]------ {{{
-""
-"" Netrw setup
-"let g:netrw_banner       = 0  " removes the netrw banner
-"let g:netrw_liststyle    = 3  " tree style listing
-"let g:netrw_browse_split = 4  " see help on this one. lots of useful options
-"let g:netrw_altv         = 1  " change from left splitting to right splitting
-"let g:netrw_winsize      = 15 " initial size of new explore windows
-"let g:netrw_keepdir      = 0  "Keep the current directory and the browsing directory synced
-"let g:netrw_localcopydircmd = 'cp -r'
-" "Highlight marked files in the same way search matches are.
-"hi! link netrwMarkFile Search
-"" By default netrw leaves unmodified buffers open. This autocommand
-"" deletes them when they're hidden (using :q for example).
-"autocmd FileType netrw setl bufhidden=delete
-""launch after opening vim
-"" augroup ProjectDrawer
-""   autocmd!
-""   autocmd VimEnter * :Vexplore
-"" augroup END
-
-" augroup netrw_mapping
-"   autocmd!
-"   autocmd filetype netrw call NetrwMapping()
-" augroup END
-
-"NETRW NAVIGATION
-
-"function! NetrwMapping()
-""navigation
-"nmap <buffer> H u
-"nmap <buffer> h -^
-"nmap <buffer> l <CR>
-"nmap <buffer> . gh
-"nmap <buffer> P <C-w>z
-"#netrw
-"nmap <buffer> L <CR>:Lexplore<CR>
-"nmap <buffer> <Leader>dd :Lexplore<CR>
-"nnoremap <leader>dd :Lexplore %:p:h<CR>
-"nnoremap <Leader>da :Lexplore<CR>
-""marks
-"nmap <buffer> <TAB> mf
-"nmap <buffer> <S-TAB> mF
-"nmap <buffer> <Leader><TAB> mu
-""file managining
-"nmap <buffer> ff %:w<CR>:buffer #<CR>
-"nmap <buffer> fe R
-"nmap <buffer> fc mc
-"nmap <buffer> fC mtmc
-"nmap <buffer> fx mm
-"nmap <buffer> fX mtmm
-"nmap <buffer> f; mx
-"nmap <buffer> fl :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
-"nmap <buffer> fq :echo 'Target:' . netrw#Expose("netrwmftgt")<CR>
-"nmap <buffer> fd mtfq
-"nmap <buffer> FF :call NetrwRemoveRecursive()<CR>
-""bookmarks
-"nmap <buffer> bb mb
-"nmap <buffer> bd mB
-"nmap <buffer> bl gb
-
-"endfunction
-
-""remove files recursively
-"function! NetrwRemoveRecursive()
-"  if &filetype ==# 'netrw'
-"    cnoremap <buffer> <CR> rm -r<CR>
-"    normal mu
-"    normal mf
-    
-"    try
-"      normal mx
-"    catch
-"      echo "Canceled"
-"    endtry
-
-"    cunmap <buffer> <CR>
-"  endif
-"endfunction
-
 " }}}
 " ----------TEST--------- {{{
 
-"line breakejs
-" nnoremap <expr> j v:count ? 'j' : 'gj'
-" nnoremap <expr> k v:count ? 'k' : 'gk'
-" {noformat}
-" nnoremap <expr> <Down> v:count ? 'j' : 'gj'
-" nnoremap <expr> <Up> v:count ? 'k' : 'gk'
 
 
 "  }}}

@@ -130,27 +130,44 @@ set tuioptions="pv"
 " .. - cut name with ...
 " . - just cut name
 " no dot - full name
-" set viewcolumns=-{name}..,6{}.
-set viewcolumns=-{name},{nitems},6{}.
+set viewcolumns=-{name}..,6{}.
+" show files count if dirs
+" set viewcolumns=-{name},{nitems},6{}.
 
 "}}}
 "----Status line ----{{{
 
-" let &statusline = " %t%= %A %10u:%-7g %12s %4*%2* +%E %4* %15d | %a "
-" let &statusline .= '%1*'           " left separator
 
-let &statusline = ' %-26t'         " file name
-let &statusline .= '%='         " fill the whole status line
-let &statusline .= ' %A '       " file attributes
-let &statusline .= '%u:%-g|'  " user and group owners of the file
-let &statusline .= ' %-s '     " human readable cumulative file size
-let &statusline .= '%4*%2*'    " left separator
-let &statusline .= ' +%E '      " human readable cumulative file size
-let &statusline .= '%4*'       " right separator
-let &statusline .= ' %d '     " file modification date and time
-let &statusline .= '|'          " right separator
-let &statusline .= ' %a '       " free space available at current partition
-"show number of files hidden by filters, only if filter had been applied
+" nesting detection
+if $INSIDE_VIFM != ''
+    let $SL_PREFIX = 'vifm '
+else
+    if $PS1 != ''
+        let $SL_PREFIX = 'bash '
+    endif
+    let $INSIDE_VIFM = 'true'
+endif
+let &statusline = ''
+if $SL_PREFIX != ''
+	let &statusline = '%2*'.$SL_PREFIX.'%4*'
+endif
+let &statusline .= '%1*'           " left separator
+let &statusline .= ' %t '          " file name
+let &statusline .= ''             " left separator
+let &statusline .= '%='            " fill the whole status line
+let &statusline .= ''             " right separator
+let &statusline .= ' %A '		   " file attributes & user and group owners of the file
+let &statusline .= ' %[%u:%g%] '   " user and group owners of the file
+let &statusline .= '%4*%2*'       " right separator
+let &statusline .= ' %E '          " human readable cumulative file size of SELECTED files
+let &statusline .= '%3*%1*'       " right separator
+let &statusline .= ' %-s '         " human readable cumulative file size
+let &statusline .= '%4*%2*'       " right separator
+let &statusline .= ' %d '          " file modification date and time
+let &statusline .= '%3*%1*'       " right separator
+let &statusline .= ' %a '          " free space available at current partition
+
+""show number of files hidden by filters, only if filter had been applied
 set statusline+='%[ +%x%]'
 
 "}}}
@@ -358,11 +375,11 @@ filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.m2ts,
         \ mpv %f,
         \ {View using ffplay}
         \ ffplay -fs -autoexit %f,
-fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mpg,*.mpeg,*.vob,
            \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
            \*.as[fx]},
-          \<video/*>
 	\ mediainfo %c 2>&1
+fileviewer {*.mkv} mkvscan.sh %c 2>&1
 "vlc playlist
 filextype {*.xspf} vlc %c %i &
 "open mkv in mkvtoolnix-gui
@@ -520,6 +537,216 @@ filetype *.tudu tudu -f %c
 " Qt projects
 filextype *.pro qtcreator %f &
 "}}}
+"----Keyboard Mappings-------------{{{
+"<wait> - will trigger pause
+"<wait> has no effect for single-character mappings
+"<silent> - not show command line execution
+"Ctrl
+nnoremap <C-f> <c-w>x
+nnoremap <C-b> :sync<CR>
+nnoremap <C-n> <Nop>
+nnoremap <C-p> <Nop>
+nnoremap <C-c> <Nop>
+" nnoremap <C-t> :tabnew<cr>
+" nnoremap <C-c> :tabclose<cr>
+" nnoremap <C-p> gT
+" nnoremap <C-n> gt
+"moving between vifm & tmux
+nnoremap <silent> <C-h> :if paneisat('left')   | execute '!tmux select-pane -L %i' | else | execute 'wincmd h' | endif<cr>
+nnoremap <silent> <C-j> :if paneisat('bottom') | execute '!tmux select-pane -D %i' | else | execute 'wincmd j' | endif<cr>
+nnoremap <silent> <C-k> :if paneisat('top')    | execute '!tmux select-pane -U %i' | else | execute 'wincmd k' | endif<cr>
+nnoremap <silent> <C-l> :if paneisat('right')  | execute '!tmux select-pane -R %i' | else | execute 'wincmd l' | endif<cr>
+" account for <c-h>/<bs> conflict
+nnoremap <silent> <bs>  :if paneisat('left')   | execute '!tmux select-pane -L %i' | else | execute 'wincmd h' | endif<cr>
+" Alt
+" previous folders, NOT WORK
+nnoremap <A-p> [R
+nnoremap <A-n> ]R
+
+" Other symbols
+nnoremap - <C-w>5<
+nnoremap _ <C-w>5>
+nnoremap | <C-w>5=
+nnoremap <space> tj
+nnoremap ~ :help<cr>
+
+" Alphabet
+" PDF preview scrolling https://github.com/cirala/vifmimg
+" map > :!vifmimg inc<cr>
+" map < :!vifmimg dec<cr>
+
+nnoremap <wait>af :select *.*<CR>
+nnoremap <wait>aa :%select<CR>
+" all to dir_name.tar.gz
+nnoremap <wait>adgz :!tar -cvzf `basename $(pwd)`.tar.gz .<cr>
+" selected to INSERT_NAME tar.gz
+nnoremap <wait>angz :!tar -cvzf .tar.gz %f<left><left><left><left><left><left><left><left><left><left>
+" all to dir_name.zip
+nnoremap <wait>aza :!!zip -r -0 "$(basename "$(pwd)")" .<cr>
+" selected to INSERT_NAME zip
+nnoremap <wait>azf :!zip -r  %f<left><left><left>
+nnoremap <wait>by :yank | winrun , put<cr>
+nnoremap <wait>bp :yank | winrun , put!<cr>
+nnoremap <wait>bc :copy!<cr>
+nnoremap <wait>bm :move!<cr>
+nnoremap <wait>bj :jobs<cr>
+nnoremap <wait>cx :!chmod +x %f<cr>
+nnoremap <wait>ca :!config add %c<cr>
+nnoremap <wait>cdcs :cd /$HOME/.scripts<cr>
+nnoremap <wait>cdcv :cd /$HOME/.vim<cr>
+nnoremap <wait>cdcc :cd /$HOME/.config<cr>
+nnoremap <wait>cdcf :cd /$HOME/.config/vifm<cr>
+nnoremap <wait>cdch :cd /$HOME/.ssh<cr>
+nnoremap <wait>cv1 :!!/$HOME/.scripts/medio_editing/switch_subtitles_default.sh 2>&1<CR>
+" nnoremap <wait>f <Nop>
+nnoremap <wait>fc :fzfcd<cr> 
+nnoremap <wait>ff :fzflocate<cr>
+nnoremap <wait>fd :locate<space>
+nnoremap <wait>fp :fzfinpdffiles<space>""<Left>
+nnoremap <wait>ft :fzfinfiles<space>""<Left>
+nnoremap <wait>fz :fzffind<cr> 
+nnoremap <wait>gc :!!git clone<space>
+" nnoremap <wait>gs :!!git status<CR>
+nnoremap <wait>gb :!!git branch -a<CR>
+nnoremap <wait>gm :!!git checkout<space>
+nnoremap e :edit<cr>
+nnoremap E :!vim %c<CR>
+nnoremap i :file &<cr>l
+nnoremap I :file<cr>
+" nnoremap <wait>m <Nop>
+nnoremap <wait>mb :!vim "$(basename "$(pwd)")"<CR>
+nnoremap <wait>mf :touch<space>""<Left>
+nnoremap <wait>md :mkdir<space>""<Left>
+"diff for dir
+nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
+nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
+nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right><right><right>
+nnoremap <wait>rh :reg h<cr>b
+nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsfd :!!clear && rsync -urvP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap <wait>rsfr :!!clear && rsync -urvP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
+nnoremap S :sort<cr>
+nnoremap <wait>s1 :select *(1).mkv<cr>
+nnoremap <wait>s2 :select *[^(1)].mkv<cr>
+nnoremap <wait>s3 :select *.srt,*jpg,*.txt,*.m4a,*.ogg<CR>
+nnoremap <wait>ss :set sort=+size<cr>
+nnoremap <wait>sS :set sort=-size<cr>
+nnoremap <wait>sn :set sort=+iname<cr>
+nnoremap <wait>sN :set sort=-iname<cr>
+nnoremap <wait>st :set sort=+mtime<cr>
+nnoremap <wait>sT :set sort=-mtime<cr>
+nnoremap <wait>sm :togglesort<cr>
+nnoremap <wait>tl :!ls --group-directories-first -1R > $(basename $PWD)<cr>
+nnoremap <wait>tp :!ls --group-directories-first -1R > move && mv move -f ~/Documents/Look.out.for.them.all/$(basename $PWD)<cr>
+nnoremap <wait>td :!diff %c %C<cr>
+nnoremap <wait>t1 :targetm<cr>:echo $VIMARGS<cr>
+nnoremap <wait>t2 :target<space> ""<Left>
+nnoremap <wait>t0 :echo $VIMARGS<cr>
+nnoremap <wait>tm :!!mediainfo %c<cr>
+nnoremap <wait>ti :!!mkvmerge -i %c<cr>
+nnoremap w :view<cr>gs
+nnoremap x :select *.<C-x>e<cr>
+nnoremap X :unselect *.<C-x>e<cr>
+" yank current directory path into the clipboard
+nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+" yank current file path into the clipboard
+nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+" yank current filename without path into the clipboard
+nnoremap yn :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+" yank root of current file's name into the clipboard
+nnoremap yr :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
+" copy names of selected files into the clipboard
+nnoremap yz :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>
+"yank to register h
+noremap yu :normal "hyy<cr>
+noremap yi :normal "Hyy<cr>
+
+" go to previous tab page or move current tab page to position specified by the
+" count
+nnoremap <silent> gT : <C-u>
+                    \| if v:count == 0
+                    \|     execute 'normal gT'
+                    \| elseif v:count > tabpagenr('$')
+                    \|     tabmove
+                    \| elseif v:count >= tabpagenr()
+                    \|     execute 'tabmove' v:count
+                    \| elseif v:count < tabpagenr()
+                    \|     execute 'tabmove' v:count - 1
+                    \| endif
+                    \| <cr>
+
+" cycle thru the layouts -- only, vsplit, and split
+nnoremap ` :if layoutis('only')
+                        \|    vsplit
+                        \|elseif layoutis('vsplit')
+                        \|    split
+                        \|else
+                        \|    only
+                        \|endif<cr>
+
+"Disable Execution on pressing lower case L 
+nnoremap <silent> l : if filetype('.', 1) == 'dir'
+                   \|     execute 'normal! l'
+                   \| endif<cr>
+
+"---Leader <,>
+nnoremap <wait>,a :archive<Left>
+nnoremap <wait>,b :!bash<cr>
+nnoremap <wait>,cs :config status<cr>
+nnoremap <wait>,ca :config add %c<cr>
+nnoremap <wait>,cm :config commit -m ""<Left>
+nnoremap <wait>,cp :config push<cr>
+nnoremap <wait>,d :!!date<cr>
+nnoremap <wait>,e :extract<CR>
+nnoremap <wait>,m :marks<cr>
+nnoremap <wait>,r :!sudo vifm %d %D<cr>
+nnoremap <wait>,s :shell<cr>
+nnoremap <wait>,t :!urxvt &<cr>
+nnoremap <wait>,vh :split<cr>
+nnoremap <wait>,vo :only<cr>
+nnoremap <wait>,vv :vsplit<cr>
+nnoremap <wait>,x :fzf<cr>
+"priview long filenames
+nnoremap <silent> ,p : if &previewprg == ''
+                    \|     :vsplit
+                    \|     :view
+                    \|     set previewprg='echo %c%q'
+                    \| else
+                    \|     set previewprg=''
+                    \| endif<cr>
+
+" visual mode
+vnoremap w :view<cr>gv
+vnoremap yf :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>:echo "filenames yanked to clipboard"<cr>
+
+" command mode
+cnoremap <C-q> <c-r>=system("date +%Y-%m-%d")<cr>
+
+"_____Function keys______
+
+nnoremap <f1> :!man<space>
+nnoremap <f2> :set wrap!<cr>
+nnoremap <f3> :set number!<cr>
+nnoremap <f4> :set relativenumber!<cr>
+nnoremap <f5> :copy<cr>
+nnoremap <f6> :move<cr>
+nnoremap <f7> :mkdir<space>""<Left>
+nnoremap <f8> :delete<cr>
+" nnoremap <f9> :write<cr> 
+"????
+nnoremap <f10> :set viewcolumns=*{name}..,6{}.<cr>
+" brief information about files
+nnoremap <f11> :set viewcolumns=*{name}.,10{perms},12{uname},-7{gname},10{size}.,20{mtime}<cr>
+" detailed information about files
+nnoremap <f12> :reload<cr>
+
+"-----Arrows---
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
 "----GETTING ICONS TO DISPLAY IN VIFM   {{{
 " https://github.com/sebastiencs/icons-in-terminal
 " yay -S icons-in-terminal-git
@@ -616,205 +843,9 @@ set classify+='λ ::*.ml,,*.mli::,
 			\  ::.git/,,*.git/::'
 
 " }}}
-"----Keyboard Mappings-------------{{{
-"<wait> - will trigger pause
-"<wait> has no effect for single-character mappings
-"<silent> - not show command line execution
-"Ctrl
-nnoremap <c-f> <c-w>x
-nnoremap <c-b> :sync<CR>
-nnoremap <c-t> :tabnew<cr>
-nnoremap <c-c> :tabclose<cr>
-nnoremap <c-p> gT
-nnoremap <c-n> gt
-
-" Alt
-" previous folders, NOT WORK
-nnoremap <a-p> [R
-nnoremap <a-n> ]R
-
-" Other symbols
-nnoremap - <C-w>5<
-nnoremap _ <C-w>5>
-nnoremap | <C-w>5=
-nnoremap <space> tj
-nnoremap ~ :help<cr>
-
-" Alphabet
-" PDF preview scrolling https://github.com/cirala/vifmimg
-" map > :!vifmimg inc<cr>
-" map < :!vifmimg dec<cr>
-
-nnoremap <wait>af :select *.*<CR>
-nnoremap <wait>aa :%select<CR>
-" all to dir_name.tar.gz
-nnoremap <wait>adgz :!tar -cvzf `basename $(pwd)`.tar.gz .<cr>
-" selected to INSERT_NAME tar.gz
-nnoremap <wait>angz :!tar -cvzf .tar.gz %f<left><left><left><left><left><left><left><left><left><left>
-" all to dir_name.zip
-nnoremap <wait>aza :!!zip -r -0 "$(basename "$(pwd)")" .<cr>
-" selected to INSERT_NAME zip
-nnoremap <wait>azf :!zip -r  %f<left><left><left>
-nnoremap <wait>by :yank | winrun , put<cr>
-nnoremap <wait>bp :yank | winrun , put!<cr>
-nnoremap <wait>bc :copy!<cr>
-nnoremap <wait>bm :move!<cr>
-nnoremap <wait>bj :jobs<cr>
-nnoremap <wait>cx :!chmod +x %f<cr>
-nnoremap <wait>ca :!config add %c<cr>
-nnoremap <wait>cdcs :cd /$HOME/.scripts<cr>
-nnoremap <wait>cdcv :cd /$HOME/.vim<cr>
-nnoremap <wait>cdcc :cd /$HOME/.config<cr>
-nnoremap <wait>cdcf :cd /$HOME/.config/vifm<cr>
-nnoremap <wait>cdch :cd /$HOME/.ssh<cr>
-nnoremap <wait>cv1 :!!/$HOME/.scripts/medio_editing/switch_subtitles_default.sh 2>&1<CR>
-" nnoremap <wait>f <Nop>
-nnoremap <wait>fc :fzfcd<cr> 
-nnoremap <wait>ff :fzflocate<cr>
-nnoremap <wait>fd :locate<space>
-nnoremap <wait>fp :fzfinpdffiles<space>""<Left>
-nnoremap <wait>ft :fzfinfiles<space>""<Left>
-nnoremap <wait>fz :fzffind<cr> 
-nnoremap <wait>gc :!!git clone<space>
-" nnoremap <wait>gs :!!git status<CR>
-nnoremap <wait>gb :!!git branch -a<CR>
-nnoremap <wait>gm :!!git checkout<space>
-nnoremap e :edit<cr>
-nnoremap E :!vim %c<CR>
-nnoremap i :file &<cr>l
-nnoremap I :file<cr>
-" nnoremap <wait>m <Nop>
-nnoremap <wait>mb :!vim "$(basename "$(pwd)")"<CR>
-nnoremap <wait>mf :touch<space>""<Left>
-nnoremap <wait>md :mkdir<space>""<Left>
-"diff for dir
-nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
-nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
-nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right><right><right>
-nnoremap <wait>rh :reg h<cr>b
-nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
-nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
-nnoremap <wait>rsfd :!!clear && rsync -urvP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
-nnoremap <wait>rsfr :!!clear && rsync -urvP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
-nnoremap S :sort<cr>
-nnoremap <wait>s1 :select *(1).mkv<cr>
-nnoremap <wait>s2 :select *[^(1)].mkv<cr>
-nnoremap <wait>s3 :select *.srt,*jpg,*.txt,*.m4a,*.ogg<CR>
-nnoremap <wait>ss :set sort=+size<cr>
-nnoremap <wait>sS :set sort=-size<cr>
-nnoremap <wait>sn :set sort=+iname<cr>
-nnoremap <wait>sN :set sort=-iname<cr>
-nnoremap <wait>st :set sort=+mtime<cr>
-nnoremap <wait>sT :set sort=-mtime<cr>
-nnoremap <wait>sm :togglesort<cr>
-nnoremap <wait>tl :!ls --group-directories-first -1R > $(basename $PWD)<cr>
-nnoremap <wait>tp :!ls --group-directories-first -1R > move && mv move -f ~/Documents/Look.out.for.them.all/$(basename $PWD)<cr>
-nnoremap <wait>td :!diff %c %C<cr>
-nnoremap <wait>t1 :targetm<cr>:echo $VIMARGS<cr>
-nnoremap <wait>t2 :target<space> ""<Left>
-nnoremap <wait>t0 :echo $VIMARGS<cr>
-nnoremap <wait>tm :!!mediainfo %c<cr>
-nnoremap <wait>ti :!!mkvmerge -i %c<cr>
-nnoremap w :view<cr>gs
-nnoremap x :select *.<c-x>e<cr>
-nnoremap X :unselect *.<c-x>e<cr>
-" yank current directory path into the clipboard
-nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-" yank current file path into the clipboard
-nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
-" yank current filename without path into the clipboard
-nnoremap yn :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
-" yank root of current file's name into the clipboard
-nnoremap yr :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
-" copy names of selected files into the clipboard
-nnoremap yz :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>
-"yank to register h
-noremap yu :normal "hyy<cr>
-noremap yi :normal "Hyy<cr>
-
-" go to previous tab page or move current tab page to position specified by the
-" count
-nnoremap <silent> gT : <c-u>
-                    \| if v:count == 0
-                    \|     execute 'normal gT'
-                    \| elseif v:count > tabpagenr('$')
-                    \|     tabmove
-                    \| elseif v:count >= tabpagenr()
-                    \|     execute 'tabmove' v:count
-                    \| elseif v:count < tabpagenr()
-                    \|     execute 'tabmove' v:count - 1
-                    \| endif
-                    \| <cr>
-
-" cycle thru the layouts -- only, vsplit, and split
-nnoremap ` :if layoutis('only')
-                        \|    vsplit
-                        \|elseif layoutis('vsplit')
-                        \|    split
-                        \|else
-                        \|    only
-                        \|endif<cr>
-
-"Disable Execution on pressing lower case L 
-nnoremap <silent> l : if filetype('.', 1) == 'dir'
-                   \|     execute 'normal! l'
-                   \| endif<cr>
+"---- TESTING-------{{{
 
 
-"---Leader <,>
-nnoremap <wait>,a :archive<Left>
-nnoremap <wait>,b :!bash<cr>
-nnoremap <wait>,d :!!date<cr>
-nnoremap <wait>,e :extract<CR>
-nnoremap <wait>,m :marks<cr>
-nnoremap <wait>,r :!sudo vifm %d %D<cr>
-nnoremap <wait>,s :shell<cr>
-nnoremap <wait>,t :!urxvt &<cr>
-nnoremap <wait>,vh :split<cr>
-nnoremap <wait>,vo :only<cr>
-nnoremap <wait>,vv :vsplit<cr>
-nnoremap <wait>,x :fzf<cr>
-"priview long filenames
-nnoremap <silent> ,p : if &previewprg == ''
-                    \|     :vsplit
-                    \|     :view
-                    \|     set previewprg='echo %c%q'
-                    \| else
-                    \|     set previewprg=''
-                    \| endif<cr>
 
-" visual mode
-vnoremap w :view<cr>gv
-vnoremap yf :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>:echo "filenames yanked to clipboard"<cr>
-
-" command mode
-cnoremap <c-d> <c-r>=system("date +%Y-%m-%d")<cr>
-
-
-"_____Function keys______
-
-nnoremap <f1> :!man<space>
-nnoremap <f2> :set wrap!<cr>
-nnoremap <f3> :set number!<cr>
-nnoremap <f4> :set relativenumber!<cr>
-nnoremap <f5> :copy<cr>
-nnoremap <f6> :move<cr>
-nnoremap <f7> :mkdir<space>""<Left>
-nnoremap <f8> :delete<cr>
-" nnoremap <f9> :write<cr> 
-"????
-nnoremap <f10> :set viewcolumns=*{name}..,6{}.<cr>
-" brief information about files
-nnoremap <f11> :set viewcolumns=*{name}.,10{perms},12{uname},-7{gname},10{size}.,20{mtime}<cr>
-" detailed information about files
-nnoremap <f12> :reload<cr>
-
-"-----Arrows---
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-"---- TESTING-------
 
 "}}}
