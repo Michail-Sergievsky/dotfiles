@@ -1,7 +1,6 @@
 " ###########################################################
 " ##########               VIMRC file by smy               ##
 " ###########################################################
-
 "----------Configuration-----------------------------{{{
 
 " Bail out if something that ran earlier, e.g. a system wide vimrc, does not
@@ -10,19 +9,21 @@ if exists('skip_defaults_vim')
   finish
 endif
 
-filetype plugin indent on  " enable filetype recognitions and indent base on it
+"filetype plugin indent on  " enable filetype recognitions and indent base on it
 
 set nocompatible               " Use Vim settings, rather than Vi settings (much better!).
 set viminfo=<1000,'1000,/50,:100,h,f1
 
 set backspace=indent,eol,start  " Allow backspacing over everything in insert mode.
 if has('unnamedplus')           " use the system register for everything
-  set clipboard=unnamed,unnamedplus
+   set clipboard=unnamed,unnamedplus
 endif
 set display=truncate            " Show @@@ in the last line if it is truncated.
 set encoding=utf-8              " Unicode encoding support
 set foldcolumn=2                " width of fold column
 set foldmethod=marker           " set folding mode
+"use rg instead of grep
+" set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 set hidden                      " Allow hidden buffers, don't limit to 1 file per window/split
 set history=200		            " keep 200 lines of command line history
 set hlsearch                    " Switch on highlighting the last used search pattern.
@@ -32,7 +33,7 @@ set laststatus=2                " show statusline always
 set mouse=a                     " use mouse everywhere
 set nrformats-=octal            " do not recognize octal numbers for ctrl-a and ctrl-x
 set number relativenumber       " Show line numbers & relativenumber
-" set ruler		                 " show the cursor position all the time
+"" set ruler		                 " show the cursor position all the time
 set scrolloff=5                 " Show a few lines of context around the cursor.
 set sidescrolloff=5	        	" Vertical
 set showcmd		               " display incomplete commands
@@ -41,8 +42,7 @@ set smartcase                   " set smartcase for search
 " set splitbelow splitright
 " set spell                     " set spellchecking
 set spelllang=en_us,ru_ru
-set statusline=%f%m%r%h%w\ [%Y]\ [0x%02.2B]%<\ %F%=%4v,%4l\ of\ %L\ %3p%%
-" set termguicolors               " colors to term
+" set statusline=%f%m%r%h%w\ [%Y]\ [0x%02.2B]%<\ %F%=%4v,%4l\ of\ %L\ %3p%%
 set ttimeout		            " time out for key codes
 set ttimeoutlen=500	            " wait up to 500ms after Esc for special key
 set vb "disable beep sound
@@ -53,11 +53,10 @@ filetype on
 
 "Autosave & swap
 set autowriteall		" This will save the file when you switch buffers, make it etc.
-						"autosave everything with ignoring warnings from untitled buffers,
-						"and read-only files, etc
+"						"autosave everything with ignoring warnings from untitled buffers,
+"						"and read-only files, etc
 autocmd FocusLost * silent! wa
-" TextChangedI - save everytime in insert mode!!!
-" autocmd TextChanged,TextChangedI * silent! write
+" save everytime text changed in normal mode, THIS BREAK quickfix-reflector!!!
 autocmd TextChanged * silent! write
 set nobackup
 set noswapfile
@@ -76,7 +75,6 @@ set imsearch=0 " Чтобы при старте поиск был на англ�
 "switch C-^
 
 "Tabs and Indent
-
 set autoindent         "when creating a new line, copy the indentation from the line above
 set copyindent         "copy the previous indentation on autoindenting
 set smartindent      "Do smart autoindenting when starting a new line.
@@ -100,7 +98,7 @@ set listchars=tab:»-,space:·,nbsp:~,trail:-,eol:$
 " compatible space chars
 " set listchars=eol:$,tab:.\ ,trail:.,extends:>,precedes:<,nbsp:_
 " incompatible with debian stretch
-"set listchars=eol:↓,tab:\ \ ┊,trail:●,extends:…,precedes:…,space:·
+" set listchars=eol:↓,tab:\ \ ┊,trail:●,extends:…,precedes:…,space:·
 " highlight SpecialKey term=standout ctermfg=darkgray guifg=darkgray
 
 " Ignoring file types from autocomplition:
@@ -157,30 +155,11 @@ autocmd BufWinEnter *.* silent loadview
 au WinEnter * setlocal cursorline
 au WinLeave * setlocal nocursorline
 
-" #NERDTree
-" https://mr-destructive.github.io/techstructive-blog/vim-nerdtree/
-" Open nerdtree window on opening Vim
-" autocmd VimEnter * NERDTree
-
-" Refresh the current folder if any changes
-autocmd BufEnter NERD_tree_* | execute 'normal R'
-au CursorHold * if exists("t:NerdTreeBufName") | call <SNR>15_refreshRoot() | endif
-
-"Reload the window if directory is changed
-augroup DIRCHANGE
-    au!
-    autocmd DirChanged global :NERDTreeCWD
-augroup END
-
-"Close nerdtree automatically if it is theonly window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-"remove whitespaces on save
+" remove whitespaces on save
 " autocmd BufWritePre * :%s/\s\+$//e
 
 " Filetype autocmd
 " autocmd BufReadPost,BufNewFile,BufRead  *.txt  set filetype=txt
-
 " autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
 
 " Working projects
@@ -188,32 +167,53 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd BufRead,BufNewFile ~/Git/*/inventory/* set filetype=yaml
 autocmd BufRead,BufNewFile ~/Git/*/*/group_vars/* set filetype=yaml
 
+
 " }}}
 "--------- PLUGINS & FILES {{{
+" The matchit plugin makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
 
 " VIM-PLUG
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
-
 " Declare the list of plugins.
+" For problems with git promtp - use full url
 Plug 'brianrodri/vim-sort-folds'
+Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dpelle/vim-LanguageTool'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-mapping-git.vim'
+Plug 'lambdalisue/fern-ssh'
+Plug 'lambdalisue/fern-mapping-project-top.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'mattn/calendar-vim'
-Plug 'preservim/nerdtree'
 Plug 'romainl/vim-qf'
+Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-speeddating' 
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 "____________ Vimwiki_____________________________
-let g:vimwiki_folding='expr'
+let g:vimwiki_folding='syntax'
 let g:vimwiki_global_ext = 0
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_conceal_pre = 1
@@ -239,13 +239,108 @@ let g:vimwiki_list = [
 command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
 " auto_diary_index - dos't work!! wait for update
 "-----------------------------
-"
-"NERDTRee
-"
-let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
-let NERDTreeShowHidden=1
 
-"Languagetool
+" FERN
+let g:fern#disable_default_mappings   = 1
+let g:fern#disable_drawer_auto_quit   = 1
+let g:fern#disable_viewer_hide_cursor = 1
+let g:fern#renderer = "nerdfont"
+
+function! FernInit() abort
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-open-expand-collapse)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-action-open:select)",
+        \   "\<Plug>(fern-action-expand)",
+        \   "\<Plug>(fern-action-collapse)",
+        \ )
+  nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> z <Plug>(fern-action-hidden)
+  nmap <buffer> C <Plug>(fern-action-clipboard-copy)
+  nmap <buffer> D <Plug>(fern-action-remove)
+  nmap <buffer> K <Plug>(fern-action-mark:clear)
+  nmap <buffer> M <Plug>(fern-action-clipboard-move)
+  nmap <buffer> N <Plug>(fern-action-new-path)
+  nmap <buffer> P <Plug>(fern-action-clipboard-paste)
+  nmap <buffer> R <Plug>(fern-action-rename)
+  nmap <buffer> S <Plug>(fern-action-open:split)
+  nmap <buffer> c <Plug>(fern-action-copy)
+  nmap <buffer> f <Plug>(fern-action-include)
+  nmap <buffer> h <Plug>(fern-action-collapse)
+  nmap <buffer> gs <Plug>(fern-action-git-stage)
+  nmap <buffer> gu <Plug>(fern-action-git-unstage)
+  nmap <buffer> l <Plug>(fern-action-open-or-expand)
+  nmap <buffer> m <Plug>(fern-action-mark:toggle)j
+  nmap <buffer> r <Plug>(fern-action-reload)
+  nmap <buffer> s <Plug>(fern-action-open:select)
+  nmap <buffer> v <Plug>(fern-action-open:vsplit)
+  nmap <buffer> y <Plug>(fern-action-yank)
+  nmap <buffer> <nowait> < <Plug>(fern-action-leave)
+  nmap <buffer> <nowait> > <Plug>(fern-action-enter)
+endfunction
+
+"  automatically update the current tree upon entering the fern window
+augroup FernTypeGroup
+    autocmd! * <buffer>
+    autocmd BufEnter <buffer> silent execute "normal \<Plug>(fern-action-reload)"
+augroup END
+
+augroup FernEvents
+  autocmd!
+  autocmd FileType fern call FernInit()
+augroup END
+
+" fern-git-status
+let g:fern_git_status#disable_ignored    = 1
+" let g:fern_git_status#disable_untracked  = 1
+let g:fern_git_status#disable_submodules = 1
+
+
+"---------------
+" Airline
+"To allow powerline symbols to be seen
+let g:airline_powerline_fonts=1
+" let g:airline_symbols_ascii = 1
+
+" Enable the list of buffers
+" let g:airline#extensions#tabline#enabled = 1
+" ~/full/path-to/file-name.js
+" let g:airline#extensions#tabline#formatter = 'default'  " f/p/file-name.js
+" let g:airline#extensions#tabline#formatter = 'jsformatter' " path-to/f
+" let g:airline#extensions#tabline#formatter = 'unique_tail' " file-name.js
+" let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " f/p/file-name.js
+
+let g:airline#extensions#whitespace#enabled = 0 
+let g:airline_theme='solarized'
+"Reduces the space occupied by section z
+" let g:airline_section_z = "%3p%% %l:%c"
+"To allow colors in the status line
+" set t_Co=256
+
+" Note: You must define the dictionary first before setting values.
+" Also, it's a good idea to check whether it exists as to avoid
+" accidentally overwriting its contents.
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='⚡'
+let g:airline_symbols.whitespace = 'Ξ'
+" If you only see boxes here it may be because your system doesn't have
+" the correct fonts. Try it in vim first and if that fails see the help
+" pages for vim-airline :help airline-troubleshooting
+
+" Languagetool
 " not work with modern version of Languagetool
 " https://github.com/dpelle/vim-LanguageTool/issues/33
 " now must use unzip version 5.9
@@ -255,17 +350,6 @@ let g:languagetool_jar='/home/freeman/Soft/LanguageTool-5.9/languagetool-command
 " let g:languagetool_cmd='java -jar /usr/share/java/languagetool/languagetool-commandline.jar'
 
 "}}}
-"----------Add optional packages.-----------{{{
-
-" The matchit plugin makes the % command work better, but it is not backwards
-" compatible.
-" The ! means the package won't be loaded right away but when plugins are
-" loaded during initialization.
-if has('syntax') && has('eval')
-  packadd! matchit
-endif
-
-" }}}
 "----------Commands-------------------------{{{
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -277,9 +361,7 @@ if !exists(":DiffOrig")
 endif
 " }}}
 " ----------Funtions----------{{{
-
 " Wrap mode, move cursor by display lines when wrappong
-
 function ToggleWrap()
   if &wrap
     echo "Wrap OFF"
@@ -309,72 +391,20 @@ function ToggleWrap()
   endif
 endfunction
 
-" fonts for gvim
-" let g:fnt_types = ['SourceCode\ Pro', 'monofur' ]
-" let g:fnt_sizes = [ 10, 13 ]
+"for quickfix list
+function! QuickfixMapping()
+  " Go to the previous location and stay in the quickfix window
+  nmap <buffer> K <Plug>(qf_qf_previous)zz<C-w>w
 
-" let g:fnt_index = 0
-" let g:fnt_size  = g:fnt_sizes[g:fnt_index]
+  " Go to the next location and stay in the quickfix window
+  nmap <buffer> J <Plug>(qf_qf_next)zz<C-w>w
+endfunction
 
-" function! CycleFont()
-"   let g:fnt_index = (g:fnt_index + 1) % len(g:fnt_types)
-"   let g:fnt_size  = g:fnt_sizes[g:fnt_index]
-"   call ResetFont()
-" endfunction
-
-" function! ResetFont ()
-"   if has('gui_running')
-"     exe ':set guifont=' . g:fnt_types[g:fnt_index] . '\ ' . string(g:fnt_size)
-"   endif
-" endfunction
-
-" call ResetFont()
-
-" function! FontSizePlus ()
-"   let g:fnt_size = g:fnt_size + 0.5
-"   call ResetFont()
-" endfunction
-
-" function! FontSizeMinus ()
-"   let g:fnt_size = g:fnt_size - 0.5
-"   call ResetFont()
-" endfunction
-
-" nnoremap <leader>+ :call FontSizePlus()<cr>
-" nnoremap <leader>- :call FontSizeMinus()<cr>
-" nnoremap cot :call CycleFont()<cr>
-
-" Another version of font switch for gui
-
-if has("unix")
-    function! FontSizePlus ()
-      let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
-      let l:gf_size_whole = l:gf_size_whole + 1
-      let l:new_font_size = ' '.l:gf_size_whole
-      let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
-    endfunction
-
-    function! FontSizeMinus ()
-      let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
-      let l:gf_size_whole = l:gf_size_whole - 1
-      let l:new_font_size = ' '.l:gf_size_whole
-      let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
-    endfunction
-else
-    function! FontSizePlus ()
-      let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
-      let l:gf_size_whole = l:gf_size_whole + 1
-      let l:new_font_size = ':h'.l:gf_size_whole
-      let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
-    endfunction
-
-    function! FontSizeMinus ()
-      let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
-      let l:gf_size_whole = l:gf_size_whole - 1
-      let l:new_font_size = ':h'.l:gf_size_whole
-      let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
-    endfunction
-endif
+augroup quickfix_group
+    autocmd!
+    autocmd filetype qf call QuickfixMapping()
+augroup END
+" autocmd TextChanged * silent! write
 
 " Wrap visual selection in an JIRA {noformat} tag.
 vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
@@ -398,7 +428,6 @@ endfunction
 
 " }}}
 "----------THEMES & COLORS----------------{{{
-
 " set termguicolors "use true color
 
 " fold color
@@ -413,7 +442,6 @@ set cursorline
 highlight CursorLine ctermbg=7 cterm=none
 
 "---Solarized----
-
 " set background=light
 " let g:solarized_termcolors=256
 " let g:solarized_contrast="high"
@@ -444,10 +472,10 @@ let g:which_key_map['e'] = {
 		\ '4' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
 		\ }
 let g:which_key_map['d'] = {
-        \ 'name' : 'NERDTree' ,
-		\ 'd' : [':NERDTreeToggle', 'Open NERDTree'],
-		\ 'f' : [':NERDTreeFind', 'NERDTree to current file'],
-		\ 'c' : [':NERDTreeCWD', 'NERDTree to current dir'],
+        \ 'name' : 'Fern' ,
+		\ 'd' : [':Fern . -drawer -width=35 -toggle', 'toggles a left-hand side project drawer on a current working directory'],
+		\ 'f' : [':Fern . -drawer -reveal=% -width=35', 'opens fern and reveals the current buffer in the project tree'],
+		\ 'c' : [':Fern %:h -drawer -width=35', 'opens just the directory of sibling files of the current buffer'],
 		\ }
 nnoremap <leader>cc @='i```<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cb @='i```bash<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
@@ -490,29 +518,34 @@ let g:which_key_map['f'] = {
 nnoremap <Leader>fs 1z=
 "shell check
 " using https://www.shellcheck.net/ - install first
-nnoremap <leader>S :!clear && shellcheck %<CR>
+nnoremap <leader>a :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
 nnoremap <leader>b <Plug>VimwikiGoBackLink
 nnoremap <leader>ds1 "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 nnoremap <leader>ds2 "=strftime("%Y-%m-%d")<CR>P
 nnoremap <leader>h :split<CR>
 nnoremap <leader>j J
 nnoremap <leader>l :ls<CR>:b<space>
-nnoremap <leader>lc :LanguageToolCheck<CR>
-nnoremap <leader>lo :LanguageToolClear<CR>
 nnoremap <leader>ma :vim /$alt+\\|<A-\\|Altmap\\|M-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
 nnoremap <leader>mc :vim /<C-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
 nnoremap <leader>ms :vim /<S-\\|S-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
+nnoremap <leader>m1 :autocmd! TextChanged *<CR>
+nnoremap <leader>m2 :autocmd TextChanged * silent! write<CR>
+nnoremap <leader>m8 :LanguageToolCheck<CR>
+nnoremap <leader>m9 :LanguageToolClear<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader>p :b#<CR>
-nnoremap <leader>q :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><CR> :redraw!<CR>
+nnoremap <leader>q <Plug>(qf_qf_toggle)
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <leader>rr :source ~/.vim/vimrc<CR>
+nnoremap <leader>S :!clear && shellcheck %<CR>
 nnoremap <leader>se :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <leader>sq :%s:::g<Left><Left><Left>
 nnoremap <leader>sr :cfdo %s:::gc<Left><Left><Left><Left>
 nnoremap <leader>st :/^\*\*\*\*$<Left><Left><Left><Left><Left>
 nnoremap <leader>su :w !sudo tee % <CR><CR>
 nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
+nnoremap <leader>tb :tabnew<CR>
+nnoremap <leader>tt :term<CR>
 nnoremap <leader>v :vsplit<CR>
 nnoremap <leader>wc :Calendar<CR>
 nnoremap <leader>wd :Diary<CR>
@@ -535,6 +568,8 @@ nnoremap <Tab> >>
 " Ctrl-n/m deletes blank line below/above
 nnoremap <silent><C-m> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+" nnoremap <silent><C-u> :bnext<CR>
+" nnoremap <silent><C-i> :bprev<CR>
 
 " ALT mappings
 if !has('gui_running')
@@ -562,6 +597,8 @@ execute 'nnoremap <silent>'.Altmap('i').':set paste<CR>m`o<Esc>``:set nopaste<CR
 "Moving tabs
 execute 'nnoremap <silent>'.Altmap('r').':tabm -1<CR>'
 execute 'nnoremap <silent>'.Altmap('t').':tabm +1<CR>'
+execute 'nnoremap <silent>'.Altmap('f').':bnext<CR>'
+execute 'nnoremap <silent>'.Altmap('g').':bprev<CR>'
 "select all
 execute 'nnoremap <silent>'.Altmap('q').'ggVG'
 
@@ -571,8 +608,8 @@ nnoremap <S-h> gT
 " move to next tab
 nnoremap <S-l> gt
 nnoremap <S-Tab> <<
-nnoremap <S-j> :bnext<CR>
-nnoremap <S-k> :bprev<CR>
+" nnoremap <S-j> :bnext<CR>
+" nnoremap <S-k> :bprev<CR>
 
 " disable arrows
 noremap <Up> <Nop>
@@ -596,7 +633,8 @@ nnoremap <F7> :set fileencodings=uft-8,cp1251<CR>:e<CR>
 " nnoremap <F8> :sbnext<CR>
 nnoremap <F8> :set invpaste paste?<CR>
 set pastetoggle=<F8>
-
+nnoremap <F9> :autocmd! TextChanged *
+nnoremap <F10> :autocmd TextChanged * silent! write
 
 " ^^^^^COMAND MODE^^^^^
 "????????

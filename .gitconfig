@@ -4,3 +4,7 @@
 
 [includeIf "gitdir:~/Git/"]
     path = ~/Git/.gitconfig
+[commit]
+	verbose = true
+[init]
+	defaultBranch = main

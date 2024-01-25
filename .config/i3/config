@@ -85,14 +85,15 @@ exec_always feh --bg-fill /$HOME/.wallpapers/wp4657311-arch-solarized-wallpapers
 exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/$HOME/Soft/jd2/JDownloader2"'
 exec --no-startup-id i3-msg 'workspace 1'
 # eng-rus keyboard layout
-# exec_always --no-startup-id sbxkb
-# exec --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle,grp_led:scroll"
-exec --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:ctrl_shift_toggle,grp_led:scroll"
+# man xkeyboard-config for key combination
+# print current keyboard layout settings - setxkbmap -print
+# delete all current keyboard layout settings - setxkbmap -option
+exec --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"
 
-#Fedora
+#Soft
 exec --no-startup-id dropbox
 exec --no-startup-id flameshot
-exec --no-startup-id goldendict-ng
+exec --no-startup-id goldendict
 exec --no-startup-id $redshift_start
 exec --no-startup-id lxqt-policykit-agent
 exec --no-startup-id telegram-desktop
@@ -398,7 +399,6 @@ bindsym $mod+Shift+comma exec "i3-msg \\"focus up, move right, focus left\\""
 #---------Function Buttons--{{{
 
 bindsym $mod+F1 exec --no-startup-id $term -name dropdown_term 
-# bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim
 bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Notes.md" -v "/$HOME/Vimwiki/work/Work_Notes.md"
 bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
 # bindsym $mod+F4 exec --no-startup-id 
@@ -413,12 +413,9 @@ bindsym $mod+F11 exec "sleep 1; xset dpms force off"
 bindsym $mod+F12 mode "$mode_display" 
 
 # Flameshot for screenshots
-bindsym Print exec --no-startup-id flameshot gui -p /$HOME/Pictures/screenshots
-bindsym $mod+Print exec --no-startup-id flameshot full -p /$HOME/Pictures/screenshots
-bindsym $mod+Shift+Print exec --no-startup-id flameshot gui
-
-# bindsym $mod+F1 exec xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off --output DisplayPort-0 --off --dpi 81
-# bindsym $mod+F2 exec xrandr  --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off --output DisplayPort-0 --off --dpi 82
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+Print exec --no-startup-id flameshot screen -p /$HOME/Pictures/screenshots
+bindsym $mod+Shift+Print exec --no-startup-id flameshot gui full -p /$HOME/Pictures/screenshots
 
 #}}}
 #---------Media Keys--{{{

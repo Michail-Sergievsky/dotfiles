@@ -109,7 +109,7 @@ let $INSIDE_VIFM = 'true'
 "Openign file in vim
 " set vicmd=vim
 set vicmd="urxvt -e vim $VIMARGS --remote-tab-silent &"
-" set vicmd=vicmd &
+" set vicmd=vim &
 
 "}}}
 "----Appearance--{{{
@@ -117,6 +117,9 @@ set vicmd="urxvt -e vim $VIMARGS --remote-tab-silent &"
 
 " List of color schemes to try (picks the first one supported by the terminal)
 colorscheme solarized-light-256 Default-256 Default
+
+"devicons from vim
+source ~/.config/vifm/favicons.vifm
 
 "Each flag configures some aspect of TUI appearance. s - left/rigth borders
 set tuioptions="pv"
@@ -225,6 +228,15 @@ mark V ~/Vagrant
 
 " }}}
 " ----Commands------------------{{{
+"  source bash alias, first must create with bash_alias_to_vifm_commands.sh
+so ~/.config/vifm/vifm_aliases
+" silently extract selected archives in background
+" command extract aunpack -e %f &>/dev/null &
+" unpack selected archivers
+command extract aunpack %f &>/dev/null &
+" archive the selection with :archive <filename.ext>
+command archive apack %a %f &>/dev/null &
+"git alias config for dotfile-git manipulation
 command! config /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME %a %S
 command! df df -h %m 2> /dev/null
 command! diff vim -d %f %F
@@ -241,6 +253,9 @@ command! print lp -n 1 -o sides=two-sided-long-edge %f
 command! reload :write | restart full
 " run script
 command! run !! ./%f
+" a sanitation command that would replace all spaces and various OS's reserved
+" characters from file names and directory names?
+command! sanitize :tr/ ?<>\\:*|"/__________
 command! targetm :let $VIMARGS = '--servername MAIN'
 command! target :let $VIMARGS = '--servername "%a"'
 command! vgrep vim "+grep %a"
@@ -249,48 +264,32 @@ command! zip zip -r %f.zip %f
 "search files with plocate
 " variation that automatically enters directories
 command! fzflocate : set noquickview
-                  \| let $FZF_PICK = term('locate $HOME | fzf --height 10 2>/dev/tty')
+                  \| let $FZF_PICK = term('locate $HOME | fzf --height 30 2>/dev/tty')
                   \| if $FZF_PICK != ''
                   \|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
                   \| endif
-
-"search files with find
+"search files with fd
 command! fzffind : set noquickview
-                \| let $FZF_PICK = term('find | fzf --height 10 2>/dev/tty')
+                \| let $FZF_PICK = term('fd | fzf --height 30 2>/dev/tty')
                 \| if $FZF_PICK != ''
                 \|     execute 'goto' fnameescape($FZF_PICK)
                 \| endif
-
 "search dir with fd & enter it
 command! fzfcd : let $FZF_RES = term('fd --type d . %a --hidden --exclude .git | fzf 2> /dev/tty')
               \| if $FZF_RES != ''
               \|     execute 'cd' fnameescape($FZF_RES)
               \| endif
-
 "search in text files with rg
 command! fzfinfiles :let $FZF_PICK = term('fzfsearchtextfiles.sh %a 2>/dev/tty')
                    \| if $FZF_PICK != ''
                    \|     execute 'goto' fnameescape($FZF_PICK)
                    \| endif
-
 "search in pdf files with pdfgrep
 "TODO - create preview
 command! fzfinpdffiles :let $FZF_PICK = term('fzfsearchpdffiles.sh %a 2>/dev/tty')
                    \| if $FZF_PICK != ''
                    \|     execute 'goto' fnameescape($FZF_PICK)
                    \| endif
-
-" a sanitation command that would replace all spaces and various OS's reserved
-" characters from file names and directory names?
-command! sanitize :tr/ ?<>\\:*|"/__________
-
-" silently extract selected archives in background
-" command extract aunpack -e %f &>/dev/null &
-" unpack selected archivers
-command extract aunpack %f &>/dev/null &
-" archive the selection with :archive <filename.ext>
-command archive apack %a %f &>/dev/null &
-
 " toggle between sorting: by name <--> by size <--> by mtime
 command! togglesort
          \ :if &sort == '-size,+name'
@@ -303,7 +302,6 @@ command! togglesort
          \ |    set sort=+iname
          \ |    echo 'Sorted by name'
          \ |endif
-
 command! cmpinternal compare-cmd %a %S
 "?????
 command! cmp : if expand('%%c') == expand('%%f')
@@ -312,9 +310,6 @@ command! cmp : if expand('%%c') == expand('%%f')
               \ | else
               \ |     echo expand('Comparing files: %%"f ...')
               \ |     cmpinternal %f \ | endif
-
-
-
 "}}}
 "----Executing programms---------------{{{
 "	 COMMON FILES
@@ -538,15 +533,16 @@ filetype *.tudu tudu -f %c
 filextype *.pro qtcreator %f &
 "}}}
 "----Keyboard Mappings-------------{{{
+
 "<wait> - will trigger pause
 "<wait> has no effect for single-character mappings
 "<silent> - not show command line execution
+
 "Ctrl
 nnoremap <C-f> <c-w>x
 nnoremap <C-b> :sync<CR>
 nnoremap <C-n> <Nop>
 nnoremap <C-p> <Nop>
-nnoremap <C-c> <Nop>
 " nnoremap <C-t> :tabnew<cr>
 " nnoremap <C-c> :tabclose<cr>
 " nnoremap <C-p> gT
@@ -560,8 +556,8 @@ nnoremap <silent> <C-l> :if paneisat('right')  | execute '!tmux select-pane -R %
 nnoremap <silent> <bs>  :if paneisat('left')   | execute '!tmux select-pane -L %i' | else | execute 'wincmd h' | endif<cr>
 " Alt
 " previous folders, NOT WORK
-nnoremap <A-p> [R
-nnoremap <A-n> ]R
+" nnoremap <A-p> [R
+" nnoremap <A-n> ]R
 
 " Other symbols
 nnoremap - <C-w>5<
@@ -747,102 +743,7 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-"----GETTING ICONS TO DISPLAY IN VIFM   {{{
-" https://github.com/sebastiencs/icons-in-terminal
-" yay -S icons-in-terminal-git
 
-" Filetypes/directories
-set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
-"Dir
-set classify+=' ::.config/::/,
-	\  ::.vifm-trash/::/,
-	\  ::Documents/::/,
-	\  ::Downloads/::/,
-	\  ::Google\ Drive/::/,
-	\  ::Music/::/,
-	\  ::Pictures/::/,
-	\  ::Videos/::/'
-
-" Specific files
-set classify+=' ::.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc,,.dmrc,,.d_store,,.fasd,,.gitconfig,,.gitignore,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.xinitpurc,,.zprofile,,.yarnc,,.snclirc,,.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs,,.mimeapps.list,,.offlineimaprc,,.msmtprc,,.Xauthority,,config::,
-			\  ::dropbox::,
-			\  ::favicon.*,,README,,readme::,
-			\  ::.vim,,.vimrc,,.gvimrc,,.vifm::,
-			\  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::,
-			\  ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::,
-			\  ::ledger::,
-			\  ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::,
-			\  ::node_modules::,
-			\  ::react.jsx::'
-
-" File extensions
-set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz,,*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm,,*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::,
-			\  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.opus,,*.ac3::,
-			\  ::*.avi,,*.divx,,*.flv,,*.m2v,,*.m4v,,*.ts,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.wmv,,*.vob,,*.qt,,*.webm::,
-			\  ::*.pdf::,
-			\  ::*.djvu::,
-			\  ::*.epub,,*.fb2,,*.mobi,,*.azw3::,
-			\  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz,,*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip::,
-			\  ::*.cbr,,*.cbz::,
-			\  ::*.log::,
-			\  ::*.doc,,*.docx,,*.odt,,*.adoc::,
-			\  ::*.xls,,*.xlsx,,*.odt,,*.xlsmx::,
-			\  ::*.pptx,,*.odp,,*.ppt::,
-			\  ::*.fish,,*.sh,,*.bash::,
-			\ 﫭::*.iso::,
-			\  ::*.torrent::,
-			\  ::*.xspf::,
-			\  ::*.h264,,*.h265::,
-			\  ::*.srt,,*.ass,,*.ssa::,
-			\  ::*.otf,,*.ttf::,
-			\  ::*.part::,
-			\  ::*.desktop::,
-			\  ::*.txt::,
-			\  ::*.mdb,,*.accdb::'
-" coding
-set classify+='λ ::*.ml,,*.mli::,
-			\  ::*.styl::,
-			\  ::*.scss::,
-			\  ::*.py,,*.pyc,,*.pyd,,*.pyo::,
-			\  ::*.php::,
-			\  ::*.markdown,,*.md::,
-			\  ::*.json::,
-			\  ::*.js::,
-			\  ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::,
-			\  ::*.mustasche::,
-			\  ::*.css,,*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg,,*.rc::,
-			\  ::*.rss::,
-			\  ::*.coffee::,
-			\  ::*.twig::,
-			\  ::*.c++,,*.cpp,,*.cxx,,*.h::,
-			\  ::*.cc,,*.c::,
-			\  ::*.hs,,*.lhs::,
-			\  ::*.lua::,
-			\  ::*.jl::,
-			\  ::*.go::,
-			\  ::*.ts::,
-			\  ::*.db,,*.dump,,*.sql::,
-			\  ::*.sln,,*.suo::,
-			\  ::*.exe::,
-			\  ::*.diff,,*.sum,,*.md5,,*.sha512::,
-			\  ::*.scala::,
-			\  ::*.java,,*.jar::,
-			\  ::*.xul::,
-			\  ::*.clj,,*.cljc::,
-			\  ::*.pl,,*.pm,,*.t::,
-			\  ::*.cljs,,*.edn::,
-			\  ::*.rb::,
-			\  ::*.dart::,
-			\  ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::,
-			\  ::*.rlib,,*.rs::,
-			\  ::*.d::,
-			\  ::*.erl,,*.hrl::,
-			\  ::*.ai::,
-			\  ::*.psb,,*.psd::,
-			\  ::*.jsx::,
-			\  ::.git/,,*.git/::'
-
-" }}}
 "---- TESTING-------{{{
 
 

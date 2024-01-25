@@ -451,12 +451,12 @@
  <programs/>
  <voiceEngines/>
  <mutedDictionaries>
-  <mutedDictionary>815cd1c85aca4f6721fc83187f552074</mutedDictionary>
-  <mutedDictionary>7c0bfb0e44bf707bb1dc5f070bba43ae</mutedDictionary>
+  <mutedDictionary>343dff6611e4e40047449c91811c2983</mutedDictionary>
   <mutedDictionary>a3b7c19d8a85cd84b93b3f85ee421743</mutedDictionary>
   <mutedDictionary>be8774515d3696bb7dfeeb659d247249</mutedDictionary>
   <mutedDictionary>59afc51d67580af2ad83717b30f7aeb9</mutedDictionary>
-  <mutedDictionary>343dff6611e4e40047449c91811c2983</mutedDictionary>
+  <mutedDictionary>815cd1c85aca4f6721fc83187f552074</mutedDictionary>
+  <mutedDictionary>7c0bfb0e44bf707bb1dc5f070bba43ae</mutedDictionary>
  </mutedDictionaries>
  <popupMutedDictionaries/>
  <preferences>
@@ -558,11 +558,11 @@
  <lastMainGroupId>5</lastMainGroupId>
  <lastPopupGroupId>5</lastPopupGroupId>
  <popupWindowState>AAAA/wAAAAD9AAAAAAAAAgUAAAGTAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywADAAAAAAFvAAABrAAAA5sAAAM+AAABbwAAAawAAAObAAADPgAAAAAAAAAAB4AAAAFvAAABrAAAA5sAAAM+</popupWindowGeometry>
+ <popupWindowGeometry>AdnQywADAAAAAAT/AAACigAABysAAAQcAAAE/wAAAooAAAcrAAAEHAAAAAAAAAAAB4AAAAT/AAACigAABysAAAQc</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
  <popupWindowAlwaysOnTop>0</popupWindowAlwaysOnTop>
  <mainWindowState>AAAA/wAAAAD9AAAAAgAAAAAAAAELAAAB3/wCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUBAAAAOwAAAd8AAACHAP///wAAAAEAAACOAAAB3/wCAAAAA/sAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAADsAAACcAAAAYQD////7AAAAGgBmAGEAdgBvAHIAaQB0AGUAcwBQAGEAbgBlAQAAAN0AAACbAAAAYQD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABfgAAAJwAAABhAP///wAAAeoAAAHfAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgEAAAF9/////wAAAAAAAAAA</mainWindowState>
- <mainWindowGeometry>AdnQywADAAAAAAI7AAABNAAABdMAAANXAAACQAAAATkAAAXOAAADUgAAAAAAAAAAB4AAAAJAAAABOQAABc4AAANS</mainWindowGeometry>
+ <mainWindowGeometry>AdnQywADAAAAAAJFAAABPgAABd0AAANhAAACSgAAAUMAAAXYAAADXAAAAAAAAAAAB4AAAAJKAAABQwAABdgAAANc</mainWindowGeometry>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
  <dictionariesDialogGeometry>AdnQywADAAAAAAKvAAABMAAABm4AAANNAAACtAAAATUAAAZpAAADSAAAAAAAAAAAB4AAAAK0AAABNQAABmkAAANI</dictionariesDialogGeometry>

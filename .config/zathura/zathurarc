@@ -10,12 +10,12 @@ set incremental-search true
 set smooth-scroll true
 set adjust-open width
 
-set statusbar-basename true
+# set statusbar-basename true
 set statusbar-home-tilde true
 set window-title-home-tilde true
 
 set font "SF Mono Bold 11"
-set guioptions v
+# set guioptions v
 
 set default-bg "#1e222b"
 set default-fg "#8e9299"

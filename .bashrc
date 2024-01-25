@@ -15,13 +15,16 @@ fi
 bind "set completion-ignore-case on"
 
 export HISTCONTROL=ignoreboth
+# show timestamp in history
+# export HISTTIMEFORMAT="%F %T "
 
 #for vifm [bash aliases] NOT working
 # shopt -s expand_aliases
 # unset BASH_ENV
-set shellcmdflag=-lc
+# set shellcmdflag=-lc
 
 #Prompt
+# export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 # 30m - color
 PS1="\[\033[00;30m\]\u\
 \[$(tput sgr0)\]\[\033[00;34m\]@\
@@ -38,8 +41,6 @@ if [ -n "$INSIDE_VIFM" ]; then
     PS1="[V]$PS1"
     unset INSIDE_VIFM
 fi
-
-# export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 
 #Arch pkgfile
 source /usr/share/doc/pkgfile/command-not-found.bash
@@ -68,9 +69,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-y:execute-silent(echo {+} | xclip -selection clipboard)'
 --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
 "
-#---------fzf
 #functions
-
 _fzf_compgen_path() {
     fd . "$1"
 }
@@ -78,12 +77,16 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
     fd --type d . "$1"
 }
+_fzf_complete_git() {
+  _fzf_complete -- "$@" < <(
+    git --help -a | grep -E '^\s+' | awk '{print $1}'
+  )
+}
 
 # Git command line
 function parse_git_branch() 
 {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
-
 
 neofetch
