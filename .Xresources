@@ -64,13 +64,20 @@
 !	URxvt Appearance
 
 !fonts to use
+!fc-list | awk '{print $1}' | sed 's/://g'
+! show installed fonts
 URxvt.*.font: xft:SFMono Nerd Font Mono:style=Regular:size=10
 URxvt.*.boldFont: xft:SFMono Nerd Font Mono:style=Bold:size=10
 URxvt.*.italicFont: xft:SFMono Nerd Font Mono:style=Italic:size=10
 URxvt.*.boldItalicFont: xft:SFMono Nerd Font Mono:style=Bold Italic:size=10
+/* URxvt.*.font: xft:SymbolsNerdFont-Regular:style=Regular:size=10 */
+/* URxvt.*.boldFont: xft:SymbolsNerdFont-Regular:style=Bold:size=10 */
+/* URxvt.*.italicFont: xft:SymbolsNerdFont-Regular:style=Italic:size=10 */
+/* URxvt.*.boldItalicFont: xft:SymbolsNerdFont-Regular:style=Bold Italic:size=10 */
 
 !space between characters
 URxvt.letterSpace: -1
+/* URxvt.letterSpace: -9 */
 !space between characters vertically
 URxvt.lineSpace: 0
 !window geometry
