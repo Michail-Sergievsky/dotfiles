@@ -42,12 +42,14 @@ set smartcase                   " set smartcase for search
 " set splitbelow splitright
 " set spell                     " set spellchecking
 set spelllang=en_us,ru_ru
+" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " set statusline=%f%m%r%h%w\ [%Y]\ [0x%02.2B]%<\ %F%=%4v,%4l\ of\ %L\ %3p%%
 set ttimeout		            " time out for key codes
 set ttimeoutlen=500	            " wait up to 500ms after Esc for special key
 set vb "disable beep sound
 set wildmenu		            " display completion matches in a status line
 set wildmode=longest,list,full  " wildmode insertions
+set updatetime=250				" for vimgutter
 syntax enable                   " Switch syntax highlighting on
 filetype on
 
@@ -183,6 +185,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 " For problems with git promtp - use full url
+Plug 'airblade/vim-gitgutter'
 Plug 'brianrodri/vim-sort-folds'
 Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -192,18 +195,21 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'lambdalisue/fern-git-status.vim'
 Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-mapping-git.vim'
+Plug 'lambdalisue/fern-mapping-project-top.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern-ssh'
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/nerdfont.vim'
-Plug 'lambdalisue/fern-mapping-git.vim'
-Plug 'lambdalisue/fern-ssh'
-Plug 'lambdalisue/fern-mapping-project-top.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'mattn/calendar-vim'
 Plug 'romainl/vim-qf'
 Plug 'stefandtw/quickfix-reflector.vim'
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-speeddating' 
 Plug 'tpope/vim-unimpaired'
@@ -311,6 +317,9 @@ let g:airline_powerline_fonts=1
 " let g:airline#extensions#tabline#formatter = 'unique_tail' " file-name.js
 " let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " f/p/file-name.js
 
+" enable fugitive statusline - work without it
+" let g:airline#extensions#branch#enabled = 1
+" let g:airline_section_b = "%3p"
 let g:airline#extensions#whitespace#enabled = 0 
 let g:airline_theme='solarized'
 "Reduces the space occupied by section z
@@ -321,7 +330,6 @@ let g:airline_theme='solarized'
 " Note: You must define the dictionary first before setting values.
 " Also, it's a good idea to check whether it exists as to avoid
 " accidentally overwriting its contents.
-
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -339,6 +347,11 @@ let g:airline_symbols.whitespace = 'Ξ'
 " If you only see boxes here it may be because your system doesn't have
 " the correct fonts. Try it in vim first and if that fails see the help
 " pages for vim-airline :help airline-troubleshooting
+
+" FURGITIVE
+
+"Vimgutter
+let g:gitgutter_map_keys = 0
 
 " Languagetool
 " not work with modern version of Languagetool
@@ -522,6 +535,25 @@ nnoremap <leader>a :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><C
 nnoremap <leader>b <Plug>VimwikiGoBackLink
 nnoremap <leader>ds1 "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 nnoremap <leader>ds2 "=strftime("%Y-%m-%d")<CR>P
+nnoremap <leader>gb :Git blame<CR>
+nnoremap <leader>gc :Git commit<CR>
+nnoremap <leader>gdf :Gdiff<CR>
+nnoremap <leader>gdh :Ghdiffsplit<CR>
+" fetches the hunk from the merge parent (on the right)
+nnoremap <leader>gdj :diffget //3<CR>
+" fetches the hunk from the target parent (on the left)
+" CHECK if need to add :diffupdate
+nnoremap <leader>gdf :diffget //2<CR>
+nnoremap <leader>gdv :Gvdiffsplit<CR>
+nnoremap <leader>gg :GBrowse<CR>
+nnoremap <leader>ghl :GitGutterLineHighlightsToggle<CR>
+nnoremap <leader>ghp <Plug>(GitGutterPreviewHunk)
+nnoremap <leader>ghs <Plug>(GitGutterStageHunk)
+nnoremap <leader>ghu <Plug>(GitGutterUndoHunk)
+nnoremap <leader>gl :Gclog<CR>
+nnoremap <leader>grr :Gread<CR>
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>h :split<CR>
 nnoremap <leader>j J
 nnoremap <leader>l :ls<CR>:b<space>
@@ -559,6 +591,8 @@ nnoremap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
 nnoremap <leader>x :close<CR>
 " refocus folds; close any other fold except the one that you are on
 nnoremap <leader>z zMzvzz
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 "Esc
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
