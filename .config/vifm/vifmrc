@@ -588,11 +588,12 @@ nnoremap <wait>bm :move!<cr>
 nnoremap <wait>bj :jobs<cr>
 nnoremap <wait>cx :!chmod +x %f<cr>
 nnoremap <wait>ca :!config add %c<cr>
-nnoremap <wait>cdcs :cd /$HOME/.scripts<cr>
-nnoremap <wait>cdcv :cd /$HOME/.vim<cr>
+nnoremap <wait>cdca :cd /$HOME/.ansible/<cr>
 nnoremap <wait>cdcc :cd /$HOME/.config<cr>
 nnoremap <wait>cdcf :cd /$HOME/.config/vifm<cr>
 nnoremap <wait>cdch :cd /$HOME/.ssh<cr>
+nnoremap <wait>cdcs :cd /$HOME/.scripts<cr>
+nnoremap <wait>cdcv :cd /$HOME/.vim<cr>
 nnoremap <wait>cv1 :!!/$HOME/.scripts/medio_editing/switch_subtitles_default.sh 2>&1<CR>
 " nnoremap <wait>f <Nop>
 nnoremap <wait>fc :fzfcd<cr> 
