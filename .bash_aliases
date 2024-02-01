@@ -15,8 +15,8 @@ alias ll='ls --group-directories-first -lHAv'
 
 #start_alias
 alias upd='sudo pacman -Syu && yay -Syu'
-alias vpnon='wg-quick up wg-client'
-alias vpnoff='wg-quick down wg-client'
+alias vpnon='wg-quick up wg-pc-client'
+alias vpnoff='wg-quick down wg-pc-client'
 alias vpnkron='sudo systemctl start openvpn-client@media-tel-vpn'
 alias vpnkroff='sudo systemctl stop openvpn-client@media-tel-vpn'
 alias vpnkrst='systemctl status openvpn-client@media-tel-vpn'

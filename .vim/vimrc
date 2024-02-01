@@ -168,6 +168,9 @@ au WinLeave * setlocal nocursorline
 " ansible inventory yaml
 autocmd BufRead,BufNewFile ~/Git/*/inventory/* set filetype=yaml
 autocmd BufRead,BufNewFile ~/Git/*/*/group_vars/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/.ansible/*/inventory/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/.ansible/*/group_vars/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/.ansible/*/*.yml set filetype=yaml
 
 
 " }}}
