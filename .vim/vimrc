@@ -164,6 +164,10 @@ au WinLeave * setlocal nocursorline
 " autocmd BufReadPost,BufNewFile,BufRead  *.txt  set filetype=txt
 " autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
 
+" In the quickfix window, <CR> is used to jump to the error under the
+" cursor, so undefine the mapping there.
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
 " Working projects
 " ansible inventory yaml
 autocmd BufRead,BufNewFile ~/Git/*/inventory/* set filetype=yaml
