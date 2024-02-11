@@ -284,6 +284,11 @@ command! fzfinfiles :let $FZF_PICK = term('fzfsearchtextfiles.sh %a 2>/dev/tty')
                    \| if $FZF_PICK != ''
                    \|     execute 'goto' fnameescape($FZF_PICK)
                    \| endif
+"search in media base with rg
+command! fzfinmedia :let $FZF_PICK = term('fzfsearchmedia.sh %a 2>/dev/tty')
+                   \| if $FZF_PICK != ''
+                   \|     execute 'goto' fnameescape($FZF_PICK)
+                   \| endif
 "search in pdf files with pdfgrep
 "TODO - create preview
 command! fzfinpdffiles :let $FZF_PICK = term('fzfsearchpdffiles.sh %a 2>/dev/tty')
@@ -594,13 +599,14 @@ nnoremap <wait>cdcf :cd /$HOME/.config/vifm<cr>
 nnoremap <wait>cdch :cd /$HOME/.ssh<cr>
 nnoremap <wait>cdcs :cd /$HOME/.scripts<cr>
 nnoremap <wait>cdcv :cd /$HOME/.vim<cr>
-nnoremap <wait>cv1 :!!/$HOME/.scripts/medio_editing/switch_subtitles_default.sh 2>&1<CR>
+nnoremap <wait>cv1 :!!/$HOME/.scripts/medio_editing/switch_audio_and_subtitles_default.sh 2>&1<CR>
 " nnoremap <wait>f <Nop>
 nnoremap <wait>fc :fzfcd<cr> 
 nnoremap <wait>ff :fzflocate<cr>
 nnoremap <wait>fd :locate<space>
 nnoremap <wait>fp :fzfinpdffiles<space>""<Left>
 nnoremap <wait>ft :fzfinfiles<space>""<Left>
+nnoremap <wait>fm :fzfinmedia<space>""<Left>
 nnoremap <wait>fz :fzffind<cr> 
 nnoremap <wait>gc :!!git clone<space>
 " nnoremap <wait>gs :!!git status<CR>

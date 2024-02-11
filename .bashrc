@@ -11,6 +11,11 @@ if [ -f ~/.bash_aliases ]; then
 . ~/.bash_aliases
 fi
 
+#export private variables
+if [ -f ~/.env_priv ]; then
+. ~/.env_priv
+fi
+
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
 
@@ -79,6 +84,16 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-y:execute-silent(echo {+} | xclip -selection clipboard)'
 --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
 "
+# Shell-GPT integration BASH v0.2
+_sgpt_bash() {
+if [[ -n "$READLINE_LINE" ]]; then
+    READLINE_LINE=$(sgpt --shell <<< "$READLINE_LINE" --no-interaction)
+    READLINE_POINT=${#READLINE_LINE}
+fi
+}
+bind -x '"\C-l": _sgpt_bash'
+# Shell-GPT integration BASH v0.2
+
 #functions
 _fzf_compgen_path() {
     fd . "$1"
