@@ -370,6 +370,10 @@ let g:languagetool_jar='/home/freeman/Soft/LanguageTool-5.9/languagetool-command
 " let g:languagetool_cmd='/sbin/languagetool'
 " let g:languagetool_cmd='java -jar /usr/share/java/languagetool/languagetool-commandline.jar'
 
+"MarkdownPreview Config
+
+
+
 "}}}
 "----------Commands-------------------------{{{
 " Convenient command to see the difference between the current buffer and the
