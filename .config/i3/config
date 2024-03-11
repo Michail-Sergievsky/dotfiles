@@ -289,8 +289,8 @@ bindsym $mod+v split v
 # bindsym $mod+c split h
 
 # parent/child
-bindsym $mod+p focus parent
-bindsym $mod+Shift+p focus child
+bindsym $mod+z focus parent
+bindsym $mod+Shift+z focus child
 
 bindsym $mod+f fullscreen toggle
 
@@ -385,6 +385,8 @@ bindsym $mod+d exec --no-startup-id "rofi -combi-modi drun,run -font 'hack 12' -
 bindsym $mod+s exec --no-startup-id rofi -show blezz -modi blezz -auto-select -matching normal 
 # rofi-greeclip
 bindsym $mod+a exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+# rofi-pass
+bindsym $mod+p exec --no-startup-id "rofi-pass"
 # run commands from shell - DOS'T WORK!
 # bindsym $mod+t exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 

@@ -240,13 +240,13 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown'
 " Final exp
 let g:vimwiki_root = '~/Vimwiki'
 let g:vimwiki_list = [
-            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/server', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/study', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/notes', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/selfimprove', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/culture', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
