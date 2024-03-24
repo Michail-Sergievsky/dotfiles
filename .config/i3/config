@@ -82,7 +82,7 @@ exec_always feh --bg-fill /$HOME/.wallpapers/wp4657311-arch-solarized-wallpapers
 #---------Autostart applications-----{{{
 
 # move all download apps to ws6 then return to ws1
-exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/$HOME/Soft/jd2/JDownloader2"'
+exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/$HOME/.soft/jd2/JDownloader2"'
 exec --no-startup-id i3-msg 'workspace 1'
 # eng-rus keyboard layout
 # man xkeyboard-config for key combination
@@ -207,7 +207,7 @@ exec --no-startup-id $term -name dropdown_term
 bindsym $mod+b [class="^URxvt$" instance="^dropdown_term"] scratchpad show; [class="^URxvt$" instance="^dropdown_term"] move position center
 
 # exec --no-startup-id $term -name dropdown_notes -e vim
-exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Notes.md" -v "/$HOME/Vimwiki/work/Work_Notes.md"
+exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md" -v "/$HOME/Vimwiki/work/index.md" -v "/$HOME/Vimwiki/notes/index.md" -v "/$HOME/Vimwiki/lists/index.md" -v "/$HOME/Vimwiki/links/index.md"
 bindsym $mod+n [class="^URxvt$" instance="^dropdown_notes"] scratchpad show; [class="^URxvt$" instance="^dropdown_notes"] move position center
 
 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
@@ -401,7 +401,7 @@ bindsym $mod+Shift+comma exec "i3-msg \\"focus up, move right, focus left\\""
 #---------Function Buttons--{{{
 
 bindsym $mod+F1 exec --no-startup-id $term -name dropdown_term 
-bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Notes.md" -v "/$HOME/Vimwiki/work/Work_Notes.md"
+bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md" -v "/$HOME/Vimwiki/work/index.md" -v "/$HOME/Vimwiki/notes/index.md" -v "/$HOME/Vimwiki/lists/index.md" -v "/$HOME/Vimwiki/links/index.md"
 bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
 # bindsym $mod+F4 exec --no-startup-id 
 # bindsym $mod+F5 exec --no-startup-id 

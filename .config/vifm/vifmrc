@@ -177,10 +177,6 @@ set statusline+='%[ +%x%]'
 "----Marks----------------{{{
 " :mark mark /full/directory/path [filename]
 
-mark e /etc
-mark u /usr/share
-mark R /
-
 mark 0 ~/Videos/!convert
 mark 1 ~/Documents
 mark 2 ~/Documents/docs
@@ -191,12 +187,26 @@ mark 6 ~/.steam/steam/steamapps/common/
 mark 7 ~/.ssh
 mark 8 ~/DiskD
 mark 9 ~/DiskE
+mark A ~/.ansible
+mark B ~/Books
+mark C ~/.config
+mark D ~/Documents
+mark F ~/Foto
+mark G ~/Git_work
+mark L ~/Learn
+mark M ~/Music
+mark R /
+mark S ~/Study
+mark T ~/Downloads/t_done
+mark V ~/Vagrant
+mark W ~/Work_smy
 mark a ~/Music/audiobooks_1_main
 mark b ~/Books
 mark c ~/Media/home/comics
 mark d ~/Downloads
+mark e /etc
 mark f ~/Foto
-mark g ~/Git
+mark g ~/Git_smy
 mark h ~/
 mark i ~/Knowledge/!IT_articles
 mark j ~/Knowledge/japan,anime,manga
@@ -209,22 +219,12 @@ mark p ~/Pictures
 mark r ~/Recordings
 mark s ~/Stuff
 mark t ~/Temp
+mark u /usr/share
 mark v ~/Videos
 mark w ~/Work
 mark x ~/.config/vifm
 mark y ~/Media/home
 mark z ~/.vim
-mark A ~/.ansible
-mark B ~/Books
-mark C ~/.config
-mark D ~/Documents
-mark F ~/Foto
-mark M ~/Music
-" mark P /~/Pictures
-mark S ~/Study
-mark T ~/Downloads/t_done
-" mark U 
-mark V ~/Vagrant
 
 " }}}
 " ----Commands------------------{{{
@@ -382,10 +382,10 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mpg,*.mpeg,*.vob,
 fileviewer {*.mkv} mkvscan.sh %c 2>&1
 "vlc playlist
 filextype {*.xspf} vlc %c %i &
-"open mkv in mkvtoolnix-gui
-filextype {*.mkv} mkvtoolnix-gui %f %i &
+"open in mkvtoolnix-gui
+filextype {*.mkv,*.mp4} mkvtoolnix-gui %f %i &
 "open mkv in inviska
-filextype {*.mkv} /$HOME/Soft/Inviska_MKV_Extract-11.0-x86_64.AppImage %f %i &
+filextype {*.mkv} /$HOME/.soft/Inviska_MKV_Extract-11.0-x86_64.AppImage %f %i &
 " Fonts
 fileviewer <font/*>
 	\ vifmimg font %px %py %pw %ph %c

@@ -32,12 +32,12 @@ act(v,VirtualBox,VirtualBox)
 act(w,Wireshark,wireshark)
 
 Download:
-act(j,JDownload,/bin/sh "/home/freeman/Soft/jd2/JDownloader2")
+act(j,JDownload,/bin/sh "/home/freeman/.soft/jd2/JDownloader2")
 act(q,qBittorrent,qbittorrent)
 act(t,Transmission Remote GUI,transgui)
 
 MediaWork:
-act(e,Inviska,/home/freeman/Soft/Inviska_MKV_Extract-11.0-x86_64.AppImage)
+act(e,Inviska,/home/freeman/.soft/Inviska_MKV_Extract-11.0-x86_64.AppImage)
 act(f,fre:ac,freac)
 act(h,Handbreake,ghb)
 act(i,Mediainfo-gui,mediainfo-gui)

@@ -66,7 +66,8 @@ set undofile " Maintain undo history
 set undodir=~/.vim/undodir
 set undolevels=10000     " Maximum number of changes that can be undone
 set undoreload=10000
-
+" set vimwiki tags
+set tags+=$HOME/Vimwiki/tags.wiki
 "Langmap for Russian layout
 "no <">, <?>, <;>, </> - try to find way to write in codes
 " set langmap=!№%*ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;!#%*`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -233,25 +234,40 @@ let g:vimwiki_hl_headers = 1
 let g:vimwiki_conceal_pre = 1
 let g:vimwiki_url_maxsave = 0
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-" let g:vimwiki_nested_syntaxes = {'python': 'python', 'bash':'bash', 'sql':'sql', 'msql':'msql', 'git':'git',
-"             \'gitcommit':'gitcommint', 'vim':'vim', 'viminfo':'viminfo', 'c':'c', 'c++': 'cpp', 'conf':'conf',
-"             \'config':'config', 'cfg':'cfg', 'cmake':'cmake', 'diff':'diff', 'zsh':'zsh',
-"             \'xdefaults':'xdefaults'}
+let g:vimwiki_nested_syntaxes = {'python': 'python', 'bash':'bash', 'sql':'sql', 'msql':'msql', 'git':'git',
+            \'gitcommit':'gitcommint', 'vim':'vim', 'viminfo':'viminfo', 'c':'c', 'c++': 'cpp', 'conf':'conf',
+            \'config':'config', 'cfg':'cfg', 'cmake':'cmake', 'diff':'diff', 'zsh':'zsh',
+            \'xdefaults':'xdefaults'}
 " Final exp
 let g:vimwiki_root = '~/Vimwiki'
 let g:vimwiki_list = [
+            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/notes', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/lists', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/links', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/selfimprove', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/culture', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
             \{'path': '~/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
-command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
-" auto_diary_index - dos't work!! wait for update
+" let g:vimwiki_map_prefix = '<Plug>'
+" let g:vimwiki_no_default_links = 1
+
+" command! Diary exe 'VimwikiDiaryIndex' | exe 'norm ggdGo' | exe 'VimwikiDiaryGenerateLinks' | exe 'norm zR'
+" return to wiki diary and generate links
+command! Diary exe 'VimwikiDiaryIndex' | exe 'VimwikiDiaryGenerateLinks'
+
+function! VimwikiFindIncompleteTasks()
+  lvimgrep /- \[ \]/ %:p
+  lopen
+endfunction
+
+function! VimwikiFindAllIncompleteTasks()
+  VimwikiSearch /- \[ \]/
+  lopen
+endfunction
 "-----------------------------
 
 " FERN
@@ -386,6 +402,19 @@ if !exists(":DiffOrig")
 endif
 " }}}
 " ----------Funtions----------{{{
+" Creating tags
+function! AddTag(tagname)
+    let tagname = input('Tag name: ', a:tagname, 'tag')
+    let tagfile = expand('%:p')
+    let tagaddress = input('Address: ', '/\<' . a:tagname . '\>/')
+    if (tagname == ''  || tagaddress == '')
+        return
+    endif
+    let cmd = '!echo -e "' . tagname . '\t' . tagfile .
+        '\t' . tagaddress . '" >> ' . $HOME . '/tags.global'
+    execute cmd
+endfunction
+
 " Wrap mode, move cursor by display lines when wrappong
 function ToggleWrap()
   if &wrap
@@ -590,16 +619,23 @@ nnoremap <leader>su :w !sudo tee % <CR><CR>
 nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
 nnoremap <leader>tb :tabnew<CR>
 nnoremap <leader>tt :term<CR>
+nmap ,tt yiw:call AddTag('<C-R>"')<CR>
+vmap ,t y:call AddTag('<C-R>"')<CR>
+nnoremap <leader>tn :VimwikiTable 
+nnoremap <leader>tl :VimwikiTableMoveColumnLeft<CR>
+nnoremap <leader>tr :VimwikiTableMoveColumnRight<CR>
 nnoremap <leader>v :vsplit<CR>
 nnoremap <leader>wc :Calendar<CR>
-nnoremap <leader>wd :Diary<CR>
-nnoremap <leader>wg <Plug>VimwikiGoto
-nnoremap <leader>wn <Plug>VimwikiMakeDiaryNote
-nnoremap <leader>wp <Plug>VimwikiDiaryIndex
-nnoremap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote
-nnoremap <leader>wu <Plug>VimwikiDiaryGenerateLinks
-nnoremap <leader>wx <Plug>VimwikiDeleteFile
-nnoremap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote
+nnoremap <leader>wd <Plug>VimwikiDeleteFile<CR>
+nnoremap <leader>wi :Diary<CR>
+nnoremap <leader>wn <Plug>VimwikiMakeDiaryNote<CR>
+nnoremap <leader>wr <Plug>VimwikiRenameFile<CR>
+nnoremap <leader>ws <Plug>VimwikiUISelect
+nnoremap <leader>wt <Plug>VimwikiMakeTomorrowDiaryNote<CR>
+nnoremap <leader>ww <Plug>VimwikiIndex<CR>
+nnoremap <leader>wy <Plug>VimwikiMakeYesterdayDiaryNote<CR>
+nnoremap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
+nnoremap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
 nnoremap <leader>x :close<CR>
 " refocus folds; close any other fold except the one that you are on
 nnoremap <leader>z zMzvzz
