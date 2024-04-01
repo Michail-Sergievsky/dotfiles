@@ -3,7 +3,7 @@
 	name = Michail-Sergievsky
 
 [includeIf "gitdir:~/Git/"]
-    path = ~/Git/.gitconfig
+    path = ~/Git_work/.gitconfig
 [commit]
 	verbose = true
 [init]

@@ -195,7 +195,7 @@ mark F ~/Foto
 mark G ~/Git_work
 mark L ~/Learn
 mark M ~/Music
-mark R /
+mark R ~/Recordings
 mark S ~/Study
 mark T ~/Downloads/t_done
 mark V ~/Vagrant
@@ -216,7 +216,7 @@ mark m ~/Magazine
 mark n ~/Vimwiki
 mark o ~/Mounted
 mark p ~/Pictures
-mark r ~/Recordings
+mark r ~/Work/tasks
 mark s ~/Stuff
 mark t ~/Temp
 mark u /usr/share
@@ -408,12 +408,17 @@ filextype {*.html,*.htm},<text/html>
         \ {Open with uzbl}
         \ uzbl-browser %f %i &,
 filetype {*.html,*.htm},<text/html> links, lynx
+" Drawio
+filextype {*.drawio}
+        \ {Open with drawio}
+        \ drawio %f &,
 " Office files
 filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
          \<application/vnd.openxmlformats-officedocument.*,
           \application/msword,
           \application/vnd.ms-excel>
-        \ libreoffice %f %i &
+        \ libreoffice %f %i &,
+		\ wps %f %i &
 fileviewer {*.doc},<application/msword> catdoc %c
 fileviewer {*.docx},
           \<application/

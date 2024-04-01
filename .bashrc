@@ -91,7 +91,7 @@ if [[ -n "$READLINE_LINE" ]]; then
     READLINE_POINT=${#READLINE_LINE}
 fi
 }
-bind -x '"\C-l": _sgpt_bash'
+# bind -x '"\C-i": _sgpt_bash'
 # Shell-GPT integration BASH v0.2
 
 #functions

@@ -284,7 +284,7 @@ bindsym $mod+e layout splitv
 #switch split mode between h/v
 bindsym $mod+c split toggle
 ## change container layout (next split will be vertical)
-bindsym $mod+v split v
+# bindsym $mod+v split v
 # change container layout (next split will be horizontal)
 # bindsym $mod+c split h
 
@@ -387,11 +387,14 @@ bindsym $mod+s exec --no-startup-id rofi -show blezz -modi blezz -auto-select -m
 bindsym $mod+a exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 # rofi-pass
 bindsym $mod+p exec --no-startup-id "rofi-pass"
+#rofi-ssh
+bindsym $mod+v exec --no-startup-id "rofi -show ssh -parse-hosts"
 # run commands from shell - DOS'T WORK!
 # bindsym $mod+t exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 
 # OTHER
 # master-stack keybinding (moves stack window to master and current master back to stack window)
+# GOOGLE TEST MORE!!!!!!
 bindsym $mod+m exec "i3-msg \\"focus left, move right, focus up, move left\\""
 bindsym $mod+Shift+m exec "i3-msg \\"move right, focus up, move left\\""
 bindsym $mod+comma exec "i3-msg \\"focus up, move right, focus up, focus left\\""
