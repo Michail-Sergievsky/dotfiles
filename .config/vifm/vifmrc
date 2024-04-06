@@ -188,7 +188,7 @@ mark 7 ~/.ssh
 mark 8 ~/DiskD
 mark 9 ~/DiskE
 mark A ~/.ansible
-mark B ~/Books
+mark B ~/Backup
 mark C ~/.config
 mark D ~/Documents
 mark F ~/Foto
