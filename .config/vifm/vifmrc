@@ -177,14 +177,14 @@ set statusline+='%[ +%x%]'
 "----Marks----------------{{{
 " :mark mark /full/directory/path [filename]
 
-mark 0 ~/Videos/!convert
+mark 0 ~/.steam/steam/steamapps/common/
 mark 1 ~/Documents
-mark 2 ~/Documents/docs
-mark 3 ~/Dropbox
-mark 4 ~/Downloads/t_done
-mark 5 ~/Downloads/t_done_inside
-mark 6 ~/.steam/steam/steamapps/common/
-mark 7 ~/.ssh
+mark 2 ~/.ssh
+mark 3 ~/.config
+mark 4 ~/.ansible
+mark 5 ~/.cache
+mark 6 ~/.scripts
+mark 7 ~/Dropbox
 mark 8 ~/DiskD
 mark 9 ~/DiskE
 mark A ~/.ansible
@@ -195,8 +195,9 @@ mark F ~/Foto
 mark G ~/Git_work
 mark L ~/Learn
 mark M ~/Music
+mark P ~/Phone
 mark R ~/Recordings
-mark S ~/Study
+mark S ~/Share
 mark T ~/Downloads/t_done
 mark V ~/Vagrant
 mark W ~/Work_smy
