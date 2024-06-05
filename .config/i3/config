@@ -27,7 +27,8 @@ workspace_auto_back_and_forth yes
 #default_border pixel
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-for_window [class=".*"] $border_no_name
+# for_window [class=".*"] $border_no_name
+for_window [class=".*"] $border_normal
 for_window [class="^PacketTracer$"] $border_normal
 for_window [class="^PacketTracer$"] floating enable
 
@@ -67,7 +68,8 @@ client.urgent				$ubgcolor	$ubgcolor		$textcolor	$ubgcolor
 #Display Resolution
 # exec_always --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-2 --off
 # exec_always --no-startup-id xrandr --output DP1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
+# exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
+exec_always --no-startup-id xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate normal
 
 #Polybar Launch script
 exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
@@ -99,6 +101,7 @@ exec --no-startup-id lxqt-policykit-agent
 exec --no-startup-id telegram-desktop
 exec --no-startup-id udiskie -N
 exec --no-startup-id systemctl start --user greenclip
+exec --no-startup-id nm-applet
 
 #}}}
 #---------Mouse--{{{
@@ -209,7 +212,16 @@ exec --no-startup-id $term -name dropdown_term
 bindsym $mod+b [class="^URxvt$" instance="^dropdown_term"] scratchpad show; [class="^URxvt$" instance="^dropdown_term"] move position center
 
 # exec --no-startup-id $term -name dropdown_notes -e vim
-exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md" -v "/$HOME/Vimwiki/work/index.md" -v "/$HOME/Vimwiki/notes/index.md" -v "/$HOME/Vimwiki/lists/index.md" -v "/$HOME/Vimwiki/links/index.md"
+exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md"\
+	-v "/$HOME/Vimwiki/work/index.md"\
+	-v "/$HOME/Vimwiki/work/viva_work.md"\
+	-v "/$HOME/Vimwiki/work/viva_notes.md"\
+	-v "/$HOME/Vimwiki/work/IT_work.md"\
+	-v "/$HOME/Vimwiki/work/IT_notes.md"\
+	-v "/$HOME/Vimwiki/notes/index.md"\
+	-v "/$HOME/Vimwiki/lists/index.md"\
+	-v "/$HOME/Vimwiki/links/index.md"\
+	-v "/$HOME/Vimwiki/lists/music.md"
 bindsym $mod+n [class="^URxvt$" instance="^dropdown_notes"] scratchpad show; [class="^URxvt$" instance="^dropdown_notes"] move position center
 
 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
@@ -239,9 +251,13 @@ bindsym $mod+Pause mode "$mode_system"
 # HOME
 set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) HDMI+DP_rotate
 mode "$mode_display" {
-bindsym a exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
-bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
-bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+bindsym a exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate normal ; mode "default"
+bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off ; mode "default"
+bindsym d exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate left ; mode "default"
+
+# bindsym a exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+# bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+# bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -406,7 +422,17 @@ bindsym $mod+Shift+comma exec "i3-msg \\"focus up, move right, focus left\\""
 #---------Function Buttons--{{{
 
 bindsym $mod+F1 exec --no-startup-id $term -name dropdown_term 
-bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md" -v "/$HOME/Vimwiki/work/index.md" -v "/$HOME/Vimwiki/notes/index.md" -v "/$HOME/Vimwiki/lists/index.md" -v "/$HOME/Vimwiki/links/index.md"
+bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md"\
+	-v "/$HOME/Vimwiki/work/index.md"\
+	-v "/$HOME/Vimwiki/work/viva_work.md"\
+	-v "/$HOME/Vimwiki/work/viva_notes.md"\
+	-v "/$HOME/Vimwiki/work/IT_work.md"\
+	-v "/$HOME/Vimwiki/work/IT_notes.md"\
+	-v "/$HOME/Vimwiki/notes/index.md"\
+	-v "/$HOME/Vimwiki/lists/index.md"\
+	-v "/$HOME/Vimwiki/links/index.md"\
+	-v "/$HOME/Vimwiki/lists/music.md"
+
 bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
 # bindsym $mod+F4 exec --no-startup-id 
 # bindsym $mod+F5 exec --no-startup-id 

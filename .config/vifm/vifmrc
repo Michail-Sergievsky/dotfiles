@@ -179,12 +179,12 @@ set statusline+='%[ +%x%]'
 
 mark 0 ~/.steam/steam/steamapps/common/
 mark 1 ~/Documents
-mark 2 ~/.ssh
-mark 3 ~/.config
-mark 4 ~/.ansible
-mark 5 ~/.cache
-mark 6 ~/.scripts
-mark 7 ~/Dropbox
+mark 2 ~/Dropbox
+mark 3 ~/Media/t_done/
+mark 4 ~/.ssh
+mark 5 ~/.ansible
+mark 6 ~/.cache
+mark 7 ~/.scripts
 mark 8 ~/DiskD
 mark 9 ~/DiskE
 mark A ~/.ansible
@@ -201,7 +201,7 @@ mark S ~/Share
 mark T ~/Downloads/t_done
 mark V ~/Vagrant
 mark W ~/Work_smy
-mark a ~/Music/audiobooks_1_main
+mark a ~/Music/audiobooks
 mark b ~/Books
 mark c ~/Media/home/comics
 mark d ~/Downloads
@@ -414,12 +414,26 @@ filextype {*.drawio}
         \ {Open with drawio}
         \ drawio %f &,
 " Office files
-filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
-         \<application/vnd.openxmlformats-officedocument.*,
-          \application/msword,
-          \application/vnd.ms-excel>
-        \ libreoffice %f %i &,
-		\ wps %f %i &
+" WPS doc
+filextype {*.wps,*.doc,*.rtf,*.wpt,*.docx,*.dotx,*.docm,*.dotm},
+        \ /usr/lib/office6/wps %f %i &
+" Libre doc
+filextype {*.odt},
+        \ libreoffice %f %i &
+" WPS xls
+filextype {*.et,*.xls,*.xlsx,*.dbf,*.prn,*.xltx,*.xla,*.ett,*.xlt,*.xlsm,*.csv,*.dif,*.xltm,*.xlam},
+		\ /usr/lib/office6/et %f %i &
+" Libre xls
+filextype {*.ods,*.odp},
+        \ libreoffice %f %i &
+" filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
+"          \<application/vnd.openxmlformats-officedocument.*,
+"           \application/msword,
+"           \application/vnd.ms-excel>
+"         \ libreoffice %f %i &,
+" 		\ /usr/lib/office6/et %f %i &
+        " \ /usr/lib/office6/wps %f %i &
+		" \ wps %f %i &
 fileviewer {*.doc},<application/msword> catdoc %c
 fileviewer {*.docx},
           \<application/
