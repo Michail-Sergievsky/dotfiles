@@ -84,7 +84,8 @@ exec_always feh --bg-fill /$HOME/.wallpapers/wp4657311-arch-solarized-wallpapers
 #---------Autostart applications-----{{{
 
 # move all download apps to ws6 then return to ws1
-exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec qbittorrent; exec /bin/sh "/$HOME/.soft/jd2/JDownloader2"'
+# exec qbittorrent; 
+exec --no-startup-id i3-msg 'workspace 9; layout tabbed; exec /bin/sh "/$HOME/.soft/jd2/JDownloader2"'
 exec --no-startup-id i3-msg 'workspace 1'
 # eng-rus keyboard layout
 # man xkeyboard-config for key combination

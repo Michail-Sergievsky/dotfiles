@@ -171,8 +171,10 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " Working projects
 " ansible inventory yaml
-autocmd BufRead,BufNewFile ~/Git/*/inventory/* set filetype=yaml
-autocmd BufRead,BufNewFile ~/Git/*/*/group_vars/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/Git_work/*/inventory/*/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/Git_work/*/*/group_vars/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/Share/Git_work/*/inventory/*/* set filetype=yaml
+autocmd BufRead,BufNewFile ~/Share/Git_work/*/*/group_vars/* set filetype=yaml
 autocmd BufRead,BufNewFile ~/.ansible/*/inventory/* set filetype=yaml
 autocmd BufRead,BufNewFile ~/.ansible/*/group_vars/* set filetype=yaml
 autocmd BufRead,BufNewFile ~/.ansible/*/*.yml set filetype=yaml

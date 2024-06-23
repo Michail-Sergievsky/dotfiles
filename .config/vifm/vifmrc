@@ -212,9 +212,9 @@ mark h ~/
 mark i ~/Knowledge/!IT_articles
 mark j ~/Knowledge/japan,anime,manga
 mark k ~/Knowledge
-mark l ~/Documents/Look.out.for.them.all
+mark l ~/Dropbox/Look.out.for.them.all
 mark m ~/Magazine
-mark n ~/Vimwiki
+mark n ~/Dropbox/Vimwiki
 mark o ~/Mounted
 mark p ~/Pictures
 mark r ~/Work/tasks
