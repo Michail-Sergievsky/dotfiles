@@ -213,16 +213,16 @@ exec --no-startup-id $term -name dropdown_term
 bindsym $mod+b [class="^URxvt$" instance="^dropdown_term"] scratchpad show; [class="^URxvt$" instance="^dropdown_term"] move position center
 
 # exec --no-startup-id $term -name dropdown_notes -e vim
-exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md"\
-	-v "/$HOME/Vimwiki/work/index.md"\
-	-v "/$HOME/Vimwiki/work/viva_work.md"\
-	-v "/$HOME/Vimwiki/work/viva_notes.md"\
-	-v "/$HOME/Vimwiki/work/IT_work.md"\
-	-v "/$HOME/Vimwiki/work/IT_notes.md"\
-	-v "/$HOME/Vimwiki/notes/index.md"\
-	-v "/$HOME/Vimwiki/lists/index.md"\
-	-v "/$HOME/Vimwiki/links/index.md"\
-	-v "/$HOME/Vimwiki/lists/music.md"
+exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Dropbox/Vimwiki/Todo.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/viva_work.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/viva_notes.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/IT_work.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/IT_notes.md"\
+	-v "/$HOME/Dropbox/Vimwiki/notes/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/lists/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/links/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/lists/music.md"
 bindsym $mod+n [class="^URxvt$" instance="^dropdown_notes"] scratchpad show; [class="^URxvt$" instance="^dropdown_notes"] move position center
 
 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
@@ -423,16 +423,16 @@ bindsym $mod+Shift+comma exec "i3-msg \\"focus up, move right, focus left\\""
 #---------Function Buttons--{{{
 
 bindsym $mod+F1 exec --no-startup-id $term -name dropdown_term 
-bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md"\
-	-v "/$HOME/Vimwiki/work/index.md"\
-	-v "/$HOME/Vimwiki/work/viva_work.md"\
-	-v "/$HOME/Vimwiki/work/viva_notes.md"\
-	-v "/$HOME/Vimwiki/work/IT_work.md"\
-	-v "/$HOME/Vimwiki/work/IT_notes.md"\
-	-v "/$HOME/Vimwiki/notes/index.md"\
-	-v "/$HOME/Vimwiki/lists/index.md"\
-	-v "/$HOME/Vimwiki/links/index.md"\
-	-v "/$HOME/Vimwiki/lists/music.md"
+bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Dropbox/Vimwiki/Todo.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/viva_work.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/viva_notes.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/IT_work.md"\
+	-v "/$HOME/Dropbox/Vimwiki/work/IT_notes.md"\
+	-v "/$HOME/Dropbox/Vimwiki/notes/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/lists/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/links/index.md"\
+	-v "/$HOME/Dropbox/Vimwiki/lists/music.md"
 
 bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
 # bindsym $mod+F4 exec --no-startup-id 
