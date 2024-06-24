@@ -241,18 +241,18 @@ let g:vimwiki_nested_syntaxes = {'python': 'python', 'bash':'bash', 'sql':'sql',
             \'config':'config', 'cfg':'cfg', 'cmake':'cmake', 'diff':'diff', 'zsh':'zsh',
             \'xdefaults':'xdefaults'}
 " Final exp
-let g:vimwiki_root = '~/Vimwiki'
+let g:vimwiki_root = '~/Dropbox/Vimwiki'
 let g:vimwiki_list = [
-            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/notes', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/lists', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/links', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/selfimprove', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
+            \{'path': '~/Dropbox/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/notes', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/lists', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/links', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/selfimprove', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Dropbox/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
 " let g:vimwiki_map_prefix = '<Plug>'
 " let g:vimwiki_no_default_links = 1

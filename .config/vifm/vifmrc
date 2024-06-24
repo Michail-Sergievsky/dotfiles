@@ -661,7 +661,7 @@ nnoremap <wait>st :set sort=+mtime<cr>
 nnoremap <wait>sT :set sort=-mtime<cr>
 nnoremap <wait>sm :togglesort<cr>
 nnoremap <wait>tl :!ls --group-directories-first -1R > $(basename $PWD)<cr>
-nnoremap <wait>tp :!ls --group-directories-first -1R > move && mv move -f ~/Documents/Look.out.for.them.all/$(basename $PWD)<cr>
+nnoremap <wait>tp :!ls --group-directories-first -1R > move && mv move -f ~/Dropbox/Look.out.for.them.all/$(basename $PWD)<cr>
 nnoremap <wait>td :!diff %c %C<cr>
 nnoremap <wait>t1 :targetm<cr>:echo $VIMARGS<cr>
 nnoremap <wait>t2 :target<space> ""<Left>
