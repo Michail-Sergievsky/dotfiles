@@ -47,4 +47,5 @@ alias reflec='sudo reflector -c Russia -a 7 --sort rate --save /etc/pacman.d/mir
 alias setx='setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"'
 alias hosts='sudo vim /etc/hosts'
 alias work='cd ~/Downloads/work'
+alias viv='cd ~/Git_work/viva-it/'
 #end_alias

@@ -470,8 +470,10 @@ function! VisualHTMLTagWrap()
   if len(tag) > 0
     normal `>
     if &selection == 'exclusive'
+      exe "normal o"
       exe "normal o{noformat}"
     else
+      exe "normal o"
       " exe "normal o</".tag.">"
       exe "normal o{noformat}"
     endif
@@ -481,6 +483,27 @@ function! VisualHTMLTagWrap()
     normal `<
   endif
 endfunction
+
+" vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
+" function! VisualHTMLTagWrap()
+"   " let tag = input("Tag to wrap block: ")
+"   let tag = 1
+"   if len(tag) > 0
+"     normal `>
+"     if &selection == 'exclusive'
+"       exe "normal o```"
+"     else
+"       " exe "normal o</".tag.">"
+"       exe "normal o```"
+"     endif
+"     normal `<
+"     exe "normal O```bash"
+"     " exe "normal O<".tag.">"
+"     normal `<
+"   endif
+" endfunction
+
+
 
 " }}}
 "----------THEMES & COLORS----------------{{{
@@ -557,7 +580,8 @@ nnoremap <Leader>fI :exe "norm I_" <bar> exe "norm A_"<CR>
 nnoremap <Leader>fc @='ciW`<C-V><C-R>"`<C-V><Esc>w'<CR>
 nnoremap <Leader>fC :exe "norm I`" <bar> exe "norm A`"<CR>
 nnoremap <Leader>fe @='ciW[[#<C-V><C-R>"]]<C-V><Esc>w'<CR>
-nnoremap <leader>fp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
+" nnoremap <leader>fp :let a = ['</pre>', '<pre>'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
+nnoremap <leader>fp :let a = ['```', '```bash'] <bar> %s/{noformat}/\=reverse(a)[0]/g<CR>
 let g:which_key_map['f'] = {
         \ 'name' : 'text format' ,
 		\ 't' : 'world in bold',
