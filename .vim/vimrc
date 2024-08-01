@@ -546,7 +546,7 @@ let g:which_key_map =  {}
 let g:which_key_map['e'] = {
         \ 'name' : 'rename files' ,
 		\ '1' : [':% norm /\(19\|20\)\d\{2}/yw0Pa - ', 'move movies date to begining'],
-		\ '2' : [':% norm 0df]$p0x', 'move anime group to end'],
+		\ '2' : [':% norm 0df]$hhhP0x', 'move anime group to end'],
 		\ '3' : [':%s/.zip/.cbz/g', 'rename zip to cbz'],
 		\ '4' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
 		\ }

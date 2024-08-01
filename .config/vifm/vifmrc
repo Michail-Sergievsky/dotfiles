@@ -442,6 +442,9 @@ fileviewer {*.docx},
 " Torrent
 filetype {*.torrent},<application/x-bittorrent> qbittorrent %f &
 fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
+" 3d models
+filextype {*.slt},
+		\ /sbin/freecad %f &
 "-------------------------------------------
 " view contents of archive files on opening them
 filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
