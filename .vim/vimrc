@@ -32,7 +32,8 @@ set incsearch                   " Display the match for a search pattern when ha
 set laststatus=2                " show statusline always
 set mouse=a                     " use mouse everywhere
 set nrformats-=octal            " do not recognize octal numbers for ctrl-a and ctrl-x
-set number relativenumber       " Show line numbers & relativenumber
+" set number relativenumber       " Show line numbers & relativenumber
+set number						" Show line numbers
 "" set ruler		                 " show the cursor position all the time
 set scrolloff=5                 " Show a few lines of context around the cursor.
 set sidescrolloff=5	        	" Vertical
@@ -241,18 +242,18 @@ let g:vimwiki_nested_syntaxes = {'python': 'python', 'bash':'bash', 'sql':'sql',
             \'config':'config', 'cfg':'cfg', 'cmake':'cmake', 'diff':'diff', 'zsh':'zsh',
             \'xdefaults':'xdefaults'}
 " Final exp
-let g:vimwiki_root = '~/Dropbox/Vimwiki'
+let g:vimwiki_root = '~/Vimwiki'
 let g:vimwiki_list = [
-            \{'path': '~/Dropbox/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/notes', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/lists', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/links', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/selfimprove', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
-            \{'path': '~/Dropbox/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
+            \{'path': '~/Vimwiki/linux2', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/work', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/notes', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/lists', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/links', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/soft', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/hardware', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/selfimprove', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1},
+            \{'path': '~/Vimwiki/life', 'syntax': 'markdown', 'ext':'.md', 'auto_toc': 1}]
 
 " let g:vimwiki_map_prefix = '<Plug>'
 " let g:vimwiki_no_default_links = 1
@@ -624,6 +625,7 @@ nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>h :split<CR>
 nnoremap <leader>j J
 nnoremap <leader>l :ls<CR>:b<space>
+" ADD DESCRIPTIONS!!!
 nnoremap <leader>ma :vim /$alt+\\|<A-\\|Altmap\\|M-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
 nnoremap <leader>mc :vim /<C-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
 nnoremap <leader>ms :vim /<S-\\|S-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
@@ -637,12 +639,13 @@ nnoremap <leader>q <Plug>(qf_qf_toggle)
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <leader>rr :source ~/.vim/vimrc<CR>
 nnoremap <leader>S :!clear && shellcheck %<CR>
-nnoremap <leader>se :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <leader>sq :%s:::g<Left><Left><Left>
-nnoremap <leader>sr :cfdo %s:::gc<Left><Left><Left><Left>
-nnoremap <leader>st :/^\*\*\*\*$<Left><Left><Left><Left><Left>
-nnoremap <leader>su :w !sudo tee % <CR><CR>
-nnoremap <leader>sw :%s:::cg<Left><Left><Left><Left>
+nnoremap <leader>sw :vim //jg ***<Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>se :cfdo %s:::gc<Left><Left><Left><Left>
+nnoremap <leader>sr :/^\*\*\*\*$<Left><Left><Left><Left><Left>
+nnoremap <leader>sy :w !sudo tee % <CR><CR>
+nnoremap <leader>su :%s/{noformat}/```/g<CR>
+nnoremap <leader>si :%s/\*\([^*]*\)\*/# \1/<CR>
 nnoremap <leader>tb :tabnew<CR>
 nnoremap <leader>tt :term<CR>
 nmap ,tt yiw:call AddTag('<C-R>"')<CR>

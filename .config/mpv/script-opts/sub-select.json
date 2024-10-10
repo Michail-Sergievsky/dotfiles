@@ -1,0 +1,17 @@
+[
+    {
+        "alang": ["jpn", "ja"],
+        "slang": [ "eng?", "und" ],
+        "whitelist": [ "Dialogue", "dialogue" ],
+        "blacklist": [ "sign", "Forced" ]
+    },
+    {
+        "alang": ["chi?","zh" ],
+        "slang": [ "eng?", "rus?" ]
+    },
+    {
+        "alang": "eng?",
+        "slang": [ "eng?", "und" ],
+        "whitelist": [ "sign", "song" ]
+    }
+]

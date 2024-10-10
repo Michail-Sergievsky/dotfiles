@@ -367,13 +367,13 @@ fileviewer *.epub
 fileviewer {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg} mediainfo
 " Video
 filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.m2ts,
-        \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+        \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.m3u,
         \*.as[fx]},
         \<video/*>
+        \ {View using mpv}
+        \ mpv %f %i &,
         \ {View using vlc}
         \ vlc %f %i &,
-        \ {View using mpv}
-        \ mpv %f,
         \ {View using ffplay}
         \ ffplay -fs -autoexit %f,
 fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mpg,*.mpeg,*.vob,
@@ -606,7 +606,8 @@ nnoremap <wait>adgz :!tar -cvzf `basename $(pwd)`.tar.gz .<cr>
 " selected to INSERT_NAME tar.gz
 nnoremap <wait>angz :!tar -cvzf .tar.gz %f<left><left><left><left><left><left><left><left><left><left>
 " all to dir_name.zip
-nnoremap <wait>aza :!!zip -r -0 "$(basename "$(pwd)")" .<cr>
+nnoremap <wait>aza :!!zip -r -0 "$(basename "$(pwd)").zip" .<cr>
+nnoremap <wait>azb :!!zip -r -e -0 "$(basename "$(pwd)").zip" .<cr>
 " selected to INSERT_NAME zip
 nnoremap <wait>azf :!zip -r  %f<left><left><left>
 nnoremap <wait>by :yank | winrun , put<cr>

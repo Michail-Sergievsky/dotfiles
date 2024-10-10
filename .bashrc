@@ -12,8 +12,8 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 #export private variables
-if [ -f ~/.env_priv ]; then
-. ~/.env_priv
+if [ -f  ~/.env_priv/.env_priv_lines ]; then
+. ~/.env_priv/.env_priv_lines
 fi
 
 #ignore upper and lowercase when TAB completion
