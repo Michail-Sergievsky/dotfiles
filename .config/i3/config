@@ -392,8 +392,8 @@ bindsym $mod+Ctrl+q exec --no-startup-id cmus-remote -k -10
 bindsym $mod+Ctrl+e exec --no-startup-id cmus-remote -k +10
 
 # MPV CONTROLS
-bindsym Ctrl+Mod1+j exec --no-startup-id xdotool search --class mpv key j
-bindsym Ctrl+Mod1+l exec --no-startup-id xdotool search --class mpv key k
+bindsym Ctrl+Mod1+j exec --no-startup-id xdotool search --class mpv key Shift+j
+bindsym Ctrl+Mod1+l exec --no-startup-id xdotool search --class mpv key Shift+k
 bindsym Ctrl+Mod1+i exec --no-startup-id xdotool search --class mpv key space
 bindsym Ctrl+Mod1+u exec --no-startup-id xdotool search --class mpv key Shift+comma
 bindsym Ctrl+Mod1+o exec --no-startup-id xdotool search --class mpv key Shift+period

@@ -261,6 +261,7 @@ command! targetm :let $VIMARGS = '--servername MAIN'
 command! target :let $VIMARGS = '--servername "%a"'
 command! vgrep vim "+grep %a"
 command! zip zip -r %f.zip %f
+command! mpvop find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.webm" -o -iname "*.mov" -o -iname "*.flv" -o -name "*.m4v" \) -exec mpv {} + &
 
 "search files with plocate
 " variation that automatically enters directories
@@ -443,8 +444,9 @@ fileviewer {*.docx},
 filetype {*.torrent},<application/x-bittorrent> qbittorrent %f &
 fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
 " 3d models
-filextype {*.slt},
-		\ /sbin/freecad %f &
+filextype {*.stl},
+        \ {View using f3d}
+		\ /sbin/f3d %f &
 "-------------------------------------------
 " view contents of archive files on opening them
 filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,

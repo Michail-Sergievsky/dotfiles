@@ -3,7 +3,7 @@
         "alang": ["jpn", "ja"],
         "slang": [ "eng?", "und" ],
         "whitelist": [ "Dialogue", "dialogue" ],
-        "blacklist": [ "sign", "Forced" ]
+        "blacklist": [ "sign", "Sign & Songs", "Forced" ]
     },
     {
         "alang": ["chi?","zh" ],
