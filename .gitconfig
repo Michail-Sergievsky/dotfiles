@@ -2,7 +2,7 @@
 	email = mikhail.sergiev@gmail.com
 	name = Michail-Sergievsky
 
-[includeIf "gitdir:~/Git/"]
+[includeIf "gitdir:~/Git_work/"]
     path = ~/Git_work/.gitconfig
 [commit]
 	verbose = true

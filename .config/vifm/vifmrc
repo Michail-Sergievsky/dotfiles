@@ -388,6 +388,9 @@ filextype {*.xspf} vlc %c %i &
 filextype {*.mkv,*.mp4} mkvtoolnix-gui %f %i &
 "open mkv in inviska
 filextype {*.mkv} /$HOME/.soft/Inviska_MKV_Extract-11.0-x86_64.AppImage %f %i &
+filextype {*.mkv}, 
+        \ {Open with kdenlive}
+        \ kdenlive %f %i &,
 " Fonts
 fileviewer <font/*>
 	\ vifmimg font %px %py %pw %ph %c
@@ -398,7 +401,9 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {View in sxiv}
         \ rifle_sxiv.sh %f %i,
         \ {View in gpicview}
-        \ sxiv %f
+        \ sxiv %f,
+        \ {Open with drawio}
+        \ drawio %f &
 fileviewer <image/*>
 	\ vifmimg draw %px %py %pw %ph %c
 	\ %pc
