@@ -564,6 +564,8 @@ nnoremap <leader>cs @='i```sql<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>``
 nnoremap <leader>cg @='i```git<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>cv @='i```vim<C-V><Enter><C-V><Enter><C-V><Enter><C-V><Enter>```<C-V><Esc>'<CR>
 nnoremap <leader>ct :VimwikiTOC<CR>
+xnoremap <leader>c] c[[#<C-r>"]]<Esc>
+nnoremap <leader>c] viwc[[#<C-r>"]]<Esc>
 let g:which_key_map['c'] = {
         \ 'name' : 'code block' ,
 		\ 'c' : 'quotes blank',
