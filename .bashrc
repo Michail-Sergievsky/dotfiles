@@ -122,3 +122,12 @@ if [ -f '/home/freeman/yandex-cloud/path.bash.inc' ]; then source '/home/freeman
 # The next line enables shell command completion for yc.
 if [ -f '/home/freeman/yandex-cloud/completion.bash.inc' ]; then source '/home/freeman/yandex-cloud/completion.bash.inc'; fi
 
+
+#ssh-agent - only one process
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+

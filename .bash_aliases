@@ -48,4 +48,5 @@ alias setx='setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"'
 alias hosts='sudo vim /etc/hosts'
 alias work='cd ~/Downloads/work'
 alias viv='cd ~/Git_work/viva-it/'
+alias tok='ssh-add -s /usr/lib64/librtpkcs11ecp.so'
 #end_alias
