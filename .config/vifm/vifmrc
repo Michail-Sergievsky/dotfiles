@@ -651,6 +651,8 @@ nnoremap I :file<cr>
 nnoremap <wait>mb :!vim "$(basename "$(pwd)")"<CR>
 nnoremap <wait>mf :touch<space>""<Left>
 nnoremap <wait>md :mkdir<space>""<Left>
+nnoremap <wait>ml :!find . -type f -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" -o -name "*.ts" > "$(basename "$PWD").m3u"<CR>
+nnoremap <wait>mp :!(find . -mindepth 2 -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" -o -name "*.ts" \) -print; find . -maxdepth 1 -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" \) -print) | sort | mpv --playlist=- >/dev/null 2>&1 %i &<CR>
 "diff for dir
 nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
 nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
