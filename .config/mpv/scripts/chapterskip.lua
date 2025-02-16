@@ -5,9 +5,9 @@
 -- This script skips chapters based on their title.
 
 local categories = {
-    prologue = "^Prologue/^Intro/^Recap Start/^Recap End/^Scene 1/^Avant",
+    prologue = "^Prologue/^Intro/^Introduction/^Recap Start/^Recap End/^Scene 1/^Avant",
     opening = "^OP/ OP$/^Opening/^OPENING",
-    main = "^Episode/Episode$/^Part A/^Part B/Part A$/Part B$/^Part 3/^Part 2/^A-Part/^B-Part/^A-PART/^B-PART/^A Part/^B Part/^Main EP/^Insert/^Scene 3/^Scene 4/^Scene 5/^Eyecatch/^Eye Catch",
+    main = "^Episode/Episode$/^Part A/^Part B/Part A$/Part B$/^Part 3/^Part 2/^A-Part/^B-Part/^A-PART/^B-PART/^A Part/^B Part/^Main EP/^Insert/^Scene 3/^Scene 4/^Scene 5/^Eyecatch/^Eye Catch/^Title",
     ending = "^ED/ ED$/^Ending/^ENDING/^Credits",
     preview = "Preview$/^Extra/^PV/^Credits End/^Preview End/^Outro/^Epilogue"
 }

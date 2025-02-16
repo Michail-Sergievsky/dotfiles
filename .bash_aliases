@@ -49,4 +49,8 @@ alias hosts='sudo vim /etc/hosts'
 alias work='cd ~/Downloads/work'
 alias viv='cd ~/Git_work/viva-it/'
 alias tok='ssh-add -s /usr/lib64/librtpkcs11ecp.so'
+alias a_down='$HOME/.scripts/youtube_only_audio_download.sh'
+alias abatch_down='$HOME/.scripts/youtube_audio_batch_download.sh'
+alias v_down='yt-dlp --cookies ~/.env_priv/max_yotebe_cookies.txt --add-metadata --parse-metadata "title:%(uploader)" -f 'bestvideo[height=1080]+bestaudio' -o "~/Downloads/youtube/video/%(title)s.%(ext)s" --batch-file=~/Downloads/youtube/your_links.txt'
+alias fed="ssh fedora40lab1"
 #end_alias
