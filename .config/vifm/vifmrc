@@ -114,19 +114,15 @@ set vicmd="urxvt -e vim $VIMARGS --remote-tab-silent &"
 "}}}
 "----Appearance--{{{
 " themes, highlighting
-
 " List of color schemes to try (picks the first one supported by the terminal)
-colorscheme solarized-light-256 Default-256 Default
-
+" colorscheme solarized-light-256 Default-256 Default
+colorscheme palenight
 "devicons from vim
 source ~/.config/vifm/favicons.vifm
-
 "Each flag configures some aspect of TUI appearance. s - left/rigth borders
 set tuioptions="pv"
-
 " change appearance of middle border
 " set fillchars=vborder:В·
-
 " Customize view columns a bit (enable ellipsis for truncated file names)
 " * - long name - from end
 " - - long name - from start
@@ -136,7 +132,6 @@ set tuioptions="pv"
 set viewcolumns=-{name}..,6{}.
 " show files count if dirs
 " set viewcolumns=-{name},{nitems},6{}.
-
 "}}}
 "----Status line ----{{{
 
@@ -665,6 +660,7 @@ nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^
 nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsfd :!!clear && rsync -urvP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsfr :!!clear && rsync -urvP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
+" rsync -urvP --delete --exclude '.thumbnails' /home/freeman/Music/music_sorted/ /home/freeman/Phone/Internal\ shared\ storage/Music/ | grep -E '^deleting|[^/]$'
 nnoremap S :sort<cr>
 nnoremap <wait>s1 :select *(1).mkv<cr>
 nnoremap <wait>s2 :select *[^(1)].mkv<cr>
