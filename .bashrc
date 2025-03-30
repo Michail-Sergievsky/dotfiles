@@ -16,6 +16,11 @@ if [ -f  ~/.env_priv/.env_priv_lines ]; then
 . ~/.env_priv/.env_priv_lines
 fi
 
+#export taskwarrior aliases
+if [ -f  ~/.bash_taskwarrior ]; then
+. ~/.bash_taskwarrior
+fi
+
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
 
@@ -41,23 +46,22 @@ HISTFILESIZE=2000
 #Prompt
 # export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 # 30m - color
-# PS1="\[\033[00;30m\]\u\
-# \[$(tput sgr0)\]\[\033[00;34m\]@\
-# \[$(tput sgr0)\]\[\033[00;31m\]\h\
-# \[$(tput sgr0)\]\[\033[00;15m\]\
-#  [\[$(tput sgr0)\]\[\033[38;5;30m\]\W\
-# \[$(tput sgr0)\]\[\033[00;15m\]]\
-#  \[\033[38;5;30m\]\$(parse_git_branch)\[\033[38;5;15m\]\[\033[00m\]\
-# \[$(tput sgr0)\]\[\033[38;5;9m\]>\
-# \[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+PS1="\[\033[00;30m\]\u\
+\[$(tput sgr0)\]\[\033[00;34m\]@\
+\[$(tput sgr0)\]\[\033[00;31m\]\h\
+\[$(tput sgr0)\]\[\033[00;15m\]\
+ [\[$(tput sgr0)\]\[\033[38;5;30m\]\W\
+\[$(tput sgr0)\]\[\033[00;15m\]]\
+ \[\033[38;5;30m\]\$(parse_git_branch)\[\033[38;5;15m\]\[\033[00m\]\
+\[$(tput sgr0)\]\[\033[38;5;9m\]>\
+\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
 # Palenight Bash Prompt
-PS1="\[\033[38;5;110m\]\u\[\033[38;5;141m\]@\
-\[\033[38;5;218m\]\h\[\033[38;5;252m\] \
-[\[\033[38;5;75m\]\W\[\033[38;5;252m\]] \
-\[\033[38;5;204m\]\$(parse_git_branch)\[\033[38;5;252m\]\
-\[\033[38;5;204m\]> \[\033[0m\]"
-
+# PS1="\[\033[38;5;110m\]\u\[\033[38;5;141m\]@\
+# \[\033[38;5;218m\]\h\[\033[38;5;252m\] \
+# [\[\033[38;5;75m\]\W\[\033[38;5;252m\]] \
+# \[\033[38;5;204m\]\$(parse_git_branch)\[\033[38;5;252m\]\
+# \[\033[38;5;204m\]> \[\033[0m\]"
 
 
 # idicate - shell session is running inside vifm

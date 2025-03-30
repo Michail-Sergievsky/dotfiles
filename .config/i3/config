@@ -44,35 +44,17 @@ popup_during_fullscreen leave_fullscreen
 #}}}
 #---------Colors--{{{
 
-## Window Colors
-#set $bglocor	#00897b33
-##inactive color
-#set $ibgcolor	#363636
-##focused workspace
-#set $fws	#00897b80
-#set $barcolor	#00897b0D
-#set $textcolor	#ffffff
-#set $itextcolor	#969696
-##urgent bg color
-#set $ubgcolor	#ff0000
-
-# Window Colors (Palenight)
-set $bgcolor     #292D3E 
-set $ibgcolor    #1E1E2E
-set $fws         #82AAFF
-set $barcolor    #1E1E2E
-set $textcolor   #A6ACCD
-set $itextcolor  #676E95
-set $ubgcolor    #FF5370
-
-# bgcolor → Darker background (#292D3E).
-# ibgcolor → Slightly lighter inactive windows (#1E1E2E).
-# fws → Blue accent (#82AAFF) for focused workspaces.
-# barcolor → Matches URxvt and Vifm's background.
-# textcolor → Light gray (#A6ACCD) for better contrast.
-# itextcolor → Dimmer gray (#676E95) for inactive workspaces.
-# ubgcolor → Urgent workspaces now red-pink (#FF5370).
-
+# Window Colors
+set $bglocor	#00897b33
+#inactive color
+set $ibgcolor	#363636
+#focused workspace
+set $fws	#00897b80
+set $barcolor	#00897b0D
+set $textcolor	#ffffff
+set $itextcolor	#969696
+#urgent bg color
+set $ubgcolor	#ff0000
 
 #					border		background		text		indicator
 client.focused				$bgcolor	$bgcolor		$textcolor	$bgcolor

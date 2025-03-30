@@ -1,0 +1,182 @@
+#  TASKWARRIOR ALIASES
+
+#start_alias
+alias t="task"
+alias td="task delete"
+alias tvi="task in"
+alias tin="task type:in add"
+
+alias tick="tickle"
+alias think='tickle +1d'
+alias rnd='task add +rnd +next +@computer +@online'
+alias rnr='read_and_review'
+alias tor='taskobjective'  # new long name function for adding an objective task
+
+#adding task
+#add to in
+#add to next
+alias taa='taskaddfzf' # add new task
+
+#annotation
+alias tan='/home/freeman/.scripts/taskwarrior_tan.sh'
+# moving tasks
+alias mt='modify_task_with_fzf' # all 3 - type, project, tag (from in)
+# only tag with fzf
+alias tgp='modify_task_set_type_objective' # only type - > project
+alias tgi='modify_task_set_type_in'
+alias tgn='modify_task_set_type_next'
+alias tgo='modify_task_set_type_note'
+alias tgb='modify_task_set_type_bucket'
+alias tgs='modify_task_set_type_someday'
+alias tgw='modify_task_set_type_waiting'
+alias tgc='modify_task_set_type_cal'
+#showing
+alias tsomeday='show_someday_by_tag'
+alias tproj='choose_project_and_list'
+alias tobjective='show_objectives_by_tag'
+alias tcheat="awk '/^#start_alias$/{flag=1; next} /^#end_alias$/{flag=0} flag' ~/.bash_taskwarrior | sed -E 's/^alias[[:space:]]+([^=]+)=([\"\x27])(.*)\2/\1 -> \3/'"
+#end_alias
+
+# Functions
+
+# Modify task type functions with full names:
+modify_task_set_type_in()    { task modify "$1" type:in; }
+modify_task_set_type_next()  { task modify "$1" type:next; }
+modify_task_set_type_note()  { task modify "$1" type:note; }
+modify_task_set_type_bucket() { task modify "$1" type:bucketlist; }
+modify_task_set_type_objective() { task modify "$1" type:objective; }
+# must have poject name!
+modify_task_set_type_someday() { task modify "$1" type:someday; }
+modify_task_set_type_waiting() { task modify "$1" type:waiting; }
+modify_task_set_type_cal()    { task modify "$1" type:cal; }
+
+# A function to add an objective task (asks for description and project)
+taskobjective() {
+    # Prompt for task description if not provided
+    if [ "$#" -gt 0 ]; then
+        desc="$*"
+    else
+        read -p "Enter objective task description: " desc
+    fi
+    # Always prompt for the project.
+    read -p "Enter project name (or type new for a new project): " proj
+    if [[ "$proj" == "new" ]]; then
+        read -p "Enter NEW project name: " proj
+    fi
+    task add "$desc" type:objective project:"$proj"
+}
+
+choose_project() {
+    # List projects from task (using task _projects if available)
+    # Remove any unwanted header lines.
+    task _projects 2>/dev/null | tail -n +3 | sed 's/^[[:space:]]*//'
+}
+choose_type() {
+    # Assumes a file with your types (one per line) in ~/.task/types.txt
+    cat ~/.task/types.txt | fzf --prompt="Select type: " | sed 's/^[[:space:]]*//'
+}
+choose_tags() {
+    # Assumes a file with your tags (one per line) in ~/.task/tags.txt
+    cat ~/.task/tags.txt | fzf --multi --prompt="Select tags (space separated): " | sed 's/^[[:space:]]*//'
+}
+
+# ADDING TASK FUNCTIONS
+# Composite function to add a task using fzf for type, tags, and project.
+
+taskaddfzf() {
+  # Get description interactively if not provided.
+  if [ "$#" -eq 0 ]; then
+    read -p "Enter task description: " desc
+  else
+    desc="$*"
+  fi
+
+  # Choose tags using your fzf-based function.
+  local chosen_tags
+  chosen_tags=$(choose_tags | tr '\n' ' ' | xargs)
+  
+  # Choose type (take first result and trim whitespace).
+  local chosen_type
+  chosen_type=$(choose_type | head -n1 | xargs)
+  
+  # For project, use task _projects but skip header lines.
+  # Adjust the tail parameter as needed to skip header lines.
+  echo "Select a project (or press Enter to input a new one):"
+  local proj
+  proj=$(task _projects 2>/dev/null | tail -n +3 | fzf --prompt="Select project: " | head -n1 | xargs)
+  if [ -z "$proj" ]; then
+    read -p "Enter new project name: " proj
+  fi
+
+  # Build tag arguments (each tag prefixed with a '+').
+  local tag_args=""
+  for tag in $chosen_tags; do
+    tag_args="$tag_args +$tag"
+  done
+
+  # Execute the task add command.
+  # The colon immediately after field names (type: and project:) is important.
+  task add "$desc" type:$chosen_type project:"$proj" $tag_args
+}
+
+# REPORTS FUNCTIONS
+# Function to show all "someday" tasks with a chosen tag.
+show_someday_by_tag() {
+    chosen_tag=$(choose_tags)
+    if [ -n "$chosen_tag" ]; then
+        task all type:someday tag:"$chosen_tag"
+    else
+        echo "No tag selected."
+    fi
+}
+
+# Function to show all "objective" tasks with a chosen tag.
+show_objectives_by_tag() {
+    chosen_tag=$(choose_tags)
+    if [ -n "$chosen_tag" ]; then
+        task all type:objective tag:"$chosen_tag"
+    else
+        echo "No tag selected."
+    fi
+}
+
+# tproj: list all tasks for the selected project (already exists)
+choose_project_and_list() {
+    proj=$(choose_project)
+    if [ -n "$proj" ]; then
+        task all project:"$proj"
+    else
+        echo "No project selected."
+    fi
+}
+
+modify_task_with_fzf() {
+    if [ -z "$1" ]; then
+        echo "Usage: mt <TASK_ID>"
+        return 1
+    fi
+    TASK_ID="$1"
+    
+    # Let user choose tags and type via your functions,
+    # making sure to only take a single line result for type.
+    TAGS=$(choose_tags)
+    TYPE=$(choose_type | head -n1 | xargs)
+    
+    # If type is "someday", skip project selection.
+    if [[ "$TYPE" == "someday" ]]; then
+        PROJECT=""
+    else
+        # Use fzf to choose a single project.
+        PROJECT=$(task _projects 2>/dev/null | tail -n +3 | sed 's/^[[:space:]]*//' | fzf --prompt="Select project: " | head -n1 | xargs)
+    fi
+    
+    # Build the command as an array to preserve spaces
+    CMD=(task modify "$TASK_ID")
+    [ -n "$TAGS" ] && CMD+=(tag:"$TAGS")
+    [ -n "$TYPE" ] && CMD+=(type:"$TYPE")
+    [ -n "$PROJECT" ] && CMD+=(project:"$PROJECT")
+    
+    echo "Running: ${CMD[@]}"
+    "${CMD[@]}"
+}
+

@@ -1,0 +1,125 @@
+# vim: set filetype=sh :
+# 'man task-sync' or 'man taskrc'
+# news.version=4.0.2
+
+include ~/.env_priv/task_config
+
+# Files
+data.location=~/.task
+
+# Color theme (choose one)
+include solarized-light-256.theme
+
+# Disable confirmations (if you prefer)
+confirmation=off
+
+#allow purge
+allow.purge=yes
+
+# User Defined Attributes (UDAs)
+uda.type.type = string
+uda.type.label = Type
+uda.type.values = in,next,note,objective,someday,waiting,cal,bucketlist
+
+uda.priority.type = string
+uda.priority.values = H,L,
+urgency.uda.priority.H.coefficient = 0
+urgency.uda.priority.L.coefficient = 0
+
+uda.difficulty.type = string
+uda.difficulty.label = Difficulty
+uda.difficulty.values = H,L,
+
+# Global urgency coefficients – set all to 0 so that urgency has no effect.
+urgency.age.coefficient = 0
+urgency.priority.coefficient = 0
+urgency.due.coefficient = 0
+urgency.wait.coefficient = 0
+urgency.scheduled.coefficient = 0
+urgency.overdue.coefficient = 0
+
+# Reports
+
+report.all.columns = id,status.short,uuid.short,start.active,entry.age,end.age,type,depends.indicator,priority,difficulty,tags,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
+report.all.labels  = ID,St,UUID,A,Age,Done,Type,D,P,Difficulty,Tags,Project,TagsC,R,Wait,Sch,Due,Until,Description
+
+report.all_valid.columns = id,status.short,uuid.short,start.active,entry.age,end.age,type,depends.indicator,priority,difficulty,tags,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
+report.all_valid.labels  = ID,St,UUID,A,Age,Done,Type,D,P,Difficulty,Tags,Project,TagsC,R,Wait,Sch,Due,Until,Description
+report.all_valid.filter  = (status:pending or status:waiting)
+
+report.in.description = Inbox
+report.in.columns = id,description,priority,difficulty
+report.in.labels = ID,Description,Priority,Difficulty
+report.in.filter = status:pending limit:page (type:in)
+
+report.note.description = Notes
+report.note.columns = id,description,tags,project,difficulty
+report.note.labels = ID,Description,Tags,Project,Difficulty
+report.note.filter = limit: type:note
+
+report.next.description = Next Actions
+report.next.columns = id,start.age,priority,difficulty,tags,project,type,recur,scheduled.countdown,due.relative,until.remaining,description.count
+report.next.labels  = ID,Active,P,Difficulty,Tags,Project,Type,Recur,S,Due,Until,Description
+# report.next.filter = type:next
+report.next.filter = status:pending and type:next
+report.next.sort    = priority
+
+report.objectives.description = Projects
+report.objectives.columns = id,priority,difficulty,tags,project,type,description.count
+report.objectives.labels = ID,P,Difficulty,Tags,Project,Type,Description
+report.objectives.filter = limit: type:objective status:pending
+# report.objectives.sort = project+\/,entry+
+report.objectives.sort = tags+,project+,entry+
+# report.objectives.sort = priority
+
+report.someday.description = Someday/Maybe
+report.someday.columns = id,tags,project,description.count,difficulty
+report.someday.labels = ID,Tags,Projects,Description,Difficulty
+report.someday.filter = limit: type:someday status:pending
+
+report.waiting.columns = id,priority,difficulty,tags,project,due.relative,description.count
+report.waiting.description = WaitingFor
+report.waiting.labels = ID,P,Difficulty,Tags,Project,Due,Description
+report.waiting.filter = limit: type:waiting status:pending +READY
+report.waiting.sort = priority
+
+report.cal.columns = id,tags,project,recur.indicator,scheduled,due,description,difficulty
+report.cal.description = Calendar
+report.cal.filter = type:cal status:pending limit:page
+report.cal.labels = ID,Tags,Project,R,Scheduled,Due,Description,Difficulty
+report.cal.sort = scheduled
+
+report.bucketlist.columns = id,description,tags,project,difficulty
+report.bucketlist.description = Bucket list
+report.bucketlist.filter = limit: type:bucketlist
+report.bucketlist.labels = ID,Description,Tags,Project,Difficulty
+
+report.today.columns = id,description,type,project,priority,difficulty,due
+report.today.description = "Today's tasks"
+report.today.filter = ( (type:next or type:objective or type:note or type:waiting or type:cal) and (entry:today or modified:today) )
+report.today.labels = ID,Description,Type,Project,Priority,Difficulty,Due
+
+report.yesterday.columns = id,description,type,project,priority,difficulty,due
+report.yesterday.description = "Yesterday's tasks"
+report.yesterday.filter = ( (type:next or type:objective or type:note or type:waiting or type:cal) and (entry:yesterday or modified:yesterday) )
+report.yesterday.labels = ID,Description,Type,Project,Priority,Difficulty,Due
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+
+# A custom report to show all tasks for a given project.
+report.project.columns = id,status,project,description,entry,due
+report.project.labels  = ID,Status,Project,Description,Entry,Due
+report.project.sort    = entry+
+# Note: This report has no built‐in filter. When you run it, you’ll have to supply a project filter.
+
+# Custom report to show annotations only
+report.annotations.columns=id,description,annotations
+report.annotations.labels=ID,Description,Annotation
+report.annotations.filter=status:pending
+report.annotations.sort=due-
+
+news.version=2.6.0

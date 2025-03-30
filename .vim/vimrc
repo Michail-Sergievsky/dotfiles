@@ -201,7 +201,6 @@ Plug 'brianrodri/vim-sort-folds'
 Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dpelle/vim-LanguageTool'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -229,6 +228,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 "____________ Vimwiki_____________________________
@@ -349,8 +349,7 @@ let g:airline_powerline_fonts=1
 " let g:airline#extensions#branch#enabled = 1
 " let g:airline_section_b = "%3p"
 let g:airline#extensions#whitespace#enabled = 0 
-let g:airline_theme='palenight'
-" let g:airline_theme='solarized'
+let g:airline_theme='solarized'
 "Reduces the space occupied by section z
 " let g:airline_section_z = "%3p%% %l:%c"
 "To allow colors in the status line
@@ -528,8 +527,6 @@ highlight CursorLine ctermbg=7 cterm=none
 " let g:solarized_termcolors=256
 " let g:solarized_contrast="high"
 " colorscheme solarized
-colorscheme palenight
-
 
 "}}}
 "----------KEYMAPPINGS-------------------------{{{

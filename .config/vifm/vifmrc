@@ -115,8 +115,8 @@ set vicmd="urxvt -e vim $VIMARGS --remote-tab-silent &"
 "----Appearance--{{{
 " themes, highlighting
 " List of color schemes to try (picks the first one supported by the terminal)
-" colorscheme solarized-light-256 Default-256 Default
-colorscheme palenight
+colorscheme solarized-light-256 Default-256 Default
+" colorscheme palenight
 "devicons from vim
 source ~/.config/vifm/favicons.vifm
 "Each flag configures some aspect of TUI appearance. s - left/rigth borders
@@ -192,7 +192,7 @@ mark L ~/Learn
 mark M ~/Music
 mark P ~/Phone
 mark R ~/Recordings
-mark S ~/Share
+mark S ~/Study
 mark T ~/Downloads/t_done
 mark V ~/Vagrant
 mark W ~/Work_smy
@@ -213,7 +213,7 @@ mark n ~/Dropbox/Vimwiki
 mark o ~/Mounted
 mark p ~/Pictures
 mark r ~/Work/tasks
-mark s ~/Stuff
+mark s ~/Scripts_configs
 mark t ~/Temp
 mark u /usr/share
 mark v ~/Videos
