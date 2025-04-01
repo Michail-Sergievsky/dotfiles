@@ -30,4 +30,4 @@ DUE_WEEK_COUNT="$(task status:pending due.before:eow count 2>/dev/null)"
 #with colores
 # echo "$CONTEXT %{F#FFFF00}$IN_COUNT%{F-} %{F#FF00FF}$STUCK_COUNT%{F-} %{F#FF0000}$DUE_WEEK_COUNT%{F-}"
 #with emojies
-echo "🗹 $IN_COUNT ⏳ $STUCK_COUNT 🚨 $DUE_WEEK_COUNT"
+echo "   🗹 $IN_COUNT ⏳ $STUCK_COUNT 🚨 $DUE_WEEK_COUNT"
