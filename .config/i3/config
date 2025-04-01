@@ -1,6 +1,6 @@
 # i3 config file (v4)
 ##########################################################
-##########    i3wm config By SMY    ######################
+##########    i3wm config By Ataru    ######################
 ##########################################################
 #---------Basic Definitions--{{{
 
@@ -72,7 +72,8 @@ client.urgent				$ubgcolor	$ubgcolor		$textcolor	$ubgcolor
 exec_always --no-startup-id xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate normal
 
 #Polybar Launch script
-exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
+# exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
+exec_always --no-startup-id ~/.scripts/polybar/setup-polybar.sh
 
 #Window Compositor
 exec_always --no-startup-id $picom_start
