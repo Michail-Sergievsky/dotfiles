@@ -1,45 +1,49 @@
-#!/bin/sh
+#!/bin/bash
 
 usb_print() {
+    EXCLUDE_MOUNTPOINTS=(
+        "/" "/home" "/boot/efi"
+        "/home/freeman/DiskD"
+        "/home/freeman/DiskE"
+        "/home/freeman/Media"
+    )
+
     devices=$(lsblk -Jplno NAME,TYPE,RM,SIZE,MOUNTPOINT,VENDOR)
     output=""
-    counter=0
 
-    for unmounted in $(echo "$devices" | jq -r '.blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint == null) | .name'); do
-        unmounted=$(echo "$unmounted" | tr -d "[:digit:]")
-        unmounted=$(echo "$devices" | jq -r '.blockdevices[] | select(.name == "'"$unmounted"'") | .vendor')
-        unmounted=$(echo "$unmounted" | tr -d ' ')
+    for dev in $(echo "$devices" | jq -r '
+        .blockdevices[] | select(.type == "part") | select(.mountpoint != null) | .name'); do
 
-        if [ $counter -eq 0 ]; then
-            space=""
-        else
-            space="   "
+        mountpoint=$(echo "$devices" | jq -r --arg dev "$dev" '
+            .blockdevices[] | select(.name == $dev) | .mountpoint')
+
+        if [[ " ${EXCLUDE_MOUNTPOINTS[*]} " =~ " $mountpoint " ]]; then
+            continue
         fi
-        counter=$((counter + 1))
 
-        output="$output$space#1 $unmounted"
+        size=$(echo "$devices" | jq -r --arg dev "$dev" '
+            .blockdevices[] | select(.name == $dev) | .size')
+
+        # Use base directory name from mountpoint (e.g. 'Main' from '/run/media/freeman/Main')
+        mountname=$(basename "$mountpoint")
+
+        # If mountname is empty, fallback to vendor
+        if [[ -z "$mountname" || "$mountname" == "null" ]]; then
+            parent=$(echo "$dev" | sed 's/[0-9]*$//') # get parent device
+            mountname=$(echo "$devices" | jq -r --arg parent "$parent" '
+                .blockdevices[] | select(.name == $parent) | .vendor' | tr -d ' ')
+            [[ "$mountname" == "null" ]] && mountname="USB"
+        fi
+
+        output="$output$mountname $size  "
     done
 
-    for mounted in $(echo "$devices" | jq -r '.blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint != null) | .size'); do
-        if [ $counter -eq 0 ]; then
-            space=""
-        else
-            space="   "
-        fi
-        counter=$((counter + 1))
-
-        output="$output$space#2 $mounted"
-    done
-
-    echo "$output"
+    echo "$output" | sed 's/ *$//'
 }
 
 usb_update() {
-    pid=$(cat "$path_pid")
-
-    if [ "$pid" != "" ]; then
-        kill -10 "$pid"
-    fi
+    pid=$(cat "$path_pid" 2>/dev/null)
+    [ -n "$pid" ] && kill -10 "$pid"
 }
 
 path_pid="/tmp/polybar-system-usb-udev.pid"
@@ -50,40 +54,29 @@ case "$1" in
         ;;
     --mount)
         devices=$(lsblk -Jplno NAME,TYPE,RM,MOUNTPOINT)
-
-        for mount in $(echo "$devices" | jq -r '.blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint == null) | .name'); do
-            # udisksctl mount --no-user-interaction -b "$mount"
-
-            # mountpoint=$(udisksctl mount --no-user-interaction -b $mount)
-            # mountpoint=$(echo $mountpoint | cut -d " " -f 4 | tr -d ".")
-            # terminal -e "bash -lc 'filemanager $mountpoint'"
-
+        for mount in $(echo "$devices" | jq -r '
+            .blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint == null) | .name'); do
             mountpoint=$(udisksctl mount --no-user-interaction -b "$mount")
             mountpoint=$(echo "$mountpoint" | cut -d " " -f 4 | tr -d ".")
             termite -e "bash -lc 'mc $mountpoint'" &
         done
-
         usb_update
         ;;
     --unmount)
         devices=$(lsblk -Jplno NAME,TYPE,RM,MOUNTPOINT)
-
-        for unmount in $(echo "$devices" | jq -r '.blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint != null) | .name'); do
+        for unmount in $(echo "$devices" | jq -r '
+            .blockdevices[] | select(.type == "part") | select(.mountpoint != null) | .name'); do
             udisksctl unmount --no-user-interaction -b "$unmount"
             udisksctl power-off --no-user-interaction -b "$unmount"
         done
-
         usb_update
         ;;
     *)
-        echo $$ > $path_pid
-
+        echo $$ > "$path_pid"
         trap exit INT
         trap "echo" USR1
-
         while true; do
             usb_print
-
             sleep 60 &
             wait
         done

@@ -4,9 +4,11 @@
 CONFIG_DIR="$HOME/.config/polybar"
 BASE_CONFIG="$CONFIG_DIR/config.base.ini"
 FINAL_CONFIG="$CONFIG_DIR/config.ini"
+
 BATTERY_CONFIG="$CONFIG_DIR/battery.ini"
 ETH_TEMPLATE="$CONFIG_DIR/eth.template.ini"
 WLAN_TEMPLATE="$CONFIG_DIR/wlan.template.ini"
+VPN_CONFIG="$CONFIG_DIR/vpn.ini"
 NET_CONFIG="$CONFIG_DIR/net.generated.ini"
 
 # --- Step 1: Start from base config with placeholders ---
@@ -31,7 +33,7 @@ for wifi_if in $WIFI_IFS; do
     fi
 done
 
-# --- Step 5: Choose Network Module and generate config ---
+# --- Step 5: Generate network module config (eth/wlan) ---
 NETWORK_MODULE="eth"
 if $IS_WIFI; then
     NETWORK_MODULE="wlan"
@@ -40,12 +42,13 @@ else
     sed "s|__IFACE__|$DEFAULT_IF|g" "$ETH_TEMPLATE" > "$NET_CONFIG"
 fi
 
-# --- Step 6: Replace placeholders in final config ---
-DYNAMIC_LEFT_MODULES="$NETWORK_MODULE $BATTERY_MODULE"
+# --- Step 6: Combine dynamic modules ---
+DYNAMIC_LEFT_MODULES="vpn $NETWORK_MODULE $BATTERY_MODULE"
 sed -i "s|\${dynamic_modules_left}|$DYNAMIC_LEFT_MODULES|g" "$FINAL_CONFIG"
 
-# --- Step 7: Append generated network module config ---
+# --- Step 7: Append dynamic module configs to final config ---
 cat "$NET_CONFIG" >> "$FINAL_CONFIG"
+cat "$VPN_CONFIG" >> "$FINAL_CONFIG"
 
 # --- Step 8: Launch Polybar ---
 ~/.scripts/polybar/launchpolybar.sh

@@ -415,18 +415,18 @@ filextype {*.drawio}
         \ {Open with drawio}
         \ drawio %f &,
 " Office files
-" WPS doc
+" onlyoffice doc
 filextype {*.wps,*.doc,*.rtf,*.wpt,*.docx,*.dotx,*.docm,*.dotm},
-        \ /usr/lib/office6/wps %f %i &
+        \ onlyoffice-desktopeditors %f %i &
+" onlyoffice xls
+filextype {*.et,*.xls,*.xlsx,*.dbf,*.prn,*.xltx,*.xla,*.ett,*.xlt,*.xlsm,*.csv,*.dif,*.xltm,*.xlam},
+		\ onlyoffice-desktopeditors %f %i &
 " Libre doc
 filextype {*.odt},
-        \ libreoffice %f %i &
-" WPS xls
-filextype {*.et,*.xls,*.xlsx,*.dbf,*.prn,*.xltx,*.xla,*.ett,*.xlt,*.xlsm,*.csv,*.dif,*.xltm,*.xlam},
-		\ /usr/lib/office6/et %f %i &
+        \ onlyoffice-desktopeditors %f %i &
 " Libre xls
 filextype {*.ods,*.odp},
-        \ libreoffice %f %i &
+        \ onlyoffice-desktopeditors %f %i &
 " filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
 "          \<application/vnd.openxmlformats-officedocument.*,
 "           \application/msword,
