@@ -44,4 +44,5 @@ fi
 [ -f /etc/xprofile ] && . /etc/xprofile
 [ -f ~/.xprofile ] && . ~/.xprofile
 
+~/.scripts/priv/include-device_i3wm.sh
 exec i3

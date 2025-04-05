@@ -1,0 +1,487 @@
+# i3 config file (v4)
+##########################################################
+##########    i3wm config By Ataru    ######################
+##########################################################
+#---------Basic Definitions--{{{
+
+set $mod Mod4
+set $alt Mod1
+set $term --no-startup-id $TERMINAL
+set $border_no_name border pixel 5
+set $border_normal border normal 5
+set $picom_start "pkill picom; sleep 1; picom"
+set $redshift_start "pkill redshift; sleep 1; redshift"
+set $redshift_kill "pkill redshift"
+
+#}}}
+#---------Basis Setup [fonts, windows]--{{{
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Droid Sans Mono 11
+
+#Automatic back-and-forth between workspace
+workspace_auto_back_and_forth yes
+
+#Diseable window title [in title mode!]
+#default_border pixel
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+# for_window [class=".*"] $border_no_name
+for_window [class=".*"] $border_normal
+for_window [class="^PacketTracer$"] $border_normal
+for_window [class="^PacketTracer$"] floating enable
+
+# Hide borders <none|vertical|horizontal|both|smart>
+hide_edge_borders none
+
+# set popup behaviour during full screen <smart|ignore|leave_fullscreen>
+popup_during_fullscreen leave_fullscreen
+
+# set preferred focus_wrapping <yes|no|force>
+#focus_wrapping yes
+
+#}}}
+#---------Colors--{{{
+
+# Window Colors
+set $bglocor	#00897b33
+#inactive color
+set $ibgcolor	#363636
+#focused workspace
+set $fws	#00897b80
+set $barcolor	#00897b0D
+set $textcolor	#ffffff
+set $itextcolor	#969696
+#urgent bg color
+set $ubgcolor	#ff0000
+
+#					border		background		text		indicator
+client.focused				$bgcolor	$bgcolor		$textcolor	$bgcolor
+client.unfocused			$ibgcolor	$ibgcolor		$itextcolor	$ibgcolor
+client.focused_inactive			$ibgcolor	$ibgcolor		$itextcolor	$ibgcolor
+client.urgent				$ubgcolor	$ubgcolor		$textcolor	$ubgcolor
+
+#}}}
+#---------Desktop ENVIRONMENT--{{{
+
+#Polybar Launch script
+# exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
+exec_always --no-startup-id ~/.scripts/polybar/setup-polybar.sh
+
+#Window Compositor
+exec_always --no-startup-id $picom_start
+
+#Display Wallpapers
+exec_always feh --bg-fill /$HOME/.wallpapers/wp4657311-arch-solarized-wallpapers.png
+# Exec_always feh --bg-center --randomize /$HOME/Pictures/Wallpapers/Mics_authors/*
+#}}}
+#---------Autostart applications-----{{{
+
+# move all download apps to ws6 then return to ws1
+# exec qbittorrent; 
+exec --no-startup-id i3-msg 'workspace 9; layout tabbed; exec /bin/sh "/$HOME/.soft/jd2/JDownloader2"'
+exec --no-startup-id i3-msg 'workspace 1'
+# eng-rus keyboard layout
+# man xkeyboard-config for key combination
+# print current keyboard layout settings - setxkbmap -print
+# delete all current keyboard layout settings - setxkbmap -option
+exec --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"
+
+#Soft
+exec --no-startup-id dropbox
+exec --no-startup-id flameshot
+exec --no-startup-id goldendict
+exec --no-startup-id $redshift_start
+exec --no-startup-id lxqt-policykit-agent
+exec --no-startup-id telegram-desktop
+exec --no-startup-id udiskie -N
+exec --no-startup-id systemctl start --user greenclip
+exec --no-startup-id nm-applet
+
+#}}}
+#---------Mouse--{{{
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#The middle button over a titlebar kills the window
+#bindsym --release button2 kill
+
+# The right button over a titlebar toggles floating
+#bindsym $mod+button3 floating toggle
+
+#}}}
+#---------Workspace Bindings--{{{
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Move focused container to workspace, and SWITCH to that workspace
+bindsym $mod+Ctrl+1 move container to workspace number $ws1; workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace number $ws2; workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace number $ws3; workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace number $ws4; workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace number $ws5; workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace number $ws6; workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace number $ws7; workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace number $ws8; workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace number $ws9; workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace number $ws10; workspace $ws10
+
+#Putting workspaces on specific screens
+# workspace $ws1 output HDMI-A-0
+# workspace $ws2 output HDMI-A-0
+# workspace $ws3 output DisplayPort-0
+
+# Assign Programs to Workspaces
+# xprop to show windiw info
+# title don't work with urxvt
+
+assign [class="(?i)telegramdesktop"] $ws4
+#assign [class="(?i)libreoffice|libreoffice-calc|libreoffic-writer"] $ws5
+# assign [class="(?i)qbittorrent"] $ws6
+# assign [class="vlc"] $ws7
+
+#Floats for windows
+for_window [class="GoldenDict"] floating enable
+# for_window [title="^JDownloader$"] floating enable
+for_window [window_role="(?i)(?:pop-up|setup|prefwindow|task_dialog)"] floating enable
+
+#}}}
+#---------Scratchpad Windows--{{{
+#xprop - show window title& props
+# General dropdown window traits. The order can matter.
+
+for_window [class="^URxvt$" instance="^dropdown_*"] floating enable 
+for_window [class="^URxvt$" instance="^dropdown_*"] move scratchpad 
+# for_window [class="^URxvt$" instance="^dropdown_*"] sticky enable
+for_window [class="^URxvt$" instance="^dropdown_*"] scratchpad show 
+for_window [class="^URxvt$" instance="^dropdown_term"] resize set 800 600
+for_window [class="^URxvt$" instance="^dropdown_notes"] resize set 1024 768
+for_window [class="^URxvt$" instance="^dropdown_qalc"] resize set 625 450
+for_window [class="^URxvt$" instance="dropdown_term|dropdown_notes"] border pixel 4
+for_window [class="^URxvt$" instance="^dropdown_qalc"] border pixel 3
+for_window [class="^URxvt$" instance="^dropdown_*"] move scratchpad 
+
+for_window [class="^URxvt$" instance="float_t_*"] resize set 625 450
+for_window [class="^URxvt$" instance="float_t_*"] floating enable
+
+exec --no-startup-id $term -name dropdown_term 
+bindsym $mod+b [class="^URxvt$" instance="^dropdown_term"] scratchpad show; [class="^URxvt$" instance="^dropdown_term"] move position center
+
+# exec --no-startup-id $term -name dropdown_notes -e vim
+exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md"\
+	-v "/$HOME/Vimwiki/work/index.md"\
+	-v "/$HOME/Vimwiki/work/viva_work.md"\
+	-v "/$HOME/Vimwiki/work/viva_notes.md"\
+	-v "/$HOME/Vimwiki/work/IT_work.md"\
+	-v "/$HOME/Vimwiki/work/IT_notes.md"\
+	-v "/$HOME/Vimwiki/notes/index.md"\
+	-v "/$HOME/Vimwiki/lists/index.md"\
+	-v "/$HOME/Vimwiki/links/index.md"\
+	-v "/$HOME/Vimwiki/lists/music.md"
+bindsym $mod+n [class="^URxvt$" instance="^dropdown_notes"] scratchpad show; [class="^URxvt$" instance="^dropdown_notes"] move position center
+
+exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
+bindsym $mod+semicolon [class="^URxvt$" instance="^dropdown_qalc"] scratchpad show; [class="^URxvt$" instance="^dropdown_qalc"] move position center
+#}}}
+#---------Shutdown, reboot, lock screen{{{
+set $Locker i3lock && sleep 1
+
+set $mode_system System (l) lock, (Shift+e) logout, (s) suspend, (h) hibernate, (Shift+r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym Shift+e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    # bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym Shift+r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+	bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+#}}}
+#-------- Reload mode{{{
+# Set the shortcuts and what they do
+set $mode_reload Reload (i) i3wm (p) polybar, (x) Xresource, (r) redshift, (Shift+r) redshift_kill, (c) picom
+mode "$mode_reload" {
+bindsym i restart ; mode "default"
+bindsym p exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+bindsym x exec --no-startup-id "xrdb -load ~/.Xresources" ; mode "default"
+bindsym c exec --no-startup-id $picom_start ; mode "default"
+bindsym r exec --no-startup-id $redshift_start ; mode "default"
+bindsym Shift+r exec --no-startup-id $redshift_kill ; mode "default"
+
+    # back to normal: Enter or Escape
+    # bindsym Return mode "default"
+    # bindsym Escape mode "default"
+    bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+}
+bindsym $mod+r mode "$mode_reload" 
+# }}}
+#---------Main Key Bindings--{{{
+
+# CONTROLING I3WM
+# restart i3wm
+bindsym $mod+Shift+r restart
+#reload the i3wm configuration file ????
+bindsym $mod+$alt+r reload
+#enable screelock
+# bindsym $mod+apostrophe exec i3lock
+
+# WINDOWS,SPLITS,LAYOUTS
+
+# swithcing layouts
+bindsym $mod+q layout splith
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout splitv
+# bindsym $mod+s layout stacking
+#switch split mode between h/v
+bindsym $mod+c split toggle
+## change container layout (next split will be vertical)
+# bindsym $mod+v split v
+# change container layout (next split will be horizontal)
+# bindsym $mod+c split h
+
+# parent/child
+bindsym $mod+z focus parent
+bindsym $mod+Shift+z focus child
+
+bindsym $mod+f fullscreen toggle
+
+# kill focused window
+bindsym $mod+Shift+c kill
+# swaping workspaces
+bindsym $mod+Shift+s exec /$HOME/.scripts/i3-display-swap.sh
+
+# APPEAREANCE
+
+# change borders
+bindsym $mod+period $border_no_name
+bindsym $mod+Shift+period $border_normal
+bindsym $mod+Ctrl+period border none
+
+# MOVING AROUND
+
+# workspace back and forth (with/without active container)
+bindsym $mod+grave workspace back_and_forth
+bindsym $mod+Shift+grave move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+u workspace prev
+bindsym $mod+i workspace next
+# switch to urgent(red) window
+bindsym $mod+y [urgent=latest] focus
+#h
+bindsym $mod+h focus left
+bindsym $mod+Shift+h move left 30
+bindsym $mod+Ctrl+h move workspace to output left
+bindsym $alt+h resize grow width 20 px or 2 ppt
+#j
+bindsym $mod+j focus down
+bindsym $mod+Shift+j move down 30
+bindsym $mod+Ctrl+j move workspace to output down
+bindsym $alt+j resize shrink height 20 px or 2 ppt
+#k
+bindsym $mod+k focus up
+bindsym $mod+Shift+k move up 30
+bindsym $mod+Ctrl+k move workspace to output up
+bindsym $alt+k resize grow height 20 px or 2 ppt
+#l
+bindsym $mod+l focus right
+bindsym $mod+Shift+l move right 30
+bindsym $mod+Ctrl+l move workspace to output right
+bindsym $alt+l resize shrink width 20 px or 2 ppt
+
+# SPECIALS MODES (FLOAT,STICKY,SCRATCHPAD)
+# bindsym $mod+Shift+s sticky toggle;exec notify-send 'sticky windows toggled'
+# change FOCUS between tiling / floating windows
+bindsym $mod+space focus mode_toggle;
+# toggle tiling / floating mode FOR window
+bindsym $mod+Shift+space floating toggle
+
+# Make the currently focused window a scratchpad
+bindsym $mod+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+plus scratchpad show; resize set 1366 750; move position center
+#resize set 1366 750, move position center
+
+# LAUCHING PROGRAMS
+
+# start a terminal
+bindsym $mod+Return exec $term
+# vifm
+bindsym $mod+Ctrl+v exec --no-startup-id $term -e ~/.scripts/launch_vifm.sh
+
+# CMUS CONTROLS
+# pause
+bindsym $mod+Ctrl+i exec --no-startup-id cmus-remote -u
+# prev
+bindsym $mod+Ctrl+u exec --no-startup-id cmus-remote -r
+# next
+bindsym $mod+Ctrl+o exec --no-startup-id cmus-remote -n
+# volume
+bindsym $mod+Ctrl+s exec --no-startup-id cmus-remote -v -5%
+bindsym $mod+Ctrl+d exec --no-startup-id cmus-remote -v +5%
+# seek
+bindsym $mod+Ctrl+q exec --no-startup-id cmus-remote -k -10
+bindsym $mod+Ctrl+e exec --no-startup-id cmus-remote -k +10
+
+# MPV CONTROLS
+bindsym Ctrl+Mod1+j exec --no-startup-id xdotool search --class mpv key Shift+j
+bindsym Ctrl+Mod1+l exec --no-startup-id xdotool search --class mpv key Shift+k
+bindsym Ctrl+Mod1+i exec --no-startup-id xdotool search --class mpv key space
+bindsym Ctrl+Mod1+u exec --no-startup-id xdotool search --class mpv key Shift+comma
+bindsym Ctrl+Mod1+o exec --no-startup-id xdotool search --class mpv key Shift+period
+bindsym Ctrl+Mod1+n exec --no-startup-id xdotool search --class mpv key x
+bindsym Ctrl+Mod1+m exec --no-startup-id xdotool search --class mpv key c
+bindsym Ctrl+Mod1+bracketleft exec --no-startup-id xdotool search --class mpv key bracketleft
+bindsym Ctrl+Mod1+bracketright exec --no-startup-id xdotool search --class mpv key bracketright
+bindsym Ctrl+Mod1+BackSpace exec --no-startup-id xdotool search --class mpv key BackSpace
+
+# ROFI
+# rofi mod-tab
+# bindsym $mod+Tab exec --no-startup-id "rofi -show-icons -modi windowcd,window,drun -show window"
+bindsym $mod+Tab exec --no-startup-id "rofi -show-icons -show window"
+# rofi application launch
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi drun,run -font 'hack 12' -show combi -icon-theme 'Papirus' -show-icons"
+# show blezz menu 
+bindsym $mod+s exec --no-startup-id rofi -show blezz -modi blezz -auto-select -matching normal 
+# rofi-greeclip
+bindsym $mod+a exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+# rofi-pass
+bindsym $mod+p exec --no-startup-id "rofi-pass"
+#rofi-ssh
+bindsym $mod+v exec --no-startup-id "rofi -show ssh -parse-hosts"
+# run commands from shell - DOS'T WORK!
+# bindsym $mod+t exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
+# bindsym $mod+t exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e bash -ic "{cmd} && read"'
+
+# OTHER
+# master-stack keybinding (moves stack window to master and current master back to stack window)
+# GOOGLE TEST MORE!!!!!!
+bindsym $mod+m exec "i3-msg \\"focus left, move right, focus up, move left\\""
+bindsym $mod+Shift+m exec "i3-msg \\"move right, focus up, move left\\""
+bindsym $mod+comma exec "i3-msg \\"focus up, move right, focus up, focus left\\""
+bindsym $mod+Shift+comma exec "i3-msg \\"focus up, move right, focus left\\""
+
+#}}}
+#---------Function Buttons--{{{
+
+bindsym $mod+F1 exec --no-startup-id $term -name dropdown_term 
+bindsym $mod+F2 exec --no-startup-id $term -name dropdown_notes -e vim -v "/$HOME/Vimwiki/Todo.md"\
+	-v "/$HOME/Vimwiki/work/index.md"\
+	-v "/$HOME/Vimwiki/work/viva_work.md"\
+	-v "/$HOME/Vimwiki/work/viva_notes.md"\
+	-v "/$HOME/Vimwiki/work/IT_work.md"\
+	-v "/$HOME/Vimwiki/work/IT_notes.md"\
+	-v "/$HOME/Vimwiki/notes/index.md"\
+	-v "/$HOME/Vimwiki/lists/index.md"\
+	-v "/$HOME/Vimwiki/links/index.md"\
+	-v "/$HOME/Vimwiki/lists/music.md"
+
+bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
+# bindsym $mod+F4 exec --no-startup-id 
+# bindsym $mod+F5 exec --no-startup-id 
+# bindsym $mod+F6 exec --no-startup-id 
+bindsym $mod+F7 exec --no-startup-id $picom_start
+# bindsym $mod+F8 exec --no-startup-id - USE IN NOTEBOOK!
+bindsym $mod+F9 exec --no-startup-id $redshift_kill
+bindsym $mod+F10 exec --no-startup-id $redshift_start
+# Turn off both monitors
+bindsym $mod+F11 exec "sleep 1; xset dpms force off"
+bindsym $mod+F12 mode "$mode_display" 
+
+# Flameshot for screenshots
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+Print exec --no-startup-id flameshot screen -p /$HOME/Pictures/screenshots
+bindsym $mod+Shift+Print exec --no-startup-id flameshot gui full -p /$HOME/Pictures/screenshots
+
+#}}}
+#---------Media Keys--{{{
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Media Controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+#}}}
+#---------Arrow Keys--{{{
+bindsym $mod+Left		focus left
+bindsym $mod+Shift+Left		move left
+bindsym $mod+Ctrl+Left		move workspace to output left
+bindsym $alt+Left		resize grow width 20 px or 2 ppt
+
+bindsym $mod+Down		focus down
+bindsym $mod+Shift+Down		move down
+bindsym $mod+Ctrl+Down		move workspace to output down
+bindsym $alt+Down		resize shrink height 20 px or 2 ppt
+
+bindsym $mod+Up			focus up
+bindsym $mod+Shift+Up		move up
+bindsym $mod+Ctrl+Up		move workspace to output up
+bindsym $alt+Up		resize grow height 20 px or 2 ppt
+
+bindsym $mod+Right 		focus right
+bindsym $mod+Shift+Right 	move right
+bindsym $mod+Ctrl+Right		move workspace to output right
+bindsym $alt+Right		resize shrink width 20 px or 2 ppt
+
+#}}}
+#---------TESTING-----------{{{
+bindsym $mod+F4 exec --no-startup-id $term -e ~/.scripts/launch_vifm.sh
+
+#}}}
+
+

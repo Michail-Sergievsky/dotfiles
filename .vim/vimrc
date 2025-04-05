@@ -13,6 +13,7 @@ endif
 
 set nocompatible               " Use Vim settings, rather than Vi settings (much better!).
 set viminfo=<1000,'1000,/50,:100,h,f1
+set viminfofile=$HOME/.cache/vim/viminfo
 
 set backspace=indent,eol,start  " Allow backspacing over everything in insert mode.
 if has('unnamedplus')           " use the system register for everything

@@ -1,0 +1,22 @@
+#-------------i3 config file NOTEBOOK{{{
+#Display Resolution
+exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --mode 1440x900 --pos 3840x0 --rotate normal --output DP-2 --off --output DP-3 --off --output DP-4 --off
+
+#}}}
+#-------- Manual management of external displays{{{
+# HOME
+set $mode_display Ext_Screen (a) NOTE+HDMI, (s) NOTE+HDMI+PORT, (d) NOTE
+mode "$mode_display" {
+bindsym a exec xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-1-8 --off --output DP-1-9 --off
+bindsym s exec xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --mode 1440x900 --pos 3840x0 --rotate normal --output DP-2 --off --output DP-3 --off --output DP-4 --off
+bindsym d exec xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off
+
+    # back to normal: Enter or Escape
+	bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+}
+
+bindsym F12 mode "$mode_display"
+# }}}
+
+bindsym $mod+F8 exec --no-startup-id ~/.scripts/priv/adjust-monitors_i3wm_notebook.sh
