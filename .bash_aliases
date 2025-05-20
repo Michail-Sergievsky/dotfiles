@@ -23,8 +23,8 @@ alias vpnoff='wg-quick down wg-pc-client'
 alias conn='nmcli conn show'
 alias vivaon='nmcli conn up viva_online --ask'
 alias vivaoff='nmcli conn down viva_online'
-alias collon='nmcli conn up viva_collect --ask'
-alias colloff='nmcli conn down viva_collect'
+alias collon='nmcli conn up viva_collect-gateway-admin01 --ask'
+alias colloff='nmcli conn down viva_collect-gateway-admin01'
 alias mksvon='nmcli conn up mediatel_msk'
 alias mksvoff='nmcli conn down mediatel_msk'
 alias krdvon='nmcli conn up mikhail.sergievsky-krd'
@@ -60,5 +60,5 @@ alias v_down="yt-dlp \
   -f 'bestvideo[height=1080]+bestaudio' \
   -o ~/Downloads/youtube/video/'%(upload_date)s - %(title)s.%(ext)s' \
   --batch-file=~/Downloads/youtube/your_links.txt"
-alias fed="ssh fedora40lab1"
+alias fed='cd ~/Vagrant/fedora && vagrant ssh fedora40work'
 #end_alias

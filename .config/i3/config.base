@@ -98,6 +98,7 @@ exec --no-startup-id telegram-desktop
 exec --no-startup-id udiskie -N
 exec --no-startup-id systemctl start --user greenclip
 exec --no-startup-id nm-applet
+exec --no-startup-id nekoray
 
 #}}}
 #---------Mouse--{{{
@@ -433,7 +434,7 @@ bindsym $mod+F9 exec --no-startup-id $redshift_kill
 bindsym $mod+F10 exec --no-startup-id $redshift_start
 # Turn off both monitors
 bindsym $mod+F11 exec "sleep 1; xset dpms force off"
-bindsym $mod+F12 mode "$mode_display" 
+# bindsym $mod+F12 mode "$mode_display" 
 
 # Flameshot for screenshots
 bindsym Print exec --no-startup-id flameshot gui

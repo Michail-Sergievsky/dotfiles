@@ -1,10 +1,12 @@
 #  TASKWARRIOR ALIASES
 
 #start_alias
+
+alias tfz='~/.scripts/taskfzf.sh'
 alias t="task"
+alias tl="t list"
 alias td="task delete"
 alias tvi="task in"
-alias tin="task type:in add"
 
 alias tick="tickle"
 alias think='tickle +1d'
@@ -14,11 +16,12 @@ alias tor='taskobjective'  # new long name function for adding an objective task
 
 #adding task
 #add to in
+alias tin="task type:in add"
 #add to next
 alias taa='taskaddfzf' # add new task
 
 #annotation
-alias tan='/home/freeman/.scripts/taskwarrior_tan.sh'
+alias tan='~/.scripts/taskwarrior_tan.sh'
 # moving tasks
 alias mt='modify_task_with_fzf' # all 3 - type, project, tag (from in)
 # only tag with fzf
@@ -50,6 +53,23 @@ modify_task_set_type_someday() { task modify "$1" type:someday; }
 modify_task_set_type_waiting() { task modify "$1" type:waiting; }
 modify_task_set_type_cal()    { task modify "$1" type:cal; }
 
+
+# ADDING TASK FUNCTIONS
+# Composite function to add a task using fzf for type, tags, and project.
+choose_project() {
+    # List projects from task (using task _projects if available)
+    # Remove any unwanted header lines.
+    task _projects 2>/dev/null | fzf --prompt="Select project: " | sed 's/^[[:space:]]*//'
+}
+choose_type() {
+    # Assumes a file with your types (one per line) in ~/.task/types.txt
+    cat ~/.task/types.txt | fzf --prompt="Select type: " | sed 's/^[[:space:]]*//'
+}
+choose_tags() {
+    # Assumes a file with your tags (one per line) in ~/.task/tags.txt
+    cat ~/.task/tags.txt | fzf --multi --prompt="Select tags (space separated): " | sed 's/^[[:space:]]*//'
+}
+
 # A function to add an objective task (asks for description and project)
 taskobjective() {
     # Prompt for task description if not provided
@@ -65,23 +85,6 @@ taskobjective() {
     fi
     task add "$desc" type:objective project:"$proj"
 }
-
-choose_project() {
-    # List projects from task (using task _projects if available)
-    # Remove any unwanted header lines.
-    task _projects 2>/dev/null | tail -n +3 | sed 's/^[[:space:]]*//'
-}
-choose_type() {
-    # Assumes a file with your types (one per line) in ~/.task/types.txt
-    cat ~/.task/types.txt | fzf --prompt="Select type: " | sed 's/^[[:space:]]*//'
-}
-choose_tags() {
-    # Assumes a file with your tags (one per line) in ~/.task/tags.txt
-    cat ~/.task/tags.txt | fzf --multi --prompt="Select tags (space separated): " | sed 's/^[[:space:]]*//'
-}
-
-# ADDING TASK FUNCTIONS
-# Composite function to add a task using fzf for type, tags, and project.
 
 taskaddfzf() {
   # Get description interactively if not provided.
@@ -103,7 +106,7 @@ taskaddfzf() {
   # Adjust the tail parameter as needed to skip header lines.
   echo "Select a project (or press Enter to input a new one):"
   local proj
-  proj=$(task _projects 2>/dev/null | tail -n +3 | fzf --prompt="Select project: " | head -n1 | xargs)
+  proj=$(choose_project | head -n1 | xargs)
   if [ -z "$proj" ]; then
     read -p "Enter new project name: " proj
   fi
@@ -167,7 +170,7 @@ modify_task_with_fzf() {
         PROJECT=""
     else
         # Use fzf to choose a single project.
-        PROJECT=$(task _projects 2>/dev/null | tail -n +3 | sed 's/^[[:space:]]*//' | fzf --prompt="Select project: " | head -n1 | xargs)
+        PROJECT=$(choose_project | head -n1 | xargs)
     fi
     
     # Build the command as an array to preserve spaces

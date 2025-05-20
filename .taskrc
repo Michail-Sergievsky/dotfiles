@@ -4,9 +4,6 @@
 
 include ~/.env_priv/task_config
 
-# Files
-data.location=~/.task
-
 # Color theme (choose one)
 include solarized-light-256.theme
 
@@ -16,10 +13,17 @@ confirmation=off
 #allow purge
 allow.purge=yes
 
+#only one recurring
+rc.recurring.generate=0
+
 # User Defined Attributes (UDAs)
 uda.type.type = string
 uda.type.label = Type
 uda.type.values = in,next,note,objective,someday,waiting,cal,bucketlist
+
+uda.cat.type = string
+uda.cat.label = Category
+# uda.cat.values = home,office,life,school,trip
 
 uda.priority.type = string
 uda.priority.values = H,L,
@@ -38,71 +42,131 @@ urgency.wait.coefficient = 0
 urgency.scheduled.coefficient = 0
 urgency.overdue.coefficient = 0
 
-# Reports
+# CONTEXT
 
-report.all.columns = id,status.short,uuid.short,start.active,entry.age,end.age,type,depends.indicator,priority,difficulty,tags,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
-report.all.labels  = ID,St,UUID,A,Age,Done,Type,D,P,Difficulty,Tags,Project,TagsC,R,Wait,Sch,Due,Until,Description
 
-report.all_valid.columns = id,status.short,uuid.short,start.active,entry.age,end.age,type,depends.indicator,priority,difficulty,tags,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
-report.all_valid.labels  = ID,St,UUID,A,Age,Done,Type,D,P,Difficulty,Tags,Project,TagsC,R,Wait,Sch,Due,Until,Description
-report.all_valid.filter  = (status:pending or status:waiting)
+# REPORTS
 
+# Default GTD view
+default.command = gtd
+
+# GTD overview: all actionable items
+report.gtd.description = GTD View
+report.gtd.filter = status:pending and (type:next or type:waiting or type:cal or type:objective)
+report.gtd.columns = uuid,start.age,cat,priority,difficulty,tags,project,type,description.count
+report.gtd.labels = uuid,Active,CAT,P,Diff,Tags,Project,Type,Description
+report.gtd.sort = type-,cat+,project+,entry+
+
+# GTD overview: all actionable items+complete task
+report.gtdc.description = GTD View
+report.gtdc.filter = status:pending and (type:next or type:waiting or type:cal or type:objective)
+report.gtdc.columns = uuid,start.age,end.age,cat,priority,difficulty,tags,project,type,description.count
+report.gtdc.labels = uuid,Active,Done,CAT,P,Diff,Tags,Project,Type,Description
+report.gtdc.sort = cat+,project+,type-,entry+
+
+# Inbox
 report.in.description = Inbox
-report.in.columns = id,description,priority,difficulty
-report.in.labels = ID,Description,Priority,Difficulty
-report.in.filter = status:pending limit:page (type:in)
+report.in.filter = status:pending and type:in
+report.in.columns = uuid,id,description,priority,difficulty
+report.in.labels = uuid,ID,Description,Priority,Difficulty
+report.in.sort = entry+
 
-report.note.description = Notes
-report.note.columns = id,description,tags,project,difficulty
-report.note.labels = ID,Description,Tags,Project,Difficulty
-report.note.filter = limit: type:note
-
+# Next actions
 report.next.description = Next Actions
-report.next.columns = id,start.age,priority,difficulty,tags,project,type,recur,scheduled.countdown,due.relative,until.remaining,description.count
-report.next.labels  = ID,Active,P,Difficulty,Tags,Project,Type,Recur,S,Due,Until,Description
-# report.next.filter = type:next
 report.next.filter = status:pending and type:next
-report.next.sort    = priority
+report.next.columns = uuid,id,start.age,cat,priority,difficulty,tags,project,type,recur,scheduled.countdown,due.relative,until.remaining,description.count
+report.next.labels  = uuid,ID,Active,CAT,P,Difficulty,Tags,Project,Type,Recur,S,Due,Until,Description
+report.next.sort = cat+,project+,entry+
 
-report.objectives.description = Projects
-report.objectives.columns = id,priority,difficulty,tags,project,type,description.count
-report.objectives.labels = ID,P,Difficulty,Tags,Project,Type,Description
-report.objectives.filter = limit: type:objective status:pending
-# report.objectives.sort = project+\/,entry+
-report.objectives.sort = tags+,project+,entry+
-# report.objectives.sort = priority
+# Next actions with complete task
+report.nextc.description = Next Actions
+report.nextc.filter = (status:pending or status:completed) and type:next
+report.nextc.columns = uuid,id,start.age,end.age,cat,priority,difficulty,tags,project,type,recur,scheduled.countdown,due.relative,until.remaining,description.count
+report.nextc.labels  = uuid,ID,Active,Done,CAT,P,Difficulty,Tags,Project,Type,Recur,S,Due,Until,Description
+report.nextc.sort = cat+,project+,entry+
 
+# All projects with tasks (including next, cal, waiting)
+
+report.projs.description = Projects + Actions
+report.projs.filter = status:pending and (type:objective or type:next or type:cal or type:waiting)
+report.projs.columns = uuid,id,cat,project,type,description
+report.projs.labels = uuid,ID,CAT,Project,Type,Description
+report.projs.sort = cat+,project+,type-,entry+
+
+# Projects with no next actions NOT WORK
+report.projs_without_next.description = Projects without Next Actions
+report.projs_without_next.filter = type:objective and status:pending and not project.any:(type:next)
+report.projs_without_next.columns = uuid,id,start.age,cat,priority,difficulty,tags,project,type,recur,scheduled.countdown,due.relative,until.remaining,description.count
+report.projs_without_next.labels  = uuid,ID,Active,CAT,P,Difficulty,Tags,Project,Type,Recur,S,Due,Until,Description
+report.projs_without_next.sort = cat+,project+
+
+# One project (you choose project manually with a filter) ADD LATER
+report.proj.description = One Project
+report.proj.filter = status:pending and (type:objective or type:next or type:cal or type:waiting)
+report.proj.columns = uuid,status,cat,project,type,difficulty,tags,description,entry,due
+report.proj.labels = uuid,Status,CAT,Project,Type,Difficulty,Tags,Description,Entry,Due
+report.proj.sort = entry+
+# Note: appfilter manually when running
+
+# Someday/Maybe
 report.someday.description = Someday/Maybe
-report.someday.columns = id,tags,project,description.count,difficulty
-report.someday.labels = ID,Tags,Projects,Description,Difficulty
-report.someday.filter = limit: type:someday status:pending
+report.someday.filter = status:pending and type:someday
+report.someday.columns = uuid,id,start.age,cat,priority,difficulty,project,type,recur,scheduled.countdown,due.relative,until.remaining,description.count
+report.someday.labels  = uuid,ID,Active,CAT,P,Difficulty,Project,Type,Recur,S,Due,Until,Description
+report.someday.sort = cat+,project+,entry+
 
-report.waiting.columns = id,priority,difficulty,tags,project,due.relative,description.count
-report.waiting.description = WaitingFor
-report.waiting.labels = ID,P,Difficulty,Tags,Project,Due,Description
-report.waiting.filter = limit: type:waiting status:pending +READY
-report.waiting.sort = priority
+# Waiting tasks
+report.waiting.description = Waiting
+report.waiting.filter = status:pending and type:waiting
+# report.waiting.filter = limit: type:waiting status:pending +READY
+report.waiting.columns = uuid,id,cat,priority,difficulty,tags,project,scheduled,due,due.relative,description.count
+report.waiting.labels = uuid,ID,CAT,P,Diff,Tags,Project,SHE,DUE,Days left,Description
+report.waiting.sort = cat+,project+,priority
 
-report.cal.columns = id,tags,project,recur.indicator,scheduled,due,description,difficulty
+# Calendar tasks
 report.cal.description = Calendar
-report.cal.filter = type:cal status:pending limit:page
-report.cal.labels = ID,Tags,Project,R,Scheduled,Due,Description,Difficulty
-report.cal.sort = scheduled
+report.cal.filter = status:pending and type:cal
+report.cal.columns = uuid,id,cat,project,recur.indicator,scheduled,due,description,difficulty
+report.cal.labels = uuid,ID,CAT,Project,R,Scheduled,Due,Description,Difficulty
+report.cal.sort = cat+,scheduled
 
-report.bucketlist.columns = id,description,tags,project,difficulty
-report.bucketlist.description = Bucket list
-report.bucketlist.filter = limit: type:bucketlist
-report.bucketlist.labels = ID,Description,Tags,Project,Difficulty
+# Birthdays (tagged cal)
+report.birthdays.description = Birthdays
+report.birthdays.filter = status:pending and type:cal and +birthday
+report.birthdays.columns = uuid,id,project,scheduled,due,description
+report.birthdays.labels = uuid,ID,Project,Scheduled,Due,Description
+report.birthdays.sort = scheduled
 
-report.today.columns = id,description,type,project,priority,difficulty,due
-report.today.description = "Today's tasks"
-report.today.filter = ( (type:next or type:objective or type:note or type:waiting or type:cal) and (entry:today or modified:today) )
-report.today.labels = ID,Description,Type,Project,Priority,Difficulty,Due
+# Bucketlist
+report.bucketlist.description = Bucket List
+report.bucketlist.filter = status:pending and type:bucketlist
+report.bucketlist.columns = uuid,id,description,cat,project,difficulty
+report.bucketlist.labels = uuid,ID,Description,CAT,Project,Difficulty
+report.bucketlist.sort = cat+,project+
 
-report.yesterday.columns = id,description,type,project,priority,difficulty,due
-report.yesterday.description = "Yesterday's tasks"
-report.yesterday.filter = ( (type:next or type:objective or type:note or type:waiting or type:cal) and (entry:yesterday or modified:yesterday) )
-report.yesterday.labels = ID,Description,Type,Project,Priority,Difficulty,Due
+# Done tasks
+report.completed.description = Completed Tasks
+report.completed.filter = status:completed
+report.completed.columns = uuid,id,end.age,cat,project,type,description
+report.completed.labels = uuid,ID,Done,CAT,Project,Type,Description
+report.completed.sort = cat+,project+,end-
+
+# Deleted tasks
+report.deleted.description = Deleted Tasks
+report.deleted.filter = status:deleted
+report.deleted.columns = uuid,id,end.age,cat,project,type,description
+report.deleted.labels = uuid,ID,Deleted,CAT,Project,Type,Description
+report.deleted.sort = cat+,project+,end-
+
+# All tasks
+report.all.description = All Tasks
+report.all.filter = 
+report.all.columns = uuid,id,status.short,start.active,entry.age,end.age,type,depends.indicator,priority,difficulty,cat,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
+report.all.labels  = uuid,ID,St,A,Age,Done,Type,D,P,Diff,CAT,Project,TagsC,R,Wait,Sch,Due,Until,Description
+report.all.sort = cat+,project+,entry+
+
+
+#MISC, sort
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
 report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
@@ -122,4 +186,7 @@ report.annotations.labels=ID,Description,Annotation
 report.annotations.filter=status:pending
 report.annotations.sort=due-
 
-news.version=2.6.0
+news.version=3.4.1
+context.work.read=+work or +freelance
+context.study.read=+school
+context.study.write=+school

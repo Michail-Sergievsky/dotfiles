@@ -18,5 +18,5 @@ bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rota
 	bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
 	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
 }
-bindsym F12 mode "$mode_display"
+bindsym $mod+F12 mode "$mode_display"
 # }}}
