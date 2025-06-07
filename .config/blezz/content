@@ -22,7 +22,7 @@ act(b,Thunderbird,thunderbird)
 act(d,Discord,discord)
 act(s,Skype,skypeforlinux)
 act(r,RocketChat,rocketchat-desktop)
-act(t,Telegram,telegram-desktop)
+act(t,Telegram,Telegram)
 act(z,Zoom,zoom)
 
 Work:

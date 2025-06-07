@@ -38,7 +38,7 @@ alias asciidoc2pdf='$HOME/.local/share/asciidoc2pdf/asciidoc2pdf'
 alias la='awk "/#start/{s=NR;p=1;next}/#end/{p=0}p&&NR>s" ~/.bash_aliases'
 alias mirr='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed'
 alias iwmh='grep -E "^bindsym" $HOME/.config/i3/config | less'
-alias genpass='</dev/urandom tr -dc "1234567890-=!@#$%^&*()_=qwertyuiop[]QWERTYUIOP{}asdfghjkl;\ASDFGHJKL:zxcvbnm,./ZXCVBNM<>?" | head -c16; echo ""'
+alias genpass='pwgen -n 16 1 | tee >(xclip -selection clipboard) > /dev/null'
 alias pstr='i3-gnome-pomodoro start'
 alias pstop='i3-gnome-pomodoro stop'
 alias ptog='i3-gnome-pomodoro toggle'
@@ -62,3 +62,7 @@ alias v_down="yt-dlp \
   --batch-file=~/Downloads/youtube/your_links.txt"
 alias fed='cd ~/Vagrant/fedora && vagrant ssh fedora40work'
 #end_alias
+
+
+# alias genpass='</dev/urandom tr -dc "1234567890-=!@#$%^&*()_=qwertyuiop[]QWERTYUIOP{}asdfghjkl;\ASDFGHJKL:zxcvbnm,./ZXCVBNM<>?" | head -c16; echo ""'
+

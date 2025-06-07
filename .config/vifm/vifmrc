@@ -312,6 +312,16 @@ command! cmp : if expand('%%c') == expand('%%f')
               \ | else
               \ |     echo expand('Comparing files: %%"f ...')
               \ |     cmpinternal %f \ | endif
+
+" WORK!!!!
+" Mount remote dir via sshfs
+command! mountssh :!mkdir -p ~/mnt/remote && sshfs user@host:/path ~/mnt/remote && cd ~/mnt/remote
+" sshfs sergievsky.m-vc-admin@gateway-employee01:/ /mnt/server
+" fusermount -u /mnt/server
+
+" Unmount remote
+command! unmountssh :!fusermount -u ~/mnt/remote
+
 "}}}
 "----Executing programms---------------{{{
 "	 COMMON FILES
