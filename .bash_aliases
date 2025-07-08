@@ -57,7 +57,6 @@ alias v_down="yt-dlp \
   --cookies ~/.env_priv/max_yotebe_cookies.txt \
   --add-metadata \
   --parse-metadata 'title:%(uploader)' \
-  -f 'bestvideo[height=1080]+bestaudio' \
   -o ~/Downloads/youtube/video/'%(upload_date)s - %(title)s.%(ext)s' \
   --batch-file=~/Downloads/youtube/your_links.txt"
 alias fed='cd ~/Vagrant/fedora && vagrant ssh fedora40work'

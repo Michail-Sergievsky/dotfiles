@@ -65,12 +65,6 @@ client.urgent				$ubgcolor	$ubgcolor		$textcolor	$ubgcolor
 #}}}
 #---------Desktop ENVIRONMENT--{{{
 
-#Display Resolution
-# exec_always --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-2 --off
-# exec_always --no-startup-id xrandr --output DP1 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-# exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off
-exec_always --no-startup-id xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate normal
-
 #Polybar Launch script
 # exec_always --no-startup-id ~/.scripts/polybar/launchpolybar.sh
 exec_always --no-startup-id ~/.scripts/polybar/setup-polybar.sh
@@ -100,10 +94,11 @@ exec --no-startup-id flameshot
 exec --no-startup-id goldendict
 exec --no-startup-id $redshift_start
 exec --no-startup-id lxqt-policykit-agent
-exec --no-startup-id telegram-desktop
+exec --no-startup-id Telegram
 exec --no-startup-id udiskie -N
 exec --no-startup-id systemctl start --user greenclip
 exec --no-startup-id nm-applet
+exec --no-startup-id nekoray
 
 #}}}
 #---------Mouse--{{{
@@ -249,24 +244,6 @@ mode "$mode_system" {
 
 bindsym $mod+Pause mode "$mode_system"
 #}}}
-#-------- Manual management of external displays{{{
-# HOME
-set $mode_display Ext_Screen (a) HDMI+DP, (s) HDMI ONLY, (d) HDMI+DP_rotate
-mode "$mode_display" {
-bindsym a exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate normal ; mode "default"
-bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off ; mode "default"
-bindsym d exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate left ; mode "default"
-
-# bindsym a exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
-# bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
-# bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
-
-    # back to normal: Enter or Escape
-	bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
-	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
-}
-# bindsym to F12
-# }}}
 #-------- Reload mode{{{
 # Set the shortcuts and what they do
 set $mode_reload Reload (i) i3wm (p) polybar, (x) Xresource, (r) redshift, (Shift+r) redshift_kill, (c) picom
@@ -281,7 +258,7 @@ bindsym Shift+r exec --no-startup-id $redshift_kill ; mode "default"
     # back to normal: Enter or Escape
     # bindsym Return mode "default"
     # bindsym Escape mode "default"
-	bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+    bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
 	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
 }
 bindsym $mod+r mode "$mode_reload" 
@@ -451,13 +428,13 @@ bindsym $mod+F3 exec --no-startup-id $term -name dropdown_qalc -e 'qalc'
 # bindsym $mod+F4 exec --no-startup-id 
 # bindsym $mod+F5 exec --no-startup-id 
 # bindsym $mod+F6 exec --no-startup-id 
-# bindsym $mod+F7 exec --no-startup-id 
-bindsym $mod+F8 exec --no-startup-id $picom_start
+bindsym $mod+F7 exec --no-startup-id $picom_start
+# bindsym $mod+F8 exec --no-startup-id - USE IN NOTEBOOK!
 bindsym $mod+F9 exec --no-startup-id $redshift_kill
 bindsym $mod+F10 exec --no-startup-id $redshift_start
 # Turn off both monitors
 bindsym $mod+F11 exec "sleep 1; xset dpms force off"
-bindsym $mod+F12 mode "$mode_display" 
+# bindsym $mod+F12 mode "$mode_display" 
 
 # Flameshot for screenshots
 bindsym Print exec --no-startup-id flameshot gui
@@ -509,3 +486,25 @@ bindsym $mod+F4 exec --no-startup-id $term -e ~/.scripts/launch_vifm.sh
 #}}}
 
 
+#-------------i3 config file DESKTOP{{{
+#Display Resolution
+#HOME
+exec_always --no-startup-id xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --mode 1440x900 --pos 1921x0 --rotate normal
+
+#}}}
+
+#-------- Manual management of external displays{{{
+# HOME
+set $mode_display Ext_Screen (a) NOTE+HDMI, (s) NOTE+HDMI+PORT, (d) NOTE
+mode "$mode_display" {
+
+bindsym a exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+bindsym s exec xrandr --output DisplayPort-0 --off --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+bindsym d exec xrandr --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate right --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --off ; mode "default"
+
+    # back to normal: Enter or Escape
+	bindsym Return exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
+}
+bindsym $mod+F12 mode "$mode_display"
+# }}}

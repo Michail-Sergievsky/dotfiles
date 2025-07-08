@@ -186,7 +186,7 @@ mark A ~/.ansible
 mark B ~/Backup
 mark C ~/.config
 mark D ~/Documents
-mark F ~/Foto
+mark F ~/Fest_prepair
 mark G ~/Git_work
 mark L ~/Learn
 mark M ~/Music
@@ -799,3 +799,16 @@ noremap <Right> <Nop>
 
 
 "}}}
+"
+" TODO
+
+" sshfs user@host:/path/to/dir ~/mnt/server
+" sshfs smy@mikhail.sergievsky-vm01:/home/smy/ /mnt/server
+" sshfs teligent@fedhome:/media/sf_work_rdp /mnt/fedora
+" fusermount -u ~/mnt/server
+
+" Mount remote dir via sshfs
+" command! mountssh :!mkdir -p ~/mnt/remote && sshfs user@host:/path ~/mnt/remote && cd ~/mnt/remote
+
+" Unmount remote
+" command! unmountssh :!fusermount -u ~/mnt/remote
