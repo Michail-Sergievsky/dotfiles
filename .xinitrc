@@ -45,4 +45,7 @@ fi
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 ~/.scripts/priv/include-device_i3wm.sh
-exec i3
+# exec i3
+xset s off
+xset dpms 0 0 3600
+exec dbus-run-session i3
