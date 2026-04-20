@@ -21,8 +21,10 @@ alias vag='cd ~/Vagrant'
 alias vpnon='wg-quick up wg-pc-client'
 alias vpnoff='wg-quick down wg-pc-client'
 alias conn='nmcli conn show'
-alias vivaon='nmcli conn up viva_online-smy --ask'
-alias vivaoff='nmcli conn down viva_online-smy'
+alias vivaon='sudo openfortivpn --config ~/.config/openfortivpn/viva_online-smy.conf'
+alias vivaoff='sudo pkill -f openfortivpn'
+# alias vivaon='nmcli conn up viva_online-smy --ask'
+# alias vivaoff='nmcli conn down viva_online-smy'
 alias collon='nmcli conn up viva_collect-gateway-admin01-smy --ask'
 alias colloff='nmcli conn down viva_collect-gateway-admin01-smy'
 alias collempon='nmcli conn up viva_collect-employee-smy --ask'
@@ -48,22 +50,20 @@ alias pres='i3-gnome-pomodoro reset'
 alias pskip='i3-gnome-pomodoro skip'
 alias pstat='i3-gnome-pomodoro status'
 alias reflec='sudo reflector -c Russia -a 7 --sort rate --save /etc/pacman.d/mirrorlist'
-alias setx='setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"'
+# alias setx='setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"'
+# alias setx='setxkbmap "us,ru" -option "winkeys" -option "grp:ctrl_shift_toggle" -option "grp_led:scroll"'
+alias setx='setxkbmap us,ru -option grp:alt_shift_toggle,grp_led:scroll'
 alias hosts='sudo vim /etc/hosts'
 alias work='cd ~/Downloads/work'
 alias viv='cd ~/Git_work/viva-it/'
 alias tok='ssh-add -s /usr/lib64/librtpkcs11ecp.so'
-alias a_down='$HOME/.scripts/youtube_only_audio_download.sh'
-alias abatch_down='$HOME/.scripts/youtube_audio_batch_download.sh'
+alias a_down='$HOME/.scripts/youtube_audio_download.sh'
+alias m_down='$HOME/.scripts/youtube_music_download.sh'
 alias v_down="yt-dlp \
   --cookies ~/.env_priv/max_yotebe_cookies.txt \
   --add-metadata \
-  --parse-metadata 'title:%(uploader)' \
   -o ~/Downloads/youtube/video/'%(upload_date)s - %(title)s.%(ext)s' \
   --batch-file=~/Downloads/youtube/your_links.txt"
+alias abatch_down='$HOME/.scripts/youtube_audio_batch_download.sh'
 alias fed='cd ~/Vagrant/fedora && vagrant ssh fedora40work'
 #end_alias
-
-
-# alias genpass='</dev/urandom tr -dc "1234567890-=!@#$%^&*()_=qwertyuiop[]QWERTYUIOP{}asdfghjkl;\ASDFGHJKL:zxcvbnm,./ZXCVBNM<>?" | head -c16; echo ""'
-
