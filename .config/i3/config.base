@@ -99,7 +99,12 @@ exec --no-startup-id udiskie -N
 exec --no-startup-id systemctl start --user greenclip
 exec --no-startup-id nm-applet
 exec --no-startup-id throne
-
+# DBus env 
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+# Keyring
+exec --no-startup-id eval $(gnome-keyring-daemon --start --components=secrets)
+# Policy agent
+exec --no-startup-id lxqt-policykit-agent
 #}}}
 #---------Mouse--{{{
 
