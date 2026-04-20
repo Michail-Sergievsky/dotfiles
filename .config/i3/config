@@ -93,12 +93,17 @@ exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id goldendict
 exec --no-startup-id $redshift_start
-exec --no-startup-id lxqt-policykit-agent
 exec --no-startup-id Telegram
 exec --no-startup-id udiskie -N
 exec --no-startup-id systemctl start --user greenclip
 exec --no-startup-id nm-applet
-exec --no-startup-id nekoray
+exec --no-startup-id throne
+# DBus env 
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+# Keyring
+exec --no-startup-id eval $(gnome-keyring-daemon --start --components=secrets)
+# Policy agent
+exec --no-startup-id lxqt-policykit-agent
 
 #}}}
 #---------Mouse--{{{
@@ -242,7 +247,7 @@ mode "$mode_system" {
 	bindsym Escape exec --no-startup-id ~/.scripts/polybar/reloadpolybar.sh ; mode "default"
 }
 
-bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Home mode "$mode_system"
 #}}}
 #-------- Reload mode{{{
 # Set the shortcuts and what they do

@@ -93,7 +93,6 @@ exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id goldendict
 exec --no-startup-id $redshift_start
-exec --no-startup-id lxqt-policykit-agent
 exec --no-startup-id Telegram
 exec --no-startup-id udiskie -N
 exec --no-startup-id systemctl start --user greenclip
