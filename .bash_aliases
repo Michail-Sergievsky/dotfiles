@@ -48,20 +48,17 @@ alias pres='i3-gnome-pomodoro reset'
 alias pskip='i3-gnome-pomodoro skip'
 alias pstat='i3-gnome-pomodoro status'
 alias reflec='sudo reflector -c Russia -a 7 --sort rate --save /etc/pacman.d/mirrorlist'
-# alias setx='setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"'
+alias setx='setxkbmap "us,ru" ",winkeys" "grp:alt_space_toggle,grp_led:scroll"'
 # alias setx='setxkbmap "us,ru" -option "winkeys" -option "grp:ctrl_shift_toggle" -option "grp_led:scroll"'
-alias setx='setxkbmap us,ru -option grp:alt_shift_toggle,grp_led:scroll'
+# alias setx='setxkbmap us,ru -option grp:alt_shift_toggle,grp_led:scroll'
 alias hosts='sudo vim /etc/hosts'
 alias work='cd ~/Downloads/work'
 alias viv='cd ~/Git_work/viva-it/'
 alias tok='ssh-add -s /usr/lib64/librtpkcs11ecp.so'
-alias a_down='$HOME/.scripts/youtube_audio_download.sh'
-alias m_down='$HOME/.scripts/youtube_music_download.sh'
-alias v_down="yt-dlp \
-  --cookies ~/.env_priv/max_yotebe_cookies.txt \
-  --add-metadata \
-  -o ~/Downloads/youtube/video/'%(upload_date)s - %(title)s.%(ext)s' \
-  --batch-file=~/Downloads/youtube/your_links.txt"
-alias abatch_down='$HOME/.scripts/youtube_audio_batch_download.sh'
+alias a_down='$HOME/.scripts/youtube_audio.sh'
+alias as_down='$HOME/.scripts/youtube_audio_search_first.sh'
+alias m_down='$HOME/.scripts/youtube_music.sh'
+alias mc_down='$HOME/.scripts/youtube_music_chapters.sh'
+alias v_down='$HOME/.scripts/youtube_video.sh'
 alias fed='cd ~/Vagrant/fedora && vagrant ssh fedora40work'
 #end_alias
