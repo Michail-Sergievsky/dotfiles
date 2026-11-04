@@ -100,15 +100,6 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-y:execute-silent(echo {+} | xclip -selection clipboard)'
 --bind 'ctrl-e:execute(nvim {+})'
 "
-# Shell-GPT integration BASH v0.2
-_sgpt_bash() {
-if [[ -n "$READLINE_LINE" ]]; then
-    READLINE_LINE=$(sgpt --shell <<< "$READLINE_LINE" --no-interaction)
-    READLINE_POINT=${#READLINE_LINE}
-fi
-}
-# bind -x '"\C-i": _sgpt_bash'
-# Shell-GPT integration BASH v0.2
 
 # FUNCTIONS
 _fzf_compgen_path() {
@@ -153,7 +144,7 @@ fi
 
 bind -x '"\C-x\C-y":copy_current_command'
 
-neofetch
+fastfetch
 
 source "$HOME/.scripts/cred.sh"
 

@@ -13,7 +13,7 @@ act(c,Calc,libreoffice --calc)
 act(p,Pinta,pinta)
 act(r,Foliate,foliate)
 act(s,Steam,steam)
-act(t,Terminal,terminator)
+act(t,Terminal,kitty)
 act(v,Vlc,vlc)
 act(w,Writer,libreoffice --writer)
 

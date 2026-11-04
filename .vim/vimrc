@@ -657,9 +657,9 @@ nnoremap <leader>h :split<CR>
 nnoremap <leader>j J
 nnoremap <leader>l :ls<CR>:b<space>
 " ADD DESCRIPTIONS!!!
-nnoremap <leader>ma :vim /$alt+\\|<A-\\|Altmap\\|M-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
-nnoremap <leader>mc :vim /<C-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
-nnoremap <leader>ms :vim /<S-\\|S-/ ~/.config/i3/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
+nnoremap <leader>ma :vim /$alt+\\|<A-\\|Altmap\\|M-/ ~/.config/sway/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
+nnoremap <leader>mc :vim /<C-/ ~/.config/sway/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
+nnoremap <leader>ms :vim /<S-\\|S-/ ~/.config/sway/config ~/.config/vifm/vifmrc ~/.config/tmux/tmux.conf ~/.vim/vimrc<CR>
 nnoremap <leader>m1 :autocmd! TextChanged *<CR>
 nnoremap <leader>m2 :autocmd TextChanged * silent! write<CR>
 nnoremap <leader>m8 :LanguageToolCheck<CR>
