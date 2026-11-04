@@ -26,13 +26,12 @@ act(t,Telegram,Telegram)
 act(z,Zoom,zoom)
 
 Work:
-act(g,GVim,gvim)
+act(g,Neovim,kitty -e nvim)
 act(p,Packettracer,packettracer)
 act(v,VirtualBox,VirtualBox)
 act(w,Wireshark,wireshark)
 
 Download:
-act(j,JDownload,/bin/sh "/home/freeman/.soft/jd2/JDownloader2")
 act(q,qBittorrent,qbittorrent)
 act(t,Transmission Remote GUI,transgui)
 
@@ -47,7 +46,32 @@ act(o,OBS,obs)
 act(s,Soundconverter,soundconverter)
 
 System:
-act(a,Arandr,arandr)
-act(c,Conky,conky)
-act(h,Htop,terminator -e htop)
+dir(a,Audio)
+act(b,Bluetooth,python3 /home/freeman/.scripts/rofi_bluetooth.py)
+dir(d,Display)
+dir(n,Network)
+dir(t,Tinty)
+act(u,USB Storage,python3 /home/freeman/.scripts/rofi_usb_storage.py)
 
+Audio:
+act(d,Devices / Status,kitty --hold -e wpctl status)
+act(m,Mixer,pavucontrol)
+
+Display:
+act(m,Manual Setup,wdisplays)
+act(r,Reapply Automatic Layout,/home/freeman/.scripts/sway_layout.sh)
+act(s,Show Outputs,kitty --hold -e sh -c 'swaymsg -t get_outputs | jq')
+
+Network:
+act(c,Connections,kitty -e nmtui connect)
+act(p,Profile Editor,nm-connection-editor)
+act(t,Throne,throne)
+act(v,VPN,/home/freeman/.scripts/rofi_vpn.sh)
+
+Tinty:
+act(c,Atelier Cave,tinty apply base16-atelier-cave)
+act(a,Atelier Lakeside,tinty apply base16-atelier-lakeside)
+act(d,Eldritch,tinty apply base16-eldritch)
+act(e,Everforest Light Soft,tinty apply base16-everforest-light-soft)
+act(p,Pasque,tinty apply base16-pasque)
+act(g,Tinty Gallery,tinty gallery)

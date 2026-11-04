@@ -1,0 +1,39 @@
+# Kanshi profiles for Sway
+# Current notebook: smy-worknote
+#
+# Output names are based on the current working Sway setup:
+#   eDP-1     - laptop panel, 1920x1200
+#   HDMI-A-1  - external HDMI, 1920x1080
+#   DP-1      - external DisplayPort, 1440x900
+#
+# More-specific profiles are listed first.
+
+profile notebook-hdmi-dp {
+    output eDP-1
+    output HDMI-A-1
+    output DP-1
+    exec ~/.scripts/sway_layout.sh
+}
+
+profile notebook-hdmi {
+    output eDP-1
+    output HDMI-A-1
+    exec ~/.scripts/sway_layout.sh
+}
+
+profile notebook-dp {
+    output eDP-1
+    output DP-1
+    exec ~/.scripts/sway_layout.sh
+}
+
+profile notebook {
+    output eDP-1
+    exec ~/.scripts/sway_layout.sh
+}
+
+profile MPC-hdmi-dp {
+    output HDMI-A-1
+    output DP-3
+    exec ~/.scripts/sway_layout.sh
+}

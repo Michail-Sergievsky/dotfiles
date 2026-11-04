@@ -1,0 +1,5 @@
+run = "/usr/bin/kitty --directory %d /usr/bin/nvim -- %f:p", desc = "Edit selected files in Neovim (new Kitty window)", block = false
+run = "/usr/bin/kitty --directory %d /usr/bin/nvim -d -- %c:p %C:p", desc = "Compare current files from both panes in Neovim", block = false
+run = "/usr/bin/kitty --directory %d", desc = "Open Kitty terminal in current directory", block = false
+run = "/usr/bin/stat -- %f:p", desc = "Show selected files metadata (press Enter afterward to return)", block = true
+run = "printf '%%s\0' %f:p | /usr/bin/xargs -0 -r -n 1 /usr/bin/xdg-open", desc = "Open selected files with their default desktop applications", block = false

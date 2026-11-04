@@ -487,6 +487,32 @@ function! VisualHTMLTagWrap()
   endif
 endfunction
 
+" build pdf from md with pandoc and latex
+function! BuildPDF()
+    " Save file
+    write
+
+    " Build output path (same name, .pdf)
+    let l:input = expand('%:p')
+    let l:output = expand('%:p:r') . '.pdf'
+
+    echo "Building PDF..."
+
+    " Run pandoc
+    silent execute '!pandoc "' . l:input . '" -o "' . l:output . '" ' .
+        \ '--pdf-engine=xelatex ' .
+        \ '--from markdown-implicit_figures ' .
+		\ '-V mainfont="Liberation Sans" ' .
+        \ '-V geometry:margin=1.5cm ' .
+        \ '-V fontsize=11pt ' .
+        \ '-V colorlinks=true ' .
+        \ '-H ~/.config/pandoc/header.tex'
+
+   redraw!
+
+    echo "PDF created: " . l:output
+endfunction
+
 " vmap <Leader>w <Esc>:call VisualHTMLTagWrap()<CR>
 " function! VisualHTMLTagWrap()
 "   " let tag = input("Tag to wrap block: ")
@@ -550,8 +576,9 @@ let g:which_key_map['e'] = {
         \ 'name' : 'rename files' ,
 		\ '1' : [':% norm /\(19\|20\)\d\{2}/yw0Pa - ', 'move movies date to begining'],
 		\ '2' : [':% norm 0df]$hhhP0x', 'move anime group to end'],
-		\ '3' : [':%s/.zip/.cbz/g', 'rename zip to cbz'],
-		\ '4' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
+		\ '3' : [':% norm 0f[hD', 'clean torrent dowload name'],
+		\ '4' : [':%s/.zip/.cbz/g', 'rename zip to cbz'],
+		\ '5' : [':%s/.rar/.cbr/g', 'rename rar to cbr'],
 		\ }
 let g:which_key_map['d'] = {
         \ 'name' : 'Fern' ,
@@ -637,6 +664,7 @@ nnoremap <leader>m1 :autocmd! TextChanged *<CR>
 nnoremap <leader>m2 :autocmd TextChanged * silent! write<CR>
 nnoremap <leader>m8 :LanguageToolCheck<CR>
 nnoremap <leader>m9 :LanguageToolClear<CR>
+nnoremap <leader>md :call BuildPDF()<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader>p :b#<CR>
 nnoremap <leader>q <Plug>(qf_qf_toggle)
@@ -687,35 +715,27 @@ nnoremap <silent><C-n> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 " nnoremap <silent><C-i> :bprev<CR>
 
 " ALT mappings
-if !has('gui_running')
-  set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    " can break <esc> mapping in isert mode - switch from 0 to 200
-    autocmd InsertEnter * set timeoutlen=200
-    autocmd InsertLeave * set timeoutlen=2000
-  augroup END
-endif
- 
-function! Altmap(char)
-  if has('gui_running') | return ' <A-'.a:char.'> ' | else | return ' <Esc>'.a:char.' '|endif
-endfunction
- 
-" Make adjusing split sizes a bit more friendly
-execute 'nnoremap <silent>'.Altmap('n').':vertical resize +3<CR>'
-execute 'nnoremap <silent>'.Altmap('m').':vertical resize -3<CR>'
-execute 'nnoremap <silent>'.Altmap('p').':resize -3<CR>'
-execute 'nnoremap <silent>'.Altmap(';').':resize +3<CR>'
-" Alt-i/o insert blank line below/above
-execute 'nnoremap <silent>'.Altmap('o').':set paste<CR>m`O<Esc>``:set nopaste<CR>'
-execute 'nnoremap <silent>'.Altmap('i').':set paste<CR>m`o<Esc>``:set nopaste<CR>'
-"Moving tabs
-execute 'nnoremap <silent>'.Altmap('r').':tabm -1<CR>'
-execute 'nnoremap <silent>'.Altmap('t').':tabm +1<CR>'
-execute 'nnoremap <silent>'.Altmap('f').':bnext<CR>'
-execute 'nnoremap <silent>'.Altmap('g').':bprev<CR>'
-"select all
-execute 'nnoremap <silent>'.Altmap('q').'ggVG'
+
+" Resize splits
+nnoremap <silent> <A-n> :vertical resize +3<CR>
+nnoremap <silent> <A-m> :vertical resize -3<CR>
+nnoremap <silent> <A-p> :resize -3<CR>
+nnoremap <silent> <A-;> :resize +3<CR>
+
+" Insert blank line above/below
+nnoremap <silent> <A-o> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent> <A-i> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+
+" Move tabs
+nnoremap <silent> <A-r> :tabm -1<CR>
+nnoremap <silent> <A-t> :tabm +1<CR>
+
+" Buffers
+nnoremap <silent> <A-f> :bnext<CR>
+nnoremap <silent> <A-g> :bprev<CR>
+
+" Select all
+nnoremap <silent> <A-q> ggVG
 
 "Shift mapping
 " move to previos tab

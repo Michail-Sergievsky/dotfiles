@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+proxy='http://127.0.0.1:2080'
+installer='/tmp/codex-install.sh'
+
+echo "==> Downloading Codex installer through Throne"
+
+curl \
+  -x "$proxy" \
+  -fsSL \
+  https://chatgpt.com/codex/install.sh \
+  -o "$installer"
+
+echo "==> Updating Codex through Throne"
+
+env \
+  HTTP_PROXY="$proxy" \
+  HTTPS_PROXY="$proxy" \
+  ALL_PROXY="$proxy" \
+  http_proxy="$proxy" \
+  https_proxy="$proxy" \
+  all_proxy="$proxy" \
+  CODEX_NON_INTERACTIVE=1 \
+  sh "$installer"
+
+echo
+echo "==> Installed version:"
+"$HOME/.local/bin/codex" --version

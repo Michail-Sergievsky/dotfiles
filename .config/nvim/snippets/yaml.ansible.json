@@ -1,0 +1,59 @@
+{
+  "Ansible task": {
+    "prefix": "task",
+    "body": [
+      "- name: ${1:Task name}",
+      "  ansible.builtin.${2:module}:",
+      "    ${0}"
+    ],
+    "description": "Basic Ansible task"
+  },
+
+  "Copy file": {
+    "prefix": "copy",
+    "body": [
+      "- name: ${1:Copy file}",
+      "  ansible.builtin.copy:",
+      "    src: ${2:source}",
+      "    dest: ${3:destination}",
+      "    ${0}"
+    ],
+    "description": "Ansible copy task"
+  },
+
+  "Template file": {
+    "prefix": "template",
+    "body": [
+      "- name: ${1:Deploy template}",
+      "  ansible.builtin.template:",
+      "    src: ${2:template.j2}",
+      "    dest: ${3:/etc/example.conf}",
+      "    ${0}"
+    ],
+    "description": "Ansible template task"
+  },
+
+  "Service": {
+    "prefix": "service",
+    "body": [
+      "- name: ${1:Manage service}",
+      "  ansible.builtin.service:",
+      "    name: ${2:service_name}",
+      "    state: ${3:started}",
+      "    enabled: ${4:true}",
+      "    ${0}"
+    ],
+    "description": "Ansible service task"
+  },
+
+  "Command": {
+    "prefix": "command",
+    "body": [
+      "- name: ${1:Run command}",
+      "  ansible.builtin.command:",
+      "    cmd: ${2:command}",
+      "    ${0}"
+    ],
+    "description": "Ansible command task"
+  }
+}

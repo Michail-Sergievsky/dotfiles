@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+proxy='http://127.0.0.1:2080'
+
+export HTTP_PROXY="$proxy"
+export HTTPS_PROXY="$proxy"
+export ALL_PROXY="$proxy"
+
+export http_proxy="$proxy"
+export https_proxy="$proxy"
+export all_proxy="$proxy"
+
+export WS_PROXY="$proxy"
+export WSS_PROXY="$proxy"
+
+export ws_proxy="$proxy"
+export wss_proxy="$proxy"
+
+export NO_PROXY='localhost,127.0.0.1,::1'
+export no_proxy="$NO_PROXY"
+
+exec "$HOME/.local/bin/codex" \
+  --no-daemon \
+  "$@"

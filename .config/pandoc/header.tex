@@ -1,0 +1,32 @@
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{etoolbox}
+\usepackage{needspace}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdfborder={0 0 1}
+}
+
+% Images not full width
+\setkeys{Gin}{width=0.85\linewidth}
+
+% Prevent floating
+\floatplacement{figure}{H}
+
+% Keep section with following content
+\pretocmd{\section}{\Needspace{10\baselineskip}}{}{}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {}
+  {0pt}
+  {}
+  [\titlerule]
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}

@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROFI_PASS_BIN="/usr/bin/rofi-pass"
+USER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/rofi-pass/config"
+LOG="/tmp/rofi-pass-sway.log"
+
+: > "$LOG"
+
+if [[ ! -x "$ROFI_PASS_BIN" ]]; then
+    echo "rofi-pass not found: $ROFI_PASS_BIN" >&2
+    exit 1
+fi
+
+for cmd in swaymsg jq wtype pass; do
+    command -v "$cmd" >/dev/null 2>&1 || {
+        echo "Required command not found: $cmd" >&2
+        exit 1
+    }
+done
+
+focused_id() {
+    swaymsg -t get_tree 2>/dev/null |
+        jq -r '.. | objects | select(.focused? == true) | .id' |
+        head -n1
+}
+
+focused_window() {
+    swaymsg -t get_tree 2>/dev/null |
+        jq -r '.. | objects | select(.focused? == true) |
+               "id=\(.id) app_id=\(.app_id // "-") class=\(.window_properties.class // "-") name=\(.name // "-")"' |
+        head -n1
+}
+
+ROFI_PASS_TARGET_CON_ID="$(focused_id)"
+export ROFI_PASS_TARGET_CON_ID
+export ROFI_PASS_SWAY_LOG="$LOG"
+
+{
+    echo "START v7"
+    echo "target_con_id=$ROFI_PASS_TARGET_CON_ID"
+    echo "initial_focus=$(focused_window)"
+} >> "$LOG"
+
+TMP_CONFIG="$(mktemp "${XDG_RUNTIME_DIR:-/tmp}/rofi-pass-sway.XXXXXX")"
+trap 'rm -f "$TMP_CONFIG"' EXIT
+
+cat > "$TMP_CONFIG" <<EOF
+# First load the user's normal rofi-pass config.
+if [[ -f "$USER_CONFIG" ]]; then
+    source "$USER_CONFIG"
+fi
+
+_rp_log() {
+    printf '%s\n' "\$*" >> "\${ROFI_PASS_SWAY_LOG}"
+}
+
+_rp_focus_id() {
+    swaymsg -t get_tree 2>/dev/null |
+        jq -r '.. | objects | select(.focused? == true) | .id' |
+        head -n1
+}
+
+_rp_focus_now() {
+    swaymsg -t get_tree 2>/dev/null |
+        jq -r '.. | objects | select(.focused? == true) |
+               "id=\\(.id) app_id=\\(.app_id // "-") class=\\(.window_properties.class // "-") name=\\(.name // "-")"' |
+        head -n1
+}
+
+# Restore the original Sway window only if focus really moved elsewhere.
+_ensure_target_window() {
+    local current
+    current="\$(_rp_focus_id)"
+
+    if [[ -n "\${ROFI_PASS_TARGET_CON_ID:-}" &&
+          "\$current" != "\$ROFI_PASS_TARGET_CON_ID" ]]; then
+        _rp_log "RESTORE current=\$current target=\$ROFI_PASS_TARGET_CON_ID"
+        swaymsg "[con_id=\$ROFI_PASS_TARGET_CON_ID] focus" >>"\${ROFI_PASS_SWAY_LOG}" 2>&1 || true
+        sleep 0.10
+    else
+        _rp_log "KEEP target focus current=\$current"
+    fi
+}
+
+_type() {
+    local passentry="\$1"
+    local field="\$2"
+
+    _rp_log "_type passentry=\$passentry field=\$field"
+
+    [[ -z "\${fields_map["\${AUTOTYPE_FIELD}"]}" && -n \${default_autotype:-} ]] &&
+        fields_map["\${AUTOTYPE_FIELD}"]="\${default_autotype}"
+
+    _wtype() {
+        sleep "\${wait}"
+        _ensure_target_window
+        wtype -d "\${type_delay}" -
+    }
+
+    # v7: autotype is sent as ONE background sequence after rofi-pass returns.
+    # This mirrors the standalone wtype sequence that already worked in Firefox.
+    autotype_atomic() {
+        local sequence="\${fields_map["\$AUTOTYPE_FIELD"]}"
+        local username=""
+        local password=""
+
+        # Resolve values while pass/fields_map are still available.
+        username="\$(basename "\$passentry")"
+        password="\$(pass show "\$passentry" | head -n1)"
+
+        _rp_log "AUTOTYPE atomic sequence=[\$sequence]"
+        _rp_log "resolved username basename; password_length=\${#password}"
+
+        (
+            # Allow every rofi window and the parent rofi-pass process to disappear.
+            sleep 0.35
+
+            _ensure_target_window
+            _rp_log "atomic_start focus=\$(_rp_focus_now)"
+
+            # Current intended layout:
+            #   path :tab pass
+            #
+            # Keep this as one uninterrupted sequence. No swaymsg focus call is
+            # made between Tab and password while the target window remains focused.
+            printf '%s' "\$username" | wtype -d "\${type_delay}" -
+            _rp_log "atomic_username_rc=\$? focus=\$(_rp_focus_now)"
+
+            wtype -P Tab -s 50 -p Tab
+            _rp_log "atomic_tab_rc=\$? focus=\$(_rp_focus_now)"
+
+            # Small application-level settling delay, matching the working
+            # standalone test without allowing a long focus-stealing interval.
+            sleep 0.20
+
+            printf '%s' "\$password" | wtype -d "\${type_delay}" -
+            _rp_log "atomic_password_rc=\$? focus=\$(_rp_focus_now)"
+
+            [[ \${auto_enter} == "true" ]] && wtype -P Return -s 50 -p Return
+        ) &
+
+        # Return immediately so the original rofi-pass can terminate.
+        return 0
+    }
+
+    case "\$field" in
+        "menu")
+            local sorted_fields=()
+            mapfile -t sorted_fields < <(get_sorted_fields)
+            sorted_fields+=("\${AUTOTYPE_FIELD}")
+
+            local placeholder
+            local help_content
+            placeholder=\$(wrap_placeholder "Field to autotype")
+            help_content="Global hotkeys: Pass (\$kb_type_pass), User (\$kb_type_user), OTP (\$kb_type_otp), autotype (\$kb_autotype)"
+            field=\$(printf '%s\n' "\${sorted_fields[@]}" |
+                _rofi -theme-str "\$placeholder" -mesg "\$help_content")
+            assert_status \$?
+
+            _type "\$passentry" "\$field"
+            ;;
+
+        "\$USERNAME_FIELD")
+            printf '%s' "\${fields_map[\${USERNAME_FIELD}]}" | _wtype
+            ;;
+
+        pass)
+            pass show "\$passentry" | head -n1 | _wtype
+            ;;
+
+        OTP)
+            printf '%s' "\$(_get_otp "\$passentry")" | _wtype
+            ;;
+
+        "\$AUTOTYPE_FIELD")
+            autotype_atomic
+            ;;
+
+        *)
+            printf '%s' "\${fields_map[\${field}]}" | _wtype
+            ;;
+    esac
+}
+EOF
+
+export ROFI_PASS_CONFIG="$TMP_CONFIG"
+exec "$ROFI_PASS_BIN" "$@"

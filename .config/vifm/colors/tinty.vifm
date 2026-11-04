@@ -1,0 +1,110 @@
+
+" Generic Tinty/Base16 Vifm theme
+" Uses Kitty's Tinty-controlled ANSI palette.
+" Designed to follow Tinty theme changes automatically.
+"
+" ANSI mapping used:
+"   0 = base/background
+"   1 = red/error
+"   2 = green
+"   3 = yellow
+"   4 = blue/accent
+"   5 = magenta
+"   6 = cyan/accent
+"   7 = foreground/light
+
+highlight clear
+
+" ---------------------------------------------------------------------------
+" Main panes
+" ---------------------------------------------------------------------------
+
+highlight Win         cterm=none ctermfg=7 ctermbg=0
+highlight OtherWin    cterm=none ctermfg=7 ctermbg=0
+highlight AuxWin      cterm=none ctermfg=7 ctermbg=0
+highlight OddLine     cterm=none ctermfg=7 ctermbg=0
+highlight OtherLine   cterm=none ctermfg=7 ctermbg=0
+highlight LineNr      cterm=none ctermfg=6 ctermbg=0
+
+" ---------------------------------------------------------------------------
+" Current line / selected files
+" ---------------------------------------------------------------------------
+
+" Strong, clearly visible cursor line.
+highlight CurrLine    cterm=bold ctermfg=0 ctermbg=4
+
+" Marked/selected files.
+highlight Selected    cterm=bold ctermfg=0 ctermbg=6
+
+" ---------------------------------------------------------------------------
+" Top line, tabs, borders
+" ---------------------------------------------------------------------------
+
+highlight TopLine     cterm=none ctermfg=4 ctermbg=0
+highlight TopLineSel  cterm=bold ctermfg=0 ctermbg=4
+
+highlight TabLine     cterm=none ctermfg=7 ctermbg=0
+highlight TabLineSel  cterm=bold ctermfg=0 ctermbg=4
+
+" Powerline tabs: active accent, inactive background (Tinty ANSI palette).
+highlight User11 cterm=bold ctermfg=0 ctermbg=4
+highlight User12 cterm=none ctermfg=4 ctermbg=0
+highlight User13 cterm=none ctermfg=4 ctermbg=0
+highlight User14 cterm=none ctermfg=7 ctermbg=0
+highlight User15 cterm=none ctermfg=0 ctermbg=4
+highlight User16 cterm=none ctermfg=0 ctermbg=0
+
+highlight Border      cterm=none ctermfg=4 ctermbg=0
+
+" ---------------------------------------------------------------------------
+" Status / command / popup UI
+" ---------------------------------------------------------------------------
+
+highlight StatusLine  cterm=bold ctermfg=7 ctermbg=0
+highlight JobLine     cterm=bold ctermfg=0 ctermbg=6
+
+highlight CmdLine     cterm=none ctermfg=7 ctermbg=0
+highlight ErrorMsg    cterm=bold ctermfg=1 ctermbg=0
+
+highlight WildMenu    cterm=bold ctermfg=0 ctermbg=6
+highlight SuggestBox  cterm=none ctermfg=7 ctermbg=0
+
+" ---------------------------------------------------------------------------
+" Simple alternating Powerline statusline
+
+" Main/background block
+highlight User1 cterm=none ctermfg=7 ctermbg=0
+
+" Contrasting block
+highlight User2 cterm=bold ctermfg=0 ctermbg=7
+
+" Separator: dark -> light with 
+" Also light -> dark with 
+highlight User3 cterm=none ctermfg=0 ctermbg=7
+
+" Separator: light -> dark with 
+" Also dark -> light with 
+highlight User4 cterm=none ctermfg=7 ctermbg=0
+
+highlight StatusLine cterm=none ctermfg=7 ctermbg=0
+
+" ---------------------------------------------------------------------------
+" Filesystem objects
+" ---------------------------------------------------------------------------
+
+highlight Directory   cterm=bold ctermfg=4 ctermbg=default
+highlight Link        cterm=none ctermfg=6 ctermbg=default
+highlight BrokenLink  cterm=bold ctermfg=1 ctermbg=default
+highlight HardLink    cterm=none ctermfg=3 ctermbg=default
+highlight Socket      cterm=none ctermfg=5 ctermbg=default
+highlight Device      cterm=none ctermfg=3 ctermbg=default
+highlight Fifo        cterm=none ctermfg=6 ctermbg=default
+highlight Executable  cterm=none ctermfg=2 ctermbg=default
+
+" ---------------------------------------------------------------------------
+" Compare mode
+" ---------------------------------------------------------------------------
+
+highlight CmpMismatch cterm=bold ctermfg=7 ctermbg=1
+highlight CmpUnmatched cterm=bold ctermfg=0 ctermbg=2
+highlight CmpBlank    cterm=none ctermfg=7 ctermbg=0

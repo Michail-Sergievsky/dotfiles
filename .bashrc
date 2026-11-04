@@ -47,15 +47,25 @@ HISTFILESIZE=2000
 #Prompt
 # export PS1='\[\033[00;30m\]\u@\[\033[00;34m\]\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 # 30m - color
-PS1="\[\033[00;30m\]\u\
-\[$(tput sgr0)\]\[\033[00;34m\]@\
-\[$(tput sgr0)\]\[\033[00;31m\]\h\
-\[$(tput sgr0)\]\[\033[00;15m\]\
- [\[$(tput sgr0)\]\[\033[38;5;30m\]\W\
-\[$(tput sgr0)\]\[\033[00;15m\]]\
- \[\033[38;5;30m\]\$(parse_git_branch)\[\033[38;5;15m\]\[\033[00m\]\
-\[$(tput sgr0)\]\[\033[38;5;9m\]>\
-\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+# PS1="\[\033[00;30m\]\u\
+# \[$(tput sgr0)\]\[\033[00;34m\]@\
+# \[$(tput sgr0)\]\[\033[00;31m\]\h\
+# \[$(tput sgr0)\]\[\033[00;15m\]\
+#  [\[$(tput sgr0)\]\[\033[38;5;30m\]\W\
+# \[$(tput sgr0)\]\[\033[00;15m\]]\
+#  \[\033[38;5;30m\]\$(parse_git_branch)\[\033[38;5;15m\]\[\033[00m\]\
+# \[$(tput sgr0)\]\[\033[38;5;9m\]>\
+# \[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+PS1="\[\e[1;36m\]\u\
+\[\e[0m\]\[\e[1;34m\]@\
+\[\e[0m\]\[\e[1;31m\]\h\
+\[\e[0m\] \
+[\[\e[1;32m\]\W\[\e[0m\]] \
+\[\e[1;35m\]\$(parse_git_branch)\
+\[\e[1;31m\]>\
+\[\e[0m\] "
+
 
 # idicate - shell session is running inside vifm
 if [ -n "$INSIDE_VIFM" ]; then
@@ -88,7 +98,7 @@ export FZF_DEFAULT_OPTS="
 --bind '?:toggle-preview'
 --bind 'ctrl-a:select-all'
 --bind 'ctrl-y:execute-silent(echo {+} | xclip -selection clipboard)'
---bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+--bind 'ctrl-e:execute(nvim {+})'
 "
 # Shell-GPT integration BASH v0.2
 _sgpt_bash() {
@@ -100,7 +110,7 @@ fi
 # bind -x '"\C-i": _sgpt_bash'
 # Shell-GPT integration BASH v0.2
 
-#functions
+# FUNCTIONS
 _fzf_compgen_path() {
     fd . "$1"
 }
@@ -114,13 +124,16 @@ _fzf_complete_git() {
   )
 }
 
+copy_current_command() {
+    printf '%s' "$READLINE_LINE" | wl-copy
+}
+
+
 # Git command line
 function parse_git_branch() 
 {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
-
-neofetch
 
 # The next line updates PATH for CLI.
 if [ -f '/home/freeman/yandex-cloud/path.bash.inc' ]; then source '/home/freeman/yandex-cloud/path.bash.inc'; fi
@@ -136,5 +149,11 @@ if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
+# keybindings
 
+bind -x '"\C-x\C-y":copy_current_command'
+
+neofetch
+
+source "$HOME/.scripts/cred.sh"
 

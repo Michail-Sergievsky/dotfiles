@@ -1,0 +1,43 @@
+[[items]]
+path = "https://github.com/tinted-theming/tinted-terminal"
+name = "tinted-terminal"
+themes-dir = "themes/kitty"
+hook = "[ -n \"$KITTY_PID\" ] && kill -USR1 \"$KITTY_PID\""
+supported-systems = ["base16", "base24"]
+
+[[items]]
+path = "https://github.com/tinted-theming/tinted-shell"
+name = "tinted-shell"
+themes-dir = "scripts"
+hook = ". %f"
+supported-systems = ["base16", "base24"]
+
+[[items]]
+path = "https://github.com/tinted-theming/base16-tmux"
+name = "base16-tmux"
+themes-dir = "colors"
+supported-systems = ["base16"]
+hook = "pkill -USR1 -u \"$USER\" -x kitty 2>/dev/null || true"
+
+[[items]]
+path = "https://github.com/rkubosz/base16-sway"
+name = "base16-sway"
+revision = "master"
+themes-dir = "themes"
+hook = "cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/sway/colors.conf && swaymsg reload"
+supported-systems = ["base16"]
+
+[[items]]
+path = "https://github.com/mnussbaum/base16-waybar"
+name = "base16-waybar"
+revision = "master"
+themes-dir = "colors"
+hook = "cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/waybar/colors.css && ~/.scripts/waybar_launch.sh >/dev/null 2>&1 &"
+supported-systems = ["base16"]
+
+[[items]]
+path = "/home/freeman/.config/tinted-theming/templates/rofi"
+name = "base16-rofi-local"
+themes-dir = "themes"
+hook = "cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/rofi/colors.rasi"
+supported-systems = ["base16"]

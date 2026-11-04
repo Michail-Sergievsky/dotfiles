@@ -1,7 +1,7 @@
+@theme "colors"
+
 configuration {
- modi: "window,run,drun,ssh,combi,blezz";
- /* modi: "window,run,drun,ssh,combi,blezz"; */
- /* theme: "solarized"; */
- font: "hack 12";
- combi-modi: "window,drun,ssh";
- }
+    modi: "window,run,drun,ssh,combi,blezz";
+    font: "hack 12";
+    combi-modi: "window,drun,ssh";
+}

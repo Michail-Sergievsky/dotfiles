@@ -7,7 +7,6 @@ https://github.com/Siilwyn/my-dotfiles/tree/master/.my-dotfiles
 
 
 **1. Create local bare repo**
-
 create new repository on github.com
 ```bash
 git init --bare $HOME/.myconf

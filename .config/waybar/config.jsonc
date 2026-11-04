@@ -1,0 +1,144 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 26,
+
+    "modules-left": [
+        "custom/visible-workspaces",
+        "sway/mode",
+        "custom/usb",
+        "custom/updates"
+    ],
+
+    "modules-center": [
+        "custom/weather"
+    ],
+
+    "modules-right": [
+        "disk#root",
+        "disk#home",
+        "pulseaudio",
+        "memory",
+        "cpu",
+        "sway/language",
+        "custom/vpn",
+        "custom/ethernet",
+        "custom/wifi",
+        "battery",
+        "tray",
+        "clock"
+    ],
+
+    "clock": {
+        "format": "🕒 {:%Y-%m-%d %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "today": "<span background='#eee8d5'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+
+    "pulseaudio": {
+        "format": "🔊 {volume}%",
+        "format-muted": "🔇 muted",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+
+    "memory": {
+        "format": "🧠 {percentage}%"
+    },
+
+    "cpu": {
+        "format": "🖥️ {usage}%"
+    },
+
+    "custom/ethernet": {
+        "exec": "~/.scripts/waybar_network-ethernet.sh",
+        "interval": 3,
+        "return-type": "json",
+        "format": "{}"
+    },
+
+    "custom/wifi": {
+        "exec": "~/.scripts/waybar_network-wifi.sh",
+        "interval": 3,
+        "return-type": "json",
+        "format": "{}"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "🔋 {capacity}% {time}",
+        "format-charging": "⚡ {capacity}%",
+        "format-plugged": "🔌 {capacity}%",
+        "format-full": "🔋 100%",
+        "format-alt": "🔋 {capacity}% {time}",
+        "tooltip-format": "{capacity}%\n{timeTo}\n{power} W"
+    },
+
+    "disk#root": {
+        "path": "/",
+        "format": "💽 {percentage_used}%"
+    },
+
+    "disk#home": {
+        "path": "/home",
+        "format": "🏠 {percentage_used}%"
+    },
+
+    "sway/language": {
+        "format": "⌨️ {}",
+        "min-length": 5
+    },
+
+    "sway/mode": {
+        "format": "{}"
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 6,
+        "show-passive-items": false
+    },
+
+    "custom/usb": {
+        "exec": "~/.scripts/waybar_system-usb-count.sh",
+        "interval": 3,
+        "format": "💾 {}",
+        "on-click": "~/.scripts/waybar_system-usb-popup.sh"
+    },
+
+    "custom/updates": {
+        "exec": "~/.scripts/waybar_updates-pacman-aurhelper.sh",
+        "interval": 600,
+        "format": "📦 {}",
+        "on-click": "kitty --title system-update sh -lc 'sudo pacman -Syu && yay -Syu; exec bash'"
+    },
+
+    "custom/vpn": {
+        "exec": "~/.scripts/priv/waybar_vpn-status.sh",
+        "interval": 5
+    },
+
+    "custom/weather": {
+        "exec": "~/.scripts/waybar_weather.sh",
+        "interval": 1800,
+        "format": "{}",
+        "on-click": "kitty -e w3m wttr.in/Krasnodar"
+    },
+
+    "custom/visible-workspaces": {
+        "exec": "~/.scripts/waybar_visible-workspaces.sh",
+        "interval": 1,
+        "format": "{}"
+    }
+}

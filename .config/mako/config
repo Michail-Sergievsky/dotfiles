@@ -1,0 +1,25 @@
+font=Hack 11
+
+# Show the sender's application name above the original summary and body.
+# The sender supplies %a; Mako cannot infer the real component behind a script.
+# Scripts should identify themselves, e.g. notify-send -a 'USB Storage' ...
+# Otherwise the heading may be generic (such as notify-send) or empty.
+format=<b>%a</b>\n%s\n%b
+
+background-color=#161b1d
+text-color=#7ea2b4
+border-color=#5a7b8c
+
+border-size=1
+border-radius=0
+
+padding=8
+margin=10
+
+width=420
+height=150
+
+default-timeout=5000
+
+icons=1
+max-icon-size=48

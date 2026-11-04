@@ -1,0 +1,30 @@
+@import "colors.css";
+
+* {
+    font-family: "SFMono Nerd Font Mono", monospace;
+    font-size: 12px;
+}
+
+window#waybar {
+    background: @base00;
+    color: @base05;
+}
+
+#custom-visible-workspaces,
+#mode,
+#custom-usb,
+#custom-updates,
+#custom-weather,
+#custom-vpn,
+#custom-ethernet,
+#custom-wifi,
+#disk,
+#pulseaudio,
+#memory,
+#cpu,
+#language,
+#battery,
+#tray,
+#clock {
+    padding: 0 6px;
+}

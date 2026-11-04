@@ -1,174 +1,210 @@
-" vim: filetype=vim :
+"https://q2a.vifm.info/2501/scroll-in-the-quickviee vim: filetype=vim :
 " #########################################################
 " ##########           VIFMRC by Ataru    #################
 " #########################################################
 "------Setup-----------------{{{
-" always ignore case of characters for f/F/;/,
+" Ignore case for f/F/;/,
 set caseoptions=g
 
-" delete files without confirmation
+" Delete files without confirmation
 set confirm=""
 
-" show size of directories
+" Show directory sizes
 set dirsize=size
 
-" hide .. directory everywhere
+" Hide the parent-directory entry (`..`)
 set dotdirs=
 
-" show dotfiles
+" Show dotfiles
 set dotfiles
 
-" allow partially entered external commands with unambiguous beginning using :!
+" Allow abbreviated unambiguous external commands with `:!`
 set fastrun
 
-" how many directories to store in all kinds of history
+" Keep up to 1000 entries in Vifm histories
 set history=1000
 
-" ignore case in search pattern unless it contains at least one uppercase letter
+" Ignore case in search pattern unless it contains at least one uppercase letter
 set ignorecase
 set smartcase
 
-" use increment searching and filtering (search/filter while typing)
+" Search and filter incrementally while typing
 set incsearch
 
-" follow links on l or Enter automatically, not just navigate to target!!!!!!
+" Follow symlinks automatically on `l` or Enter
 set nofollowlinks
 
-" don't highlight search results automatically
+" Don't highlight search results automatically
 set nohlsearch
 
-" don't wrap long lines in preview pane
+" Don't wrap long lines in preview pane
 set nowrap
 
-" show lines numbers
+" Show absolute line numbers
 set number
 
+" Show relative line numbers in addition to the current absolute line
 set relativenumber
 
-" custom ruler format
+" Custom ruler format
 set rulerformat='%2l-%S%[ +%x%]'
 
-" allow automatic runing of executable files
+" Allow executable files to run directly
 set runexec
 
-" try to leave some space from cursor to upper/lower border in lists
+" Keep four lines of context above and below the cursor
 set scrolloff=4
 
-" natural sort of (version) numbers within filenames
+" Sort numeric parts of filenames naturally
 set sortnumbers
 
-" show suggestions
+" Enable suggestions in supported Vifm contexts
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
 
-" perform file operations via system calls
+" Perform file operations via system calls
 set syscalls
 
-" expand tabulation characters as two spaces
+" Display tab characters as two columns
 set tabstop=2
 
-" format for displaying time
+" Format for displaying time
 set timefmt="%y/%m/%d %H:%M"
 
-" update terminal title
+" Update terminal title
 set title
 
-" use trash directory per mount point, fallback to ~/.vifm-trash
+" Use trash directory per mount point, fallback to ~/.vifm-trash
 set trashdir=%r/.vifm-trash,$HOME/.vifm-trash
 
-" maximum number of changes that can be undone.
+" Keep up to 100 undo levels
 set undolevels=100
 
-" use vim's documentation system for :help command
+" Use vim's documentation system for :help command
 " set vimhelp
 
-" What should be saved automatically between vifm sessions.  
+" Persist selected state between Vifm sessions
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
-" show list of matches on tab complition in command-line mode
+" Show completion matches in command-line mode
 set wildmenu
 
-" use popup window instead of a single line for completion
+" Use popup window instead of a single line for completion
 set wildstyle=popup
 
-" Don't do too many requests to slow file systems!!!!!!!
+" Reduce requests to slow file systems
 if !has('win')
     set slowfs=curlftpfs
 endif
 
-" mount FUSE file-systems here!!!!!!!!!!
-set fusehome=~/.vifm/.fuse
+" Use this directory for FUSE mount points
+set fusehome=~/.local/state/vifm/fuse
 
-" ignore .git directory on :find
+" Ignore .git directory on :find
 set findprg='find %s %a -print ,
             \ -type d \( ! -readable -o ! -executable -o -path "*/.git" \)
             \ -prune'
-" How to indicate that shell session is running inside Vifm
+" Mark shell sessions launched from Vifm
 let $INSIDE_VIFM = 'true'
 
-"Openign file in vim
-" set vicmd=vim
-set vicmd="urxvt -e vim $VIMARGS --remote-tab-silent &"
-" set vicmd=vim &
+" Open files in Neovim in a separate Kitty window without blocking Vifm
+" set vicmd="kitty -e vim $VIMARGS --remote-tab-silent >/dev/null 2>&1 &"
+"set vicmd="kitty -e nvim &"
+set vicmd=nvim
+
 
 "}}}
 "----Appearance--{{{
-" themes, highlighting
-" List of color schemes to try (picks the first one supported by the terminal)
-colorscheme solarized-light-256 Default-256 Default
-" colorscheme palenight
-"devicons from vim
+" Configure colors and highlighting
+" Use the first supported color scheme in this list
+" Colorscheme solarized-light-256 Default-256 Default
+colorscheme tinty Default-256 Default
+" Colorscheme palenight
+" Load file icons
 source ~/.config/vifm/favicons.vifm
-"Each flag configures some aspect of TUI appearance. s - left/rigth borders
+" Powerline tabs (keyboard navigation; custom tabline has no mouse handling).
+" Load early so the handler can be checked before enabling it.
+plugin load
+if has('#tabline#fmt')
+    set tabline=#tabline#fmt
+endif
+" Configure TUI elements
 set tuioptions="pv"
-" change appearance of middle border
+" Change appearance of middle border
 " set fillchars=vborder:В·
-" Customize view columns a bit (enable ellipsis for truncated file names)
+" Configure filename columns and truncation
 " * - long name - from end
 " - - long name - from start
 " .. - cut name with ...
 " . - just cut name
-" no dot - full name
+" No dot - full name
 set viewcolumns=-{name}..,6{}.
-" show files count if dirs
+" Show files count if dirs
 " set viewcolumns=-{name},{nitems},6{}.
 "}}}
 "----Status line ----{{{
 
-
-" nesting detection
 if $INSIDE_VIFM != ''
-    let $SL_PREFIX = 'vifm '
+    let $SL_PREFIX = 'vifm'
 else
     if $PS1 != ''
-        let $SL_PREFIX = 'bash '
+        let $SL_PREFIX = 'bash'
     endif
     let $INSIDE_VIFM = 'true'
 endif
-let &statusline = ''
-if $SL_PREFIX != ''
-	let &statusline = '%2*'.$SL_PREFIX.'%4*'
-endif
-let &statusline .= '%1*'           " left separator
-let &statusline .= ' %t '          " file name
-let &statusline .= ''             " left separator
-let &statusline .= '%='            " fill the whole status line
-let &statusline .= ''             " right separator
-let &statusline .= ' %A '		   " file attributes & user and group owners of the file
-let &statusline .= ' %[%u:%g%] '   " user and group owners of the file
-let &statusline .= '%4*%2*'       " right separator
-let &statusline .= ' %E '          " human readable cumulative file size of SELECTED files
-let &statusline .= '%3*%1*'       " right separator
-let &statusline .= ' %-s '         " human readable cumulative file size
-let &statusline .= '%4*%2*'       " right separator
-let &statusline .= ' %d '          " file modification date and time
-let &statusline .= '%3*%1*'       " right separator
-let &statusline .= ' %a '          " free space available at current partition
 
-""show number of files hidden by filters, only if filter had been applied
+let &statusline = ''
+
+" LEFT
+
+" Dark
+let &statusline .= '%1* '.$SL_PREFIX.' '
+
+" Dark -> light
+let &statusline .= '%3*'
+
+" Light
+let &statusline .= '%2* %t%[ -> %T%] '
+
+" Light -> dark
+let &statusline .= '%4*'
+
+" Dark middle
+let &statusline .= '%1*'
+let &statusline .= '%='
+
+
+" RIGHT
+
+" Dark
+let &statusline .= '%1* %A '
+let &statusline .= '%[%u:%g%] '
+
+" Current-file size, separated within the existing dark block
+let &statusline .= ' %-s '
+
+" Dark -> light
+let &statusline .= '%4*'
+
+" Light: selected-files total
+let &statusline .= '%2* %E '
+
+" Light -> dark
+let &statusline .= '%3*'
+
+" Dark
+let &statusline .= '%1* %d '
+
+" Dark -> light
+let &statusline .= '%4*'
+
+" Light
+let &statusline .= '%2* %a '
+
+" Append selection/filter state to the status line
 set statusline+='%[ +%x%]'
 
-"}}}
+"}}}"
 "----Marks----------------{{{
 " :mark mark /full/directory/path [filename]
 
@@ -188,7 +224,7 @@ mark C ~/.config
 mark D ~/Documents
 mark F ~/Fest_prepair
 mark G ~/Git_work
-mark L ~/Learn
+mark L ~/Codex/home-admin
 mark M ~/Music
 mark P ~/Phone
 mark R ~/Recordings
@@ -213,90 +249,117 @@ mark n ~/Dropbox/Vimwiki
 mark o ~/Mounted
 mark p ~/Pictures
 mark r ~/Work/tasks
-mark s ~/Scripts_configs
+mark s ~/Work/simpleone
 mark t ~/Temp
 mark u /usr/share
 mark v ~/Videos
 mark w ~/Work
 mark x ~/.config/vifm
 mark y ~/Media/home
-mark z ~/.vim
+mark z ~/.config/nvim
 
 " }}}
 " ----Commands------------------{{{
-"  source bash alias, first must create with bash_alias_to_vifm_commands.sh
+" Load Vifm commands generated from Bash aliases
 so ~/.config/vifm/vifm_aliases
-" silently extract selected archives in background
+" Example: extract selected archives silently in the background
 " command extract aunpack -e %f &>/dev/null &
-" unpack selected archivers
+" Extract selected archives
 command extract aunpack %f &>/dev/null &
-" archive the selection with :archive <filename.ext>
+" Archive the selection with :archive <filename.ext>
 command archive apack %a %f &>/dev/null &
-"git alias config for dotfile-git manipulation
+" Run Git commands against the bare dotfiles repository
 command! config /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME %a %S
+" Show filesystem usage for the current mount point
 command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
-"execute command for each selected file
-" usage - %foreach echo "$f"
+" Open selected files from both panes in Neovim diff mode
+command! diff nvim -d %f %F
+" Run a command once for each selected file
+" Example: `%foreach echo "$f"`
 command! foreach for f in %f; do %a; done
-" run make in current directory
+" Run make in current directory
 command! make !!make %a
-" creates directory and immediately enters it
+" Create a directory and enter it
 command! mkcd :mkdir %a | cd %a
+" List mounted filesystems
 command! mounts /bin/lsblk -no MOUNTPOINT|sed '/^$/d'|sed '/\[SWAP\]/d'|sort|uniq %M
-command! link ln -s %d/%f %D
+" Create a symbolic link in the other pane
+command! link :alink
+" Print selected files double-sided
 command! print lp -n 1 -o sides=two-sided-long-edge %f
+" Save the Vifm configuration and restart Vifm
 command! reload :write | restart full
-" run script
+" Run script
 command! run !! ./%f
-" a sanitation command that would replace all spaces and various OS's reserved
-" characters from file names and directory names?
+" Replace spaces and reserved filename characters with underscores
 command! sanitize :tr/ ?<>\\:*|"/__________
+" Set the legacy Vim server target to `MAIN`
 command! targetm :let $VIMARGS = '--servername MAIN'
+" Set the legacy Vim server target from command arguments
 command! target :let $VIMARGS = '--servername "%a"'
-command! vgrep vim "+grep %a"
+" Create a ZIP archive from selected files
 command! zip zip -r %f.zip %f
+" Play all video files below the current directory with mpv
 command! mpvop find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.webm" -o -iname "*.mov" -o -iname "*.flv" -o -name "*.m4v" \) -exec mpv {} + &
-
+" comics_fetcher
 command! cvmarvel !python3 ~/.config/vifm/scripts/cv_oneshot_sorter.py %f --marvel
 command! cvdc     !python3 ~/.config/vifm/scripts/cv_oneshot_sorter.py %f --dc
 command! cvother  !python3 ~/.config/vifm/scripts/cv_oneshot_sorter.py %f --other
 
-"search files with plocate
-" variation that automatically enters directories
+
+" Disabled helper scripts
+" command! cvmarvel !python3 ~/.config/vifm/scripts/cv_oneshot_sorter.py %f --marvel
+" command! cvdc     !python3 ~/.config/vifm/scripts/cv_oneshot_sorter.py %f --dc
+" command! cvother  !python3 ~/.config/vifm/scripts/cv_oneshot_sorter.py %f --other
+
+" Search indexed files with plocate and fzf
+" Enter directories directly and open files with `goto`
 command! fzflocate : set noquickview
                   \| let $FZF_PICK = term('locate $HOME | fzf --height 30 2>/dev/tty')
                   \| if $FZF_PICK != ''
                   \|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
                   \| endif
-"search files with fd
+" Search files with fd and fzf
 command! fzffind : set noquickview
                 \| let $FZF_PICK = term('fd | fzf --height 30 2>/dev/tty')
                 \| if $FZF_PICK != ''
                 \|     execute 'goto' fnameescape($FZF_PICK)
                 \| endif
-"search dir with fd & enter it
+" Search directories with fd and fzf, then enter the result
 command! fzfcd : let $FZF_RES = term('fd --type d . %a --hidden --exclude .git | fzf 2> /dev/tty')
               \| if $FZF_RES != ''
               \|     execute 'cd' fnameescape($FZF_RES)
               \| endif
-"search in text files with rg
-command! fzfinfiles :let $FZF_PICK = term('fzfsearchtextfiles.sh %a 2>/dev/tty')
+" Learn visited directories and offer an interactive zoxide jump.
+" Keep ordinary cd, marks, fc and preview settings unchanged.
+if executable('zoxide')
+    autocmd DirEnter * !zoxide add -- %d %i
+    if executable('fzf')
+        command! ZcdI : let g:zoxide_pick = term('zoxide query --interactive 2>/dev/tty')
+                     \| if g:zoxide_pick != ''
+                     \|     execute 'cd' fnameescape(g:zoxide_pick)
+                     \| endif
+        nnoremap <silent> ,z :ZcdI<cr>
+    endif
+endif
+
+" Search text inside files in the current directory with ripgrep and fzf
+command! fzfinfiles :let $FZF_PICK = term('vifm_fzfsearchtextfiles.sh 2>/dev/tty')
                    \| if $FZF_PICK != ''
                    \|     execute 'goto' fnameescape($FZF_PICK)
                    \| endif
-"search in media base with rg
-command! fzfinmedia :let $FZF_PICK = term('fzfsearchmedia.sh %a 2>/dev/tty')
+" Search the media database with ripgrep and fzf
+command! fzfinmedia :let $FZF_PICK = term('vifm_fzfsearchmedia.sh 2>/dev/tty')
                    \| if $FZF_PICK != ''
                    \|     execute 'goto' fnameescape($FZF_PICK)
                    \| endif
-"search in pdf files with pdfgrep
-"TODO - create preview
-command! fzfinpdffiles :let $FZF_PICK = term('fzfsearchpdffiles.sh %a 2>/dev/tty')
+
+" Search text inside PDF files with pdfgrep and fzf
+command! fzfinpdffiles :let $FZF_PICK = term('vifm_fzfsearchpdffiles.sh 2>/dev/tty')
                    \| if $FZF_PICK != ''
                    \|     execute 'goto' fnameescape($FZF_PICK)
                    \| endif
-" toggle between sorting: by name <--> by size <--> by mtime
+" Cycle sorting between name, size, and modification time
 command! togglesort
          \ :if &sort == '-size,+name'
          \ |    set sort=+mtime
@@ -308,8 +371,9 @@ command! togglesort
          \ |    set sort=+iname
          \ |    echo 'Sorted by name'
          \ |endif
-command! cmpinternal compare-cmd %a %S
-"?????
+" Run Vifm's internal comparison helper
+command! cmpinternal vifm_compare-cmd %a %S
+" ?
 command! cmp : if expand('%%c') == expand('%%f')
               \ |     echo expand('Comparing %%"c and %%"C:t ...')
               \ |     cmpinternal %c %C
@@ -317,33 +381,35 @@ command! cmp : if expand('%%c') == expand('%%f')
               \ |     echo expand('Comparing files: %%"f ...')
               \ |     cmpinternal %f \ | endif
 
-" WORK!!!!
-" Mount remote dir via sshfs
+" WORK
+" Mount a remote directory with SSHFS and enter it
 command! mountssh :!mkdir -p ~/mnt/remote && sshfs user@host:/path ~/mnt/remote && cd ~/mnt/remote
-" sshfs sergievsky.m-vc-admin@gateway-employee01:/ /mnt/server
-" fusermount -u /mnt/server
+" Sshfs sergievsky.m-vc-admin@gateway-employee01:/ /mnt/server
+" Fusermount -u /mnt/server
 
-" Unmount remote
+" Unmount the SSHFS directory
 command! unmountssh :!fusermount -u ~/mnt/remote
 
 "}}}
 "----Executing programms---------------{{{
-"	 COMMON FILES
-" .dotfiles
-filetype /^[^.]+$/ vim
+" Common files
+" Extensionless files
+" Open extensionless files directly in Neovim
 " fileviewer *[^/],.*[^/] bat %c -p
 " TODO need color setup for bat
-" Pdf
+" Markdown preview as formatted terminal text
+fileviewer {*.md} pandoc %c -t ansi
+" PDF files
 filextype {*.pdf},<application/pdf> zathura %c %i &
 fileviewer *.pdf
         \ vifmimg pdf %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
-" PostScript
+" PostScript files
 filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
         \ {View in zathura}
         \ zathura %f,
-" Djvu
+" DjVu files
 filextype {*.djvu},<image/vnd.djvu>
         \ {View in zathura}
         \ zathura %f %i,
@@ -351,11 +417,11 @@ fileviewer *.djvu
 	\ vifmimg djvu %px %py %pw %ph %c
 	\ %pc
 	\ vifmimg clear
-"Comics Arch
+" Comic-book archives
 filextype {*.cbz,*.cbr}
 	\ {View in Mcomix}
 	\ mcomix %c %i &,
-"E-books Arch
+" E-books
 filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
 	\ {View in foliate}
 	\ foliate %c %i &,
@@ -390,13 +456,17 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mpg,*.mpeg,*.vob,
            \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
            \*.as[fx]},
 	\ mediainfo %c 2>&1
-fileviewer {*.mkv} mkvscan.sh %c 2>&1
-"vlc playlist
+fileviewer {*.mkv} vifm_mkvscan.sh %c 2>&1
+" VLC playlists
+" Open XSPF playlists in VLC
+if executable('vlc')
 filextype {*.xspf} vlc %c %i &
-"open in mkvtoolnix-gui
+endif
+" Open Matroska/video files in MKVToolNix GUI
 filextype {*.mkv,*.mp4} mkvtoolnix-gui %f %i &
-"open mkv in inviska
-filextype {*.mkv} /$HOME/.soft/Inviska_MKV_Extract-11.0-x86_64.AppImage %f %i &
+" Open MKV files in Inviska MKV Extract
+"filextype {*.mkv} /$HOME/.soft/Inviska_MKV_Extract-11.0-x86_64.AppImage %f %i &
+" Open mkv in kdenlive
 filextype {*.mkv}, 
         \ {Open with kdenlive}
         \ kdenlive %f %i &,
@@ -407,128 +477,119 @@ fileviewer <font/*>
 	\ vifmimg clear
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-        \ {View in sxiv}
-        \ rifle_sxiv.sh %f %i,
-        \ {View in gpicview}
-        \ sxiv %f,
+        \ {View in vimiv}
+        \ vimiv %f %i &,
         \ {Open with drawio}
         \ drawio %f &
 fileviewer <image/*>
-	\ vifmimg draw %px %py %pw %ph %c
-	\ %pc
-	\ vifmimg clear
-" Web
+    \ vifm_image_preview.sh %c %px %py %pw %ph
+" HTML before generic text associations
 filextype {*.html,*.htm},<text/html>
-        \ {Open with firefox}
-        \ firefox %f &,
+        \ {Open with Zen Browser}
+        \ zen-browser %f:p &
+
+" all textRULES
+" Extensionless files
+
+filetype /^[^.]+$/
+        \ {Open in Neovim}
+        \ kitty -e nvim %f &,
+
+filetype <text/*>,<application/json>,<application/xml>,<application/x-shellscript>
+        \ {Open in Neovim}
+        \ kitty -e nvim %f &,
+
+if executable('uzbl-browser')
+filextype {*.html,*.htm},<text/html>
         \ {Open with uzbl}
         \ uzbl-browser %f %i &,
-filetype {*.html,*.htm},<text/html> links, lynx
+endif
+
+if executable('links')
+filetype {*.html,*.htm},<text/html> links
+endif
+if executable('lynx')
+filetype {*.html,*.htm},<text/html> lynx
+endif
+
+filetype {*.[1-8]},<text/troff> man ./%c
+
+fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 " Drawio
 filextype {*.drawio}
         \ {Open with drawio}
         \ drawio %f &,
 " Office files
-" onlyoffice doc
+" Open document formats in ONLYOFFICE
 filextype {*.wps,*.doc,*.rtf,*.wpt,*.docx,*.dotx,*.docm,*.dotm},
-        \ onlyoffice-desktopeditors %f %i &
-" onlyoffice xls
+        \ onlyoffice-desktopeditors %f:p %i &
+" Open spreadsheet formats in ONLYOFFICE
 filextype {*.et,*.xls,*.xlsx,*.dbf,*.prn,*.xltx,*.xla,*.ett,*.xlt,*.xlsm,*.csv,*.dif,*.xltm,*.xlam},
-		\ onlyoffice-desktopeditors %f %i &
-" Libre doc
+		\ onlyoffice-desktopeditors %f:p %i &
+" Open ODT files in ONLYOFFICE
 filextype {*.odt},
-        \ onlyoffice-desktopeditors %f %i &
-" Libre xls
-filextype {*.ods,*.odp},
-        \ onlyoffice-desktopeditors %f %i &
+        \ onlyoffice-desktopeditors %f:p %i &
+" Open ODS files in ONLYOFFICE
+filextype {*.ods},
+        \ onlyoffice-desktopeditors %f:p %i &
+" Open presentation formats in ONLYOFFICE
+filextype {*.ppt,*.pptx,*.pptm,*.pps,*.ppsx,*.ppsm,*.pot,*.potx,*.potm,*.odp,*.otp,*.dps,*.dpt},
+        \ onlyoffice-desktopeditors %f:p %i &
 " filextype {*.odt,*.doc,*.docx,*.adoc,*.rtf,*.vsd,*.xls,*.xlsx,*.ods,*.odp,*.pptx,*.ppt,*.csv},
-"          \<application/vnd.openxmlformats-officedocument.*,
-"           \application/msword,
-"           \application/vnd.ms-excel>
-"         \ libreoffice %f %i &,
-" 		\ /usr/lib/office6/et %f %i &
+" \<application/vnd.openxmlformats-officedocument.*,
+" \application/msword,
+" \application/vnd.ms-excel>
+" \ libreoffice %f %i &,
+" \ /usr/lib/office6/et %f %i &
         " \ /usr/lib/office6/wps %f %i &
 		" \ wps %f %i &
+" Optional document text previews; require their respective providers.
+if executable('catdoc')
 fileviewer {*.doc},<application/msword> catdoc %c
+endif
+if executable('docx2txt.pl')
 fileviewer {*.docx},
           \<application/
            \vnd.openxmlformats-officedocument.wordprocessingml.document>
-         \ docx2txt.pl %f -
+         \ docx2txt.pl %c -
+endif
 " Torrent
 filetype {*.torrent},<application/x-bittorrent> qbittorrent %f &
 fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
-" 3d models
+" 3D models
 filextype {*.stl},
         \ {View using f3d}
 		\ /sbin/f3d %f &
 "-------------------------------------------
-" view contents of archive files on opening them
-filetype *.7z,*.bz2,*.cab,*.cpio,*.deb,*.gz,
-        \*.msi,*.pkg,*.rar,*.tar,*.tgz,*.xz,*.zip
-        \ als %f | less
-" put following rules before any other filetype and fileviewer groups
-" filetype *.tar.gz,*.tgz,*.tar.bz,*.tbz,*.tar.bz2,*.tbz2,
-"          \*.tar.Z,*.tZ,*.tar.lzo,*.tzo,*.tar.lz,*.tlz,*.tar.xz,*.txz,*.tar.7z,*.t7z,
-"          \*.tar,
-"          \*.zip,*.jar,*.war,*.rar,*.lha,*.lzh,
-"          \*.alz,*.ace,*.a,*.arj,*.arc,
-"          \*.rpm,*.deb,
-"          \*.cab,
-"          \*.gz,*.bz,*.bz2,
-"          \*.Z,*.lzma,*.lzo,*.lz,*.xz,*.rz,*.lrz,*.7z,
-"          \*.cpio
-"          \ aunpack %f
-" fileviewer *.tar.gz,*.tgz,*.tar.bz,*.tbz,*.tar.bz2,*.tbz2,
-"          \*.tar.Z,*.tZ,*.tar.lzo,*.tzo,*.tar.lz,*.tlz,*.tar.xz,*.txz,*.tar.7z,*.t7z,
-"          \*.tar,
-"          \*.zip,*.jar,*.war,*.rar,*.lha,*.lzh,
-"          \*.alz,*.ace,*.a,*.arj,*.arc,
-"          \*.rpm,*.deb,
-"          \*.cab,
-"          \*.gz,*.bz,*.bz2,
-"          \*.Z,*.lzma,*.lzo,*.lz,*.xz,*.rz,*.lrz,*.7z,
-"          \*.cpio
-"          \ als %f 2>/dev/null
-" FuseZipMount
-filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
-        \<application/zip,application/java-archive>
-       \ {Mount with fuse-zip}
-       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
-       \ {View contents}
-       \ zip -sf %c | less,
-       \ {Extract here}
-       \ tar -xf %c,
-fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
-" ArchiveMount
-filetype {*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
-        \<application/x-tar>
-       \ {Mount with archivemount}
-       \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
-fileviewer *.tgz,*.tar.gz tar -tzf %c
+" Archives
+" Browse multi-file archives as read-only directories through fuse-archive.
+filetype {*.zip,*.rar,*.7z,*.tar,*.tar.gz,*.tgz,*.tar.bz2,*.tbz2,*.tar.xz,*.txz,*.tar.zst,*.tzst}
+        \ {Browse archive}
+        \ FUSE_MOUNT|fuse-archive %SOURCE_FILE %DESTINATION_DIR %FOREGROUND,
+
+" Archive previews.
+fileviewer *.zip zip -sf %c
+fileviewer *.tar tar -tf %c
+fileviewer *.tar.gz,*.tgz tar -tzf %c
 fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
-fileviewer *.tar.txz,*.txz xz --list %c
-fileviewer {*.tar},<application/x-tar> tar -tf %c
-" Rar2FsMount and rar archives
-filetype {*.rar},<application/x-rar>
-       \ {Mount with rar2fs}
-       \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
-fileviewer {*.rar},<application/x-rar> unrar v %c
+fileviewer *.rar unrar v %c
+fileviewer *.7z 7z l %c
 " IsoMount
-filetype {*.iso},<application/x-iso9660-image>
-       \ {Mount with fuseiso}
-       \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+if executable(expand('~/.config/vifm/scripts/iso-mount'))
+filetype {*.iso}
+        \ {Browse ISO/UDF image}
+        \ FUSE_MOUNT|~/.config/vifm/scripts/iso-mount %SOURCE_FILE %DESTINATION_DIR,
+endif
 " SshMount
 filetype *.ssh
        \ {Mount with sshfs}
        \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %FOREGROUND,
 " FtpMount
+if executable('curlftpfs')
 filetype *.ftp
        \ {Mount with curlftpfs}
        \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
-" Fuse7z and 7z archives
-filetype {*.7z},<application/x-7z-compressed>
-       \ {Mount with fuse-7z}
-       \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
+endif
 fileviewer {*.7z},<application/x-7z-compressed> 7z l %c
 " Traces
 filextype {*.pcap,*.pcapng,*.pcapng.gz,*.pcap.gz}
@@ -541,16 +602,18 @@ filextype {*.rdp}
 " Object
 filetype {*.o},<application/x-object> nm %f | less
 " Man page
-filetype {*.[1-8]},<text/troff> man ./%c
-fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
-" OpenRaster
+" OpenRaster images
+if executable('mypaint')
 filextype *.ora
         \ {Edit in MyPaint}
         \ mypaint %f,
-" Mindmap
+endif
+" Mind maps
+if executable('vym')
 filextype *.vym
         \ {Open with VYM}
         \ vym %f &,
+endif
 " MD5
 filetype *.md5
        \ {Check MD5 hash sum}
@@ -571,121 +634,154 @@ filetype *.sha512
 filetype {*.asc},<application/pgp-signature>
        \ {Check signature}
        \ !!gpg --verify %c,
-" TuDu files
+" TuDu task files
+if executable('tudu')
 filetype *.tudu tudu -f %c
-" Qt projects
+endif
+" Qt project files
+if executable('qtcreator')
 filextype *.pro qtcreator %f &
+endif
 "}}}
 "----Keyboard Mappings-------------{{{
 
-"<wait> - will trigger pause
-"<wait> has no effect for single-character mappings
-"<silent> - not show command line execution
+" `<wait>` introduces a mapping timeout
+" `<wait>` has no effect on single-character mappings
+" `<silent>` suppresses command-line echo
 
-"Ctrl
+" Ctrl
+" Swap the current pane with the other pane
 nnoremap <C-f> <c-w>x
+" Synchronize the other pane to the current directory
 nnoremap <C-b> :sync<CR>
+" Disable Ctrl-N and Ctrl-P
 nnoremap <C-n> <Nop>
 nnoremap <C-p> <Nop>
 " nnoremap <C-t> :tabnew<cr>
 " nnoremap <C-c> :tabclose<cr>
 " nnoremap <C-p> gT
 " nnoremap <C-n> gt
-"moving between vifm & tmux
+" Move between Vifm panes and tmux panes
 nnoremap <silent> <C-h> :if paneisat('left')   | execute '!tmux select-pane -L %i' | else | execute 'wincmd h' | endif<cr>
 nnoremap <silent> <C-j> :if paneisat('bottom') | execute '!tmux select-pane -D %i' | else | execute 'wincmd j' | endif<cr>
 nnoremap <silent> <C-k> :if paneisat('top')    | execute '!tmux select-pane -U %i' | else | execute 'wincmd k' | endif<cr>
 nnoremap <silent> <C-l> :if paneisat('right')  | execute '!tmux select-pane -R %i' | else | execute 'wincmd l' | endif<cr>
-" account for <c-h>/<bs> conflict
+" Handle the Ctrl-H / Backspace terminal-key conflict
 nnoremap <silent> <bs>  :if paneisat('left')   | execute '!tmux select-pane -L %i' | else | execute 'wincmd h' | endif<cr>
 " Alt
-" previous folders, NOT WORK
+" Disabled previous-directory Alt mappings
 " nnoremap <A-p> [R
 " nnoremap <A-n> ]R
 
 " Other symbols
+" Resize panes with -, _, and |
 nnoremap - <C-w>5<
 nnoremap _ <C-w>5>
 nnoremap | <C-w>5=
+" Toggle selection and move down
 nnoremap <space> tj
+" Open Vifm help
 nnoremap ~ :help<cr>
 
 " Alphabet
-" PDF preview scrolling https://github.com/cirala/vifmimg
-" map > :!vifmimg inc<cr>
-" map < :!vifmimg dec<cr>
+" Disabled vifmimg PDF preview scrolling
+" Map > :!vifmimg inc<cr>
+" Map < :!vifmimg dec<cr>
 
+" Selection helpers
 nnoremap <wait>af :select *.*<CR>
 nnoremap <wait>aa :%select<CR>
-" all to dir_name.tar.gz
+" Archive the whole current directory as `<dirname>.tar.gz`
 nnoremap <wait>adgz :!tar -cvzf `basename $(pwd)`.tar.gz .<cr>
-" selected to INSERT_NAME tar.gz
+" Archive selected files to a manually named `.tar.gz` file
 nnoremap <wait>angz :!tar -cvzf .tar.gz %f<left><left><left><left><left><left><left><left><left><left>
-" all to dir_name.zip
+" Archive the whole current directory as `<dirname>.zip`
 nnoremap <wait>aza :!!zip -r -0 "$(basename "$(pwd)").zip" .<cr>
 nnoremap <wait>azb :!!zip -r -e -0 "$(basename "$(pwd)").zip" .<cr>
-" selected to INSERT_NAME zip
+" Archive selected files to a manually named ZIP file
 nnoremap <wait>azf :!zip -r  %f<left><left><left>
+" Copy/move/job helpers
 nnoremap <wait>by :yank | winrun , put<cr>
 nnoremap <wait>bp :yank | winrun , put!<cr>
 nnoremap <wait>bc :copy!<cr>
 nnoremap <wait>bm :move!<cr>
 nnoremap <wait>bj :jobs<cr>
+" Make selected files executable
 nnoremap <wait>cx :!chmod +x %f<cr>
-nnoremap <wait>ca :!config add %c<cr>
+" Add the current file to the dotfiles Git repository
+nnoremap <wait>ca :config add %c<cr>
+" Quick directory jumps
 nnoremap <wait>cdca :cd /$HOME/.ansible/<cr>
 nnoremap <wait>cdcc :cd /$HOME/.config<cr>
 nnoremap <wait>cdcf :cd /$HOME/.config/vifm<cr>
 nnoremap <wait>cdch :cd /$HOME/.ssh<cr>
 nnoremap <wait>cdcs :cd /$HOME/.scripts<cr>
 nnoremap <wait>cdcv :cd /$HOME/.vim<cr>
-nnoremap <wait>cv1 :!!/$HOME/.scripts/medio_editing/switch_audio_and_subtitles_default.sh 2>&1<CR>
+" Run the media audio/subtitle default-track helper
+nnoremap <wait>cv1 :!!$HOME/.scripts/video_switch_audio_and_subtitles_default.sh 2>&1<CR>
 " nnoremap <wait>f <Nop>
+" Search helpers
 nnoremap <wait>fc :fzfcd<cr> 
 nnoremap <wait>ff :fzflocate<cr>
 nnoremap <wait>fd :locate<space>
-nnoremap <wait>fp :fzfinpdffiles<space>""<Left>
-nnoremap <wait>ft :fzfinfiles<space>""<Left>
-nnoremap <wait>fm :fzfinmedia<space>""<Left>
+" Search contents of every file in the current view (including custom views)
+nnoremap <wait>fg :%grep -i<space>
+nnoremap <wait>fp :fzfinpdffiles<cr>
+nnoremap <wait>ft :fzfinfiles<cr>
+nnoremap <wait>fm :fzfinmedia<cr>
 nnoremap <wait>fz :fzffind<cr> 
+" Git helpers
 nnoremap <wait>gc :!!git clone<space>
 " nnoremap <wait>gs :!!git status<CR>
 nnoremap <wait>gb :!!git branch -a<CR>
 nnoremap <wait>gm :!!git checkout<space>
+" Open the current file with Vifm's configured editor
 nnoremap e :edit<cr>
-nnoremap E :!vim %c<CR>
+" Open the current file in Neovim directly
+nnoremap E :!kitty -e nvim %c &<CR>
+" Open the filetype menu and select the next action
 nnoremap i :file &<cr>l
+" Open the filetype menu
 nnoremap I :file<cr>
 " nnoremap <wait>m <Nop>
-nnoremap <wait>mb :!vim "$(basename "$(pwd)")"<CR>
+" Open a file named after the current directory in Neovim
+nnoremap <wait>mb :!nvim "$(basename "$(pwd)")"<CR>
+" Create files and directories
 nnoremap <wait>mf :touch<space>""<Left>
 nnoremap <wait>md :mkdir<space>""<Left>
-nnoremap <wait>mD :!!$HOME/.scripts/create_dir_with_current_date.sh 2>&1<CR>
+nnoremap <wait>mD :!!$HOME/.scripts/vifm_create_dir_with_current_date.sh 2>&1<CR>
 " nnoremap <wait>ml :!find . -type f -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" -o -name "*.ts" -o -name "*.mpeg" -o -name "*.mpg" -o -name "*.flv" -o -name "*.mov" | sort > "$(basename "$PWD").m3u"<CR>
-nnoremap <wait>ml :!find . -type f -o -name "*.3g2" -o -name "*.3gp" -o -name "*.avi" -o -name "*.flv" -o -name "*.m2ts" -o -name "*.m4v" -o -name "*.mj2" -o -name "*.mkv" -o -name "*.mov" -o -name "*.mp4" -o -name "*.mpeg" -o -name "*.mpg" -o -name "*.ogv" -o -name "*.rmvb" -o -name "*.webm" -o -name "*.wmv" -o -name "*.y4m" -o -name "*.ts" \( ! -name '*.m3u' \) | sort > "$(basename "$PWD").m3u"<CR> 
-nnoremap <wait>mp :!find . -type f -o -name "*.3g2" -o -name "*.3gp" -o -name "*.avi" -o -name "*.flv" -o -name "*.m2ts" -o -name "*.m4v" -o -name "*.mj2" -o -name "*.mkv" -o -name "*.mov" -o -name "*.mp4" -o -name "*.mpeg" -o -name "*.mpg" -o -name "*.ogv" -o -name "*.rmvb" -o -name "*.webm" -o -name "*.wmv" -o -name "*.y4m" -o -name "*.ts" | sort | mpv --playlist=- >/dev/null 2>&1 %i &<CR>
+" Build a sorted M3U playlist from video files below the current directory
+nnoremap <wait>ml :!find . -type f \( -name "*.3g2" -o -name "*.3gp" -o -name "*.avi" -o -name "*.flv" -o -name "*.m2ts" -o -name "*.m4v" -o -name "*.mj2" -o -name "*.mkv" -o -name "*.mov" -o -name "*.mp4" -o -name "*.mpeg" -o -name "*.mpg" -o -name "*.ogv" -o -name "*.rmvb" -o -name "*.webm" -o -name "*.wmv" -o -name "*.y4m" -o -name "*.ts" \) | sort > "$(basename "$PWD").m3u"<CR>
+" Play video files below the current directory as an mpv playlist
+nnoremap <wait>mp :!find . -type f \( -name "*.3g2" -o -name "*.3gp" -o -name "*.avi" -o -name "*.flv" -o -name "*.m2ts" -o -name "*.m4v" -o -name "*.mj2" -o -name "*.mkv" -o -name "*.mov" -o -name "*.mp4" -o -name "*.mpeg" -o -name "*.mpg" -o -name "*.ogv" -o -name "*.rmvb" -o -name "*.webm" -o -name "*.wmv" -o -name "*.y4m" -o -name "*.ts" \) | sort | mpv --playlist=- >/dev/null 2>&1 %i &<CR>
 " nnoremap <wait>mp :!(find . -mindepth 2 -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" -o -name "*.ts" \) -print; find . -maxdepth 1 -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" \) -print) | sort | mpv --playlist=- >/dev/null 2>&1 %i &<CR>
-"diff for dir
+" Compare the two pane directories recursively
 nnoremap <wait>rd :!clear && diff -rq %d %D<cr>
+" File cleanup helpers
 nnoremap <wait>rr :!find . -iname "" -type f -exec rm -f {} \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right>
 nnoremap <wait>rm :!find . -type f -iname '*.' -exec bash -c 'mv "$1" .' - '{}' \;<a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><a-b><right><right><right>
 nnoremap <wait>rh :reg h<cr>b
+" Rsync directory synchronization helpers
 nnoremap <wait>rsd :!!clear && rsync -avP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsr :!!clear && rsync -avP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsfd :!!clear && rsync -urvP --delete --dry-run %d/ %D | grep -E '^deleting|[^/]$'<cr>
 nnoremap <wait>rsfr :!!clear && rsync -urvP --delete %d/ %D | grep -E '^deleting|[^/]$'<cr>
-" rsync -urvP --delete --exclude '.thumbnails' /home/freeman/Music/music_sorted/ /home/freeman/Phone/Internal\ shared\ storage/Music/ | grep -E '^deleting|[^/]$'
+" Rsync -urvP --delete --exclude '.thumbnails' /home/freeman/Music/music_sorted/ /home/freeman/Phone/Internal\ shared\ storage/Music/ | grep -E '^deleting|[^/]$'
+" Open the interactive sort menu
 nnoremap S :sort<cr>
 " nnoremap <wait>s1 :select *(1).mkv<cr>
 " nnoremap <wait>s2 :select *[^(1)].mkv<cr>
 " nnoremap <wait>s3 :select *.srt,*jpg,*.txt,*.m4a,*.ogg<CR>
-nnoremap <wait>s1 :!pack_to_cbz.sh<cr>
-nnoremap <wait>s2 :!rename_cbz.sh<cr>
-nnoremap <wait>s3 :!series_fetcher.sh
-nnoremap <wait>s4 :!convert_and_pack_webp.sh<cr>
+" Comic/archive helper scripts
+nnoremap <wait>s1 :!vifm_pack_to_cbz.sh<cr>
+nnoremap <wait>s2 :!vifm_rename_cbz.sh<cr>
+nnoremap <wait>s3 :!vifm_series_fetcher.sh
+nnoremap <wait>s4 :!vifm_convert_and_pack_webp.sh<cr>
 nnoremap <wait>s5 :cvmarvel<CR>
 nnoremap <wait>s6 :cvdc<CR>
 nnoremap <wait>s7 :cvother<CR>
+" Direct sorting mappings
 nnoremap <wait>ss :set sort=+size<cr>
 nnoremap <wait>sS :set sort=-size<cr>
 nnoremap <wait>sn :set sort=+iname<cr>
@@ -693,6 +789,7 @@ nnoremap <wait>sN :set sort=-iname<cr>
 nnoremap <wait>st :set sort=+mtime<cr>
 nnoremap <wait>sT :set sort=-mtime<cr>
 nnoremap <wait>sm :togglesort<cr>
+" Utility/report mappings
 nnoremap <wait>tl :!ls --group-directories-first -lhR --time-style=+%Y-%m-%d | awk '{print $5, substr($0, index($0, $6))}' > list<cr>
 nnoremap <wait>tp :!drop_list.sh<cr>
 nnoremap <wait>td :!diff %c %C<cr>
@@ -701,25 +798,30 @@ nnoremap <wait>t2 :target<space> ""<Left>
 nnoremap <wait>t0 :echo $VIMARGS<cr>
 nnoremap <wait>tm :!!mediainfo %c<cr>
 nnoremap <wait>ti :!!mkvmerge -i %c<cr>
-nnoremap w :view<cr>gs
+" Toggle quick preview without clearing or recalling a selection
+nnoremap w :keepsel view<cr>
+" Select or unselect files by the current extension
 nnoremap x :select *.<C-x>e<cr>
 nnoremap X :unselect *.<C-x>e<cr>
-" yank current directory path into the clipboard
-nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-" yank current file path into the clipboard
-nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
-" yank current filename without path into the clipboard
-nnoremap yn :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
-" yank root of current file's name into the clipboard
-nnoremap yr :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
-" copy names of selected files into the clipboard
-nnoremap yz :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>
-"yank to register h
+
+" Yank current directory path into the clipboard
+nnoremap yd :!printf '%%s' %d | wl-copy %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+" Yank current file path into the clipboard
+nnoremap yf :!printf '%%s' %c:p | wl-copy %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+" Yank current filename without path into the clipboard
+nnoremap yn :!printf '%%s' %c | wl-copy %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+" Yank root of current file's name into the clipboard
+nnoremap yr :!printf '%%s' %c:r | wl-copy %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
+" Copy names of selected files into the clipboard
+nnoremap yz :!printf "\n%%s" %f:p | tail -c+2 | wl-copy %i<cr>
+
+" Yank to register h
+" Yank the current line into custom registers
 noremap yu :normal "hyy<cr>
 noremap yi :normal "Hyy<cr>
 
-" go to previous tab page or move current tab page to position specified by the
-" count
+" Go to previous tab page or move current tab page to position specified by the
+" Count
 nnoremap <silent> gT : <C-u>
                     \| if v:count == 0
                     \|     execute 'normal gT'
@@ -732,7 +834,7 @@ nnoremap <silent> gT : <C-u>
                     \| endif
                     \| <cr>
 
-" cycle thru the layouts -- only, vsplit, and split
+" Cycle thru the layouts -- only, vsplit, and split
 nnoremap ` :if layoutis('only')
                         \|    vsplit
                         \|elseif layoutis('vsplit')
@@ -741,12 +843,12 @@ nnoremap ` :if layoutis('only')
                         \|    only
                         \|endif<cr>
 
-"Disable Execution on pressing lower case L 
+" Make lowercase `l` enter directories only
 nnoremap <silent> l : if filetype('.', 1) == 'dir'
                    \|     execute 'normal! l'
                    \| endif<cr>
 
-"---Leader <,>
+" ---Leader <,>
 nnoremap <wait>,a :archive<Left>
 nnoremap <wait>,b :!bash<cr>
 nnoremap <wait>,cs :config status<cr>
@@ -758,12 +860,12 @@ nnoremap <wait>,e :extract<CR>
 nnoremap <wait>,m :marks<cr>
 nnoremap <wait>,r :!sudo vifm %d %D<cr>
 nnoremap <wait>,s :shell<cr>
-nnoremap <wait>,t :!urxvt &<cr>
+nnoremap <wait>,t :!kitty >/dev/null 2>&1 &<cr>
 nnoremap <wait>,vh :split<cr>
 nnoremap <wait>,vo :only<cr>
 nnoremap <wait>,vv :vsplit<cr>
-nnoremap <wait>,x :fzf<cr>
-"priview long filenames
+nnoremap <wait>,x :fzffind<cr>
+" Toggle a split preview for long filenames
 nnoremap <silent> ,p : if &previewprg == ''
                     \|     :vsplit
                     \|     :view
@@ -772,15 +874,19 @@ nnoremap <silent> ,p : if &previewprg == ''
                     \|     set previewprg=''
                     \| endif<cr>
 
-" visual mode
-vnoremap w :view<cr>gv
-vnoremap yf :!printf "\n%%s" %f:p | tail -c+2 | xclip -selection clipboard %i<cr>:echo "filenames yanked to clipboard"<cr>
+" Visual-mode mappings
+" Preserve selected files when leaving visual mode to toggle quick preview
+vnoremap w :keepsel view<cr>
+" Visual-mode mappings: copy selected file paths
+vnoremap yf :!printf "\n%%s" %f:p | tail -c+2 | wl-copy %i<cr>:echo "filenames yanked to clipboard"<cr>
 
 " command mode
+" Insert the current date on the Vifm command line
 cnoremap <C-q> <c-r>=system("date +%Y-%m-%d")<cr>
 
 "_____Function keys______
 
+" Function-key shortcuts
 nnoremap <f1> :!man<space>
 nnoremap <f2> :set wrap!<cr>
 nnoremap <f3> :set number!<cr>
@@ -790,36 +896,42 @@ nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>""<Left>
 nnoremap <f8> :delete<cr>
 " nnoremap <f9> :write<cr> 
-"????
+" ?
 nnoremap <f10> :set viewcolumns=*{name}..,6{}.<cr>
-" brief information about files
+" Show brief file metadata columns
 nnoremap <f11> :set viewcolumns=*{name}.,10{perms},12{uname},-7{gname},10{size}.,20{mtime}<cr>
-" detailed information about files
+" Show detailed file metadata columns
 nnoremap <f12> :reload<cr>
 
 "-----Arrows---
+" Disable arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-
+"}}}
 "---- TESTING-------{{{
 
-
+command! MoveRipGrep : set noquickview
+                    \| let $FZF_PICK = term("rg --column --line-number --color=always --smart-case . | fzf --ansi --color 'hl:-1:underline,hl+:-1:underline:reverse' --delimiter : --preview '' --border 'none' --no-bold --color='gutter:-1' --layout=reverse --height 100%% 2>/dev/tty | cut -f1 -d:")
+                    \| if $FZF_PICK != ''
+                    \|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
+                    \| endif
 
 
 "}}}
 "
-" TODO
+"------ TODO ------{{{
 
-" sshfs user@host:/path/to/dir ~/mnt/server
-" sshfs smy@mikhail.sergievsky-vm01:/home/smy/ /mnt/server
-" sshfs teligent@fedhome:/media/sf_work_rdp /mnt/fedora
-" fusermount -u /mnt/server
+" Sshfs user@host:/path/to/dir ~/mnt/server
+" Sshfs smy@mikhail.sergievsky-vm01:/home/smy/ /mnt/server
+" Sshfs teligent@fedhome:/media/sf_work_rdp /mnt/fedora
+" Fusermount -u /mnt/server
 
-" Mount remote dir via sshfs
+" Mount a remote directory with SSHFS and enter it
 " command! mountssh :!mkdir -p ~/mnt/remote && sshfs user@host:/path ~/mnt/remote && cd ~/mnt/remote
 
-" Unmount remote
+" Unmount the SSHFS directory
 " command! unmountssh :!fusermount -u ~/mnt/remote
+"}}}
