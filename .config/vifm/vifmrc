@@ -402,9 +402,9 @@ fileviewer {*.md} pandoc %c -t ansi
 " PDF files
 filextype {*.pdf},<application/pdf> zathura %c %i &
 fileviewer *.pdf
-        \ vifmimg pdf %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+    \ $HOME/.scripts/vifm_image_preview.sh pdf %c:p %px %py %pw %ph %N %pu
+    \ %pc
+    \ $HOME/.scripts/vifm_image_preview.sh clear %N
 " PostScript files
 filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
         \ {View in zathura}
@@ -414,9 +414,9 @@ filextype {*.djvu},<image/vnd.djvu>
         \ {View in zathura}
         \ zathura %f %i,
 fileviewer *.djvu
-	\ vifmimg djvu %px %py %pw %ph %c
-	\ %pc
-	\ vifmimg clear
+    \ $HOME/.scripts/vifm_image_preview.sh djvu %c:p %px %py %pw %ph %N %pu
+    \ %pc
+    \ $HOME/.scripts/vifm_image_preview.sh clear %N
 " Comic-book archives
 filextype {*.cbz,*.cbr}
 	\ {View in Mcomix}
@@ -428,9 +428,9 @@ filextype {*.epub,*.fb2,*.mobi,*.lit,*.azw3}
     \ {View in zathura}
     \ zathura %f %i &
 fileviewer *.epub
-        \ vifmimg epub %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+    \ $HOME/.scripts/vifm_image_preview.sh epub %c:p %px %py %pw %ph %N %pu
+    \ %pc
+    \ $HOME/.scripts/vifm_image_preview.sh clear %N
 " Audio
 " filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.ogg},
         " \<audio/*>
@@ -472,9 +472,9 @@ filextype {*.mkv},
         \ kdenlive %f %i &,
 " Fonts
 fileviewer <font/*>
-	\ vifmimg font %px %py %pw %ph %c
-	\ %pc
-	\ vifmimg clear
+    \ $HOME/.scripts/vifm_image_preview.sh font %c:p %px %py %pw %ph %N %pu
+    \ %pc
+    \ $HOME/.scripts/vifm_image_preview.sh clear %N
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {View in vimiv}
@@ -482,7 +482,9 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {Open with drawio}
         \ drawio %f &
 fileviewer <image/*>
-    \ vifm_image_preview.sh %c %px %py %pw %ph
+    \ $HOME/.scripts/vifm_image_preview.sh image %c:p %px %py %pw %ph %N %pu
+    \ %pc
+    \ $HOME/.scripts/vifm_image_preview.sh clear %N
 " HTML before generic text associations
 filextype {*.html,*.htm},<text/html>
         \ {Open with Zen Browser}
@@ -684,9 +686,6 @@ nnoremap <space> tj
 nnoremap ~ :help<cr>
 
 " Alphabet
-" Disabled vifmimg PDF preview scrolling
-" Map > :!vifmimg inc<cr>
-" Map < :!vifmimg dec<cr>
 
 " Selection helpers
 nnoremap <wait>af :select *.*<CR>
