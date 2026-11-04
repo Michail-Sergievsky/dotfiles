@@ -372,6 +372,9 @@ local function find_and_add_entries()
         added_entries[entry.filename] = true
     end
 
+    -- Stop the initially opened file from being added to the playlist twice.
+    added_entries[path] = true
+
     local append = {[-1] = {}, [1] = {}}
     for direction = -1, 1, 2 do -- 2 iterations, with direction = -1 and +1
         for i = 1, MAX_ENTRIES do

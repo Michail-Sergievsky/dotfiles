@@ -2,8 +2,8 @@
     {
         "alang": ["jpn", "ja"],
         "slang": [ "eng?", "und" ],
-        "whitelist": [ "Dialogue", "dialogue" ],
-        "blacklist": [ "sign", "Sign & Songs", "Forced" ]
+        "blacklist": [ "sign" ],
+        "condition": "not sub.forced"
     },
     {
         "alang": ["chi?","zh" ],
